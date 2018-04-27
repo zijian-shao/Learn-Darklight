@@ -1,0 +1,103 @@
+/* arrows */
+i.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+i.arrow.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+i.arrow.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+i.arrow.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+i.arrow.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+/* block page */
+.darklight-block-page {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 9999;
+    cursor: wait;
+}
+
+.darklight-block-page i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: -10px auto 0;
+    color: #999;
+}
+
+/* Back to top button*/
+.darklight-back-to-top {
+    background: rgba(0, 0, 0, 0.2);
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 30px;
+    bottom: 60px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 200;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.darklight-back-to-top .arrow {
+    border-color: rgba(255, 255, 255, 0.8);
+    padding: 8px;
+    margin-top: 20px;
+}
+
+.darklight-back-to-top:hover {
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.darklight-back-to-top-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@media (max-width: 767px) {
+    .darklight-back-to-top {
+        display: none;
+    }
+}
+
+/* navbar fixed */
+.darklight-navbar-fixed {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 500;
+}
