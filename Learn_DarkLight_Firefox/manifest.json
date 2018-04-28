@@ -1,8 +1,14 @@
 {
   "manifest_version": 2,
   "name": "Learn Darklight",
-  "version": "0.0.5",
+  "version": "1.1.0",
   "author": "Zijian Shao",
+  "background": {
+    "scripts": [
+      "js/configs.js",
+      "js/background.js"
+    ]
+  },
   "browser_action": {
     "default_icon": {
       "16": "icon/icon16.png",
@@ -17,42 +23,49 @@
       "js": [
         "js/jquery.js",
         "js/configs.js",
+        "js/themes.js",
         "js/init.js"
       ],
       "matches": [
-        "*://learn.uwaterloo.ca/*"
+        "*://learn.uwaterloo.ca/*",
+        "*://mylearningspace.wlu.ca/*"
       ],
-      "run_at": "document_start",
-      "all_frames": true
+      "run_at": "document_start"
     },
     {
       "js": [
         "js/init_idle.js"
       ],
       "matches": [
-        "*://learn.uwaterloo.ca/*"
+        "*://learn.uwaterloo.ca/*",
+        "*://mylearningspace.wlu.ca/*"
       ],
-      "run_at": "document_end",
-      "all_frames": true
+      "run_at": "document_end"
     }
   ],
-  "description": "Darklight takes back the classic dark theme for Waterloo Learn.",
+  "description": "Learn Darklight offers multiple themes for the new Waterloo Learn.",
   "icons": {
     "128": "icon/icon128.png",
     "16": "icon/icon16.png",
     "48": "icon/icon48.png"
   },
+  "options_ui": {
+    "page": "html/options.html"
+  },
   "permissions": [
     "activeTab",
+    "contextMenus",
     "storage",
-    "*://learn.uwaterloo.ca/*"
+    "*://learn.uwaterloo.ca/*",
+    "*://mylearningspace.wlu.ca/*"
   ],
   "short_name": "Learn Darklight",
   "web_accessible_resources": [
     "js/*",
     "css/*",
     "icon/*",
-    "img/*"
+    "img/*",
+    "theme/*"
   ],
   "applications": {
     "gecko": {

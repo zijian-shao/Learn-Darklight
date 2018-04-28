@@ -1,4 +1,4 @@
-var baseURL, currURL, options, configs;
+var baseURL, currURL, options, configs, themeConfigs;
 
 function injectCSS(src, tag, type) {
     var style;
@@ -33,9 +33,14 @@ function initDarklight() {
         if (!options.GLB_Enabled)
             return;
 
+        if (currURL.includes('/content/enforced/'))
+            return;
+
+        themeConfigs = getThemeConfigs(options.GLB_ThemeID);
+
         var cover = document.createElement("div");
         cover.id = 'darklight-load-overlay';
-        cover.style = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:#111';
+        cover.style = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:' + themeConfigs.overlayColor;
         document.documentElement.appendChild(cover);
     }
 

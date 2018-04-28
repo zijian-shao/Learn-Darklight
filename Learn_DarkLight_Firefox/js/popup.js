@@ -23,6 +23,12 @@ function initPopup() {
 
     });
 
+    $('#more-options').on('click', function () {
+        browser.tabs.create({
+            url: browser.runtime.getURL('') + 'html/options.html'
+        });
+    });
+
     $('#open-learn').on('click', function () {
         browser.tabs.create({
             url: 'https://learn.uwaterloo.ca/'

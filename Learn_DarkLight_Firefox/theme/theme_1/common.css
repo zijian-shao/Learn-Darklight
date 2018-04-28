@@ -1,0 +1,82 @@
+/* font size */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+    font-size: 100%;
+}
+
+/* widget */
+
+.daylight .d2l-widget {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+/* navbar */
+
+.d2l-navigation-s-logo img {
+    max-height: 40px;
+}
+
+.d2l-icon-0[icon*="d2l-tier3:"] {
+    width: 20px;
+    height: 20px;
+}
+
+.d2l-navigation-s-band-color {
+    display: none;
+}
+
+.d2l-navigation-s-main {
+    border: none;
+    background: #333333;
+}
+
+a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:visited {
+    color: #aaa;
+}
+
+.d2l-navigation-s-item .d2l-navigation-s-group-text,
+.d2l-navigation-s-item .d2l-icon-0 {
+    color: #aaa !important;
+}
+
+/* homepage */
+
+.homepage-container .d2l-htmlblock .results {
+    padding: 10px 15px !important;
+}
+
+.homepage-container .d2l-htmlblock .results .btn {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.2em;
+}
+
+.homepage-container .d2l-htmlblock .results a {
+    font-size: 14px !important;
+}
+
+/* button */
+
+.d2l-button, .d2l-button * {
+    vertical-align: bottom !important;
+}
+
+/* course content */
+
+.d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
+    background: #f9fafb;
+}
+
+.d2l-collapsepane-header {
+    padding-bottom: 0.6rem !important;
+}
+
+.d2l-collapsepane-content {
+    padding-top: 0.5rem;
+    padding-bottom: 0;
+}
+
+.d2l-collapsepane-content > div > div > div {
+    padding-top: 0;
+}
