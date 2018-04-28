@@ -45,8 +45,10 @@ function extensionUpdated(oldVer, newVer) {
         'EXT_Version': newVer
     });
 
-    if (newVer == '1.9.0') {
-
+    if (newVer == '1.1.0') {
+        chrome.tabs.create({
+            'url': 'https://www.zijianshao.com/dlight/whatsnew/?version=1.1.0&platform=chrome'
+        });
     } else if (newVer == '1.0.0') {
         chrome.runtime.openOptionsPage();
     }

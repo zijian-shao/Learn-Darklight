@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Learn Darklight",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Zijian Shao",
   "background": {
     "persistent": false,
@@ -44,7 +44,7 @@
       "run_at": "document_end"
     }
   ],
-  "description": "Darklight takes back the classic dark theme for Waterloo Learn.",
+  "description": "Learn Darklight offers multiple themes for the new Waterloo Learn.",
   "icons": {
     "128": "icon/icon128.png",
     "16": "icon/icon16.png",

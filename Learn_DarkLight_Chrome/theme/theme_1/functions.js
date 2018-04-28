@@ -1,1 +1,5 @@
-// empty
+function initTheme() {
+
+}
+
+initTheme();

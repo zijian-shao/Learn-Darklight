@@ -3,25 +3,25 @@ function getThemeConfigs(id) {
     var configs = {
         "theme_0": {
             "id": 0,
-            "name": "Darklight Theme",
+            "name": "Classic Darklight Theme",
             "author": "Zijian Shao",
             "brightness": "dark",
             "overlayColor": "#111",
-            "previewColor": "#111"
+            "previewColor": "#333"
         },
         "theme_1": {
             "id": 1,
-            "name": "Daylight Theme",
+            "name": "Bright Daylight Theme",
             "author": "Zijian Shao",
             "brightness": "light",
             "overlayColor": "#fff",
-            "previewColor": "#fff"
+            "previewColor": "#eee"
         },
         "theme_2": {
             "id": 2,
-            "name": "Black Turquoise Theme",
+            "name": "Dark Turquoise Theme",
             "author": "Zijian Shao",
-            "overlayColor": "#09b1b9",
+            "overlayColor": "#282d34",
             "previewColor": "#09b1b9"
         }
     };
