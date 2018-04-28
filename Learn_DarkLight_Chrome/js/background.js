@@ -114,7 +114,14 @@ function initBackground() {
 
         // app.getDetails
         else if (request.action == 'getDetails') {
-            obj = chrome.app.getDetails();
+            obj = chrome.runtime.getManifest();
+        }
+
+        // open new tab
+        else if (request.action == 'createTab') {
+            chrome.tabs.create({
+                'url': request.data.url
+            });
         }
 
         if (typeof sendResponse === 'function') {

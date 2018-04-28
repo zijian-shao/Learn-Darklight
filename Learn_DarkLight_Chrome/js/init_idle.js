@@ -25,7 +25,10 @@ function initDarklightIdle() {
             console.log('New version updated (V' + newVer + ')');
 
             if (newVer == '1.1.3') {
-                window.open('https://www.zijianshao.com/dlight/whatsnew/?version=1.1.0&platform=chrome', '_blank');
+                chrome.runtime.sendMessage({
+                    action: 'createTab',
+                    data: {url: 'https://www.zijianshao.com/dlight/whatsnew/?version=1.1.0&platform=chrome'}
+                });
             } else if (newVer == '1.0.0') {
 
             }
