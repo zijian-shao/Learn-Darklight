@@ -5,7 +5,7 @@ function initTheme() {
         $('.d2l-page-main').prepend('<div class="darklight-waterloo" style="background-image: url(' + baseURL + 'img/waterloo_background.png); opacity: 0.2;"></div>');
 
         // logo - white
-        $('.d2l-navigation-s-logo-link img').attr('src', baseURL + 'img/waterloo_learn_logo.png');
+        $('.d2l-navigation-s-logo-link img').attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.8);
 
     } else {
 

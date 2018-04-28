@@ -95,6 +95,9 @@ function initDarklightIdle() {
     if (!options.GLB_Enabled)
         return;
 
+    if (currURL.includes('/content/enforced/'))
+        return;
+
     // favicon
     var head = $('head');
     head.find('link[rel="icon"]').remove();

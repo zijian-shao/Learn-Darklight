@@ -92,6 +92,25 @@ body {
     background: #09b1b9;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f242b;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #323841;
+    border: 2px solid #1f242b;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #424a56;
+}
+
 #d2l_body, .d2l-body {
     background: #282d34;
 }

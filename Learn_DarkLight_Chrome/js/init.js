@@ -33,6 +33,9 @@ function initDarklight() {
         if (!options.GLB_Enabled)
             return;
 
+        if (currURL.includes('/content/enforced/'))
+            return;
+
         themeConfigs = getThemeConfigs(options.GLB_ThemeID);
 
         var cover = document.createElement("div");
