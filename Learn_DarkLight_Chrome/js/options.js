@@ -29,7 +29,6 @@ function initOptions() {
                         }
                         if (!hasFound) {
                             optionElem.first().prop('checked', true);
-                            console.log('not found');
                         }
                         break;
 
@@ -284,7 +283,7 @@ function initOptions() {
         restoreOptions();
 
         // version #
-        $('#darklight-version').text(chrome.app.getDetails().version);
+        $('#darklight-version').text(chrome.runtime.getManifest().version);
 
         // clipboard input
         var clipBoardInput = $('<div class="width-0"><input type="text" id="clipboard-input"></div>');

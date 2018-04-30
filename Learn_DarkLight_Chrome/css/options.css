@@ -192,7 +192,8 @@ hr {
     position: relative;
     width: 100%;
     height: auto;
-    margin: 80px auto 30px;
+    margin: 0 auto 30px;
+    padding: 80px 0 0;
     background: #fdfdfd;
     overflow: hidden;
     text-align: left;
@@ -796,7 +797,6 @@ label.checkbox-label {
     position: fixed;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     max-width: 300px;
@@ -814,7 +814,7 @@ label.checkbox-label {
     -webkit-box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
     -moz-box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
     box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
-    z-index: 100;
+    z-index: 200;
 
     -webkit-transition: top 0.2s linear;
     -moz-transition: top 0.2s linear;
