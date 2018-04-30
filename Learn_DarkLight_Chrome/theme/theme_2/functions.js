@@ -1,7 +1,7 @@
 function initTheme() {
     if (!isWLU()) {
 
-        // // bg - waterloo
+        // bg - waterloo
         $('.d2l-page-main').prepend('<div class="darklight-waterloo" style="background-image: url(' + baseURL + 'img/waterloo_background.png); opacity: 0.2;"></div>');
 
         // logo - white

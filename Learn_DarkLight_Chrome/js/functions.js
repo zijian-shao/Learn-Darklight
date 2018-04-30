@@ -158,8 +158,8 @@ function init() {
     }
 
     $('.d2l-homepage-header-wrapper').each(function (i, e) {
-
-        if ($(e).text().match(/SYSTEM ALERT/gi)) {
+        var headText = $(e).text();
+        if (headText.match(/SYSTEM ALERT/gi)) {
             if (options.GLB_AutoHideSysAlert) {
                 // remove sys alert if empty
                 var alertHtml = $(e).parent('div.d2l-widget-header').next('div.d2l-widget-content').children('div.d2l-htmlblock').first();
@@ -169,6 +169,10 @@ function init() {
                 if (_alertHtml.text().trim() == '') {
                     $(e).parents('div.d2l-widget').remove();
                 }
+            }
+        } else if (headText.match(/Check My System/gi)) {
+            if (options.GLB_HideCheckMySys) {
+                $(e).parents('div.d2l-widget').remove();
             }
         }
 

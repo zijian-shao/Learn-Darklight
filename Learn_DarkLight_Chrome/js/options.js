@@ -13,7 +13,7 @@ function initOptions() {
                 optionElem = $('input[data-option-name="' + key + '"]');
 
                 switch (key) {
-                    
+
                     case 'GLB_ThemeID':
                         var hasFound = false;
                         if (items[key] === true) {
@@ -29,7 +29,14 @@ function initOptions() {
                         }
                         if (!hasFound) {
                             optionElem.first().prop('checked', true);
+                            console.log('not found');
                         }
+                        break;
+
+                    case 'GLB_CustomCSS':
+                    case 'GLB_CustomJS':
+                        optionElem = $('textarea[data-option-name="' + key + '"]');
+                        optionElem.val(items[key]);
                         break;
 
                     default:
@@ -38,11 +45,11 @@ function initOptions() {
 
             }
 
-            // theme preview color
+            // night mode
             var themeConfigs = getThemeConfigs();
-            $('input[name="GLB_ThemeID"]').each(function (i, e) {
-                $(e).parent('p').before($('<div class="color-scheme"><span style="background:' + themeConfigs['theme_' + $(e).attr('value')].previewColor + '"></span></div>'));
-            });
+            if (themeConfigs['theme_' + items.GLB_ThemeID]['nightMode']) {
+                $('body').addClass('dark-mode');
+            }
 
             bindEvents();
         });
@@ -204,9 +211,75 @@ function initOptions() {
             }
         });
 
+        // custom styles
+        $('#custom-save').on('click', function (e) {
+            e.preventDefault();
+            var css = $('#custom-css').val().trim();
+            var js = $('#custom-js').val().trim();
+            console.log(css);
+            console.log(js);
+            var obj = {};
+            obj['GLB_CustomCSS'] = css;
+            obj['GLB_CustomJS'] = js;
+            saveOption(obj);
+
+        });
+        $('#custom-clear').on('click', function (e) {
+            e.preventDefault();
+
+            var r = confirm('Do you want to clear the custom CSS and JS code above?');
+            if (r == false)
+                return;
+
+            $('#custom-css').val('');
+            $('#custom-js').val('');
+
+            var obj = {};
+            obj['GLB_CustomCSS'] = '';
+            obj['GLB_CustomJS'] = '';
+
+            saveOption(obj);
+        });
+        $('#custom-css, #custom-js').bind('keydown', function (event) {
+            if (event.ctrlKey || event.metaKey) {
+                switch (String.fromCharCode(event.which).toLowerCase()) {
+                    case 's':
+                        event.preventDefault();
+                        $('#custom-save').trigger('click');
+                        break;
+                }
+            }
+        });
+    }
+
+    function loadThemes() {
+        var themes = getThemeConfigs();
+        var list = $('#theme-list');
+        var index = 0;
+        $.each(themes, function (i, val) {
+
+            var nightModeStr = '';
+            if (val['nightMode'])
+                nightModeStr = ' <small>(Night Mode)</small>';
+
+            $('<div class="color-scheme"><span style="background:' + val['previewColor'] + '"></span></div>').appendTo(list);
+            $('<p><input type="radio" id="opt-global-2-' + index + '" name="GLB_ThemeID" value="' + val['id'] + '" data-option-name="GLB_ThemeID" data-option-type="enum"><label for="opt-global-2-' + index + '">' + val['name'] + nightModeStr + '</label></p>').appendTo(list);
+
+            $('#opt-global-2-' + index).on('change', function () {
+                if (themes['theme_' + $(this).attr('value')]['nightMode']) {
+                    $('body').addClass('dark-mode');
+                } else {
+                    $('body').removeClass('dark-mode');
+                }
+            });
+
+            index++;
+        });
     }
 
     $(window).load(function () {
+
+        loadThemes();
 
         restoreOptions();
 

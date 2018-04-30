@@ -10,48 +10,51 @@
     <link rel="stylesheet" type="text/css" href="/css/options.css">
 </head>
 <body>
-<div class="container">
+<!-- Header Start -->
+<div class="header">
+    <h1>Learn Darklight</h1>
+    <h3>Extension Options</h3>
+
+    <!-- Share Box -->
+    <div class="share-box">
+        <div class="share-tag">Share</div>
+        <!-- Facebook Share -->
+        <a data-open-in="popup" data-width="560"
+           data-href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&display=popup&ref=plugin&src=share_button"
+           target="_blank" class="share-link share-link-facebook"></a>
+
+        <!-- Twitter Share -->
+        <a data-open-in="popup" data-width="500"
+           data-href="https://twitter.com/intent/tweet?hashtags=UWaterloo&original_referer=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2F&ref_src=twsrc%5Etfw&text=Learn%20Darklight%20is%20a%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn&tw_p=tweetbutton&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
+           target="_blank" class="share-link share-link-twitter"></a>
+
+        <!-- Reddit Share -->
+        <a data-open-in="newtab"
+           data-href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&title=Learn%20Darklight%20-%20The%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn"
+           target="_blank" class="share-link share-link-reddit"></a>
+
+        <!-- Google Plus Share -->
+        <a data-open-in="popup" data-width="380"
+           data-href="https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
+           target="_blank" class="share-link share-link-googleplus"></a>
+
+        <!-- Copy Link -->
+        <a data-open-in="copy" class="share-link share-link-copy"></a>
+    </div>
+</div>
+<!-- Header End -->
+
+<div class="container" id="container">
     <div class="wrapper">
 
-        <!-- Header Start -->
-        <div class="header">
-            <h1>Learn Darklight</h1>
-            <h3>Extension Options</h3>
-
-            <!-- Share Box -->
-            <div class="share-box">
-                <div class="share-tag">Share</div>
-                <!-- Facebook Share -->
-                <a data-open-in="popup" data-width="560"
-                   data-href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&display=popup&ref=plugin&src=share_button"
-                   target="_blank" class="share-link share-link-facebook"></a>
-
-                <!-- Twitter Share -->
-                <a data-open-in="popup" data-width="500"
-                   data-href="https://twitter.com/intent/tweet?hashtags=UWaterloo&original_referer=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2F&ref_src=twsrc%5Etfw&text=Learn%20Darklight%20is%20a%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn&tw_p=tweetbutton&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
-                   target="_blank" class="share-link share-link-twitter"></a>
-
-                <!-- Reddit Share -->
-                <a data-open-in="newtab"
-                   data-href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&title=Learn%20Darklight%20-%20The%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn"
-                   target="_blank" class="share-link share-link-reddit"></a>
-
-                <!-- Google Plus Share -->
-                <a data-open-in="popup" data-width="380"
-                   data-href="https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
-                   target="_blank" class="share-link share-link-googleplus"></a>
-
-                <!-- Copy Link -->
-                <a data-open-in="copy" class="share-link share-link-copy"></a>
-            </div>
-        </div>
-        <!-- Header End -->
-
         <!-- Tab Start -->
+        <div class="nav-bg"></div>
         <div class="nav">
             <ul>
                 <li data-option-tab-index="0" data-option-tab-name="global" id="nav-tab-0" class="nav-tab active">
                     General
+                </li>
+                <li data-option-tab-index="1" data-option-tab-name="advanced" id="nav-tab-1" class="nav-tab">Advanced
                 </li>
                 <li data-option-tab-index="3" data-option-tab-name="about" id="nav-tab-3" class="nav-tab">About</li>
             </ul>
@@ -84,23 +87,7 @@
                 <div class="category-title">
                     <h5>Theme</h5>
                 </div>
-                <div class="option-group radio-group">
-                    <p>
-                        <input type="radio" id="opt-global-2-0" name="GLB_ThemeID" value="0"
-                               data-option-name="GLB_ThemeID" data-option-type="enum">
-                        <label for="opt-global-2-0">Classic Darklight Theme</label>
-                    </p>
-                    <p>
-                        <input type="radio" id="opt-global-2-1" name="GLB_ThemeID" value="1"
-                               data-option-name="GLB_ThemeID" data-option-type="enum">
-                        <label for="opt-global-2-1">Bright Daylight Theme</label>
-                    </p>
-                    <p>
-                        <input type="radio" id="opt-global-2-2" name="GLB_ThemeID" value="2"
-                               data-option-name="GLB_ThemeID" data-option-type="enum">
-                        <label for="opt-global-2-2">Dark Turquoise Theme <small>(Night Mode)</small></label>
-                    </p>
-                </div>
+                <div class="option-group radio-group" id="theme-list"></div>
 
                 <!-- Global -->
                 <div class="category-title">
@@ -141,16 +128,64 @@
                                data-option-type="switch">
                         <label for="opt-global-1-0"></label>
                     </div>
-                    <label for="opt-global-1-0" class="checkbox-label">Auto hide systerm alert</label>
+                    <label for="opt-global-1-0" class="checkbox-label">Auto hide systerm alert widget</label>
                     <a class="option-tip-toggle">?</a>
                     <div class="option-tip hidden">
                         <p>Automatically hide the system alert widget on homepage if the alert content is empty</p>
+                    </div>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-global-1-1" data-option-name="GLB_HideCheckMySys"
+                               data-option-type="switch">
+                        <label for="opt-global-1-1"></label>
+                    </div>
+                    <label for="opt-global-1-1" class="checkbox-label">Hide system check widget</label>
+                    <a class="option-tip-toggle">?</a>
+                    <div class="option-tip hidden">
+                        <p>Hide the system check widget on homepage to avoid seeing the alert message.</p>
                     </div>
                 </div>
 
             </div>
         </div>
         <!-- General End -->
+
+        <!-- Advanced Start -->
+        <div class="content-container" id="opt-tab-1">
+            <div class="content">
+
+                <!-- Switch -->
+                <div class="category-title">
+                    <h5>Control</h5>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-global-4-0" data-option-name="GLB_EnableCustomStyle"
+                               data-option-type="switch">
+                        <label for="opt-global-4-0"></label>
+                    </div>
+                    <label for="opt-global-4-0" class="checkbox-label">Enable custom styles</label>
+                    <a class="option-tip-toggle option-tip-toggle-fixed">?</a>
+                    <div class="option-tip">
+                        <p>Inject the following CSS and JS code into webpages after the original code were executed.</p>
+                        <p>For performance considerations, please keep the code size less than 20KB.</p>
+                        <p>If you don't know what this is, please do not enable it.</p>
+                    </div>
+                </div>
+                <hr>
+
+                <!-- Custom styles -->
+                <label for="custom-css" class="textarea-label">Custom CSS</label>
+                <textarea name="custom-css" id="custom-css" rows="10" class="input-box width-100 block" data-option-name="GLB_CustomCSS"></textarea>
+                <label for="custom-js" class="textarea-label">Custom JS</label>
+                <textarea name="custom-js" id="custom-js" rows="10" class="input-box width-100 block" data-option-name="GLB_CustomJS"></textarea>
+                <hr>
+                <a href="#" class="btn btn-primary" id="custom-save">Save</a>
+                <a href="#" class="btn btn-default" id="custom-clear">Clear</a>
+            </div>
+        </div>
+        <!-- Advanced End -->
 
         <!-- About Start -->
         <div class="content-container hidden" id="opt-tab-3">

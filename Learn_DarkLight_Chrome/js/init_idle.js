@@ -109,6 +109,8 @@ function initDarklightIdle() {
     // css
     injectCSS(baseURL + 'css/common.css', 'head');
     injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/common.css', 'head');
+    if (options.GLB_EnableCustomStyle)
+        injectCSS(options.GLB_CustomCSS, 'head', 'text');
 
     // js
     var jsText = 'var baseURL = "' + baseURL + '";';
@@ -121,6 +123,8 @@ function initDarklightIdle() {
 
     injectJS(baseURL + 'js/functions.js', 'head');
     injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions.js', 'head');
+    if (options.GLB_EnableCustomStyle)
+        injectCSS(options.GLB_CustomJS, 'head', 'text');
 
     // overlay
     $('#darklight-load-overlay').delay(400).fadeOut(400, function () {
