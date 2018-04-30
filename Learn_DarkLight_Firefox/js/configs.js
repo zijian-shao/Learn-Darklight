@@ -14,7 +14,11 @@ function getOptionListDefault() {
         'GLB_ThemeID': 0,
         'GLB_AutoHideSysAlert': true,
         'GLB_FixNavigation': true,
-        'GLB_BackToTopButton': true
+        'GLB_BackToTopButton': true,
+        'GLB_HideCheckMySys': false,
+        'GLB_EnableCustomStyle': false,
+        'GLB_CustomCSS': '',
+        'GLB_CustomJS': ''
     };
 
     return obj;

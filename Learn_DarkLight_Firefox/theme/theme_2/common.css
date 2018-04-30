@@ -1318,6 +1318,20 @@ td.d2l-le-calendar-weekend, th.d2l-le-calendar-weekend, .d2l-le-calendar-week-he
     filter: grayscale(100%) brightness(500%);
 }
 
+/* alert */
+d2l-alert {
+    background: #424a56 !important;
+    border: none !important;
+}
+
+d2l-alert .message-wrapper {
+    border: none !important;
+}
+
+d2l-alert .message-highlight {
+    background: #09b1b9 !important;
+}
+
 /* Back to top button*/
 
 .darklight-back-to-top {

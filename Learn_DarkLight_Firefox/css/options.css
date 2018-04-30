@@ -58,6 +58,12 @@
     box-sizing: border-box;
 }
 
+div:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
 body, strong, p, a, h1, h2, h3, h4, h5, h6, input, button, select {
     font-family: 'Muli', sans-serif !important;
 }
@@ -66,7 +72,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 14px;
-    background: #eee;
+    background: #333;
     text-align: center;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -177,18 +183,18 @@ hr {
     cursor: not-allowed !important;
 }
 
+.dark-mode {
+    -webkit-filter: brightness(0.8);
+    filter: brightness(0.8);
+}
+
 .container {
     position: relative;
-    width: 850px;
+    width: 100%;
     height: auto;
-    margin: 50px auto 30px;
-    background: #f9f9f9;
-    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    margin: 0 auto 30px;
+    padding: 80px 0 0;
+    background: #fdfdfd;
     overflow: hidden;
     text-align: left;
     z-index: 10;
@@ -201,19 +207,20 @@ hr {
 }
 
 .header {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    height: 100px;
-    background: #333333;
-    background: -moz-linear-gradient(left, #333333 0%, #666666 100%);
-    background: -webkit-linear-gradient(left, #333333 0%,#666666 100%);
-    background: linear-gradient(to right, #333333 0%,#666666 100%);
+    height: 80px;
+    background: #222;
     text-align: left;
-    border-bottom: 1px solid #fff;
+    border-bottom: 2px solid #fdd54f;
     z-index: 100;
 }
 
 .header h1 {
+    display: inline-block;
     font-size: 30px;
     color: #fff;
     font-weight: 200;
@@ -223,20 +230,32 @@ hr {
 }
 
 .header h3 {
+    display: inline-block;
     font-size: 16px;
     color: #fff;
     font-weight: 200;
     margin: 0;
-    padding: 0 0 0 30px;
+    padding: 0 0 0 20px;
     line-height: 30px;
     opacity: 0.6;
+}
+
+.nav-bg {
+    background: #333;
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
 }
 
 .nav {
     position: relative;
     float: left;
-    background: #f9f9f9;
-    width: 25%;
+    background: none;
+    width: 20%;
     height: auto;
     overflow: hidden;
     z-index: 90;
@@ -266,25 +285,35 @@ hr {
 }
 
 .nav ul li:hover, .nav ul li:focus {
-    background: rgba(0, 0, 0, 0.03);
-    /*color: #333;*/
+    background: #444;
+    color: #ddd;
 }
 
 .nav ul li.active {
-    /*background: #fff;*/
-    color: #333;
-    -webkit-box-shadow: inset 5px 0 0 #333;
-    -moz-box-shadow: inset 5px 0 0 #333;
-    box-shadow: inset 5px 0 0 #333;
+    background: #444;
+    color: #ddd;
+    position: relative;
+}
+
+.nav ul li.active:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 20px;
+    right: 0;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right-color: #fdfdfd;
 }
 
 .content-container {
     position: relative;
     float: left;
-    width: 75%;
+    width: 80%;
     height: auto;
     overflow: hidden;
-    background: #fff;
+    background: #fdfdfd;
     z-index: 80;
 }
 
@@ -340,10 +369,10 @@ hr {
 
 .copyright {
     position: relative;
-    color: #bbb;
+    color: #999;
     font-size: 14px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .option-group {
@@ -442,12 +471,18 @@ hr {
     }
 }
 
+.textarea-label {
+    display: block;
+    padding: 10px 0;
+}
+
 .input-box {
     display: block;
     border: 1px solid #ccc;
     margin: 0 4px 4px 0;
     padding: 10px 10px;
     border-radius: 4px;
+    outline: none;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
@@ -463,6 +498,10 @@ hr {
 
 .input-box:focus {
     border-color: #333;
+}
+
+textarea.input-box {
+    resize: vertical;
 }
 
 .input-group-highlight td:first-child {
@@ -540,6 +579,7 @@ label.checkbox-label {
 
 .checkbox-slide:after {
     content: "";
+    display: block;
     float: right;
     position: absolute;
     background: #ddd;
@@ -757,7 +797,6 @@ label.checkbox-label {
     position: fixed;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     max-width: 300px;
@@ -775,7 +814,7 @@ label.checkbox-label {
     -webkit-box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
     -moz-box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
     box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
-    z-index: 100;
+    z-index: 200;
 
     -webkit-transition: top 0.2s linear;
     -moz-transition: top 0.2s linear;
@@ -999,7 +1038,7 @@ div.arrow.left {
 
 .share-box {
     position: absolute;
-    top: 30px;
+    top: 18px;
     right: 30px;
 }
 
@@ -1007,7 +1046,6 @@ div.arrow.left {
     width: 43px;
     height: 43px;
     position: relative;
-    /*display: inline-block;*/
     color: #fff;
     line-height: 43px;
     float: left;
@@ -1024,7 +1062,6 @@ div.arrow.left {
     background: transparent center no-repeat;
     background-size: contain;
     opacity: 0.8;
-    /*border: 2px solid rgba(255, 255, 255, 0);*/
     -moz-background-clip: border;
     -webkit-background-clip: border;
     background-clip: border-box;
@@ -1046,7 +1083,6 @@ div.arrow.left {
 
 .share-box a:hover {
     opacity: 1;
-    /*border-color: rgba(255, 255, 255, 0.8);*/
     -webkit-box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
     -moz-box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
@@ -1094,10 +1130,6 @@ div.arrow.left {
 
 @media (max-width: 991px) {
 
-    body {
-        background: #fff;
-    }
-
     .container {
         position: relative;
         width: 100%;
@@ -1111,12 +1143,13 @@ div.arrow.left {
     }
 
     .header {
+        position: relative;
         height: auto;
         text-align: center;
-        border: none;
     }
 
     .header h1 {
+        display: block;
         float: none;
         font-size: 22px;
         padding: 20px 20px 0;
@@ -1124,6 +1157,7 @@ div.arrow.left {
     }
 
     .header h3 {
+        display: block;
         float: none;
         font-size: 14px;
         padding: 5px 20px 20px;
@@ -1131,10 +1165,16 @@ div.arrow.left {
         opacity: 0.6;
     }
 
+    .nav-bg {
+        display: none;
+    }
+
     .nav {
         float: none;
         width: 100%;
         height: auto;
+        background: #333;
+        border: none;
     }
 
     .nav ul {
@@ -1150,10 +1190,14 @@ div.arrow.left {
         display: inline-block;
     }
 
-    .nav ul li.active {
-        -webkit-box-shadow: inset 0 -2px 0 #333;
-        -moz-box-shadow: inset 0 -2px 0 #333;
-        box-shadow: inset 0 -2px 0 #333;
+    .nav ul li.active:after {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        border: 8px solid transparent;
+        border-bottom-color: #fdfdfd;
     }
 
     .content-container {
