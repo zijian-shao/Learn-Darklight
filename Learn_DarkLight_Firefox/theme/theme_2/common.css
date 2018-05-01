@@ -117,7 +117,11 @@ body {
 
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
     background: #323841;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
+}
+
+.d2l-page-bg {
+    top: 0;
 }
 
 .d2l-page-main .darklight-waterloo {
@@ -789,6 +793,10 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
 }
 
 /* course banner */
+.d2l-course-tile-0 .course-image.d2l-course-tile {
+    background: none;
+}
+
 .d2l-course-image, .d2l-course-banner > img {
     -webkit-filter: brightness(80%);
     filter: brightness(80%);
@@ -837,10 +845,10 @@ iframe {
 
 .d2l-collapsepane-content {
     padding-top: 10px;
-    padding-bottom: 0;
+    padding-bottom: 10px;
 }
 
-.d2l-collapsepane-content > div > div > div {
+.d2l-collapsepane-content > div.d2l-placeholder.d2l-placeholder-live > div.d2l-placeholder.d2l-placeholder-live > div {
     padding-top: 0;
 }
 
@@ -890,10 +898,7 @@ iframe {
 
 /* course content sidebar */
 .d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
-    background: #323841;
-}
-
-.d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
+    background: #373e48;
     border-color: #373e48;
 }
 
@@ -946,6 +951,10 @@ iframe {
 .daylight .d2l-collapsepane .d2l-collapsepane-content, .daylight .d2l-collapsepane .d2l-collapsepane-header.d2l-collapsepane-collapsed {
     background: #373e48;
     border: none;
+}
+
+.daylight .d2l-widget .d2l-collapsepane .d2l-collapsepane-content, .daylight .d2l-widget .d2l-collapsepane .d2l-collapsepane-header.d2l-collapsepane-collapsed {
+    background: #424a56;
 }
 
 .d2l-image-action-button-0 .d2l-image-action-content.d2l-image-action-button {
@@ -1234,6 +1243,10 @@ td.d2l-le-calendar-weekend, th.d2l-le-calendar-weekend, .d2l-le-calendar-week-he
     box-shadow: none;
 }
 
+#ListViewFormId .vui-list > li {
+    border: none;
+}
+
 .daylight .d2l-sep-s > hr {
     border-color: rgba(255, 255, 255, 0.1);
 }
@@ -1332,6 +1345,63 @@ d2l-alert .message-highlight {
     background: #09b1b9 !important;
 }
 
+/* datalist */
+.daylight .d2l-datalist-nesteditem-accordion.d2l-datalist-nesteditem-accordion-open, .daylight .d2l-datalist-nesteditem-accordion.d2l-datalist-nesteditem-accordion-open > .d2l-datalist-item-content.d2l-datalist-item-content-first {
+    background: #373e48;
+}
+
+.daylight .d2l-datalist > .d2l-datalist-nesteditem-accordion .d2l-datalist > .d2l-datalist-nesteditem-accordion.d2l-le-DataListItem-Selected > .d2l-datalist-item-content.d2l-datalist-item-content-first {
+    border: none;
+    background: none;
+}
+
+.daylight .d2l-datalist-nesteditem-accordion, .daylight .d2l-datalist-nesteditem-accordion > .d2l-datalist-item-content.d2l-datalist-item-content-first {
+    border: none;
+    background: none;
+}
+
+.d2l-datalist-nesteditem-nestedcontainer > div {
+    background: none;
+}
+
+.daylight .d2l-datalist .d2l-textblock-strong {
+    color: #09b1b9;
+}
+
+.d2l-datalist-nesteditem-accordion {
+    color: #ddd;
+}
+
+.d2l-button-nml, .d2l-button-nml.d2l-button-disabled:hover, .d2l-button-nml.d2l-button-disabled:focus {
+    background: #424a56;
+    border: none !important;
+    box-shadow: none;
+    border-radius: 0 !important;
+    padding: 10px 15px !important;
+}
+
+.d2l-button-nml, .d2l-button-nml:visited, .d2l-button-nml:hover, .d2l-button-nml:focus, .d2l-button-nml:link {
+    color: #ccc;
+}
+
+.d2l-button-nml:hover, .d2l-button-nml:focus {
+    border: none;
+    background: #09b1b9;
+    color: #fff;
+    box-shadow: none;
+}
+
+div.d2l-filterinline-group-viewswitcher > div > a.d2l-filterinline-item-selected {
+    border: none;
+    background: #09b1b9;
+    color: #fff;
+}
+
+.d2l-datalist-summary {
+    border: none !important;
+    background: #373e48 !important;
+}
+
 /* Back to top button*/
 
 .darklight-back-to-top {
@@ -1347,4 +1417,21 @@ d2l-alert .message-highlight {
 
 .darklight-back-to-top .arrow {
     border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* file link */
+.d2l-filelink-link-icon {
+    filter: brightness(1.5);
+}
+
+.d2l-filelink-link > .d2l-filelink-link-text {
+    color: #09b1b9;
+}
+
+.d2l-filelink-link:focus > .d2l-filelink-link-text, .d2l-filelink-link:hover > .d2l-filelink-link-text {
+    color: #09b1b9;
+}
+
+.d2l-filelink-filesize {
+    color: #ddd;
 }

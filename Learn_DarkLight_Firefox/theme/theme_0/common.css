@@ -12,7 +12,11 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
     background: #fff;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
+}
+
+.d2l-page-bg {
+    top: 0;
 }
 
 .d2l-page-main .darklight-waterloo {
@@ -260,10 +264,10 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
 
 .d2l-collapsepane-content {
     padding-top: 10px;
-    padding-bottom: 0;
+    padding-bottom: 10px;
 }
 
-.d2l-collapsepane-content > div > div > div {
+.d2l-collapsepane-content > div.d2l-placeholder.d2l-placeholder-live > div.d2l-placeholder.d2l-placeholder-live > div {
     padding-top: 0;
 }
 
@@ -276,10 +280,26 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
 .darklight-back-to-top:hover {
     background: rgba(150, 150, 150, 0.3);
     -webkit-box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
-    -moz-box-shadow:0 0 10px rgba(150, 150, 150, 0.2);
+    -moz-box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
     box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
 }
 
 .darklight-back-to-top .arrow {
     border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* file link */
+.d2l-filelink-link {
+    white-space: normal;
+}
+
+/* course selector */
+.d2l-courseselector-wrapper .d2l-datalist {
+    padding-top: 10px !important;
+    padding-bottom: 0 !important;
+}
+
+.d2l-courseselector-wrapper .d2l-datalist-item {
+    background: none;
+    border: none;
 }
