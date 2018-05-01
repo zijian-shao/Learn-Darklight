@@ -73,10 +73,26 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 }
 
 .d2l-collapsepane-content {
-    padding-top: 0.5rem;
-    padding-bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.d2l-collapsepane-content > div > div > div {
+.d2l-collapsepane-content > div.d2l-placeholder.d2l-placeholder-live > div.d2l-placeholder.d2l-placeholder-live > div {
     padding-top: 0;
+}
+
+/* file link */
+.d2l-filelink-link {
+    white-space: normal;
+}
+
+/* course selector */
+.d2l-courseselector-wrapper .d2l-datalist {
+    padding-top: 10px !important;
+    padding-bottom: 0 !important;
+}
+
+.d2l-courseselector-wrapper .d2l-datalist-item {
+    background: none;
+    border: none;
 }
