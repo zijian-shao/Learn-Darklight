@@ -1,0 +1,26 @@
+function getOptionVersion() {
+
+    var optionVer = 1;
+    return optionVer;
+
+}
+
+function getOptionListDefault() {
+
+    var obj = {
+        'EXT_Version': '0.0.0',
+        'OPT_Version': 0,
+        'GLB_Enabled': true,
+        'GLB_ThemeID': 0,
+        'GLB_AutoHideSysAlert': true,
+        'GLB_FixNavigation': true,
+        'GLB_BackToTopButton': true,
+        'GLB_HideCheckMySys': false,
+        'GLB_EnableCustomStyle': false,
+        'GLB_CustomCSS': '',
+        'GLB_CustomJS': ''
+    };
+
+    return obj;
+
+}

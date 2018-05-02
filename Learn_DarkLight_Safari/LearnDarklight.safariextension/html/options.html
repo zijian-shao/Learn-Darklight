@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn Darklight Options</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/options.css">
+</head>
+<body>
+<!-- Header Start -->
+<div class="header">
+    <h1>Learn Darklight</h1>
+    <h3>Extension Options</h3>
+
+    <!-- Share Box -->
+    <div class="share-box">
+        <div class="share-tag">Share</div>
+        <!-- Facebook Share -->
+        <a data-open-in="popup" data-width="560"
+           data-href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dsafari&display=popup&ref=plugin&src=share_button"
+           target="_blank" class="share-link share-link-facebook"></a>
+
+        <!-- Twitter Share -->
+        <a data-open-in="popup" data-width="500"
+           data-href="https://twitter.com/intent/tweet?hashtags=UWaterloo&original_referer=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2F&ref_src=twsrc%5Etfw&text=Learn%20Darklight%20is%20a%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn&tw_p=tweetbutton&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dsafari"
+           target="_blank" class="share-link share-link-twitter"></a>
+
+        <!-- Reddit Share -->
+        <a data-open-in="newtab"
+           data-href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dsafari&title=Learn%20Darklight%20-%20The%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn"
+           target="_blank" class="share-link share-link-reddit"></a>
+
+        <!-- Google Plus Share -->
+        <a data-open-in="popup" data-width="380"
+           data-href="https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dsafari"
+           target="_blank" class="share-link share-link-googleplus"></a>
+
+        <!-- Copy Link -->
+        <a data-open-in="copy" class="share-link share-link-copy"></a>
+    </div>
+</div>
+<!-- Header End -->
+
+<div class="container" id="container">
+    <div class="wrapper">
+
+        <!-- Tab Start -->
+        <div class="nav-bg"></div>
+        <div class="nav">
+            <ul>
+                <li data-option-tab-index="0" data-option-tab-name="global" id="nav-tab-0" class="nav-tab active">
+                    General
+                </li>
+                <li data-option-tab-index="1" data-option-tab-name="advanced" id="nav-tab-1" class="nav-tab">Advanced
+                </li>
+                <li data-option-tab-index="3" data-option-tab-name="about" id="nav-tab-3" class="nav-tab">About</li>
+            </ul>
+        </div>
+        <!-- Tab End -->
+
+        <!-- General Start -->
+        <div class="content-container" id="opt-tab-0">
+            <div class="content">
+
+                <!-- Control -->
+                <div class="category-title">
+                    <h5>Control</h5>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide checkbox-slide-important">
+                        <input type="checkbox" id="opt-global-0-0" data-option-name="GLB_Enabled"
+                               data-option-type="switch">
+                        <label for="opt-global-0-0"></label>
+                    </div>
+                    <label for="opt-global-0-0" class="checkbox-label">Enable Darklight</label>
+                    <a class="option-tip-toggle">?</a>
+                    <div class="option-tip hidden">
+                        <p>This option is the total controller. It can enable / disable all the other options in the
+                            extension. The switch in the popup is synchronized with this one.</p>
+                    </div>
+                </div>
+
+                <!-- Theme -->
+                <div class="category-title">
+                    <h5>Theme</h5>
+                </div>
+                <div class="option-group radio-group" id="theme-list"></div>
+
+                <!-- Global -->
+                <div class="category-title">
+                    <h5>Global</h5>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-global-3-0" data-option-name="GLB_BackToTopButton"
+                               data-option-type="switch">
+                        <label for="opt-global-3-0"></label>
+                    </div>
+                    <label for="opt-global-3-0" class="checkbox-label">Add "Back to top" button on each page</label>
+                    <a class="option-tip-toggle">?</a>
+                    <div class="option-tip hidden">
+                        <p>Add "Back to top" button. One-click to go back to the top of webpages.</p>
+                    </div>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-global-3-1" data-option-name="GLB_FixNavigation"
+                               data-option-type="switch">
+                        <label for="opt-global-3-1"></label>
+                    </div>
+                    <label for="opt-global-3-1" class="checkbox-label">Auto fix navigation bar</label>
+                    <a class="option-tip-toggle">?</a>
+                    <div class="option-tip hidden">
+                        <p>Fixes the navigation bar at the top if it is not on the screen.</p>
+                    </div>
+                </div>
+
+                <!-- Homepage -->
+                <div class="category-title">
+                    <h5>Homepage</h5>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-global-1-0" data-option-name="GLB_AutoHideSysAlert"
+                               data-option-type="switch">
+                        <label for="opt-global-1-0"></label>
+                    </div>
+                    <label for="opt-global-1-0" class="checkbox-label">Auto hide systerm alert widget</label>
+                    <a class="option-tip-toggle">?</a>
+                    <div class="option-tip hidden">
+                        <p>Automatically hide the system alert widget on homepage if the alert content is empty</p>
+                    </div>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-global-1-1" data-option-name="GLB_HideCheckMySys"
+                               data-option-type="switch">
+                        <label for="opt-global-1-1"></label>
+                    </div>
+                    <label for="opt-global-1-1" class="checkbox-label">Hide system check widget</label>
+                    <a class="option-tip-toggle">?</a>
+                    <div class="option-tip hidden">
+                        <p>Hide the system check widget on homepage to avoid seeing the alert message.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- General End -->
+
+        <!-- Advanced Start -->
+        <div class="content-container hidden" id="opt-tab-1">
+            <div class="content">
+
+                <!-- Switch -->
+                <div class="category-title">
+                    <h5>Control</h5>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-global-4-0" data-option-name="GLB_EnableCustomStyle"
+                               data-option-type="switch">
+                        <label for="opt-global-4-0"></label>
+                    </div>
+                    <label for="opt-global-4-0" class="checkbox-label">Enable custom styles</label>
+                    <a class="option-tip-toggle option-tip-toggle-fixed">?</a>
+                    <div class="option-tip">
+                        <p>Inject the following CSS and JS code into webpages after the original code were executed.</p>
+                        <p>For performance considerations, please keep the code size less than 20KB.</p>
+                        <p>If you don't know what this is, please do not enable it.</p>
+                    </div>
+                </div>
+                <hr>
+
+                <!-- Custom styles -->
+                <label for="custom-css" class="textarea-label">Custom CSS</label>
+                <textarea name="custom-css" id="custom-css" rows="10" class="input-box width-100 block" data-option-name="GLB_CustomCSS"></textarea>
+                <label for="custom-js" class="textarea-label">Custom JS</label>
+                <textarea name="custom-js" id="custom-js" rows="10" class="input-box width-100 block" data-option-name="GLB_CustomJS"></textarea>
+                <hr>
+                <a href="#" class="btn btn-primary" id="custom-save">Save</a>
+                <a href="#" class="btn btn-default" id="custom-clear">Clear</a>
+            </div>
+        </div>
+        <!-- Advanced End -->
+
+        <!-- About Start -->
+        <div class="content-container hidden" id="opt-tab-3">
+            <div class="content">
+
+                <!-- About -->
+                <h2>Learn Darklight</h2>
+                <p>Version <span id="darklight-version"></span></p>
+                <p>Created by Zijian Shao</p>
+                <div>
+                    <a class="btn btn-primary" href="https://www.zijianshao.com/dlight/" target="_blank">Official
+                        Website</a>
+                    <a class="btn btn-success" href="https://www.paypal.me/zjshao" target="_blank">Donate</a>
+                    <a class="btn btn-default"
+                       href="https://github.com/SssWind/Learn-Darklight" target="_blank">GitHub</a>
+                </div>
+
+                <!-- Welcome -->
+                <div class="category-title">
+                    <h5>Welcome</h5>
+                </div>
+                <div>
+                    <p>Thanks for using Learn Darklight! This extension offers several themes for the new Waterloo
+                        Learn.</p>
+                    <p>If you like this extension, please share it to your friends.</p>
+                </div>
+
+                <!-- Notes -->
+                <div class="category-title">
+                    <h5>Notes</h5>
+                </div>
+                <div><p>▷ Don't use other Waterloo Learn extensions with Darklight to avoid unexpected behaviors</p>
+                    <p>▷ Waterloo Learn may change at any time, thus the extension may not function properly</p>
+                    <p>▷ If you have any questions regarding this extension, please email me at <a
+                            href="mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension">sam.zj.shao@gmail.com</a>
+                    </p></div>
+
+                <!-- Disclaimers -->
+                <div class="category-title">
+                    <h5>Disclaimers</h5>
+                </div>
+                <div><p>▷ This extension has no affiliation with Waterloo Learn, its developers, or the University of
+                    Waterloo.</p>
+                    <p>▷ Use this extension at your own responsibility.</p></div>
+
+            </div>
+
+        </div>
+        <!-- About End -->
+
+    </div>
+</div>
+
+<!-- Footer Start -->
+<div class="copyright">Created by Zijian Shao</div>
+<!-- Footer End -->
+
+<!-- Toast Start -->
+<div class="darklight-toast darklight-toast-hidden" id="darklight-toast">Options Saved</div>
+<!-- Toast End -->
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/configs.js"></script>
+<script type="text/javascript" src="../js/themes.js"></script>
+<script type="text/javascript" src="../js/options.js"></script>
+
+</body>
+</html>
