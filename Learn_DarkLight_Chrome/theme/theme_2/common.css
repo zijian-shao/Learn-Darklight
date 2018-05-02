@@ -854,6 +854,7 @@ iframe {
 
 .vui-list > li {
     border-color: #424a56;
+    border-width: 0;
 }
 
 .d2l-datalist-item-content img,
@@ -1434,4 +1435,26 @@ div.d2l-filterinline-group-viewswitcher > div > a.d2l-filterinline-item-selected
 
 .d2l-filelink-filesize {
     color: #ddd;
+}
+
+/* new course thumbs */
+d2l-image-tile.d2l-course-image-tile {
+    background: none;
+}
+
+d2l-image-tile.d2l-course-image-tile .d2l-image-tile-image-area.d2l-image-tile {
+    background: none;
+}
+
+d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
+    color: #ddd;
+}
+
+/* new course selector */
+#courseSelectorId .vui-list > li.vui-active {
+    background: #09b1b9;
+}
+
+#courseSelectorId .vui-list > li.vui-active a {
+    color: #fff;
 }
