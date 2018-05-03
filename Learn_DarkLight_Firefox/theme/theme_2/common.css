@@ -992,6 +992,15 @@ iframe {
     color: #09b1b9;
 }
 
+#UpcomingTreePlaceholder > div {
+    background: none;
+    border-color: #09b1b9;
+}
+
+#UpcomingTreePlaceholder > div > div {
+    color: #09b1b9;
+}
+
 /* progress bar */
 .d2l-progresschart > svg > path {
     fill: #424a56;
@@ -1121,6 +1130,13 @@ d2l-more-less:not([expanded]):not([inactive]) .more-less-blur.d2l-more-less {
 /* drop box */
 
 /* calendar */
+.d2l-column-flip .d2l-column-side-bg {
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
 .d2l-page-header-dark {
     background: none;
     border: none;
@@ -1457,4 +1473,20 @@ d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
 
 #courseSelectorId .vui-list > li.vui-active a {
     color: #fff;
+}
+
+/* hide header */
+.darklight-hide-header-btn {
+    background: #3c424b;
+    color: #999 !important;
+}
+
+.darklight-hide-header-btn:hover {
+    background: #3c424b;
+    color: #ccc !important;
+}
+
+/* calendar - upcoming */
+.upcoming-events li.d2l-datalist-item > div.d2l-datalist-item-content > div > div:first-child div {
+    color: #dddddd !important;
 }
