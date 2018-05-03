@@ -303,3 +303,14 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     background: none;
     border: none;
 }
+
+/* hide header */
+.darklight-hide-header-btn {
+    background: #333;
+    color: #999 !important;
+}
+
+.darklight-hide-header-btn:hover {
+    background: #444;
+    color: #ddd !important;
+}

@@ -10,8 +10,7 @@ function initTheme() {
     } else {
 
         // for wlu learn (beta)
-        var cssText = '.d2l-navigation-s-logo-link img {-webkit-filter:invert(100%); filter:invert(100%);}';
-        injectCSS(cssText, 'head', 'text');
+        $('.d2l-navigation-s-logo-link img').attr('src', baseURL + 'img/laurier_learn_logo.png').css('opacity', 0.8);
 
     }
 
@@ -22,9 +21,18 @@ function initTheme() {
     // }
 
     // quiz & survey warning
-    if (currURL.includes('/quizzing/')) {
+    if (currURL.match(/\/quizzing\//g)) {
         // || currURL.includes('/survey/') || currURL.includes('/dropbox/')
         alert('This theme has made many changes to the original webpage. In order to ensure nothing will go wrong, it\'s recommended to switch to other themes before you continue your work on this page.');
+    }
+
+    // calendar - upcoming
+    if (currURL.match(/\/d2l\/home\/[\d]+/g)) {
+        $('.d2l-collapsepane-header').each(function (i, e) {
+            if ($(e).text().match(/upcoming events/gi)) {
+                $(e).parent('div.d2l-collapsepane').addClass('upcoming-events');
+            }
+        });
     }
 }
 
