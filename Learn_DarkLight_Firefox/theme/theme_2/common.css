@@ -1362,6 +1362,16 @@ d2l-alert .message-highlight {
     background: #09b1b9 !important;
 }
 
+d2l-alert button.d2l-alert {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: none !important;
+}
+
+d2l-alert button.d2l-alert:hover, d2l-alert button.d2l-alert:active {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+}
+
 /* datalist */
 .daylight .d2l-datalist-nesteditem-accordion.d2l-datalist-nesteditem-accordion-open, .daylight .d2l-datalist-nesteditem-accordion.d2l-datalist-nesteditem-accordion-open > .d2l-datalist-item-content.d2l-datalist-item-content-first {
     background: #373e48;
@@ -1475,18 +1485,26 @@ d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
     color: #fff;
 }
 
-/* hide header */
-.darklight-hide-header-btn {
-    background: #3c424b;
+/* fix right buttons */
+.darklight-fixed-right-button {
+    background: #373e48;
     color: #999 !important;
 }
 
-.darklight-hide-header-btn:hover {
-    background: #3c424b;
-    color: #ccc !important;
+.darklight-fixed-right-button:hover {
+    background: #424a56;
+}
+
+.darklight-fixed-right-button-icon > img {
+    opacity: 0.3;
 }
 
 /* calendar - upcoming */
 .upcoming-events li.d2l-datalist-item > div.d2l-datalist-item-content > div > div:first-child div {
     color: #dddddd !important;
+}
+
+/* pdf viewer */
+.d2l-fileviewer-pdf-pdfjs {
+    border: none;
 }

@@ -304,13 +304,16 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     border: none;
 }
 
-/* hide header */
-.darklight-hide-header-btn {
-    background: #333;
+/* fix right buttons */
+.darklight-fixed-right-button {
+    background: #222;
     color: #999 !important;
 }
 
-.darklight-hide-header-btn:hover {
-    background: #444;
-    color: #ddd !important;
+.darklight-fixed-right-button:hover {
+    background: #333;
+}
+
+.darklight-fixed-right-button-icon > img {
+    opacity: 0.3;
 }
