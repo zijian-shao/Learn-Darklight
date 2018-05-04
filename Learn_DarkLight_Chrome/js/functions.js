@@ -152,27 +152,64 @@ function isWLU() {
     return currURL.includes('mylearningspace.wlu.ca');
 }
 
-function hideHeaderBtn() {
-    var hideBtn = $('<a href="#" data-hidden="0" class="darklight-hide-header-btn">Hide Header</a>');
-    var pageHeader = $('body').children('header').first();
-    var iframe = $('#d_content').find('iframe').first();
+function resizeContentBtn(page) {
+    var body = $('body');
 
-    iframe.attr('data-original-height', iframe.css('height'));
+    var wrapper = $('<div class="darklight-fixed-right-wrapper"></div>');
+    var iframe = null;
+    if (page == 'content')
+        iframe = $('#ContentView').find('iframe').first();
+    else if (page == 'quiz')
+        iframe = $('.d2l-page-main').find('iframe').first();
 
-    hideBtn.on('click', function (e) {
+    // inc iframe
+    var sizeInc = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-plus.png"></div><div class="darklight-fixed-right-button-text">Content Height <strong>+</strong></div></a>');
+    sizeInc.on('click', function (e) {
         e.preventDefault();
-        if ($(this).attr('data-hidden') == '0') {
-            $(this).attr('data-hidden', '1').text('Show Header');
-            pageHeader.hide();
-            iframe.css('height', '100vh');
-        } else {
-            $(this).attr('data-hidden', '0').text('Hide Header');
-            pageHeader.show();
-            iframe.css('height', iframe.attr('data-original-height'));
+        var currH = iframe.attr('data-current-height');
+        if (typeof currH === 'undefined')
+            currH = iframe.height();
+        currH = parseInt(currH);
+        currH += 50;
+        iframe.css('height', currH + 'px');
+        iframe.attr('data-current-height', currH);
+    });
+    sizeInc.appendTo(wrapper);
+
+    // dec iframe
+    var sizeDec = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-minus.png"></div><div class="darklight-fixed-right-button-text">Content Height <strong>-</strong></div></a>');
+    sizeDec.on('click', function (e) {
+        e.preventDefault();
+        var currH = iframe.attr('data-current-height');
+        if (typeof currH === 'undefined')
+            currH = iframe.height();
+        currH = parseInt(currH);
+        if (currH >= 300) {
+            currH -= 50;
+            iframe.css('height', currH + 'px');
+            iframe.attr('data-current-height', currH);
         }
     });
+    sizeDec.appendTo(wrapper);
 
-    hideBtn.appendTo($('body'));
+    $(window).on('resize', function () {
+        setTimeout(function () {
+            iframe.css('height', iframe.attr('data-current-height') + 'px');
+        }, 10);
+    });
+
+    // unlock body
+    if (body.css('overflow') == 'hidden') {
+        var unlockScroll = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-unlock.png"></div><div class="darklight-fixed-right-button-text">Unlock Page Scroll</div></a>');
+        unlockScroll.on('click', function (e) {
+            e.preventDefault();
+            body.css('overflow', 'auto');
+            $(this).hide();
+        });
+        unlockScroll.appendTo(wrapper);
+    }
+
+    wrapper.appendTo(body);
 }
 
 function listMembersBtn() {
@@ -292,6 +329,7 @@ function listMembersBtn() {
 }
 
 function homepageFunc() {
+
     $('.d2l-homepage-header-wrapper').each(function (i, e) {
         var headText = $(e).text();
         if (headText.match(/SYSTEM ALERT/g) || headText.match(/News/g)) {
@@ -310,7 +348,6 @@ function homepageFunc() {
                 $(e).parents('div.d2l-widget').remove();
             }
         }
-
     });
 }
 
@@ -326,14 +363,19 @@ function init() {
         fixNavigation();
     }
 
-    // hide header
-    if (currURL.match(/\/quizzing\//g) && options.QUIZ_HideHeaderBtn) {
-        hideHeaderBtn();
-    }
-
     // display group members
     if (currURL.match(/\/d2l\/lms\/group\/user_available_group_list\.d2l/g) && options.GROUP_ListMembersBtn) {
         listMembersBtn();
+    }
+
+    // content resize
+    if (currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/g) && options.COURSE_ContentResizeBtn) {
+        resizeContentBtn('content');
+    }
+
+    // quiz & survey resize
+    if ((currURL.match(/\/quizzing\/user\/attempt\//g) || currURL.match(/\/survey\/user\/attempt\//g)) && options.QUIZ_ContentResizeBtn) {
+        resizeContentBtn('quiz');
     }
 
     // hide widget homepage
