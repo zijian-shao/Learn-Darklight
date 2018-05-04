@@ -132,7 +132,11 @@ function initDarklightIdle() {
     // extensionUpdate();
 }
 
-$(window).load(function () {
+$(window).bind('load', function () {
+
+    // For safari, only injects into top level frame
+    if (window.self !== window.top)
+        return;
 
     baseURL = safari.extension.baseURI;
     currURL = window.location.href;

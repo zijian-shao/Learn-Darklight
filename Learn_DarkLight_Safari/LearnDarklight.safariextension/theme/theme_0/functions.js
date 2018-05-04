@@ -1,4 +1,8 @@
 function initTheme() {
+    // For safari, only injects into top level frame
+    if (window.self !== window.top)
+        return;
+
     if (!isWLU()) {
 
         // bg - waterloo
@@ -10,13 +14,15 @@ function initTheme() {
     } else {
 
         // for wlu learn (beta)
-        var logo = $('.d2l-navigation-s-logo-link img').clone();
-        logo.addClass('logo-white');
-        $('.d2l-navigation-s-logo-link img').after(logo);
+        $('.d2l-navigation-s-logo-link img').after('<img src="' + baseURL + 'img/laurier_learn_logo.png" alt="My Home" class="logo-white">');
 
-        var cssText = '.d2l-navigation-s-logo-link img {-webkit-filter:invert(100%); filter:invert(100%);}';
-        cssText += '.d2l-navigation-s-logo-link img.logo-white {-webkit-filter: none; filter: none;}';
-        injectCSS(cssText, 'head', 'text');
+        // var logo = $('.d2l-navigation-s-logo-link img').clone();
+        // logo.addClass('logo-white');
+        // $('.d2l-navigation-s-logo-link img').after(logo);
+        //
+        // var cssText = '.d2l-navigation-s-logo-link img {-webkit-filter:invert(100%); filter:invert(100%);}';
+        // cssText += '.d2l-navigation-s-logo-link img.logo-white {-webkit-filter: none; filter: none;}';
+        // injectCSS(cssText, 'head', 'text');
 
     }
 }

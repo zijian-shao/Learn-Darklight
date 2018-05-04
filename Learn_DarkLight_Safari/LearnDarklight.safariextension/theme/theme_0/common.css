@@ -303,3 +303,17 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     background: none;
     border: none;
 }
+
+/* fix right buttons */
+.darklight-fixed-right-button {
+    background: #222;
+    color: #999 !important;
+}
+
+.darklight-fixed-right-button:hover {
+    background: #333;
+}
+
+.darklight-fixed-right-button-icon > img {
+    opacity: 0.3;
+}
