@@ -1173,11 +1173,12 @@ div.arrow.left {
     }
 
     .nav {
-        float: none;
+        position: relative;
         width: 100%;
         height: auto;
         background: #333;
         border: none;
+        top: 0;
     }
 
     .nav ul {
@@ -1207,6 +1208,7 @@ div.arrow.left {
         float: none;
         width: 100%;
         height: auto;
+        margin-left: 0;
     }
 
     .content {

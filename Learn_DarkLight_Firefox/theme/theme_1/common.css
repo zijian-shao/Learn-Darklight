@@ -96,3 +96,12 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
     background: none;
     border: none;
 }
+
+/* homepage calendar */
+.darklight-homepage-calendar-loading {
+    padding: 10px 0;
+}
+
+.darklight-homepage-calendar-item {
+    padding: 20px 0;
+}
