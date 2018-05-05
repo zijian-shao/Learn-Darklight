@@ -84,18 +84,12 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     max-height: 40px;
 }
 
-.d2l-navigation-s-logo-link img.logo-white {
-    display: none;
+.d2l-navigation-s-mobile-menu-header {
+    background: #000;
 }
 
-@media screen and (min-width: 768px) {
-    .d2l-navigation-s-logo-link img {
-        display: none;
-    }
-
-    .d2l-navigation-s-logo-link img.logo-white {
-        display: block;
-    }
+.d2l-navigation-s-mobile-menu-header-course-menu span {
+    color: #fff;
 }
 
 .d2l-navigation-s, .d2l-navigation-s-no-login {

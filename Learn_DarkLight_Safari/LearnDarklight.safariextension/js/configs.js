@@ -19,6 +19,7 @@ function getOptionListDefault() {
         'GLB_CustomJS': '',
         'HOME_AutoHideSysAlert': true,
         'HOME_HideCheckMySys': false,
+        'HOME_AddCalendar': true,
         'COURSE_ContentResizeBtn': true,
         'QUIZ_ContentResizeBtn': true,
         'GROUP_ListMembersBtn': true

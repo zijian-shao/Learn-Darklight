@@ -48,7 +48,13 @@ function scrollToUtil(pos, time, offset) {
     else if ($.type(pos) === 'string')
         pos = $(pos).first().offset().top;
 
-    $('body').animate({scrollTop: pos - offset}, time);
+    var html = null;
+    if (isBrowser('safari'))
+        html = $('body');
+    else
+        html = $('html');
+
+    html.animate({scrollTop: pos - offset}, time);
 
 }
 
@@ -83,10 +89,16 @@ function unblockPage() {
 
 function isOnScreen(element) {
 
+    var html = null;
+    if (isBrowser('safari'))
+        html = $('body');
+    else
+        html = $('html');
+
     if ($.type(element) === 'object')
-        return ($('body').scrollTop() < element.offset().top);
+        return (html.scrollTop() < element.offset().top);
     else if ($.type(element) === 'number')
-        return ($('body').scrollTop() < element);
+        return (html.scrollTop() < element);
 
     return true;
 }
@@ -116,7 +128,13 @@ function fixNavigation() {
         if ($(window).width() < 768)
             return;
 
-        if ($('body').scrollTop() < offset) {
+        var html = null;
+        if (isBrowser('safari'))
+            html = $('body');
+        else
+            html = $('html');
+
+        if (html.scrollTop() < offset) {
             // is on screen
             nav.removeClass('darklight-navbar-fixed');
             header.css('margin-bottom', '0px');
@@ -152,69 +170,126 @@ function isWLU() {
     return currURL.includes('mylearningspace.wlu.ca');
 }
 
+function isBrowser(name) {
+    name = name.toLowerCase();
+    if (name == 'opera')
+        return (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    else if (name == 'firefox')
+        return typeof InstallTrigger !== 'undefined';
+    else if (name == 'safari')
+        return /constructor/i.test(window.HTMLElement) || (function (p) {
+            return p.toString() === "[object SafariRemoteNotification]";
+        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+    else if (name == 'ie')
+        return /*@cc_on!@*/false || !!document.documentMode;
+    else if (name == 'edge')
+        return !isIE && !!window.StyleMedia;
+    else if (name == 'chrome')
+        return !!window.chrome && !!window.chrome.webstore;
+    else
+        return false;
+}
+
 function resizeContentBtn(page) {
-    var body = $('body');
 
-    var wrapper = $('<div class="darklight-fixed-right-wrapper"></div>');
-    var iframe = null;
-    if (page == 'content')
-        iframe = $('#ContentView').find('iframe').first();
-    else if (page == 'quiz')
-        iframe = $('.d2l-page-main').find('iframe').first();
+    function _resizeContentBtn() {
+        var body = $('body');
 
-    // inc iframe
-    var sizeInc = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-plus.png"></div><div class="darklight-fixed-right-button-text">Content Height <strong>+</strong></div></a>');
-    sizeInc.on('click', function (e) {
-        e.preventDefault();
-        var currH = iframe.attr('data-current-height');
-        if (typeof currH === 'undefined')
-            currH = iframe.height();
-        currH = parseInt(currH);
-        currH += 50;
-        iframe.css('height', currH + 'px');
-        iframe.attr('data-current-height', currH);
-    });
-    sizeInc.appendTo(wrapper);
+        var wrapper = $('<div class="darklight-fixed-right-wrapper"></div>');
 
-    // dec iframe
-    var sizeDec = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-minus.png"></div><div class="darklight-fixed-right-button-text">Content Height <strong>-</strong></div></a>');
-    sizeDec.on('click', function (e) {
-        e.preventDefault();
-        var currH = iframe.attr('data-current-height');
-        if (typeof currH === 'undefined')
-            currH = iframe.height();
-        currH = parseInt(currH);
-        if (currH >= 300) {
-            currH -= 50;
+        // inc iframe
+        var sizeInc = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-plus.png"></div><div class="darklight-fixed-right-button-text">Content Height <strong>+</strong></div></a>');
+        sizeInc.on('click', function (e) {
+            e.preventDefault();
+            var currH = iframe.attr('data-current-height');
+            if (typeof currH === 'undefined')
+                currH = iframe.height();
+            currH = parseInt(currH);
+            currH += 50;
             iframe.css('height', currH + 'px');
             iframe.attr('data-current-height', currH);
-        }
-    });
-    sizeDec.appendTo(wrapper);
-
-    $(window).on('resize', function () {
-        setTimeout(function () {
-            iframe.css('height', iframe.attr('data-current-height') + 'px');
-        }, 10);
-    });
-
-    // unlock body
-    if (body.css('overflow') == 'hidden') {
-        var unlockScroll = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-unlock.png"></div><div class="darklight-fixed-right-button-text">Unlock Page Scroll</div></a>');
-        unlockScroll.on('click', function (e) {
-            e.preventDefault();
-            body.css('overflow', 'auto');
-            $(this).hide();
         });
-        unlockScroll.appendTo(wrapper);
+        sizeInc.appendTo(wrapper);
+
+        // dec iframe
+        var sizeDec = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-minus.png"></div><div class="darklight-fixed-right-button-text">Content Height <strong>-</strong></div></a>');
+        sizeDec.on('click', function (e) {
+            e.preventDefault();
+            var currH = iframe.attr('data-current-height');
+            if (typeof currH === 'undefined')
+                currH = iframe.height();
+            currH = parseInt(currH);
+            if (currH >= 300) {
+                currH -= 50;
+                iframe.css('height', currH + 'px');
+                iframe.attr('data-current-height', currH);
+            }
+        });
+        sizeDec.appendTo(wrapper);
+
+        $(window).on('resize', function () {
+            setTimeout(function () {
+                iframe.css('height', iframe.attr('data-current-height') + 'px');
+            }, 10);
+        });
+
+        // unlock body
+        function _unlockBody() {
+            if (body.css('overflow') == 'hidden') {
+                var unlockScroll = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-unlock.png"></div><div class="darklight-fixed-right-button-text">Unlock Page Scroll</div></a>');
+                unlockScroll.on('click', function (e) {
+                    e.preventDefault();
+                    body.css('overflow', 'auto');
+                    $(this).hide();
+                });
+                unlockScroll.appendTo(wrapper);
+            }
+        }
+
+        if (isBrowser('chrome')) {
+            _unlockBody();
+        } else if (isBrowser('firefox')) {
+            setTimeout(_unlockBody, 1000);
+        } else if (isBrowser('safari')) {
+            setTimeout(_unlockBody, 1000);
+        }
+
+        wrapper.appendTo(body);
     }
 
-    wrapper.appendTo(body);
+    var iframe = null;
+
+    function _getIframe() {
+        if (page == 'content')
+            iframe = $('#ContentView').find('iframe').first();
+        else if (page == 'quiz')
+            iframe = $('.d2l-page-main').find('iframe').first();
+    }
+
+    if (isBrowser('chrome')) {
+        _getIframe();
+        _resizeContentBtn();
+    } else if (isBrowser('firefox')) {
+        var intervalId = setInterval(function () {
+            _getIframe();
+            if (iframe != null && iframe.length > 0) {
+                clearInterval(intervalId);
+                _resizeContentBtn();
+            }
+        }, 500);
+    } else if (isBrowser('safari')) {
+        _getIframe();
+        _resizeContentBtn();
+    }
 }
 
 function listMembersBtn() {
+
+    var theForm = $('form[id="d2l_form"][action^="user_available_group_list.d2l"]');
+    if (theForm.find('table').first().text().match(/No items found/g))
+        return;
+
     $('table.d_g.d_gn').removeClass('d_g d_gn').addClass('d2l-table d2l-grid d_gl group-list');
-    // .removeClass('d_g d_gn')
     injectCSS('.group-list th, .group-list td {border-width: 1px; border-style: solid; padding: 5px 15px;}', 'head', 'text');
 
     var targetBtn = $('button[class="d2l-button"][data-location^="user_group_list.d2l"]');
@@ -235,7 +310,7 @@ function listMembersBtn() {
 
         var groupID = [];
         var groupNum = [];
-        var theForm = $('form[id="d2l_form"][action^="user_available_group_list.d2l"]');
+
         theForm.find('tr').each(function (i, elem) {
             var firstTD = $(elem).find('td:first-child');
             if (firstTD.text().match(/Group \d+/g)) {
@@ -253,22 +328,7 @@ function listMembersBtn() {
         var url = new URL(currURL);
         var ou = url.searchParams.get('ou');
 
-        function showAllGroupMembers() {
-
-            // var target = $('.d2l-action-buttons').first();
-            // var tablePlaceholder = $('<div id="darklight-all-group-members"></div>');
-            // tablePlaceholder.append($('<h2 class="vui-heading-2">All Group Members</h2>'));
-            // var table = $('<table class="d2l-table"></table>');
-            // table.append('<thead><tr><th>Group</th><th>Name</th></tr></thead>');
-            //
-            // var tbody = $('<tbody></tbody>');
-            // for (var i = 0, len = finalList.length; i < len; i++) {
-            //     tbody.append('<tr><td>' + finalList[i]['group'] + '</td><td>' + finalList[i]['name'] + '</td></tr>');
-            // }
-            // tbody.appendTo(table);
-            // table.appendTo(tablePlaceholder);
-            // tablePlaceholder.append('<hr>');
-            // tablePlaceholder.insertAfter(target);
+        function _showAllGroupMembers() {
 
             counter = 0;
             theForm.find('tr').each(function (idx, elem) {
@@ -291,7 +351,7 @@ function listMembersBtn() {
             $('#darklight-all-group-members-btn').attr('data-shown', '1');
         }
 
-        function getGroupMemberAjax() {
+        function _getGroupMemberAjax() {
             blockPageMsg('Retrieving data - ' + groupNum[counter]);
             $.get('/d2l/lms/group/group_member_list.d2l?ou=' + ou + '&groupId=' + groupID[counter] + '&d2l_body_type=2', function (data) {
                 var html = $($.parseHTML(data));
@@ -312,18 +372,18 @@ function listMembersBtn() {
                 if (counter >= groupID.length) {
                     blockPageMsg('Done');
                     unblockPage();
-                    showAllGroupMembers();
+                    _showAllGroupMembers();
                 } else {
                     // wait 100ms till next request (don't wanna blow up the server)
-                    // setTimeout(getGroupMemberAjax,100);
+                    // setTimeout(_getGroupMemberAjax,100);
 
                     // whatever
-                    getGroupMemberAjax();
+                    _getGroupMemberAjax();
                 }
             });
         }
 
-        getGroupMemberAjax();
+        _getGroupMemberAjax();
 
     });
 }
@@ -343,19 +403,148 @@ function homepageFunc() {
                     $(e).parents('div.d2l-widget').remove();
                 }
             }
-        } else if (headText.match(/Check My System/g)) {
+        } else if (headText.match(/Check My System/g) && !isWLU()) {
             if (options.HOME_HideCheckMySys) {
                 $(e).parents('div.d2l-widget').remove();
+            }
+        } else if (headText.match(/Courses and Communities/g) && !isWLU()) {
+            if (options.HOME_AddCalendar) {
+                var courseWidget = $(e).parents('div.d2l-widget');
+
+                // insert after courses
+                var calendarWidget = $('<div role="region" class="d2l-widget"><div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-2">Upcoming Events</h2></div></div><div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"><div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div></div></div>');
+
+                calendarWidget.insertAfter(courseWidget);
+
+                var loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses-content d2l-loading-spinner');
+
+                var intervalId = setInterval(function () {
+                    if (loadSpinner.length == 0) {
+                        loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses-content d2l-loading-spinner');
+                    } else {
+                        if (!loadSpinner.is(':visible')) {
+                            clearInterval(intervalId);
+                            homepageCalendar(courseWidget);
+                        }
+                    }
+                }, 500);
             }
         }
     });
 }
 
-function init() {
+function homepageCalendar(courseWidget) {
+    if (isWLU()) return;
 
-    // For safari, only injects into top level frame
-    if (window.self !== window.top)
-        return;
+    var links = [];
+    courseWidget.find('.d2l-widget-content d2l-my-courses d2l-my-courses-content .my-courses-content .course-tile-grid .d2l-my-courses-content').each(function (i, e) {
+        if ($(e).children('d2l-course-image-tile').is(':visible')) {
+            var link = $(e).find('a.d2l-image-tile-base-link').first().attr('href');
+            if (link !== undefined)
+                links.push(link);
+        }
+    });
+
+    var counter = 0;
+    var placeHolder = $('#darklight-homepage-calendar');
+    var finalList = [];
+
+    function _sortEvents(a, b) {
+        if (a.timestamp < b.timestamp)
+            return -1;
+        if (a.timestamp > b.timestamp)
+            return 1;
+        return 0;
+    }
+
+    function _displayEvents() {
+        if (finalList.length == 0) {
+            placeHolder.html($('<div class="d2l-msg-container d2l-datalist-empty"><div class="d2l-msg-container-inner"><div class="d2l-msg-container-text d2l_1_70_508">There are no events to display.</div><div class="d2l-clear"></div></div></div>'));
+            return;
+        }
+
+        finalList.sort(_sortEvents);
+        placeHolder.html('');
+
+        for (var i = 0, len = finalList.length; i < len; i++) {
+            $('<a href="' + finalList[i].link + '" target="_blank" class="darklight-homepage-calendar-item"><div class="darklight-homepage-calendar-date"><span class="month">' + finalList[i].month + '</span><span class="day">' + finalList[i].day + '</span></div><div class="darklight-homepage-calendar-content"><div><span class="time">' + finalList[i].time + '</span><span class="course">' + finalList[i].course + '</span></div><div class="title d2l-typography">' + finalList[i].title + '</div></div></a>').appendTo(placeHolder);
+        }
+    }
+
+    function _getCoursePageAjax() {
+        $.get(links[counter], function (data) {
+            var html = $($.parseHTML(data));
+            var calendar = null;
+            var courseCode = html.find('.d2l-navigation-s-link').first().text();
+            courseCode = courseCode.split(' - ');
+            courseCode.pop();
+            courseCode = courseCode.join(' - ');
+
+            // get widget header
+            html.find('.d2l-homepage .d2l-widget .d2l-widget-header').each(function (i, e) {
+                if ($(e).text().match(/Calendar/g)) {
+
+                    // get calendar header
+                    $(e).next('.d2l-widget-content').find('.d2l-collapsepane-header').each(function (i2, e2) {
+                        if ($(e2).text().match(/Upcoming events/g)) {
+
+                            // get calendar list content
+                            calendar = $(e2).next('.d2l-collapsepane-content').find('ul.d2l-datalist');
+                            if (calendar.children('li.d2l-datalist-item').length > 0) {
+
+                                // if found event
+                                calendar.children('li.d2l-datalist-item').each(function (i3, e3) {
+
+                                    var dataContent = $(e3).children('div.d2l-datalist-item-content').first();
+                                    dataContent.find('div.d2l-clear').remove();
+
+                                    var date = dataContent.children('div').first().children('div').first();
+                                    var month = date.children('div').first().text().trim();
+                                    var day = date.children('div').last().text().trim();
+                                    var time = dataContent.children('div').first().children('div').last().children('span').first().text().trim();
+                                    var title = dataContent.children('div').first().children('div').last().children('div').last().text().trim();
+                                    var link = $(e3).find('#' + $(e3).attr('data-d2l-actionid')).attr('href');
+                                    link = link.substring(0, link.indexOf('#'));
+                                    var timestamp = '';
+                                    var currYear = (new Date()).getFullYear();
+
+                                    if (!time.match(/\d+:\d+ [APM]{2}/g)) {
+                                        timestamp = new Date(month + ' ' + day + ', ' + currYear + ' 23:59:59').getTime() / 1000;
+                                    } else {
+                                        timestamp = new Date(month + ' ' + day + ', ' + currYear + ' ' + time).getTime() / 1000;
+                                    }
+
+                                    finalList.push({
+                                        'course': courseCode,
+                                        'timestamp': timestamp,
+                                        'month': month,
+                                        'day': day,
+                                        'time': time,
+                                        'title': title,
+                                        'link': link
+                                    });
+                                });
+
+                            }
+                        }
+                    });
+                }
+            });
+
+            counter++;
+            if (counter >= links.length) {
+                _displayEvents();
+            } else {
+                _getCoursePageAjax();
+            }
+        });
+    }
+
+    _getCoursePageAjax();
+
+}
+
+function init() {
 
     // back to top button
     if (options.GLB_BackToTopButton) {
