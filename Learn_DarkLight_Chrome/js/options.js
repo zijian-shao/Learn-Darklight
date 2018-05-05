@@ -215,8 +215,6 @@ function initOptions() {
             e.preventDefault();
             var css = $('#custom-css').val().trim();
             var js = $('#custom-js').val().trim();
-            console.log(css);
-            console.log(js);
             var obj = {};
             obj['GLB_CustomCSS'] = css;
             obj['GLB_CustomJS'] = js;

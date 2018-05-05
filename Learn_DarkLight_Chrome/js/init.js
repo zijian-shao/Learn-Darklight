@@ -27,6 +27,26 @@ function injectJS(src, tag, type) {
     script.appendTo($(tag));
 }
 
+function isBrowser(name) {
+    name = name.toLowerCase();
+    if (name == 'opera')
+        return (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    else if (name == 'firefox')
+        return typeof InstallTrigger !== 'undefined';
+    else if (name == 'safari')
+        return /constructor/i.test(window.HTMLElement) || (function (p) {
+                return p.toString() === "[object SafariRemoteNotification]";
+            })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+    else if (name == 'ie')
+        return /*@cc_on!@*/false || !!document.documentMode;
+    else if (name == 'edge')
+        return !isIE && !!window.StyleMedia;
+    else if (name == 'chrome')
+        return !!window.chrome && !!window.chrome.webstore;
+    else
+        return false;
+}
+
 function initDarklight() {
 
     function init() {
