@@ -252,13 +252,14 @@ hr {
 }
 
 .nav {
-    position: relative;
-    float: left;
+    position: fixed;
     background: none;
     width: 20%;
     height: auto;
     overflow: hidden;
     z-index: 90;
+    top: 80px;
+    left: 0;
 }
 
 .nav ul {
@@ -311,6 +312,7 @@ hr {
     position: relative;
     float: left;
     width: 80%;
+    margin-left: 20%;
     height: auto;
     overflow: hidden;
     background: #fdfdfd;
@@ -1171,11 +1173,12 @@ div.arrow.left {
     }
 
     .nav {
-        float: none;
+        position: relative;
         width: 100%;
         height: auto;
         background: #333;
         border: none;
+        top: 0;
     }
 
     .nav ul {
@@ -1205,6 +1208,7 @@ div.arrow.left {
         float: none;
         width: 100%;
         height: auto;
+        margin-left: 0;
     }
 
     .content {

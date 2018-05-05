@@ -33,19 +33,55 @@ i.arrow.down {
     right: 0;
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     text-align: center;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 9999;
     cursor: wait;
+    display: table;
 }
 
-.darklight-block-page i {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    margin: -10px auto 0;
-    color: #999;
+.darklight-block-page-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.darklight-block-page-loader {
+    margin: auto;
+    border: 6px solid #999;
+    border-radius: 50%;
+    border-top: 6px solid #ccc;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: loader-spin 2s linear infinite;
+    animation: loader-spin 2s linear infinite;
+}
+
+.darklight-block-page-message {
+    font-size: 14px;
+    margin: 16px 0;
+    color: #fff;
+    text-align: center;
+}
+
+@-webkit-keyframes loader-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes loader-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Back to top button*/
@@ -102,3 +138,62 @@ i.arrow.down {
     z-index: 500;
 }
 
+/* fix right buttons */
+.darklight-fixed-right-wrapper {
+    position: fixed;
+    top: 25%;
+    left: auto;
+    right: -120px;
+    bottom: auto;
+    width: 160px;
+    height: auto;
+    overflow: visible;
+    z-index: 100;
+}
+
+.darklight-fixed-right-button {
+    background: #111;
+    color: #999 !important;
+    width: 160px;
+    height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.darklight-fixed-right-button:hover {
+    background: #333;
+    margin-left: -120px;
+}
+
+.darklight-fixed-right-button-icon {
+    display: inline-block;
+    float: left;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.darklight-fixed-right-button-icon > img {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    opacity: 0.5;
+}
+
+.darklight-fixed-right-button-text {
+    display: inline-block;
+    float: left;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+}
