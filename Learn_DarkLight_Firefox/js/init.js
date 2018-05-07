@@ -47,10 +47,22 @@ function isBrowser(name) {
         return false;
 }
 
+function isWLU() {
+    return currURL.includes('mylearningspace.wlu.ca');
+}
+
 function initDarklight() {
 
     function init() {
         if (!options.GLB_Enabled)
+            return;
+
+        // disable on Waterloo Learn
+        if (!options.GLB_EnableForWaterloo && !isWLU())
+            return;
+
+        // disable on Laurier MLS
+        if (!options.GLB_EnableForLaurier && isWLU())
             return;
 
         if (currURL.includes('/content/enforced/'))
