@@ -1,9 +1,23 @@
 function initPopup() {
 
-    chrome.storage.sync.get({
-        GLB_Enabled: true
-    }, function (items) {
+    chrome.storage.sync.get(getOptionListDefault(), function (items) {
         $('#enable-darklight').prop('checked', items.GLB_Enabled);
+
+        var quickLinks = $('#quick-access-links');
+        if (items.GLB_PopupAccessForWaterloo) {
+            $('<hr class="darklight-option-hr"><div class="darklight-option-group"><p class="darklight-option-link" id="open-learn">Open Waterloo Learn</p></div>').on('click', function () {
+                chrome.tabs.create({
+                    url: 'https://learn.uwaterloo.ca/'
+                });
+            }).appendTo(quickLinks);
+        }
+        if (items.GLB_PopupAccessForLaurier) {
+            $('<hr class="darklight-option-hr"><div class="darklight-option-group"><p class="darklight-option-link" id="open-learn">Open MyLearningSpace</p></div>').on('click', function () {
+                chrome.tabs.create({
+                    url: 'https://mylearningspace.wlu.ca/'
+                });
+            }).appendTo(quickLinks);
+        }
     });
 
     $('#enable-darklight').change(function () {
@@ -25,12 +39,6 @@ function initPopup() {
 
     $('#more-options').on('click', function () {
         chrome.runtime.openOptionsPage();
-    });
-
-    $('#open-learn').on('click', function () {
-        chrome.tabs.create({
-            url: 'https://learn.uwaterloo.ca/'
-        });
     });
 
 }

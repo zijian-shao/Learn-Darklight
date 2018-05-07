@@ -54,6 +54,8 @@
                 <li data-option-tab-index="0" data-option-tab-name="global" id="nav-tab-0" class="nav-tab active">
                     General
                 </li>
+                <li data-option-tab-index="2" data-option-tab-name="platform" id="nav-tab-2" class="nav-tab">Platform
+                </li>
                 <li data-option-tab-index="1" data-option-tab-name="advanced" id="nav-tab-1" class="nav-tab">Advanced
                 </li>
                 <li data-option-tab-index="3" data-option-tab-name="about" id="nav-tab-3" class="nav-tab">About</li>
@@ -157,8 +159,8 @@
                     <label for="opt-global-1-2" class="checkbox-label">Add calendar back to homepage</label>
                     <a class="option-tip-toggle">?</a>
                     <div class="option-tip hidden">
-                        <p>Use ajax to request upcoming events from each course, sort and add them to homepage. (Waterloo Learn
-                            only)</p>
+                        <p>Use ajax to request upcoming events from each course, sort and add them to homepage.
+                            (Waterloo Learn only)</p>
                     </div>
                 </div>
 
@@ -172,8 +174,8 @@
                                data-option-type="switch">
                         <label for="opt-global-6-0"></label>
                     </div>
-                    <label for="opt-global-6-0" class="checkbox-label">Add content size control buttons to course content
-                        pages</label>
+                    <label for="opt-global-6-0" class="checkbox-label">Add content size control buttons to course
+                        content pages</label>
                     <a class="option-tip-toggle">?</a>
                     <div class="option-tip hidden">
                         <p>Add a group of buttons to the right of course content pages to allow you resize the content
@@ -224,6 +226,58 @@
         </div>
         <!-- General End -->
 
+        <!-- Platform Start -->
+        <div class="content-container hidden" id="opt-tab-2">
+            <div class="content">
+
+                <!-- Control -->
+                <div class="category-title">
+                    <h5>Control</h5>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-platform-0-0" data-option-name="GLB_EnableForWaterloo"
+                               data-option-type="switch">
+                        <label for="opt-platform-0-0"></label>
+                    </div>
+                    <label for="opt-platform-0-0" class="checkbox-label">Enable on Waterloo Learn</label>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-platform-0-1" data-option-name="GLB_EnableForLaurier"
+                               data-option-type="switch">
+                        <label for="opt-platform-0-1"></label>
+                    </div>
+                    <label for="opt-platform-0-1" class="checkbox-label">Enable on Laurier MyLearningSpace</label>
+                </div>
+
+                <!-- Popup -->
+                <div class="category-title">
+                    <h5>Popup</h5>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-platform-1-0" data-option-name="GLB_PopupAccessForWaterloo"
+                               data-option-type="switch">
+                        <label for="opt-platform-1-0"></label>
+                    </div>
+                    <label for="opt-platform-1-0" class="checkbox-label">Show quick access link in popup for Waterloo
+                        Learn</label>
+                </div>
+                <div class="option-group checkbox-group">
+                    <div class="checkbox-slide">
+                        <input type="checkbox" id="opt-platform-1-1" data-option-name="GLB_PopupAccessForLaurier"
+                               data-option-type="switch">
+                        <label for="opt-platform-1-1"></label>
+                    </div>
+                    <label for="opt-platform-1-1" class="checkbox-label">Show quick access link in popup for Laurier
+                        MyLearningSpace</label>
+                </div>
+
+            </div>
+        </div>
+        <!-- Platform End -->
+
         <!-- Advanced Start -->
         <div class="content-container hidden" id="opt-tab-1">
             <div class="content">
@@ -234,11 +288,11 @@
                 </div>
                 <div class="option-group checkbox-group">
                     <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-4-0" data-option-name="GLB_EnableCustomStyle"
+                        <input type="checkbox" id="opt-adv-0-0" data-option-name="GLB_EnableCustomStyle"
                                data-option-type="switch">
-                        <label for="opt-global-4-0"></label>
+                        <label for="opt-adv-0-0"></label>
                     </div>
-                    <label for="opt-global-4-0" class="checkbox-label">Enable custom styles</label>
+                    <label for="opt-adv-0-0" class="checkbox-label">Enable custom styles</label>
                     <a class="option-tip-toggle option-tip-toggle-fixed">?</a>
                     <div class="option-tip">
                         <p>Inject the following CSS and JS code into webpages after the original code are executed.</p>

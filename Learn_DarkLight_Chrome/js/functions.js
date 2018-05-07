@@ -246,11 +246,7 @@ function resizeContentBtn(page) {
             }
         }
 
-        if (isBrowser('chrome')) {
-            _unlockBody();
-        } else if (isBrowser('firefox')) {
-            setTimeout(_unlockBody, 1000);
-        }
+        setTimeout(_unlockBody, 1000);
 
         wrapper.appendTo(body);
     }
@@ -275,6 +271,9 @@ function resizeContentBtn(page) {
                 _resizeContentBtn();
             }
         }, 500);
+    } else if (isBrowser('safari')) {
+        _getIframe();
+        _resizeContentBtn();
     }
 }
 
@@ -414,7 +413,7 @@ function homepageFunc() {
                 var loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses-content d2l-loading-spinner');
 
                 var intervalId = setInterval(function () {
-                    if (loadSpinner.length == 0){
+                    if (loadSpinner.length == 0) {
                         loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses-content d2l-loading-spinner');
                     } else {
                         if (!loadSpinner.is(':visible')) {
