@@ -246,13 +246,7 @@ function resizeContentBtn(page) {
             }
         }
 
-        if (isBrowser('chrome')) {
-            _unlockBody();
-        } else if (isBrowser('firefox')) {
-            setTimeout(_unlockBody, 1000);
-        } else if (isBrowser('safari')) {
-            setTimeout(_unlockBody, 1000);
-        }
+        setTimeout(_unlockBody, 1000);
 
         wrapper.appendTo(body);
     }

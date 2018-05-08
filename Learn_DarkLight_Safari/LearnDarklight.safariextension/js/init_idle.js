@@ -97,11 +97,15 @@ function initDarklightIdle() {
     if (!options.GLB_Enabled)
         return;
 
-    if (currURL.includes('/content/enforced/'))
+    // disable on Waterloo Learn
+    if (!options.GLB_EnableForWaterloo && !isWLU())
         return;
 
-    // For safari, only injects into top level frame
-    if (window.self !== window.top)
+    // disable on Laurier MLS
+    if (!options.GLB_EnableForLaurier && isWLU())
+        return;
+
+    if (currURL.includes('/content/enforced/'))
         return;
 
     // favicon

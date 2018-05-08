@@ -7,6 +7,18 @@ function initPopup() {
         enableStatus = !!safari.extension.settings.GLB_Enabled;
     $('#enable-darklight').prop('checked', enableStatus);
 
+    var quickLinks = $('#quick-access-links');
+    if (safari.extension.settings.GLB_PopupAccessForWaterloo === true
+        || safari.extension.settings.GLB_PopupAccessForWaterloo === undefined) {
+        $('<hr class="darklight-option-hr"><div class="darklight-option-group"><p class="darklight-option-link" id="open-learn">Open Waterloo Learn</p></div>').on('click', function () {
+            safari.application.activeBrowserWindow.openTab().url = 'https://learn.uwaterloo.ca/';
+        }).appendTo(quickLinks);
+    }
+    if (safari.extension.settings.GLB_PopupAccessForLaurier === true) {
+        $('<hr class="darklight-option-hr"><div class="darklight-option-group"><p class="darklight-option-link" id="open-learn">Open MyLearningSpace</p></div>').on('click', function () {
+            safari.application.activeBrowserWindow.openTab().url = 'https://mylearningspace.wlu.ca/';
+        }).appendTo(quickLinks);
+    }
 
     $('#enable-darklight').change(function () {
 
@@ -21,10 +33,6 @@ function initPopup() {
 
     $('#more-options').on('click', function () {
         safari.application.activeBrowserWindow.openTab().url = safari.extension.baseURI + 'html/options.html';
-    });
-
-    $('#open-learn').on('click', function () {
-        safari.application.activeBrowserWindow.openTab().url = 'https://learn.uwaterloo.ca/';
     });
 
 }
