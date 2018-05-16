@@ -27,10 +27,16 @@ function initTheme() {
     }
 
     // calendar - upcoming
-    if (currURL.match(/\/d2l\/home\/[\d]+/g)) {
+    if (currURL.match(/\/d2l\/home\/\d+/)) {
         $('.d2l-collapsepane-header').each(function (i, e) {
             if ($(e).text().match(/upcoming events/gi)) {
                 $(e).parent('div.d2l-collapsepane').addClass('upcoming-events');
+            }
+        });
+        $('.d2l-widget-header').each(function (i, e) {
+            var headText = $(e).text();
+            if (headText.match(/Calendar/)) {
+                $(e).parents('div.d2l-widget').addClass('course-home-calendar');
             }
         });
     }

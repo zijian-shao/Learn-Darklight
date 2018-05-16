@@ -88,14 +88,17 @@ function initBackground() {
         if (request.action == 'executeScript') {
 
             if (Array.isArray(request.data)) {
+
                 for (var i = 0; i < request.data.length; i++) {
+                    obj = {};
                     obj[request.data[i].type] = request.data[i].content;
+                    browser.tabs.executeScript(sender.tab.id, obj);
                 }
+
             } else {
                 obj[request.data.type] = request.data.content;
+                browser.tabs.executeScript(sender.tab.id, obj);
             }
-
-            browser.tabs.executeScript(sender.tab.id, obj);
 
         }
 
