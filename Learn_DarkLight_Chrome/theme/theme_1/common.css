@@ -12,6 +12,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 /* navbar */
+.d2l-navigation-s-header {
+    border: none;
+}
 
 .d2l-navigation-s-logo img {
     max-height: 40px;
@@ -93,7 +96,6 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 }
 
 .d2l-courseselector-wrapper .d2l-datalist-item {
-    background: none;
     border: none;
 }
 
@@ -104,4 +106,17 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 
 .darklight-homepage-calendar-item {
     padding: 20px 0;
+    -webkit-transition: padding 0.2s ease;
+    -moz-transition: padding 0.2s ease;
+    -ms-transition: padding 0.2s ease;
+    -o-transition: padding 0.2s ease;
+    transition: padding 0.2s ease;
+}
+
+.darklight-homepage-calendar-item:hover {
+    padding-left: 15px;
+}
+
+.darklight-homepage-calendar-content .tag {
+    margin-right: 15px;
 }

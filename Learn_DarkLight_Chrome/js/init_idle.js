@@ -129,6 +129,7 @@ function initDarklightIdle() {
     params.textContent = jsText;
     document.head.appendChild(params);
 
+    // injectJS(baseURL + 'js/functions.js', 'head');
     $.getScript(baseURL + 'js/functions.js', function () {
         injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions.js', 'head');
         if (options.GLB_EnableCustomStyle)
