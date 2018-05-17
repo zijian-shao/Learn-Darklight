@@ -108,6 +108,11 @@ i.arrow.down {
     border-color: rgba(255, 255, 255, 0.8);
     padding: 8px;
     margin-top: 20px;
+    -webkit-transition: border 0.2s ease;
+    -moz-transition: border 0.2s ease;
+    -ms-transition: border 0.2s ease;
+    -o-transition: border 0.2s ease;
+    transition: border 0.2s ease;
 }
 
 .darklight-back-to-top:hover {
@@ -253,6 +258,16 @@ i.arrow.down {
 
 .darklight-homepage-calendar-content {
     margin-left: 55px;
+}
+
+.darklight-homepage-calendar-content .tag {
+    float: right;
+    padding: 2px;
+    border: 1px solid #ff3c6a;
+    border-radius: 3px;
+    color: #ff3c6a;
+    font-size: 10px;
+    line-height: 1em;
 }
 
 .darklight-homepage-calendar-content .time {

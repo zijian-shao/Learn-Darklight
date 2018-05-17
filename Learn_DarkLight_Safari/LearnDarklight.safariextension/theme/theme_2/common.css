@@ -1029,6 +1029,10 @@ iframe {
     color: #ddd;
 }
 
+.d2l-page-message, .d2l-page-message .vui-heading-2 {
+    color: #ddd;
+}
+
 .d2l-flash-message {
     color: #ddd;
     filter: brightness(400%);
@@ -1500,8 +1504,13 @@ d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
 }
 
 /* calendar - upcoming */
+.upcoming-events .d2l-collapsepane-content {
+    background: none !important;
+}
+
 .upcoming-events li.d2l-datalist-item > div.d2l-datalist-item-content > div > div:first-child div {
     color: #dddddd !important;
+    border-color: #dddddd !important;
 }
 
 /* pdf viewer */
@@ -1519,11 +1528,11 @@ d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
 }
 
 .darklight-homepage-calendar-date {
-    color: #aaa;
+    color: #ccc;
 }
 
 .darklight-homepage-calendar-date .month {
-    border-color: #aaa;
+    border-color: #ccc;
 }
 
 .darklight-homepage-calendar-content .time {
@@ -1540,4 +1549,26 @@ d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
     border: 4px solid #ccc;
     border-top-color: #09b1b9;
     margin: 10px auto;
+}
+
+.darklight-homepage-calendar-content .tag {
+    border-color: #09b1b9;
+    color: #09b1b9;
+}
+
+/* course home calendar */
+.course-home-calendar .d2l-widget-content {
+    padding: 10px 0;
+}
+
+.course-home-calendar .d2l-collapsepane-header {
+    border-left: none;
+    border-right: none;
+    border-radius: 0 !important;
+}
+
+.course-home-calendar .d2l-collapsepane-content {
+    border-left: none;
+    border-right: none;
+    border-radius: 0 !important;
 }

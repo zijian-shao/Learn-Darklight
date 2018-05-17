@@ -233,6 +233,21 @@ function resizeContentBtn(page) {
             }, 10);
         });
 
+        // full screen
+        iframe.load(function () {
+            var fullScreenBtn = iframe.contents().find('#fullscreenMode');
+            if (fullScreenBtn.length) {
+
+                var fullScr = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-expand.png"></div><div class="darklight-fixed-right-button-text">Full Screen</div></a>');
+                fullScr.on('click', function (e) {
+                    e.preventDefault();
+                    fullScreenBtn.trigger('click');
+                });
+                fullScr.appendTo(wrapper);
+
+            }
+        });
+
         // unlock body
         function _unlockBody() {
             if (body.css('overflow') == 'hidden') {
@@ -263,7 +278,7 @@ function resizeContentBtn(page) {
     if (isBrowser('chrome')) {
         _getIframe();
         _resizeContentBtn();
-    } else if (isBrowser('firefox')) {
+    } else if (isBrowser('firefox') || isBrowser('safari')) {
         var intervalId = setInterval(function () {
             _getIframe();
             if (iframe != null && iframe.length > 0) {
@@ -271,9 +286,6 @@ function resizeContentBtn(page) {
                 _resizeContentBtn();
             }
         }, 500);
-    } else if (isBrowser('safari')) {
-        _getIframe();
-        _resizeContentBtn();
     }
 }
 
@@ -460,8 +472,17 @@ function homepageCalendar(courseWidget) {
         finalList.sort(_sortEvents);
         placeHolder.html('');
 
+        var todayTag = '';
+        var today = new Date();
+        var targetDay = null;
         for (var i = 0, len = finalList.length; i < len; i++) {
-            $('<a href="' + finalList[i].link + '" target="_blank" class="darklight-homepage-calendar-item"><div class="darklight-homepage-calendar-date"><span class="month">' + finalList[i].month + '</span><span class="day">' + finalList[i].day + '</span></div><div class="darklight-homepage-calendar-content"><div><span class="time">' + finalList[i].time + '</span><span class="course">' + finalList[i].course + '</span></div><div class="title d2l-typography">' + finalList[i].title + '</div></div></a>').appendTo(placeHolder);
+            targetDay = new Date(finalList[i].timestamp * 1000);
+            if (targetDay.setHours(0, 0, 0, 0) == today.setHours(0, 0, 0, 0)) {
+                todayTag = '<div class="tag">TODAY</div>';
+            } else {
+                todayTag = '';
+            }
+            $('<a href="' + finalList[i].link + '" target="_blank" class="darklight-homepage-calendar-item"><div class="darklight-homepage-calendar-date"><span class="month">' + finalList[i].month + '</span><span class="day">' + finalList[i].day + '</span></div><div class="darklight-homepage-calendar-content">' + todayTag + '<div><span class="time">' + finalList[i].time + '</span><span class="course">' + finalList[i].course + '</span></div><div class="title d2l-typography">' + finalList[i].title + '</div></div></a>').appendTo(placeHolder);
         }
     }
 

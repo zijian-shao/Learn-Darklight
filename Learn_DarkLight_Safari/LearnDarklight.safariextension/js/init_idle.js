@@ -128,30 +128,30 @@ function initDarklightIdle() {
     params.textContent = jsText;
     document.head.appendChild(params);
 
-    injectJS(baseURL + 'js/functions.js', 'head');
-    injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions.js', 'head');
-    if (options.GLB_EnableCustomStyle)
-        injectCSS(options.GLB_CustomJS, 'head', 'text');
+    // injectJS(baseURL + 'js/functions.js', 'head');
+    $.getScript(baseURL + 'js/functions.js', function () {
+        injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions.js', 'head');
+        if (options.GLB_EnableCustomStyle)
+            injectJS(options.GLB_CustomJS, 'head', 'text');
+    });
+
+    // overlay
+    $('.darklight-load-overlay').fadeOut(300, function () {
+        $(this).remove();
+    });
 
     // extensionUpdate();
 }
 
-$(window).bind('load', function () {
+$(window).on('load', function () {
 
     // For safari, only injects into top level frame
-    if (window.self !== window.top)
+    if (window.self !== window.top) {
+        // overlay
+        $('.darklight-load-overlay').remove();
         return;
+    }
 
-    baseURL = safari.extension.baseURI;
-    currURL = window.location.href;
-    configs = getOptionListDefault();
+    initDarklightIdle();
 
-    safari.self.addEventListener('message', function (event) {
-        if (event.name == 'options') {
-            options = event.message;
-            themeConfigs = getThemeConfigs(options.GLB_ThemeID);
-            initDarklightIdle();
-        }
-    }, false);
-    safari.self.tab.dispatchMessage('getOptions');
 });
