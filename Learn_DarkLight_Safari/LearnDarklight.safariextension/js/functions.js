@@ -278,7 +278,7 @@ function resizeContentBtn(page) {
     if (isBrowser('chrome')) {
         _getIframe();
         _resizeContentBtn();
-    } else if (isBrowser('firefox')) {
+    } else if (isBrowser('firefox') || isBrowser('safari')) {
         var intervalId = setInterval(function () {
             _getIframe();
             if (iframe != null && iframe.length > 0) {
@@ -286,9 +286,6 @@ function resizeContentBtn(page) {
                 _resizeContentBtn();
             }
         }, 500);
-    } else if (isBrowser('safari')) {
-        _getIframe();
-        _resizeContentBtn();
     }
 }
 

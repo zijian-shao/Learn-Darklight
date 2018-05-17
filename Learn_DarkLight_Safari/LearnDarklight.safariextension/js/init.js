@@ -77,6 +77,9 @@ function initDarklight() {
         document.documentElement.appendChild(cover);
     }
 
+    if (window.self !== window.top)
+        return;
+
     baseURL = safari.extension.baseURI;
     currURL = window.location.href;
     configs = getOptionListDefault();
