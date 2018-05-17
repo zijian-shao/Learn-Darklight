@@ -31,10 +31,17 @@ function initPopup() {
 
     });
 
-    $('#more-options').on('click', function () {
+    $('#more-options').off('click').on('click', function () {
         safari.application.activeBrowserWindow.openTab().url = safari.extension.baseURI + 'html/options.html';
     });
 
+    safari.self.height = $('html').height();
 }
 
 initPopup();
+
+function _popoverHandler() {
+    window.location.reload();
+}
+
+safari.application.addEventListener("popover", _popoverHandler, true);

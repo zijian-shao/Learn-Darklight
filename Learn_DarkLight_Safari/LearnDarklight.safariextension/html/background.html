@@ -39,6 +39,10 @@
 
             event.target.page.dispatchMessage('version', safari.extension.displayVersion);
 
+        } else if (event.name == 'reloadPopover') {
+
+            safari.extension.popovers[0].contentWindow.location.reload();
+
         }
     }
 

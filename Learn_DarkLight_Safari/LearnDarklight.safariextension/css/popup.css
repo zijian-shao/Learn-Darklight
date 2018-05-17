@@ -153,11 +153,11 @@ div {
     line-height: 40px;
     text-decoration: none;
     cursor: pointer;
-    -webkit-transition: all 0.1s linear;
-    -moz-transition: all 0.1s linear;
-    -ms-transition: all 0.1s linear;
-    -o-transition: all 0.1s linear;
-    transition: all 0.1s linear;
+    /*-webkit-transition: all 0.1s linear;*/
+    /*-moz-transition: all 0.1s linear;*/
+    /*-ms-transition: all 0.1s linear;*/
+    /*-o-transition: all 0.1s linear;*/
+    /*transition: all 0.1s linear;*/
 }
 
 .darklight-option-group p.darklight-option-link:hover,

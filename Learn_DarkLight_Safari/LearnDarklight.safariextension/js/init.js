@@ -35,8 +35,8 @@ function isBrowser(name) {
         return typeof InstallTrigger !== 'undefined';
     else if (name == 'safari')
         return /constructor/i.test(window.HTMLElement) || (function (p) {
-                return p.toString() === "[object SafariRemoteNotification]";
-            })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+            return p.toString() === "[object SafariRemoteNotification]";
+        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
     else if (name == 'ie')
         return /*@cc_on!@*/false || !!document.documentMode;
     else if (name == 'edge')
@@ -72,6 +72,7 @@ function initDarklight() {
 
         var cover = document.createElement("div");
         cover.id = 'darklight-load-overlay';
+        cover.className = 'darklight-load-overlay';
         cover.style = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:' + themeConfigs.overlayColor;
         document.documentElement.appendChild(cover);
     }
@@ -90,4 +91,4 @@ function initDarklight() {
 
 }
 
-// initDarklight();
+initDarklight();
