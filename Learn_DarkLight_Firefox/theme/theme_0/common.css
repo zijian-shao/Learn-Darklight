@@ -320,13 +320,13 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     padding: 10px 0;
 }
 
-.d2l-collapsepane-header {
+.course-home-calendar .d2l-collapsepane-header {
     border-left: none;
     border-right: none;
     border-radius: 0 !important;
 }
 
-.d2l-collapsepane-content {
+.course-home-calendar .d2l-collapsepane-content {
     border-left: none;
     border-right: none;
     border-radius: 0 !important;
