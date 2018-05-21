@@ -27,20 +27,20 @@ function initTheme() {
     // quiz & survey warning
     if (currURL.match(/\/quizzing\//g)) {
         // || currURL.includes('/survey/') || currURL.includes('/dropbox/')
-        alert('This theme has made many changes to the original webpage. In order to ensure nothing will go wrong, it\'s recommended to switch to other themes before you continue your work on this page.');
+        alert('This theme has made many changes to the original webpage. In order to ensure nothing will go wrong, it\'s recommended to switch to other themes before you continue your work here.');
     }
 
     // calendar - upcoming
     if (currURL.match(/\/d2l\/home\/\d+/)) {
         $('.d2l-collapsepane-header').each(function (i, e) {
             if ($(e).text().match(/upcoming events/gi)) {
-                $(e).parent('div.d2l-collapsepane').addClass('upcoming-events');
+                $(e).parent('div.d2l-collapsepane').addClass('darklight-upcoming-events');
             }
         });
         $('.d2l-widget-header').each(function (i, e) {
             var headText = $(e).text();
             if (headText.match(/Calendar/)) {
-                $(e).parents('div.d2l-widget').addClass('course-home-calendar');
+                $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
             }
         });
     }
