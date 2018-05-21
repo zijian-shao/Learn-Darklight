@@ -692,7 +692,8 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
 }
 
 .d2l-navigation-s-mobile-menu-content {
-    border-color: #09b1b9 !important;
+    /*border-color: #09b1b9 !important;*/
+    border-top: none !important;
     background: #323841;
 }
 
@@ -1504,11 +1505,15 @@ d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
 }
 
 /* calendar - upcoming */
-.upcoming-events .d2l-collapsepane-content {
+.darklight-upcoming-events .d2l-collapsepane-content {
     background: none !important;
 }
 
-.upcoming-events li.d2l-datalist-item > div.d2l-datalist-item-content > div > div:first-child div {
+.darklight-upcoming-events .d2l-collapsepane-content .d2l-datalist-item:hover {
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.darklight-upcoming-events li.d2l-datalist-item > div.d2l-datalist-item-content > div > div:first-child div {
     color: #dddddd !important;
     border-color: #dddddd !important;
 }
@@ -1543,32 +1548,53 @@ d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
     color: #999;
 }
 
-.darklight-homepage-calendar .darklight-block-page-loader {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #ccc;
-    border-top-color: #09b1b9;
-    margin: 10px auto;
-}
-
 .darklight-homepage-calendar-content .tag {
     border-color: #09b1b9;
     color: #09b1b9;
 }
 
+.darklight-homepage-calendar .darklight-block-page-loader {
+    border-top-color: #09b1b9;
+    opacity: 0.7;
+}
+
 /* course home calendar */
-.course-home-calendar .d2l-widget-content {
+.darklight-course-home-calendar .d2l-widget-content {
     padding: 10px 0;
 }
 
-.course-home-calendar .d2l-collapsepane-header {
+.darklight-course-home-calendar .d2l-collapsepane-header {
     border-left: none;
     border-right: none;
     border-radius: 0 !important;
 }
 
-.course-home-calendar .d2l-collapsepane-content {
+.darklight-course-home-calendar .d2l-collapsepane-content {
     border-left: none;
     border-right: none;
     border-radius: 0 !important;
+}
+
+/* course tile image ani */
+d2l-image-tile.d2l-course-image-tile .d2l-image-tile-image-area.d2l-image-tile {
+    -webkit-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
+    -moz-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
+    -ms-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
+    -o-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
+    transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
+}
+
+d2l-image-tile.d2l-course-image-tile:hover .d2l-image-tile-image-area.d2l-image-tile,
+d2l-image-tile.d2l-course-image-tile:focus .d2l-image-tile-image-area.d2l-image-tile {
+
+}
+
+/* loading spinner */
+d2l-loading-spinner {
+    opacity: 0.7 !important;
+}
+
+d2l-loading-spinner .d2l-loading-spinner-bg.d2l-loading-spinner,
+d2l-loading-spinner .d2l-loading-spinner-bg-blur.d2l-loading-spinner {
+    stroke: #09b1b9 !important;
 }
