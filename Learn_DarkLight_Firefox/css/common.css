@@ -208,6 +208,10 @@ i.arrow.down {
     padding: 0 !important;
 }
 
+.darklight-homepage-calendar-empty {
+    padding: 25px !important;
+}
+
 .darklight-homepage-calendar-loading {
     margin: 0;
     padding: 25px 25px;
@@ -289,9 +293,24 @@ i.arrow.down {
 }
 
 .darklight-homepage-calendar .darklight-block-page-loader {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #eee;
+    width: 55px;
+    height: 55px;
+    border: 5px solid #e6eaf0;
     border-top-color: #006fbf;
-    margin: 10px auto;
+    margin: 10px auto 20px;
+    background: #fff;
+    -webkit-animation-duration: 1.2s;
+    animation-duration: 1.2s;
+    -webkit-box-shadow: 0 0 0 10px #fff, 0 0 0 11px #f4f4fc, 0 0 15px 10px #e6eaf0;
+    -moz-box-shadow: 0 0 0 10px #fff, 0 0 0 11px #f4f4fc, 0 0 15px 10px #e6eaf0;
+    box-shadow: 0 0 0 10px #fff, 0 0 0 11px #f4f4fc, 0 0 25px 10px rgba(150, 150, 190, 0.2);
+}
+
+/* tmp fix for homepage course tile dropdown button */
+.d2l-homepage d2l-my-courses-content d2l-dropdown-more.d2l-image-tile {
+    -webkit-transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
+    -moz-transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
+    -ms-transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
+    -o-transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
+    transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
 }

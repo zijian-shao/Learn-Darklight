@@ -19,7 +19,7 @@ function initTheme() {
         $('.d2l-widget-header').each(function (i, e) {
             var headText = $(e).text();
             if (headText.match(/Calendar/)) {
-                $(e).parents('div.d2l-widget').addClass('course-home-calendar');
+                $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
             }
         });
     }

@@ -192,13 +192,17 @@ function isBrowser(name) {
 
 function resizeContentBtn(page) {
 
+    function _getFloatButton(iconSrc, text) {
+        return '<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + iconSrc + '"></div><div class="darklight-fixed-right-button-text">' + text + '</div></a>';
+    }
+
     function _resizeContentBtn() {
         var body = $('body');
 
         var wrapper = $('<div class="darklight-fixed-right-wrapper"></div>');
 
         // inc iframe
-        var sizeInc = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-plus.png"></div><div class="darklight-fixed-right-button-text">Content Height <strong>+</strong></div></a>');
+        var sizeInc = $(_getFloatButton(baseURL + 'img/button-icon-plus.png', 'Content Height <strong>+</strong>'));
         sizeInc.on('click', function (e) {
             e.preventDefault();
             var currH = iframe.attr('data-current-height');
@@ -212,7 +216,7 @@ function resizeContentBtn(page) {
         sizeInc.appendTo(wrapper);
 
         // dec iframe
-        var sizeDec = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-minus.png"></div><div class="darklight-fixed-right-button-text">Content Height <strong>-</strong></div></a>');
+        var sizeDec = $(_getFloatButton(baseURL + 'img/button-icon-minus.png', 'Content Height <strong>-</strong>'));
         sizeDec.on('click', function (e) {
             e.preventDefault();
             var currH = iframe.attr('data-current-height');
@@ -227,18 +231,37 @@ function resizeContentBtn(page) {
         });
         sizeDec.appendTo(wrapper);
 
+
         $(window).on('resize', function () {
             setTimeout(function () {
                 iframe.css('height', iframe.attr('data-current-height') + 'px');
             }, 10);
         });
 
-        // full screen
         iframe.load(function () {
+            // full height
+            // setTimeout(function () {
+            //     if (iframe.hasClass('d2l-fileviewer-rendered-pdf')) {
+            //         var pdfViewerH = iframe.contents().find('#viewer').height()
+            //             + iframe.contents().find('#toolbarContainer').height()
+            //             + 10;
+            //
+            //         var fullHeight = $(_getFloatButton(baseURL + 'img/button-icon-arrows-alt-v.png', 'Content Full Height'));
+            //         fullHeight.on('click', function (e) {
+            //             e.preventDefault();
+            //             iframe.css('height', pdfViewerH + 'px');
+            //             iframe.attr('data-current-height', pdfViewerH);
+            //             $(this).remove();
+            //         });
+            //         fullHeight.appendTo(wrapper);
+            //     }
+            // }, 2000);
+
+            // full screen
             var fullScreenBtn = iframe.contents().find('#fullscreenMode');
             if (fullScreenBtn.length) {
 
-                var fullScr = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-expand.png"></div><div class="darklight-fixed-right-button-text">Full Screen</div></a>');
+                var fullScr = $(_getFloatButton(baseURL + 'img/button-icon-expand.png', 'Full Screen Mode'));
                 fullScr.on('click', function (e) {
                     e.preventDefault();
                     fullScreenBtn.trigger('click');
@@ -278,7 +301,7 @@ function resizeContentBtn(page) {
     if (isBrowser('chrome')) {
         _getIframe();
         _resizeContentBtn();
-    } else if (isBrowser('firefox')) {
+    } else if (isBrowser('firefox') || isBrowser('safari')) {
         var intervalId = setInterval(function () {
             _getIframe();
             if (iframe != null && iframe.length > 0) {
@@ -286,9 +309,6 @@ function resizeContentBtn(page) {
                 _resizeContentBtn();
             }
         }, 500);
-    } else if (isBrowser('safari')) {
-        _getIframe();
-        _resizeContentBtn();
     }
 }
 
@@ -401,22 +421,29 @@ function homepageFunc() {
 
     $('.d2l-homepage-header-wrapper').each(function (i, e) {
         var headText = $(e).text();
-        if (headText.match(/SYSTEM ALERT/g) || headText.match(/News/g)) {
+        if (headText.match(/SYSTEM ALERT/) || headText.match(/News/)) {
             if (options.HOME_AutoHideSysAlert) {
-                // remove sys alert if empty
-                var alertHtml = $(e).parent('div.d2l-widget-header').next('div.d2l-widget-content').children('div.d2l-htmlblock').first();
-                var _alertHtml = alertHtml.clone();
-                _alertHtml.find('a').remove();
-                _alertHtml.find('script').remove();
-                if (_alertHtml.text().trim() == '') {
-                    $(e).parents('div.d2l-widget').remove();
+                if (!isWLU()) {
+                    // remove sys alert if empty
+                    var alertHtml = $(e).parent('div.d2l-widget-header').next('div.d2l-widget-content').children('div.d2l-htmlblock').first();
+                    var _alertHtml = alertHtml.clone();
+                    _alertHtml.find('a').remove();
+                    _alertHtml.find('script').remove();
+                    if (_alertHtml.text().trim() == '') {
+                        $(e).parents('div.d2l-widget').remove();
+                    }
+                } else {
+                    // remove news if empty
+                    if ($(e).parent('div.d2l-widget-header').next('div.d2l-widget-content').text().match(/There are no/)) {
+                        $(e).parents('div.d2l-widget').remove();
+                    }
                 }
             }
-        } else if (headText.match(/Check My System/g) && !isWLU()) {
+        } else if (headText.match(/Check My System/) && !isWLU()) {
             if (options.HOME_HideCheckMySys) {
                 $(e).parents('div.d2l-widget').remove();
             }
-        } else if (headText.match(/Courses and Communities/g) && !isWLU()) {
+        } else if (headText.match(/Courses and Communities/) && !isWLU()) {
             if (options.HOME_AddCalendar) {
                 var courseWidget = $(e).parents('div.d2l-widget');
 
@@ -438,6 +465,9 @@ function homepageFunc() {
                     }
                 }, 500);
             }
+        } else if (headText.match(/Calendar/) && isWLU()) {
+            // for WLU homepage calendar
+            $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
         }
     });
 }
@@ -469,6 +499,7 @@ function homepageCalendar(courseWidget) {
     function _displayEvents() {
         if (finalList.length == 0) {
             placeHolder.html($('<div class="d2l-msg-container d2l-datalist-empty"><div class="d2l-msg-container-inner"><div class="d2l-msg-container-text d2l_1_70_508">There are no events to display.</div><div class="d2l-clear"></div></div></div>'));
+            placeHolder.addClass('darklight-homepage-calendar-empty');
             return;
         }
 
