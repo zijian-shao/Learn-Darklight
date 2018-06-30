@@ -4,6 +4,10 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font-size: 100%;
 }
 
+.d2l-page-main-padding {
+    padding-bottom: 30px;
+}
+
 /* widget */
 
 .daylight .d2l-widget {
@@ -35,8 +39,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     height: 20px;
 }
 
-.d2l-navigation-s-band-color {
-    display: none;
+.d2l-navigation-s-band-color, d2l-navigation-band {
+    display: none !important;
 }
 
 .d2l-navigation-s-main {
@@ -120,11 +124,11 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 
 .darklight-homepage-calendar-item {
     padding: 20px 0;
-    -webkit-transition: padding 0.2s ease;
-    -moz-transition: padding 0.2s ease;
-    -ms-transition: padding 0.2s ease;
-    -o-transition: padding 0.2s ease;
-    transition: padding 0.2s ease;
+    -webkit-transition: padding 0.2s ease,background 0.2s ease;
+    -moz-transition: padding 0.2s ease,background 0.2s ease;
+    -ms-transition: padding 0.2s ease,background 0.2s ease;
+    -o-transition: padding 0.2s ease,background 0.2s ease;
+    transition: padding 0.2s ease,background 0.2s ease;
 }
 
 .darklight-homepage-calendar-item:hover {

@@ -24,6 +24,8 @@ function getOptionListDefault() {
         'HOME_AutoHideSysAlert': true,
         'HOME_HideCheckMySys': false,
         'HOME_AddCalendar': true,
+        'HOME_HidePrivacy': true,
+        'HOME_SwitchAnnounceAndCalendar': false,
         'COURSE_ContentResizeBtn': true,
         'QUIZ_ContentResizeBtn': true,
         'GROUP_ListMembersBtn': true

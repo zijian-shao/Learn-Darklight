@@ -419,6 +419,8 @@ function listMembersBtn() {
 
 function homepageFunc() {
 
+    var courseWidget = null, announcementWidget = null;
+
     $('.d2l-homepage-header-wrapper').each(function (i, e) {
         var headText = $(e).text();
         if (headText.match(/SYSTEM ALERT/) || headText.match(/News/)) {
@@ -445,10 +447,10 @@ function homepageFunc() {
             }
         } else if (headText.match(/Courses and Communities/) && !isWLU()) {
             if (options.HOME_AddCalendar) {
-                var courseWidget = $(e).parents('div.d2l-widget');
+                courseWidget = $(e).parents('div.d2l-widget');
 
                 // insert after courses
-                var calendarWidget = $('<div role="region" class="d2l-widget"><div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-2">Upcoming Events</h2></div></div><div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"><div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div></div></div>');
+                var calendarWidget = $('<div role="region" class="d2l-widget darklight-homepage-calendar-widget"><div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-2">Upcoming Events</h2></div></div><div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"><div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div></div></div>');
 
                 calendarWidget.insertAfter(courseWidget);
 
@@ -468,8 +470,25 @@ function homepageFunc() {
         } else if (headText.match(/Calendar/) && isWLU()) {
             // for WLU homepage calendar
             $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
+        } else if (headText.match(/Announcements/) && !isWLU()) {
+            announcementWidget = $(e).parents('div.d2l-widget');
         }
     });
+
+    if (options.HOME_SwitchAnnounceAndCalendar) {
+        $('.darklight-homepage-calendar-widget').insertBefore(announcementWidget);
+        announcementWidget.insertAfter(courseWidget);
+    }
+
+    // remove homepage privacy notice
+    if (options.HOME_HidePrivacy) {
+        var heading = $('.homepage-col-12 .d2l-heading');
+        heading.each(function () {
+            if ($(this).text().match(/Privacy/)) {
+                $(this).parents('div.homepage-col-12').remove();
+            }
+        });
+    }
 }
 
 function homepageCalendar(courseWidget) {
