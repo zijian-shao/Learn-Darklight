@@ -4,6 +4,10 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font-size: 100%;
 }
 
+.d2l-page-main-padding {
+    padding-bottom: 30px;
+}
+
 /* text */
 
 .d2l-typography {
@@ -117,7 +121,7 @@ body {
 
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
     background: #323841;
-    /*min-height: 100vh;*/
+    min-height: calc(100vh - 143px);
 }
 
 .d2l-page-bg {
@@ -673,12 +677,12 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     background-color: #09b1b9;
 }
 
-.d2l-navigation-s-band-color {
-    display: none;
+.d2l-navigation-s-band-color, d2l-navigation-band {
+    display: none !important;
 }
 
 .d2l-dropdown-menu-0 .d2l-dropdown-content-bottom.d2l-dropdown-menu {
-    height: 1px;
+    height: 4px;
 }
 
 .d2l-navigation-s-personal-menu-wrapper img {
