@@ -15,6 +15,10 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     min-height: calc(100vh - 143px);
 }
 
+.d2l-tiles-container .d2l-page-bg > div, .d2l-tiles-container .d2l-page-main, .d2l-tiles-container .d2l-max-width, .d2l-tiles-container .d2l-min-width {
+    background: #f6f7f8;
+}
+
 .d2l-page-bg {
     top: 0;
 }
@@ -37,10 +41,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .daylight .d2l-widget {
     background: #fff;
-    border: 1px solid #ddd !important;
+    /*border: 1px solid #ddd !important;*/
     border-radius: 5px;
     margin-bottom: 30px;
     padding: 0;
+}
+
+.daylight-widget-demarcation .d2l-widget {
+    margin-top: 20px;
 }
 
 .daylight .d2l-widget-header {
@@ -59,6 +67,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .daylight .d2l-widget-header .d2l-heading {
     color: #fff !important;
+    font-size: 16px;
+    line-height: 25px;
 }
 
 .daylight .d2l-widget-header:after {
@@ -73,13 +83,24 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 .daylight .d2l-widget-content {
-    padding: 10px 25px;
+    padding: 10px 25px 15px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
 .d2l-htmlblock ol, .d2l-htmlblock ul {
     padding-left: 1em;
+}
+
+.d2l-tile {
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+
+}
+
+.daylight-widget-demarcation .homepage-container div:last-of-type .d2l-tile.d2l-widget:last-child {
+    padding-bottom: 5px;
 }
 
 /* navbar */

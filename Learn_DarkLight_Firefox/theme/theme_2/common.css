@@ -376,6 +376,10 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
     border: none;
 }
 
+.daylight-widget-demarcation .d2l-widget {
+    margin-top: 20px;
+}
+
 .daylight .d2l-widget-header {
     background: #424a56;
     padding: 10px 25px;
@@ -397,6 +401,8 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 
 .daylight .d2l-widget-header .d2l-heading {
     color: #fff !important;
+    font-size: 16px;
+    line-height: 25px;
 }
 
 .daylight .d2l-widget-header:after {
@@ -411,7 +417,7 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 }
 
 .daylight .d2l-widget-content {
-    padding: 10px 25px;
+    padding: 10px 25px 15px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -422,6 +428,10 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 
 .daylight .homepage-container div:last-of-type .d2l-widget:last-child {
     border: none;
+}
+
+.daylight-widget-demarcation .homepage-container div:last-of-type .d2l-tile.d2l-widget:last-child {
+    padding-bottom: 5px;
 }
 
 /* dropdown */
@@ -600,6 +610,12 @@ d2l-menu-item, d2l-menu-item-link {
 .vui-dropdown-menu > ul > li.d2l-first-visible-item {
     border-top-left-radius: .4rem;
     border-top-right-radius: .4rem;
+}
+
+.d2l-tile {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 /* navbar */
