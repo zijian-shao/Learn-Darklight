@@ -61,7 +61,8 @@ body {
     padding: 0;
     background: #f6f6f6;
     text-align: center;
-    width: 200px;
+    width: 100%;
+    min-width: 200px;
     overflow: hidden;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -82,10 +83,11 @@ div {
 
 .container {
     position: relative;
-    width: 200px;
+    width: 100%;
     height: auto;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .darklight-icon {

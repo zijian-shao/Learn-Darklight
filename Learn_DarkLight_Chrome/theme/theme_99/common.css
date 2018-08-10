@@ -2,3 +2,11 @@
 .d2l-navigation-s-main {
     background: #fff;
 }
+
+.darklight-homepage-calendar-empty {
+    padding: 10px 0 0 !important;
+}
+
+.darklight-homepage-calendar-loading {
+    padding: 20px 0 10px;
+}
