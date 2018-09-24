@@ -374,3 +374,22 @@ d2l-image-tile.d2l-course-image-tile:hover .d2l-image-tile-image-area.d2l-image-
 d2l-image-tile.d2l-course-image-tile:focus .d2l-image-tile-image-area.d2l-image-tile {
 
 }
+
+/* new homepage course tabs */
+.d2l-home .d2l-tabs-scroll-button.d2l-tabs {
+    height: 20px;
+}
+
+.d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus {
+    background: none !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.d2l-home d2l-tab[aria-selected]:focus .d2l-tab-selected-indicator.d2l-tab {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
