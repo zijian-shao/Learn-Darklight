@@ -237,7 +237,7 @@ function initOptions() {
 
             saveOption(obj);
         });
-        $('#custom-css, #custom-js').bind('keydown', function (event) {
+        $('#custom-css, #custom-js').on('keydown', function (event) {
             if (event.ctrlKey || event.metaKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
@@ -274,7 +274,7 @@ function initOptions() {
         });
     }
 
-    $(window).load(function () {
+    $(window).on('load', function (e) {
 
         loadThemes();
 
