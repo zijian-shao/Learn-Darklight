@@ -1618,3 +1618,49 @@ d2l-loading-spinner .d2l-loading-spinner-bg.d2l-loading-spinner,
 d2l-loading-spinner .d2l-loading-spinner-bg-blur.d2l-loading-spinner {
     stroke: #09b1b9 !important;
 }
+
+/* new homepage course tabs */
+.d2l-home .d2l-tabs-layout.d2l-tabs {
+    border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.d2l-home .d2l-tab-selected-indicator.d2l-tab {
+    border-top-color: #09b1b9 !important;
+}
+
+.d2l-home d2l-tab:hover {
+    color: #09b1b9 !important;
+}
+
+.d2l-home d2l-tab[aria-selected]:focus .d2l-tab-selected-indicator.d2l-tab {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.d2l-home .d2l-tabs-scroll-left-container.d2l-tabs, .d2l-home .d2l-tabs-scroll-right-container.d2l-tabs {
+    background-color: #373e48 !important;
+    -webkit-box-shadow: 0 0 12px 18px #373e48 !important;
+    -moz-box-shadow: 0 0 12px 18px #373e48 !important;
+    box-shadow: 0 0 12px 18px #373e48 !important;
+}
+
+.d2l-home .d2l-tabs-scroll-button.d2l-tabs {
+    height: 20px;
+}
+
+.d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus {
+    background: none !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover d2l-icon, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus d2l-icon {
+    color: #09b1b9 !important;
+}
+
+.d2l-tabs-0 .d2l-tabs-scroll-left-container.d2l-tabs, .d2l-tabs-0 .d2l-tabs-scroll-right-container.d2l-tabs {
+
+}
