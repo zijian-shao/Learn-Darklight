@@ -143,12 +143,16 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:visited {
-    color: #999;
+    color: #999 !important;
 }
 
 .d2l-navigation-s-item .d2l-navigation-s-group-text,
 .d2l-navigation-s-item .d2l-icon-0 {
     color: #999 !important;
+}
+
+d2l-navigation-separator d2l-icon.d2l-navigation-separator {
+    color: #666 !important;
 }
 
 .d2l-icon-0 {
@@ -190,6 +194,10 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
 
 .d2l-dropdown-menu-0 .d2l-dropdown-content-bottom.d2l-dropdown-menu {
     height: 4px;
+}
+
+.d2l-navigation-s-no-branding .d2l-navigation-s-main {
+    border: none;
 }
 
 /* homepage */
