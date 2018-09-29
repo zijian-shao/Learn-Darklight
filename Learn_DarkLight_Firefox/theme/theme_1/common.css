@@ -62,12 +62,16 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:visited {
-    color: #aaa;
+    color: #aaa !important;
 }
 
 .d2l-navigation-s-item .d2l-navigation-s-group-text,
 .d2l-navigation-s-item .d2l-icon-0 {
     color: #aaa !important;
+}
+
+.d2l-navigation-s-no-branding .d2l-navigation-s-main {
+    border: none;
 }
 
 /* homepage */
