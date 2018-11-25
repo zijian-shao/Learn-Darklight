@@ -129,7 +129,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     background: none;
 }
 
-.d2l-navigation-s-header {
+.d2l-navigation-s-header, d2l-navigation-header {
     border-bottom: 2px solid #FDD54F;
 }
 
@@ -197,6 +197,10 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
 }
 
 .d2l-navigation-s-no-branding .d2l-navigation-s-main {
+    border: none;
+}
+
+.d2l-navigation-s-has-branding .d2l-navigation-s-main {
     border: none;
 }
 

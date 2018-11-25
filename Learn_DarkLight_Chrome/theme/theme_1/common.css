@@ -74,6 +74,10 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
     border: none;
 }
 
+.d2l-navigation-s-has-branding .d2l-navigation-s-main {
+    border: none;
+}
+
 /* homepage */
 
 .homepage-container .d2l-htmlblock .results {
