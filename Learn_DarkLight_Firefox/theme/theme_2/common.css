@@ -638,7 +638,7 @@ d2l-menu-item, d2l-menu-item-link {
     background: none;
 }
 
-.d2l-navigation-s-header {
+.d2l-navigation-s-header, d2l-navigation-header {
     border-bottom: 2px solid #09b1b9;
 }
 
@@ -662,6 +662,14 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 
 d2l-navigation-separator d2l-icon.d2l-navigation-separator {
     color: #666 !important;
+}
+
+.d2l-navigation-s-no-branding .d2l-navigation-s-main {
+    border: none;
+}
+
+.d2l-navigation-s-has-branding .d2l-navigation-s-main {
+    border: none;
 }
 
 .d2l-icon-0 {

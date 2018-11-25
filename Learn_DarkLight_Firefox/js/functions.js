@@ -147,7 +147,8 @@ function fixNavigation() {
 
     var nav = $('.d2l-navigation-s-main');
     var navHeight = nav.height();
-    var header = $('.d2l-navigation-s-header');
+    // var header = $('.d2l-navigation-s-header');
+    var header = $('d2l-navigation-header');
     var offset = header.height();
 
     _fixNavigation();
