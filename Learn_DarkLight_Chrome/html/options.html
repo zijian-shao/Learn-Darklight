@@ -6,392 +6,574 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/options.css">
 </head>
 <body>
-<!-- Header Start -->
-<div class="header">
-    <h1>Learn Darklight</h1>
-    <h3>Extension Options</h3>
+<div class="container">
 
-    <!-- Share Box -->
-    <div class="share-box">
-        <div class="share-tag">Share</div>
-        <!-- Facebook Share -->
-        <a data-open-in="popup" data-width="560"
-           data-href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&display=popup&ref=plugin&src=share_button"
-           target="_blank" class="share-link share-link-facebook"></a>
-
-        <!-- Twitter Share -->
-        <a data-open-in="popup" data-width="500"
-           data-href="https://twitter.com/intent/tweet?hashtags=UWaterloo&original_referer=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2F&ref_src=twsrc%5Etfw&text=Learn%20Darklight%20is%20a%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn&tw_p=tweetbutton&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
-           target="_blank" class="share-link share-link-twitter"></a>
-
-        <!-- Reddit Share -->
-        <a data-open-in="newtab"
-           data-href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&title=Learn%20Darklight%20-%20The%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn"
-           target="_blank" class="share-link share-link-reddit"></a>
-
-        <!-- Google Plus Share -->
-        <a data-open-in="popup" data-width="380"
-           data-href="https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
-           target="_blank" class="share-link share-link-googleplus"></a>
-
-        <!-- Copy Link -->
-        <a data-open-in="copy" class="share-link share-link-copy"></a>
-    </div>
-</div>
-<!-- Header End -->
-
-<div class="container" id="container">
-    <div class="wrapper">
-
-        <!-- Tab Start -->
-        <div class="nav-bg"></div>
-        <div class="nav">
-            <ul>
-                <li data-option-tab-index="0" data-option-tab-name="global" id="nav-tab-0" class="nav-tab active">
-                    General
-                </li>
-                <li data-option-tab-index="2" data-option-tab-name="platform" id="nav-tab-2" class="nav-tab">Platform
-                </li>
-                <li data-option-tab-index="1" data-option-tab-name="advanced" id="nav-tab-1" class="nav-tab">Advanced
-                </li>
-                <li data-option-tab-index="3" data-option-tab-name="about" id="nav-tab-3" class="nav-tab">About</li>
-            </ul>
+    <!-- Sidebar Start -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-img"></div>
         </div>
-        <!-- Tab End -->
+        <ul class="nav">
+            <li data-option-tab-index="0" data-option-tab-name="general" id="nav-tab-0" class="nav-tab active">General
+            </li>
+            <li data-option-tab-index="1" data-option-tab-name="themes" id="nav-tab-1" class="nav-tab">Themes</li>
+            <li data-option-tab-index="2" data-option-tab-name="courses" id="nav-tab-2" class="nav-tab">Courses</li>
+            <li data-option-tab-index="3" data-option-tab-name="pages" id="nav-tab-3" class="nav-tab">Pages</li>
+            <li data-option-tab-index="4" data-option-tab-name="about" id="nav-tab-4" class="nav-tab">About</li>
+        </ul>
+        <div class="share">
+            <div class="share-title">
+                Share Darklight
+            </div>
+            <!-- Share Box -->
+            <div class="share-box">
+                <!-- Facebook Share -->
+                <a data-open-in="popup" data-width="560"
+                   data-href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&display=popup&ref=plugin&src=share_button"
+                   target="_blank" class="share-link share-link-facebook"></a>
+
+                <!-- Twitter Share -->
+                <a data-open-in="popup" data-width="500"
+                   data-href="https://twitter.com/intent/tweet?hashtags=UWaterloo&original_referer=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2F&ref_src=twsrc%5Etfw&text=Learn%20Darklight%20is%20a%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn&tw_p=tweetbutton&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
+                   target="_blank" class="share-link share-link-twitter"></a>
+
+                <!-- Reddit Share -->
+                <a data-open-in="newtab"
+                   data-href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&title=Learn%20Darklight%20-%20The%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn"
+                   target="_blank" class="share-link share-link-reddit"></a>
+
+                <!-- Google Plus Share -->
+                <a data-open-in="popup" data-width="380"
+                   data-href="https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
+                   target="_blank" class="share-link share-link-googleplus"></a>
+
+                <!-- Copy Link -->
+                <a data-open-in="copy" class="share-link share-link-copy"></a>
+            </div>
+        </div>
+        <div class="copyright">
+            Created by Zijian Shao
+        </div>
+    </div>
+    <!-- Sidebar End -->
+
+    <div class="content">
 
         <!-- General Start -->
-        <div class="content-container" id="opt-tab-0">
-            <div class="content">
+        <div data-option-index="0" class="section" id="opt-tab-0">
+            <div class="title">General</div>
+            <div class="group">
 
                 <!-- Control -->
-                <div class="category-title">
-                    <h5>Control</h5>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide checkbox-slide-important">
-                        <input type="checkbox" id="opt-global-0-0" data-option-name="GLB_Enabled"
-                               data-option-type="switch">
-                        <label for="opt-global-0-0"></label>
-                    </div>
-                    <label for="opt-global-0-0" class="checkbox-label">Enable Darklight</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>This option is the total controller. It can enable / disable all the other options in the
-                            extension. The switch in the popup is synchronized with this one.</p>
-                    </div>
-                </div>
+                <div class="group-title">Control</div>
+                <div class="group-content">
 
-                <!-- Theme -->
-                <div class="category-title">
-                    <h5>Theme</h5>
+                    <!-- Enable Darklight  -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide checkbox-slide-important">
+                            <input type="checkbox" id="opt-general-0-0" data-option-name="GLB_Enabled"
+                                   data-option-type="switch">
+                            <label for="opt-general-0-0"></label>
+                        </div>
+                        <label for="opt-general-0-0" class="checkbox-label">Enable Darklight</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>This option is the total controller. It can enable / disable all the other options in the
+                                extension. The switch in the popup is synchronized with this one.</p>
+                        </div>
+                    </div>
+
+                    <!-- Enable for Waterloo Learn -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-0-1" data-option-name="GLB_EnableForWaterloo"
+                                   data-option-type="switch">
+                            <label for="opt-general-0-1"></label>
+                        </div>
+                        <label for="opt-general-0-1" class="checkbox-label">Enable for Waterloo Learn</label>
+                    </div>
+
+                    <!-- Enable for Laurier MLS -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-0-2" data-option-name="GLB_EnableForLaurier"
+                                   data-option-type="switch">
+                            <label for="opt-general-0-2"></label>
+                        </div>
+                        <label for="opt-general-0-2" class="checkbox-label">Enable for Laurier MyLearningSpace</label>
+                    </div>
+
                 </div>
-                <div class="option-group radio-group" id="theme-list"></div>
+            </div>
+            <div class="group">
 
                 <!-- Global -->
-                <div class="category-title">
-                    <h5>Global</h5>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-3-0" data-option-name="GLB_BackToTopButton"
-                               data-option-type="switch">
-                        <label for="opt-global-3-0"></label>
-                    </div>
-                    <label for="opt-global-3-0" class="checkbox-label">Add "Back to top" button on each page</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Add "Back to top" button. One-click to go back to the top of webpages.</p>
-                    </div>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-3-1" data-option-name="GLB_FixNavigation"
-                               data-option-type="switch">
-                        <label for="opt-global-3-1"></label>
-                    </div>
-                    <label for="opt-global-3-1" class="checkbox-label">Auto fix navigation bar</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Fixes the navigation bar at the top if it is not on the screen.</p>
-                    </div>
-                </div>
+                <div class="group-title">Global</div>
+                <div class="group-content">
 
-                <!-- Homepage -->
-                <div class="category-title">
-                    <h5>Homepage</h5>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-1-0" data-option-name="HOME_AutoHideSysAlert"
-                               data-option-type="switch">
-                        <label for="opt-global-1-0"></label>
+                    <!-- Back to top -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-0" data-option-name="GLB_BackToTopButton"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-0"></label>
+                        </div>
+                        <label for="opt-general-1-0" class="checkbox-label">Add "Back to top" button</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Add "Back to top" button. One-click to go back to the top of webpages.</p>
+                        </div>
                     </div>
-                    <label for="opt-global-1-0" class="checkbox-label">Auto hide systerm alert / news widget</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Automatically hide the system alert (Waterloo) / news (Laurier) widget on homepage if the the
-                            content is empty.</p>
-                    </div>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-1-1" data-option-name="HOME_HideCheckMySys"
-                               data-option-type="switch">
-                        <label for="opt-global-1-1"></label>
-                    </div>
-                    <label for="opt-global-1-1" class="checkbox-label">Hide system check widget</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Hide the system check widget on homepage to avoid seeing the alert message. (Waterloo Learn
-                            only)</p>
-                    </div>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-1-3" data-option-name="HOME_HidePrivacy"
-                               data-option-type="switch">
-                        <label for="opt-global-1-3"></label>
-                    </div>
-                    <label for="opt-global-1-3" class="checkbox-label">Hide privacy widget</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Hide the privacy widget at the bottom of homepage. (Waterloo Learn only)</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-1-2" data-option-name="HOME_AddCalendar"
-                               data-option-type="switch">
-                        <label for="opt-global-1-2"></label>
-                    </div>
-                    <label for="opt-global-1-2" class="checkbox-label">Add calendar back to homepage</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Use ajax to request upcoming events from each course, sort and add them to homepage.
-                            (Waterloo Learn only)</p>
-                    </div>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-1-4" data-option-name="HOME_SwitchAnnounceAndCalendar"
-                               data-option-type="switch">
-                        <label for="opt-global-1-4"></label>
-                    </div>
-                    <label for="opt-global-1-4" class="checkbox-label">Switch announcement and calendar widgets</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>If this option is enabled, the announcement widget will appear on the left and the calendar
-                            will appear on the right. This feature won't work if homepage calendar is not enabled. (Waterloo Learn only)</p>
-                    </div>
-                </div>
 
-                <!-- Courses -->
-                <div class="category-title">
-                    <h5>Course Content</h5>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-6-0" data-option-name="COURSE_ContentResizeBtn"
-                               data-option-type="switch">
-                        <label for="opt-global-6-0"></label>
+                    <!-- Fixed nav bar-->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-1" data-option-name="GLB_FixNavigation"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-1"></label>
+                        </div>
+                        <label for="opt-general-1-1" class="checkbox-label">Auto fix navigation bar</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Fixes the navigation bar at the top if it is not on the screen.</p>
+                        </div>
                     </div>
-                    <label for="opt-global-6-0" class="checkbox-label">Add content size control buttons to course
-                        content pages</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Add a group of buttons to the right of course content pages to allow you resize the content
-                            frame and unblock page scroll.</p>
-                    </div>
-                </div>
 
-                <!-- Quiz -->
-                <div class="category-title">
-                    <h5>Quiz & Survey</h5>
                 </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-2-0" data-option-name="QUIZ_ContentResizeBtn"
-                               data-option-type="switch">
-                        <label for="opt-global-2-0"></label>
-                    </div>
-                    <label for="opt-global-2-0" class="checkbox-label">Add content size control buttons to quiz / survey
-                        pages</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Add a group of buttons to the right of quiz / survey pages to allow you resize the content
-                            frame and unblock page scroll.</p>
-                    </div>
-                </div>
+            </div>
+            <div class="group">
 
-                <!-- Groups -->
-                <div class="category-title">
-                    <h5>Group</h5>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-global-5-0" data-option-name="GROUP_ListMembersBtn"
-                               data-option-type="switch">
-                        <label for="opt-global-5-0"></label>
-                    </div>
-                    <label for="opt-global-5-0" class="checkbox-label">Add "Display group members" button on available
-                        groups page</label>
-                    <a class="option-tip-toggle">?</a>
-                    <div class="option-tip hidden">
-                        <p>Click the button and all members of a group will be displayed directly on the page
-                            instead of a link. This might be helpful when you are trying to find classmates who haven't
-                            found partners yet.</p>
-                    </div>
-                </div>
+                <!-- Popup -->
+                <div class="group-title">Popup</div>
+                <div class="group-content">
 
+                    <!-- Link for Waterloo Learn -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-2-0" data-option-name="GLB_PopupAccessForWaterloo"
+                                   data-option-type="switch">
+                            <label for="opt-general-2-0"></label>
+                        </div>
+                        <label for="opt-general-2-0" class="checkbox-label">Quick access button for Waterloo
+                            Learn</label>
+                    </div>
+
+                    <!-- Link for Laurier MLS -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-2-1" data-option-name="GLB_PopupAccessForLaurier"
+                                   data-option-type="switch">
+                            <label for="opt-general-2-1"></label>
+                        </div>
+                        <label for="opt-general-2-1" class="checkbox-label">Quick access button for Laurier
+                            MyLearningSpace</label>
+                    </div>
+
+                </div>
             </div>
         </div>
         <!-- General End -->
 
-        <!-- Platform Start -->
-        <div class="content-container hidden" id="opt-tab-2">
-            <div class="content">
+        <!-- Themes Start -->
+        <div data-option-index="1" class="section" id="opt-tab-1">
+            <div class="title">Themes</div>
+            <div class="group">
 
-                <!-- Control -->
-                <div class="category-title">
-                    <h5>Control</h5>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-platform-0-0" data-option-name="GLB_EnableForWaterloo"
-                               data-option-type="switch">
-                        <label for="opt-platform-0-0"></label>
-                    </div>
-                    <label for="opt-platform-0-0" class="checkbox-label">Enable on Waterloo Learn</label>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-platform-0-1" data-option-name="GLB_EnableForLaurier"
-                               data-option-type="switch">
-                        <label for="opt-platform-0-1"></label>
-                    </div>
-                    <label for="opt-platform-0-1" class="checkbox-label">Enable on Laurier MyLearningSpace</label>
-                </div>
-
-                <!-- Popup -->
-                <div class="category-title">
-                    <h5>Popup</h5>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-platform-1-0" data-option-name="GLB_PopupAccessForWaterloo"
-                               data-option-type="switch">
-                        <label for="opt-platform-1-0"></label>
-                    </div>
-                    <label for="opt-platform-1-0" class="checkbox-label">Show quick access link in popup for Waterloo
-                        Learn</label>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-platform-1-1" data-option-name="GLB_PopupAccessForLaurier"
-                               data-option-type="switch">
-                        <label for="opt-platform-1-1"></label>
-                    </div>
-                    <label for="opt-platform-1-1" class="checkbox-label">Show quick access link in popup for Laurier
-                        MyLearningSpace</label>
+                <!-- Theme list -->
+                <div class="group-title full-width">Select Theme</div>
+                <div class="group-content full-width">
+                    <div class="theme-list" id="theme-list"></div>
                 </div>
 
             </div>
+
+            <!-- Advanced themes -->
+            <div class="advanced-themes-toggle" id="advanced-themes-toggle">
+                <div class="advanced-themes-toggle-text">Advanced</div>
+            </div>
+
+            <div class="advanced-themes hidden" id="advanced-themes">
+                <!-- Custom style control -->
+                <div class="group">
+                    <div class="group-title">Control</div>
+                    <div class="group-content">
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-themes-1-0" data-option-name="GLB_EnableCustomStyle"
+                                       data-option-type="switch">
+                                <label for="opt-themes-1-0"></label>
+                            </div>
+                            <label for="opt-themes-1-0" class="checkbox-label">Enable custom styles</label>
+                            <a class="option-tip-toggle option-tip-toggle-fixed">?</a>
+                            <div class="option-tip">
+                                <p>▷ Inject the following CSS and JS code into webpages after the original code is
+                                    executed.</p>
+                                <p>▷ For performance considerations, please keep the code size less than 20KB.</p>
+                                <p>▷ If you don't know what this is, please do not enable it or enter any code
+                                    below.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom CSS -->
+                <div class="group">
+                    <div class="group-title"><label for="custom-css" class="textarea-label">Custom CSS</label></div>
+                    <div class="group-content">
+                    <textarea name="custom-css" id="custom-css" rows="8" class="input-box width-100 block"
+                              data-option-name="GLB_CustomCSS"></textarea>
+                    </div>
+                </div>
+
+                <!-- Custom JS -->
+                <div class="group">
+                    <div class="group-title"><label for="custom-js" class="textarea-label">Custom JS</label></div>
+                    <div class="group-content">
+                    <textarea name="custom-js" id="custom-js" rows="8" class="input-box width-100 block"
+                              data-option-name="GLB_CustomJS"></textarea>
+                    </div>
+                </div>
+
+                <!-- Save custom style buttons -->
+                <div class="group">
+                    <div class="group-title">&nbsp;</div>
+                    <div class="group-content">
+                        <a href="#" class="btn btn-primary" id="custom-save">Save Styles</a>
+                        <a href="#" class="btn btn-default" id="custom-clear">Clear</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <!-- Platform End -->
+        <!-- Themes End -->
 
-        <!-- Advanced Start -->
-        <div class="content-container hidden" id="opt-tab-1">
-            <div class="content">
+        <!-- Courses Start -->
+        <div data-option-index="2" class="section" id="opt-tab-2">
+            <div class="title">Courses</div>
+            <div class="group">
 
-                <!-- Switch -->
-                <div class="category-title">
-                    <h5>Control</h5>
-                </div>
-                <div class="option-group checkbox-group">
-                    <div class="checkbox-slide">
-                        <input type="checkbox" id="opt-adv-0-0" data-option-name="GLB_EnableCustomStyle"
-                               data-option-type="switch">
-                        <label for="opt-adv-0-0"></label>
+                <!-- Custom thumb control -->
+                <div class="group-title">Control</div>
+                <div class="group-content">
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-courses-0-0" data-option-name="COURSE_CustomThumb"
+                                   data-option-type="switch">
+                            <label for="opt-courses-0-0"></label>
+                        </div>
+                        <label for="opt-courses-0-0" class="checkbox-label">Enable custom course cover pictures</label>
+                        <a class="option-tip-toggle option-tip-toggle-fixed">?</a>
+                        <div class="option-tip">
+                            <p>▷ All custom content below will not be synced with your browser account. They are stored
+                                locally in the browser cache.</p>
+                            <p>▷ Click "Add New" button to start. Click saved pictures to delete.</p>
+                            <p>▷ Manually remove unnecessary or expired items to improve performance.</p>
+                        </div>
                     </div>
-                    <label for="opt-adv-0-0" class="checkbox-label">Enable custom styles</label>
-                    <a class="option-tip-toggle option-tip-toggle-fixed">?</a>
-                    <div class="option-tip">
-                        <p>Inject the following CSS and JS code into webpages after the original code are executed.</p>
-                        <p>For performance considerations, please keep the code size less than 20KB.</p>
-                        <p>If you don't know what this is, please do not enable it or enter any code below.</p>
+                </div>
+
+            </div>
+            <div class="group">
+
+                <!-- Add thumb -->
+                <div class="group-title">Add Custom Cover Picture</div>
+                <div class="group-content">
+                    <a href="#" class="btn btn-primary" id="add-course-thumbnail">+ Add New</a>
+                    <div class="popup-template">
+                        <div class="alert alert-info alert-file-size hidden">
+                            File size exceeds recommended value. Large image may affect extension performance. <br>
+                            You may visit <a href="https://imageresize.org" target="_blank">ImageResize</a> or <a
+                                href="https://tinypng.com" target="_blank">TinyPNG</a> to crop & compress images.
+                        </div>
+                        <div class="row">
+                            <div class="width-50 pull-left">
+                                <div class="row margin-bottom-10">
+                                    <div class="width-33 pull-left uppercase strong">Course ID</div>
+                                    <div class="width-66 pull-left">
+                                        <input type="text" minlength="5" maxlength="10" placeholder="eg. 612453"
+                                               class="input-box block width-90 course-id">
+                                    </div>
+                                </div>
+                                <div class="row margin-bottom-10">
+                                    <div class="width-33 pull-left uppercase strong">Course Code</div>
+                                    <div class="width-66 pull-left">
+                                        <input type="text" minlength="3" maxlength="10" placeholder="eg. ECE 789"
+                                               class="input-box block width-90 course-code">
+                                    </div>
+                                </div>
+                                <div class="row margin-bottom-10">
+                                    <div class="width-33 pull-left uppercase strong">Cover Picture</div>
+                                    <div class="width-66 pull-left">
+                                        <label class="input-file-label block width-90">
+                                            <div class="input-file-name">Choose an image...</div>
+                                            <input class="input-file thumb-image-file" id="thumb-image-file" type="file"
+                                                   accept="image/*">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="width-50 pull-left">
+                                <div class="option-tip margin-0">
+                                    <p><strong>1.</strong> Open course home, the number in the URL is your course ID.
+                                    </p>
+                                    <p><strong>2.</strong> Course code is only used to distinguish between different
+                                        courses in options page.</p>
+                                    <p><strong>3.</strong> Recommended resolution: 1136x768. Recommended file size: less
+                                        than
+                                        200KB.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row course-thumb-preview hidden">
+                            <hr>
+                            <div class="margin-bottom-10 strong uppercase">Preview</div>
+                            <div class="cthumb-prev cthumb-prev-1 pull-left"></div>
+                            <div class="cthumb-prev cthumb-prev-2 pull-right"></div>
+                        </div>
+                        <div class="row text-center">
+                            <hr>
+                            <a href="#" class="btn btn-primary btn-add">+ Add</a>
+                            <a href="#" class="btn btn-default btn-cancel">Cancel</a>
+                        </div>
                     </div>
                 </div>
-                <hr>
 
-                <!-- Custom styles -->
-                <label for="custom-css" class="textarea-label">Custom CSS</label>
-                <textarea name="custom-css" id="custom-css" rows="10" class="input-box width-100 block"
-                          data-option-name="GLB_CustomCSS"></textarea>
-                <label for="custom-js" class="textarea-label">Custom JS</label>
-                <textarea name="custom-js" id="custom-js" rows="10" class="input-box width-100 block"
-                          data-option-name="GLB_CustomJS"></textarea>
-                <hr>
-                <a href="#" class="btn btn-primary" id="custom-save">Save</a>
-                <a href="#" class="btn btn-default" id="custom-clear">Clear</a>
+            </div>
+            <div class="group">
+
+                <!-- Saved thumbs -->
+                <div class="group-title margin-bottom-10">Saved Cover Pictures</div>
+                <div class="group-content saved-thumb-list" id="saved-thumb-list"></div>
+
             </div>
         </div>
-        <!-- Advanced End -->
+        <!-- Courses End-->
+
+        <!-- Pages Start -->
+        <div data-option-index="3" class="section" id="opt-tab-3">
+            <div class="title">Pages</div>
+            <div class="group">
+
+                <!-- Homepage -->
+                <div class="group-title">Homepage</div>
+                <div class="group-content">
+
+                    <!-- Add calendar -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-0" data-option-name="HOME_AddCalendar"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-0"></label>
+                        </div>
+                        <label for="opt-pages-0-0" class="checkbox-label">Add calendar back to homepage</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Use ajax to request upcoming events from each course, sort and add them to homepage.
+                                (Waterloo Learn only)</p>
+                        </div>
+                    </div>
+
+                    <!-- switch announcement & calendar -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-1" data-option-name="HOME_SwitchAnnounceAndCalendar"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-1"></label>
+                        </div>
+                        <label for="opt-pages-0-1" class="checkbox-label">Switch announcement and calendar
+                            widgets</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>If this option is enabled, the announcement widget will appear on the left and the
+                                calendar will appear on the right. This feature won't work if homepage calendar is not
+                                enabled. (Waterloo Learn only)</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Hide sys alert -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-2" data-option-name="HOME_AutoHideSysAlert"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-2"></label>
+                        </div>
+                        <label for="opt-pages-0-2" class="checkbox-label">Auto hide systerm alert / news widget</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Automatically hide the system alert (Waterloo) / news (Laurier) widget on homepage if the
+                                content is empty.</p>
+                        </div>
+                    </div>
+
+                    <!-- Hide sys check -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-3" data-option-name="HOME_HideCheckMySys"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-3"></label>
+                        </div>
+                        <label for="opt-pages-0-3" class="checkbox-label">Hide system check widget</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Hide the system check widget on homepage to avoid seeing the alert message. (Waterloo
+                                Learn only)</p>
+                        </div>
+                    </div>
+
+                    <!-- Hide privacy widget -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-4" data-option-name="HOME_HidePrivacy"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-4"></label>
+                        </div>
+                        <label for="opt-pages-0-4" class="checkbox-label">Hide privacy widget</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Hide the privacy widget at the bottom of homepage. (Waterloo Learn only)</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Course Content -->
+            <div class="group">
+                <div class="group-title">Course Content</div>
+                <div class="group-content">
+
+                    <!-- Content size control -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-1-0" data-option-name="COURSE_ContentResizeBtn"
+                                   data-option-type="switch">
+                            <label for="opt-pages-1-0"></label>
+                        </div>
+                        <label for="opt-pages-1-0" class="checkbox-label">Add content size control buttons to course
+                            content pages</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Add a group of buttons to the right of course content pages to allow you resize the
+                                content frame and unblock page scroll.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Quiz & Survey -->
+            <div class="group">
+                <div class="group-title">Quiz & Survey</div>
+                <div class="group-content">
+
+                    <!-- Content size control -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-2-0" data-option-name="QUIZ_ContentResizeBtn"
+                                   data-option-type="switch">
+                            <label for="opt-pages-2-0"></label>
+                        </div>
+                        <label for="opt-pages-2-0" class="checkbox-label">Add content size control buttons to quiz /
+                            survey pages</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Add a group of buttons to the right of quiz / survey pages to allow you resize the
+                                content frame and unblock page scroll.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Groups -->
+            <div class="group">
+                <div class="group-title">Groups</div>
+                <div class="group-content">
+
+                    <!-- Display group members -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-3-0" data-option-name="GROUP_ListMembersBtn"
+                                   data-option-type="switch">
+                            <label for="opt-pages-3-0"></label>
+                        </div>
+                        <label for="opt-pages-3-0" class="checkbox-label">Add "Display group members" button on
+                            available
+                            groups page</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Click the button and all members of a group will be displayed directly on the page
+                                instead of a link. This might be helpful when you are trying to find classmates who
+                                haven't found partners yet.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- Pages End-->
 
         <!-- About Start -->
-        <div class="content-container hidden" id="opt-tab-3">
-            <div class="content">
+        <div data-option-index="4" class="section" id="opt-tab-4">
+            <div class="title">About</div>
 
-                <!-- About -->
-                <h2>Learn Darklight</h2>
-                <p>Version <span id="darklight-version"></span></p>
-                <p>Created by Zijian Shao</p>
-                <div>
-                    <a class="btn btn-primary" href="https://www.zijianshao.com/dlight/" target="_blank">Official
-                        Website</a>
+            <div class="group">
+                <!-- Links -->
+                <div class="group-title">
+                    Learn Darklight
+                    <div class="group-subtitle">
+                        Version <span id="darklight-version"></span>
+                    </div>
+                </div>
+                <div class="group-content">
+                    <a class="btn btn-primary" href="https://www.zijianshao.com/dlight/" target="_blank">Website</a>
                     <a class="btn btn-success" href="https://www.paypal.me/zjshao" target="_blank">Donate</a>
                     <a class="btn btn-default"
                        href="https://github.com/SssWind/Learn-Darklight" target="_blank">GitHub</a>
                     <a class="btn btn-default"
                        href="https://chrome.google.com/webstore/detail/learn-darklight/lhodieepeghcemhpbloffmljoklaklho"
-                       target="_blank">Chrome
-                        Web Store</a>
+                       target="_blank">Chrome Store</a>
                 </div>
+            </div>
 
+            <div class="group">
                 <!-- Welcome -->
-                <div class="category-title">
-                    <h5>Welcome</h5>
-                </div>
-                <div>
+                <div class="group-title">Welcome</div>
+                <div class="group-content">
                     <p>Thanks for using Learn Darklight! This extension offers several themes for the new Waterloo
                         Learn.</p>
                     <p>If you like this extension, please <a
                             href="https://chrome.google.com/webstore/detail/learn-darklight/lhodieepeghcemhpbloffmljoklaklho"
                             target="_blank">rate and leave a comment</a> in Chrome Web Store.</p>
                 </div>
+            </div>
 
+            <div class="group">
                 <!-- Notes -->
-                <div class="category-title">
-                    <h5>Notes</h5>
-                </div>
-                <div><p>▷ Don't use other Waterloo Learn extensions with Darklight to avoid unexpected behaviors</p>
-                    <p>▷ Waterloo Learn may change at any time, thus the extension may not function properly</p>
+                <div class="group-title">Notes</div>
+                <div class="group-content">
+                    <p>▷ Don't use other Waterloo Learn extensions with Darklight to avoid unexpected behaviors.</p>
+                    <p>▷ Waterloo Learn may change at any time, thus the extension may not function properly.</p>
                     <p>▷ If you have any questions regarding this extension, please email me at <a
                             href="mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension">sam.zj.shao@gmail.com</a>
-                    </p></div>
-
-                <!-- Disclaimers -->
-                <div class="category-title">
-                    <h5>Disclaimers</h5>
+                    </p>
                 </div>
-                <div><p>▷ This extension has no affiliation with Waterloo Learn, its developers, or the University of
-                    Waterloo.</p>
-                    <p>▷ Use this extension at your own responsibility.</p></div>
+            </div>
 
+            <div class="group">
+                <!-- Disclaimers -->
+                <div class="group-title">Disclaimers</div>
+                <div class="group-content">
+                    <p>▷ This extension has no affiliation with Waterloo Learn, its developers, or the University of
+                        Waterloo.</p>
+                    <p>▷ Use this extension at your own responsibility.</p>
+                </div>
             </div>
 
         </div>
@@ -400,17 +582,12 @@
     </div>
 </div>
 
-<!-- Footer Start -->
-<div class="copyright">Created by Zijian Shao</div>
-<!-- Footer End -->
-
 <!-- Toast Start -->
-<div class="darklight-toast darklight-toast-hidden" id="darklight-toast">Options Saved</div>
+<div class="darklight-toast darklight-toast-hidden" id="darklight-toast"></div>
 <!-- Toast End -->
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/configs.js"></script>
-<script type="text/javascript" src="/js/themes.js"></script>
 <script type="text/javascript" src="/js/options.js"></script>
 
 </body>

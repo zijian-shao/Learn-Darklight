@@ -11,27 +11,27 @@
 
 <body>
 
-<div class="container">
-    <div class="darklight-icon"></div>
-    <h1 class="title">Learn Darklight</h1>
-    <h4 class="subtitle">Extension Options</h4>
-    <div class="darklight-option-container">
-        <div class="darklight-option-group">
-            <p class="darklight-option-label">Enable</p>
-            <div class="darklight-option-slide">
-                <input type="checkbox" id="enable-darklight">
-                <label for="enable-darklight"></label>
-            </div>
-        </div>
-        <hr class="darklight-option-hr">
-        <div class="darklight-option-group">
-            <p class="darklight-option-link" id="more-options">More Options</p>
-        </div>
-        <div id="quick-access-links"></div>
+<div class="header">
+    <div class="logo"></div>
+    <div class="checkbox-slide">
+        <input type="checkbox" id="enable-darklight">
+        <label for="enable-darklight"></label>
     </div>
 </div>
+<div class="content">
+    <div id="quick-access-links"></div>
+    <div class="btn btn-green" id="more-options">
+        <div class="btn-icon"><img src="../img/popup-icon-cog.png" alt="Settings"></div>
+        <div class="btn-text">Extension Options</div>
+    </div>
+</div>
+<div class="footer">
+    <div class="report">Extension didn’t work? <span class="link">Report issue</span></div>
+</div>
 
-<div class="darklight-toast darklight-toast-hidden" id="darklight-toast">Options Saved. Refresh to apply any changes.</div>
+<div class="darklight-toast darklight-toast-hidden" id="darklight-toast">
+    Refresh for the changes to take effect.
+</div>
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/configs.js"></script>

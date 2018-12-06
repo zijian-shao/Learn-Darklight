@@ -5,14 +5,18 @@ function initPopup() {
 
         var quickLinks = $('#quick-access-links');
         if (items.GLB_PopupAccessForWaterloo) {
-            $('<hr class="darklight-option-hr"><div class="darklight-option-group"><p class="darklight-option-link" id="open-learn">Open Waterloo Learn</p></div>').on('click', function () {
+            $('<div class="btn btn-yellow">' +
+                '<div class="btn-icon"><img src="../img/popup-icon-waterloo.png" alt="Waterloo"></div>' +
+                '<div class="btn-text">Waterloo Learn</div></div>').on('click', function () {
                 chrome.tabs.create({
                     url: 'https://learn.uwaterloo.ca/'
                 });
             }).appendTo(quickLinks);
         }
         if (items.GLB_PopupAccessForLaurier) {
-            $('<hr class="darklight-option-hr"><div class="darklight-option-group"><p class="darklight-option-link" id="open-learn">Open MyLearningSpace</p></div>').on('click', function () {
+            $('<div class="btn btn-purple">' +
+                '<div class="btn-icon"><img src="../img/popup-icon-laurier.png" alt="Laurier"></div>' +
+                '<div class="btn-text">Laurier MyLearningSpace</div></div>').on('click', function () {
                 chrome.tabs.create({
                     url: 'https://mylearningspace.wlu.ca/'
                 });
