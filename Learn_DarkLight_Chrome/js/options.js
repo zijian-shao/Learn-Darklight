@@ -254,12 +254,6 @@ function initOptions() {
 
             }
 
-            // night mode
-            // var themeConfigs = getThemeConfigs();
-            // if (themeConfigs['theme_' + items.GLB_ThemeID]['nightMode']) {
-            //     $('body').addClass('dark-mode');
-            // }
-
             bindEvents();
         });
 
