@@ -1,4 +1,4 @@
-var baseURL, currURL, options, configs, themeConfigs;
+var baseURL, currURL, options, configs, themeConfigs, courseThumbs;
 
 function injectCSS(src, tag, type) {
     var style;
@@ -35,8 +35,8 @@ function isBrowser(name) {
         return typeof InstallTrigger !== 'undefined';
     else if (name == 'safari')
         return /constructor/i.test(window.HTMLElement) || (function (p) {
-                return p.toString() === "[object SafariRemoteNotification]";
-            })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+            return p.toString() === "[object SafariRemoteNotification]";
+        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
     else if (name == 'ie')
         return /*@cc_on!@*/false || !!document.documentMode;
     else if (name == 'edge')
@@ -74,15 +74,45 @@ function initDarklight() {
         cover.id = 'darklight-load-overlay';
         cover.style = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:' + themeConfigs.overlayColor;
         document.documentElement.appendChild(cover);
+
+        // course thumbs
+        if (options.COURSE_CustomThumb) {
+            // TODO: test course home url
+            if (currURL.endsWith('/d2l/home') || currURL.endsWith('/home')) {
+
+                chrome.runtime.onMessage.addListener(
+                    function (request, sender, sendResponse) {
+                        if (request.action == 'getCourseThumbsResponse') {
+                            var style = '';
+                            request.data.forEach(function (item, index) {
+                                style += '.darklight-course-thumb-' + item.course_id + ' {';
+                                style += 'background-image: url(' + item.thumb_image + ');';
+                                style += '}';
+                            });
+
+                            var styleElem = document.createElement("style");
+                            styleElem.innerText = style;
+                            styleElem.id = 'darklight-course-thumbs';
+                            document.documentElement.appendChild(styleElem);
+                        }
+                    }
+                );
+
+                chrome.runtime.sendMessage({action: 'getCourseThumbs'});
+            }
+        }
     }
 
     baseURL = chrome.runtime.getURL('');
     currURL = window.location.href;
     configs = getOptionListDefault();
+
     chrome.storage.sync.get(configs, function (e) {
         options = e;
         init();
     });
+
+
 }
 
 initDarklight();

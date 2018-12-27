@@ -51,160 +51,10 @@ function initOptions() {
         $('li[data-option-tab-name = "' + hash + '"]').trigger('click');
     }
 
-    // db
-    function getDatabase(ready, error) {
-        if (!window.indexedDB) {
-            alert("Your browser doesn't support IndexedDB. Custom course cover picture is not available.");
-            return;
-        }
-        var dbOpenRequest = window.indexedDB.open("darklight", 1);
-        dbOpenRequest.onsuccess = function (e) {
-            ready(e.target.result);
-        };
-        dbOpenRequest.onerror = function (event) {
-            console.log(event.target.errorCode);
-            if (error) {
-                error(event);
-            }
-        };
-        dbOpenRequest.onupgradeneeded = function (event) {
-            if (event.oldVersion === 0) {
-                var os = event.target.result.createObjectStore('course_thumbs', {keyPath: 'course_id'});
-                os.createIndex('course_code', 'course_code', {unique: false});
-                os.createIndex('thumb_image', 'thumb_image', {unique: false});
-            }
-        }
-    };
-
-    // db
-    function getCourseThumbs(callback) {
-        getDatabase(function (db) {
-            var tx = db.transaction(['course_thumbs'], 'readonly');
-            var os = tx.objectStore('course_thumbs');
-            var all = [];
-            os.openCursor().onsuccess = function (event) {
-                var cursor = event.target.result;
-                if (cursor) {
-                    var s = {
-                        course_id: cursor.key,
-                        course_code: cursor.value.course_code,
-                        thumb_image: cursor.value.thumb_image
-                    };
-                    all.push(s);
-                    cursor.continue();
-                } else {
-                    try {
-                        callback(all);
-                    } catch (e) {
-
-                    }
-                }
-            };
-        }, null);
-    }
-
-    // db
-    function addCourseThumbs(o, callback) {
-        getDatabase(function (db) {
-            var tx = db.transaction(['course_thumbs'], 'readwrite');
-            var os = tx.objectStore('course_thumbs');
-
-            // test existence
-            var request1 = os.get(o.course_id);
-            request1.onsuccess = function (event) {
-                if (request1.result) {
-                    // found in db
-                    callback({
-                        err_code: 1,
-                        err_msg: 'Custom cover picture with this course ID already exists. ' +
-                            'You may edit saved picture or delete it before adding.'
-                    })
-                } else {
-                    // add to db
-                    var request = os.add({
-                        course_id: o.course_id,
-                        course_code: o.course_code,
-                        thumb_image: o.thumb_image
-                    });
-                    request.onsuccess = function (event) {
-                        callback({
-                            err_code: 0,
-                            data: {
-                                msg: 'New Custom Cover Picture Added'
-                            }
-                        });
-                    };
-                    request.onerror = function (event) {
-                        callback({
-                            err_code: 2,
-                            err_msg: event.target.error.name + ': ' + event.target.error.message
-                        });
-                    };
-                }
-            };
-        }, null);
-    }
-
-    // db
-    function deleteCourseThumbs(course_id, callback) {
-        getDatabase(function (db) {
-            var tx = db.transaction(['course_thumbs'], 'readwrite');
-            var os = tx.objectStore('course_thumbs');
-            var request = os.delete(course_id);
-            request.onsuccess = function (event) {
-                callback({
-                    err_code: 0,
-                    data: {
-                        msg: 'Custom cover picture deleted successfully'
-                    }
-                });
-            };
-            request.onerror = function (event) {
-                callback({
-                    err_code: 2,
-                    err_msg: event.target.error.name + ': ' + event.target.error.message
-                });
-            };
-        }, null);
-    }
-
     function refreshThumbList() {
-        var thumbList = $('#saved-thumb-list');
-        thumbList.html('');
-        getCourseThumbs(function (e) {
-            if (!e.length) {
-                thumbList.html('None');
-            } else {
 
-                function sortCourse(a, b) {
-                    if (a.course_code < b.course_code)
-                        return -1;
-                    if (a.course_code > b.course_code)
-                        return 1;
-                    return 0;
-                }
+        chrome.runtime.sendMessage({action: 'getCourseThumbs'});
 
-                e.sort(sortCourse);
-
-                e.forEach(function (item, index) {
-                    $('<div class="saved-thumb-item" data-course-id="' + item.course_id + '" style="background-image: url(' + item.thumb_image + ')">' +
-                        '<div class="saved-thumb-item-tip">Delete</div>' +
-                        '<div class="saved-thumb-item-title">' + item.course_code +
-                        '<small>( ID: ' + item.course_id + ' )</small></div>' +
-                        '<div>').appendTo(thumbList);
-                });
-
-                $('.saved-thumb-item-tip').on('click', function (e) {
-                    var r = confirm('Are you sure you want to delete this custom cover picture?');
-                    if (r) {
-                        deleteCourseThumbs($(this).parent('.saved-thumb-item').attr('data-course-id'), function (e) {
-                            showToast(e.data.msg);
-                            refreshThumbList();
-                        });
-                    }
-                });
-            }
-        });
     }
 
     function restoreOptions() {
@@ -512,16 +362,16 @@ function initOptions() {
                     alert(errMsg);
                     return;
                 }
-                addCourseThumbs({course_id: courseID, course_code: courseCode, thumb_image: thumbBase64}, function (e) {
-                    if (e.err_code === 0) {
-                        showToast(e.data.msg);
-                        refreshThumbList();
-                        removePopup(popupCls);
-                    } else {
-                        alert(e.err_msg);
+
+                chrome.runtime.sendMessage({
+                    action: 'addCourseThumbs',
+                    data: {
+                        course_id: courseID,
+                        course_code: courseCode,
+                        thumb_image: thumbBase64,
+                        popup_class: popupCls
                     }
                 });
-
 
             });
         });
@@ -545,6 +395,72 @@ function initOptions() {
 
             window.location.hash = $('#nav-tab-' + currID).attr('data-option-tab-name');
         });
+
+        // message listener
+        chrome.runtime.onMessage.addListener(
+            function (request, sender, sendResponse) {
+
+                if (request.action == 'getCourseThumbsResponse') {
+
+                    var thumbList = $('#saved-thumb-list');
+                    thumbList.html('');
+
+                    if (!request.data.length) {
+                        thumbList.html('None');
+                    } else {
+
+                        function sortCourse(a, b) {
+                            if (a.course_code < b.course_code)
+                                return -1;
+                            if (a.course_code > b.course_code)
+                                return 1;
+                            return 0;
+                        }
+
+                        request.data.sort(sortCourse);
+
+                        request.data.forEach(function (item, index) {
+                            $('<div class="saved-thumb-item" data-course-id="' + item.course_id + '" style="background-image: url(' + item.thumb_image + ')">' +
+                                '<div class="saved-thumb-item-tip">Delete</div>' +
+                                '<div class="saved-thumb-item-title">' + item.course_code +
+                                '<small>( ID: ' + item.course_id + ' )</small></div>' +
+                                '<div>').appendTo(thumbList);
+                        });
+
+                        $('.saved-thumb-item-tip').on('click', function (e) {
+                            var r = confirm('Are you sure you want to delete this custom cover picture?');
+                            if (r) {
+                                chrome.runtime.sendMessage({
+                                    action: 'deleteCourseThumbs',
+                                    data: {
+                                        course_id: $(this).parent('.saved-thumb-item').attr('data-course-id')
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+
+                else if (request.action == 'addCourseThumbsResponse') {
+
+                    if (request.data.err_code === 0) {
+                        showToast(request.data.data.msg);
+                        refreshThumbList();
+                        removePopup(request.data.data.popup_class);
+                    } else {
+                        alert(request.data.err_msg);
+                    }
+
+                }
+
+                else if (request.action == 'deleteCourseThumbsResponse') {
+                    showToast(request.data.msg);
+                    refreshThumbList();
+                }
+
+            }
+        );
+
     }
 
     function loadThemes() {
@@ -593,12 +509,12 @@ function initOptions() {
         // clipboard input
         var clipBoardInput = $('<div class="width-0 fixed"><input type="text" id="clipboard-input"></div>');
         $('body').append(clipBoardInput);
+
     });
 
     window.addEventListener("hashchange", onHashChange, false);
 
     var timeoutHandle = setTimeout(function () {
-
     }, 0);
 
 }

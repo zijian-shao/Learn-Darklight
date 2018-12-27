@@ -179,8 +179,8 @@ function isBrowser(name) {
         return typeof InstallTrigger !== 'undefined';
     else if (name == 'safari')
         return /constructor/i.test(window.HTMLElement) || (function (p) {
-                return p.toString() === "[object SafariRemoteNotification]";
-            })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+            return p.toString() === "[object SafariRemoteNotification]";
+        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
     else if (name == 'ie')
         return /*@cc_on!@*/false || !!document.documentMode;
     else if (name == 'edge')
@@ -613,6 +613,12 @@ function homepageCalendar(courseWidget) {
 
 }
 
+function customCourseThumbs() {
+    // TODO: if learn homepage
+
+    // TODO: if course home
+}
+
 function init() {
 
     // back to top button
@@ -643,6 +649,11 @@ function init() {
     // hide widget homepage
     if (currURL.endsWith('/d2l/home')) {
         homepageFunc();
+    }
+
+    // custom course thumb
+    if (options.COURSE_CustomThumb) {
+        customCourseThumbs();
     }
 
 }
