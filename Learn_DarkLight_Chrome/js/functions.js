@@ -451,48 +451,50 @@ function homepageFunc() {
                 $(e).parents('div.d2l-widget').remove();
             }
         } else if (headText.match(/Courses and Communities/) && !isWLU()) {
-            if (options.HOME_AddCalendar) {
-                courseWidget = $(e).parents('div.d2l-widget');
 
+            courseWidget = $(e).parents('div.d2l-widget');
+
+            if (options.HOME_AddCalendar) {
                 // insert after courses
                 var calendarWidget = $('<div role="region" class="d2l-widget darklight-homepage-calendar-widget d2l-tile"><div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-2">Upcoming Events</h2></div></div><div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"><div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div></div></div>');
 
                 calendarWidget.insertAfter(courseWidget);
+            }
 
-                function _waitForCourseLoad(isTabSwitch) {
+            function _waitForCourseLoad(isTabSwitch) {
 
-                    var loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses d2l-my-courses-content div.spinner-container d2l-loading-spinner');
+                var loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses d2l-my-courses-content div.spinner-container d2l-loading-spinner');
 
-                    var intervalId = setInterval(function () {
-                        if (!loadSpinner.length) {
-                            loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses d2l-my-courses-content div.spinner-container d2l-loading-spinner');
-                        } else {
-                            if (typeof loadSpinner.attr('hidden') !== typeof undefined) {
-                                clearInterval(intervalId);
+                var intervalId = setInterval(function () {
+                    if (!loadSpinner.length) {
+                        loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses d2l-my-courses-content div.spinner-container d2l-loading-spinner');
+                    } else {
+                        if (typeof loadSpinner.attr('hidden') !== typeof undefined) {
+                            clearInterval(intervalId);
 
-                                setTimeout(function () {
-                                    // calendar
-                                    homepageCalendar(courseWidget);
-                                    // custom course thumb
-                                    customCourseThumbs(courseWidget);
-                                }, 500);
+                            setTimeout(function () {
+                                // calendar
+                                homepageCalendar(courseWidget);
+                                // custom course thumb
+                                customCourseThumbs(courseWidget);
+                            }, 500);
 
-                                // tab change
-                                if (isTabSwitch !== true) {
-                                    courseWidget.find('d2l-my-courses d2l-tabs d2l-tab').on('click', function (e) {
-                                        $('#darklight-homepage-calendar').removeClass('darklight-homepage-calendar-empty').html('<div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div>');
-                                        _waitForCourseLoad(true);
-                                    });
-                                }
+                            // tab change
+                            if (isTabSwitch !== true) {
+                                courseWidget.find('d2l-my-courses d2l-tabs d2l-tab').on('click', function (e) {
+                                    $('#darklight-homepage-calendar').removeClass('darklight-homepage-calendar-empty').html('<div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div>');
+                                    _waitForCourseLoad(true);
+                                });
                             }
                         }
-                    }, 500);
-
-                }
-
-                _waitForCourseLoad();
+                    }
+                }, 500);
 
             }
+
+            _waitForCourseLoad();
+
+
         } else if (headText.match(/Calendar/) && isWLU()) {
             // for WLU homepage calendar
             $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
@@ -501,7 +503,7 @@ function homepageFunc() {
         }
     });
 
-    if (options.HOME_SwitchAnnounceAndCalendar) {
+    if (options.HOME_SwitchAnnounceAndCalendar && options.HOME_AddCalendar) {
         $('.darklight-homepage-calendar-widget').insertBefore(announcementWidget);
         announcementWidget.insertAfter(courseWidget);
     }
@@ -519,6 +521,8 @@ function homepageFunc() {
 
 function homepageCalendar(courseWidget) {
     if (isWLU()) return;
+
+    if (!options.HOME_AddCalendar) return;
 
     var links = [];
     courseWidget.find('d2l-my-courses d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content d2l-enrollment-card d2l-card').each(function (i, e) {
