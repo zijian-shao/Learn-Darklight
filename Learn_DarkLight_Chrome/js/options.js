@@ -469,28 +469,30 @@ function initOptions() {
         var index = 0;
         $.each(themes, function (i, val) {
 
-            var nightModeStr = '';
-            if (val['nightMode'])
-                nightModeStr = ' <small>(Night Mode)</small>';
+            if (val['hidden'] !== true) {
+                var nightModeStr = '';
+                if (val['nightMode'])
+                    nightModeStr = ' <small>(Night Mode)</small>';
 
-            var elem_img = '<img src="../theme/theme_' + val['id'] + '/preview.png">',
-                elem_input = '<input type="radio" ' +
-                    'id="opt-themes-0-' + index + '" ' +
-                    'name="GLB_ThemeID" ' +
-                    'value="' + val['id'] + '" ' +
-                    'data-option-name="GLB_ThemeID" ' +
-                    'data-option-type="enum">',
-                elem_label = '<label for="opt-themes-0-' + index + '">' +
-                    '<div class="theme-name">' + val['name'] + nightModeStr + '</div>' +
-                    '<div class="theme-info">Author: ' + val['author'] + '</div>' +
-                    '</label>';
+                var elem_img = '<img src="../theme/theme_' + val['id'] + '/preview.png">',
+                    elem_input = '<input type="radio" ' +
+                        'id="opt-themes-0-' + index + '" ' +
+                        'name="GLB_ThemeID" ' +
+                        'value="' + val['id'] + '" ' +
+                        'data-option-name="GLB_ThemeID" ' +
+                        'data-option-type="enum">',
+                    elem_label = '<label for="opt-themes-0-' + index + '">' +
+                        '<div class="theme-name">' + val['name'] + nightModeStr + '</div>' +
+                        '<div class="theme-info">Author: ' + val['author'] + '</div>' +
+                        '</label>';
 
-            $('<div class="theme-item">' + elem_img + elem_input + elem_label + '</div>').appendTo(list);
+                $('<div class="theme-item">' + elem_img + elem_input + elem_label + '</div>').appendTo(list);
 
-            $('#opt-themes-0-' + index).on('change', function () {
-                $('.theme-item').removeClass('selected');
-                $(this).parent('.theme-item').addClass('selected');
-            });
+                $('#opt-themes-0-' + index).on('change', function () {
+                    $('.theme-item').removeClass('selected');
+                    $(this).parent('.theme-item').addClass('selected');
+                });
+            }
 
             index++;
         });

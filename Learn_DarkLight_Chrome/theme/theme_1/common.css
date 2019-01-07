@@ -56,9 +56,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     display: none !important;
 }
 
-.d2l-navigation-s-main {
-    border: none;
-    background: #333333;
+.d2l-navigation-s-main, d2l-navigation-bottom-bar {
+    border: none !important;
+    background: #333333 !important;
 }
 
 a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:visited {

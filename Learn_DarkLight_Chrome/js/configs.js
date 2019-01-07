@@ -44,32 +44,36 @@ function getThemeConfigs(id) {
             "name": "Classic Darklight",
             "author": "Zijian Shao",
             "nightMode": false,
-            "overlayColor": "#111",
-            "previewColor": "#333"
+            "overlayColor": "#222"
         },
         "theme_1": {
             "id": 1,
             "name": "Bright Daylight",
             "author": "Zijian Shao",
             "nightMode": false,
-            "overlayColor": "#fff",
-            "previewColor": "#eee"
+            "overlayColor": "#fff"
         },
         "theme_2": {
             "id": 2,
             "name": "Dark Turquoise",
             "author": "Zijian Shao",
             "nightMode": true,
-            "overlayColor": "#282d34",
-            "previewColor": "#09b1b9"
+            "overlayColor": "#282d34"
+        },
+        "theme_3": {
+            "id": 3,
+            "name": "TEST",
+            "author": "Zijian Shao",
+            "nightMode": false,
+            "overlayColor": "#fff",
+            "hidden": true
         },
         "theme_99": {
             "id": 99,
             "name": "Default",
             "author": "D2L",
             "nightMode": false,
-            "overlayColor": "transparent",
-            "previewColor": "transparent"
+            "overlayColor": "transparent"
         }
     };
 

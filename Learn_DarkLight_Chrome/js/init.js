@@ -77,9 +77,7 @@ function initDarklight() {
 
         // course thumbs
         if (options.COURSE_CustomThumb) {
-            // TODO: test course home url
-            if (currURL.endsWith('/d2l/home') || currURL.endsWith('/home')) {
-
+            if (currURL.match(/\/d2l\/home$/) || currURL.match(/\/d2l\/home\/\d+$/)) {
                 chrome.runtime.onMessage.addListener(
                     function (request, sender, sendResponse) {
                         if (request.action == 'getCourseThumbsResponse') {
@@ -87,6 +85,9 @@ function initDarklight() {
                             request.data.forEach(function (item, index) {
                                 style += '.darklight-course-thumb-' + item.course_id + ' {';
                                 style += 'background-image: url(' + item.thumb_image + ');';
+                                style += '}';
+                                style += '.darklight-course-thumb-' + item.course_id + ' img {';
+                                style += 'opacity: 0 !important;';
                                 style += '}';
                             });
 

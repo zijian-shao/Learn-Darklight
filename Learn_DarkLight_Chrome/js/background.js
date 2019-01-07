@@ -205,10 +205,10 @@ function initBackground() {
                 var os = tx.objectStore('course_thumbs');
 
                 // test existence
-                var request1 = os.get(request.data.course_id);
-                request1.onsuccess = function (event) {
+                var req1 = os.get(request.data.course_id);
+                req1.onsuccess = function (event) {
 
-                    if (request1.result) {
+                    if (req1.result) {
                         // found in db
                         chrome.tabs.sendMessage(sender.tab.id, {
                             action: 'addCourseThumbsResponse',
@@ -221,12 +221,12 @@ function initBackground() {
 
                     else {
                         // add to db
-                        var request = os.add({
+                        var req = os.add({
                             course_id: request.data.course_id,
                             course_code: request.data.course_code,
                             thumb_image: request.data.thumb_image
                         });
-                        request.onsuccess = function (event) {
+                        req.onsuccess = function (event) {
                             chrome.tabs.sendMessage(sender.tab.id, {
                                 action: 'addCourseThumbsResponse',
                                 data: {
@@ -238,7 +238,7 @@ function initBackground() {
                                 }
                             });
                         };
-                        request.onerror = function (event) {
+                        req.onerror = function (event) {
                             chrome.tabs.sendMessage(sender.tab.id, {
                                 action: 'addCourseThumbsResponse',
                                 data: {
@@ -260,9 +260,9 @@ function initBackground() {
             getDatabase(function (db) {
                 var tx = db.transaction(['course_thumbs'], 'readwrite');
                 var os = tx.objectStore('course_thumbs');
-                var request = os.delete(request.data.course_id);
+                var req = os.delete(request.data.course_id);
 
-                request.onsuccess = function (event) {
+                req.onsuccess = function (event) {
                     chrome.tabs.sendMessage(sender.tab.id, {
                         action: 'deleteCourseThumbsResponse',
                         data: {
@@ -273,7 +273,7 @@ function initBackground() {
                         }
                     });
                 };
-                request.onerror = function (event) {
+                req.onerror = function (event) {
                     chrome.tabs.sendMessage(sender.tab.id, {
                         action: 'deleteCourseThumbsResponse',
                         data: {
