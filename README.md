@@ -6,24 +6,25 @@ Chrome: [View in Chrome Web Store](https://chrome.google.com/webstore/detail/lea
 
 Firefox: [View in Firefox Addons](https://addons.mozilla.org/addon/learn-darklight/ "Learn Darklight (Firefox Version)")
 
-Safari: [Get it from Extension Website](https://www.zijianshao.com/dlight/updates/?request=safaripack "Learn Darklight (Safari Version)")
-
 ## Features
-- Multiple themes
-- Homepage calendar
-- Course content / quiz frame size control
-- Hide system alert & system check widget
-- One-click to list all group members
-- Fixed navigation bar
-- Back to top button
-- Custom CSS and JS
-- Extension options page
+### Custom Course Cover Pics
+Customize the cover picture of each course as you like, so that the course entry on the homepage is no longer indistinguishable.
+### Homepage Calendar
+Automatically bring together all course upcoming events and add them to the homepage to avoid missing any important dates.
+### Mutiple Themes with Night Mode
+Different themes can be used in different scenarios. No need to worry about bright pages that may hurt your eyes at night. Also, the extension supports custom CSS and JS.
+### Support Waterloo and Laurier's D2L
+This browser extension is designed for Waterloo Learn and Laurier MyLearning Space and can be used on both systems.
+### Detailed Extension Options
+Detailed extension options allow you to turn any function on or off as you wish. When used with other extensions, you can turn off any conflicting features at any time.
+### And Even More
+In addition to these features, there are even more available. For example, page content size control and custom homepage widgets. Please go to the extension options page to take a look.
 
 ## Notes
-- It’s not recommended to use other Learn extensions with Darklight to avoid unexpected behaviors
-- Learn may change at any time, thus some functions may be invalid
-- If you have any questions regarding this extension, please email sam.zj.shao@gmail.com
+- Don't use other Waterloo Learn extensions with Darklight to avoid unexpected behaviors.
+- Waterloo Learn may change at any time, thus the extension may not function properly.
+- If you have any questions regarding this extension, please email me at sam.zj.shao@gmail.com or [submit your feedback online](https://docs.google.com/forms/d/e/1FAIpQLSc8teQisXY9j7mGFWwlNgna5qLqi3kjh31R3iR742oQpJ0fOA/viewform "Submit feedback online").
 
 ## Disclaimers
-- This extension has no affiliation with Learn, its developers, or the University of Waterloo
-- Use this extension at your own responsibility
+- This extension has no affiliation with Waterloo Learn, its developers, or the University of Waterloo.
+- Use this extension at your own responsibility.
