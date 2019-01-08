@@ -25,9 +25,12 @@ function getOptionListDefault() {
         'HOME_HideCheckMySys': false,
         'HOME_AddCalendar': true,
         'HOME_HidePrivacy': true,
+        'HOME_HideMetaTerm': false,
+        'HOME_HideMetaEndDate': false,
         'HOME_SwitchAnnounceAndCalendar': false,
         'COURSE_ContentResizeBtn': true,
         'COURSE_CustomThumb': true,
+        'COURSE_DirectToContent': false,
         'QUIZ_ContentResizeBtn': true,
         'GROUP_ListMembersBtn': true
     };

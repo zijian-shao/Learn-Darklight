@@ -20,7 +20,9 @@
             <li data-option-tab-index="0" data-option-tab-name="general" id="nav-tab-0" class="nav-tab active">General
             </li>
             <li data-option-tab-index="1" data-option-tab-name="themes" id="nav-tab-1" class="nav-tab">Themes</li>
-            <li data-option-tab-index="2" data-option-tab-name="courses" id="nav-tab-2" class="nav-tab">Courses</li>
+            <li data-option-tab-index="2" data-option-tab-name="courses" id="nav-tab-2" class="nav-tab">Courses
+                <div class="new-tag">NEW</div>
+            </li>
             <li data-option-tab-index="3" data-option-tab-name="pages" id="nav-tab-3" class="nav-tab">Pages</li>
             <li data-option-tab-index="4" data-option-tab-name="about" id="nav-tab-4" class="nav-tab">About</li>
         </ul>
@@ -289,10 +291,35 @@
         <!-- Courses Start -->
         <div data-option-index="2" class="section" id="opt-tab-2">
             <div class="title">Courses</div>
+
+            <div class="group">
+                <div class="group-title">Redirect</div>
+                <div class="group-content">
+
+                    <!-- Redirect to course content -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-courses-1-0" data-option-name="COURSE_DirectToContent"
+                                   data-option-type="switch">
+                            <label for="opt-courses-1-0"></label>
+                        </div>
+                        <label for="opt-courses-1-0" class="checkbox-label">Auto re-direct to course content
+                            page</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>When you enter a course though course tiles on homepage or course selector on
+                                navigation bar, you will be automatically redirect to it's corresponding content page.
+                                You can still access the original course home through other links.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="group">
 
                 <!-- Custom thumb control -->
-                <div class="group-title">Control</div>
+                <div class="group-title">Custom Cover Control</div>
                 <div class="group-content">
                     <div class="option-group checkbox-group">
                         <div class="checkbox-slide">
@@ -303,7 +330,7 @@
                         <label for="opt-courses-0-0" class="checkbox-label">Enable custom course cover pictures</label>
                         <a class="option-tip-toggle option-tip-toggle-fixed">?</a>
                         <div class="option-tip">
-                            <p>▷ All custom content in this section are not synced with your browser account. Instead,
+                            <p>▷ All custom content below are not synced with your browser account. Instead,
                                 they are stored locally in the browser.</p>
                             <p>▷ Click "Add New" button to start. Click saved pictures to delete.</p>
                             <p>▷ Manually remove unnecessary or expired items to improve performance.</p>
@@ -312,6 +339,7 @@
                 </div>
 
             </div>
+
             <div class="group">
 
                 <!-- Add thumb -->
@@ -329,12 +357,12 @@
                                 <div class="row margin-bottom-10">
                                     <div class="width-33 pull-left uppercase strong">Course ID</div>
                                     <div class="width-66 pull-left">
-                                        <input type="text" minlength="5" maxlength="10" placeholder="eg. 812345"
+                                        <input type="text" minlength="5" maxlength="10" placeholder="eg. 412305"
                                                class="input-box block width-90 course-id">
                                     </div>
                                 </div>
                                 <div class="row margin-bottom-10">
-                                    <div class="width-33 pull-left uppercase strong">Course Code</div>
+                                    <div class="width-33 pull-left uppercase strong">Course Name</div>
                                     <div class="width-66 pull-left">
                                         <input type="text" minlength="3" maxlength="10" placeholder="eg. ECE 100"
                                                class="input-box block width-90 course-code">
@@ -355,7 +383,7 @@
                                 <div class="option-tip margin-0">
                                     <p><strong>1.</strong> Open course home, the number in the URL is your course ID.
                                     </p>
-                                    <p><strong>2.</strong> Course code is only used to distinguish between different
+                                    <p><strong>2.</strong> Course name is only used to distinguish between different
                                         courses in options page.</p>
                                     <p><strong>3.</strong> Recommended resolution: 1200x300. Recommended file size: less
                                         than 200KB.</p>
@@ -472,6 +500,29 @@
                         <div class="option-tip hidden">
                             <p>Hide the privacy widget at the bottom of homepage. (Waterloo Learn only)</p>
                         </div>
+                    </div>
+
+
+                    <hr>
+
+                    <!-- Hide term meta -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-5" data-option-name="HOME_HideMetaTerm"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-5"></label>
+                        </div>
+                        <label for="opt-pages-0-5" class="checkbox-label">Hide term info on course tile</label>
+                    </div>
+
+                    <!-- Hide end date meta -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-6" data-option-name="HOME_HideMetaEndDate"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-6"></label>
+                        </div>
+                        <label for="opt-pages-0-6" class="checkbox-label">Hide end date info on course tile</label>
                     </div>
 
                 </div>
@@ -623,6 +674,63 @@
 <!-- Toast Start -->
 <div class="darklight-toast darklight-toast-hidden" id="darklight-toast"></div>
 <!-- Toast End -->
+
+<!-- Popup Start -->
+<div class="popup-container hidden" id="popup-container">
+    <div class="popup-wrapper">
+        <div class="popup-frame">
+            <div class="popup-title"><strong>LEARN</strong> DARKLIGHT</div>
+            <div class="popup-content" id="popup-content">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Popup End -->
+
+<!-- Whats New Start -->
+<div class="whatsnew hidden" id="whatsnew-content">
+    <h3>What's New in V1.5</h3>
+    <ul>
+        <li>
+            <small>Courses</small>
+            Custom course cover pictures
+        </li>
+        <li>
+            <small>Courses</small>
+            Change default course home
+        </li>
+        <li>
+            <small>Pages</small>
+            Hide homepage course tile meta
+        </li>
+        <li>
+            <small>Other</small>
+            New popup and options page
+        </li>
+        <li>
+            <small>Other</small>
+            Bug fixes
+        </li>
+    </ul>
+    <div class="popup-btn-group">
+        <a href="#" class="popup-btn popup-btn-black">Ok, got it</a>
+    </div>
+</div>
+<!-- Whats New End -->
+
+<!-- Welcome Start -->
+<div class="welcome hidden" id="welcome-content">
+    <h3>Thanks for using Learn Darklight</h3>
+    <p>This extension is designed to enhance your experience with Waterloo Learn and Laurier MyLearningSpace.</p>
+    <p><strong>For various reasons, some of the options are disabled by default. It is recommended that you browse
+        through all the options and enable them according to your needs.</strong></p>
+    <p>If you have any questions regarding this extension, please feel free to let me know. See "About" section below.</p>
+    <div class="popup-btn-group">
+        <a href="#" class="popup-btn popup-btn-black">Ok, got it</a>
+    </div>
+</div>
+<!-- Welcome End -->
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/configs.js"></script>

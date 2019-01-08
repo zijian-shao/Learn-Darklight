@@ -315,6 +315,10 @@ i.arrow.down {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.d2l-homepage d2l-card .d2l-card-content {
+    padding-bottom: 1.0rem !important;
+}
+
 .darklight-course-thumb {
     background-color: transparent;
     background-position: center;

@@ -146,7 +146,7 @@ function fixNavigation() {
     }
 
     var nav = $('.d2l-navigation-s-main, d2l-navigation-bottom-bar');
-    var navHeight = nav.height();
+    var navHeight = nav.outerHeight();
     // var header = $('.d2l-navigation-s-header');
     var header = $('d2l-navigation-header');
     var offset = header.height();
@@ -463,32 +463,38 @@ function homepageFunc() {
 
             function _waitForCourseLoad(isTabSwitch) {
 
-                var loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses d2l-my-courses-content div.spinner-container d2l-loading-spinner');
+                var loadSpinner = courseWidget.find('d2l-my-courses d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content div.spinner-container d2l-loading-spinner');
 
                 var intervalId = setInterval(function () {
-                    if (!loadSpinner.length) {
-                        loadSpinner = $(e).parent('.d2l-widget-header').next('.d2l-widget-content').find('d2l-my-courses d2l-my-courses-content div.spinner-container d2l-loading-spinner');
+                    if (!loadSpinner.length
+                        || typeof loadSpinner.attr('hidden') === typeof undefined
+                        || (!courseWidget.find('d2l-my-courses d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content d2l-enrollment-card d2l-card div.d2l-card-container').length
+                            && typeof courseWidget.find('d2l-my-courses d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content d2l-alert').attr('hidden') === typeof undefined)
+                    ) {
+
+                        loadSpinner = courseWidget.find('d2l-my-courses d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content div.spinner-container d2l-loading-spinner');
+
                     } else {
-                        if (typeof loadSpinner.attr('hidden') !== typeof undefined) {
-                            clearInterval(intervalId);
 
-                            setTimeout(function () {
-                                // calendar
-                                homepageCalendar(courseWidget);
-                                // custom course thumb
-                                customCourseThumbs(courseWidget);
-                            }, 500);
+                        clearInterval(intervalId);
+                        setTimeout(function () {
+                            // calendar
+                            homepageCalendar(courseWidget);
+                            // custom course thumb
+                            customCourseThumbs(courseWidget);
+                            // direct to content
+                            courseDirectToContent(courseWidget);
+                        }, 100);
 
-                            // tab change
-                            if (isTabSwitch !== true) {
-                                courseWidget.find('d2l-my-courses d2l-tabs d2l-tab').on('click', function (e) {
-                                    $('#darklight-homepage-calendar').removeClass('darklight-homepage-calendar-empty').html('<div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div>');
-                                    _waitForCourseLoad(true);
-                                });
-                            }
+                        // tab change
+                        if (isTabSwitch !== true) {
+                            courseWidget.find('d2l-my-courses d2l-tabs d2l-tab').on('click', function (e) {
+                                $('#darklight-homepage-calendar').removeClass('darklight-homepage-calendar-empty').html('<div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div>');
+                                _waitForCourseLoad(true);
+                            });
                         }
                     }
-                }, 500);
+                }, 100);
 
             }
 
@@ -503,6 +509,7 @@ function homepageFunc() {
         }
     });
 
+    // switch calendar and announce
     if (options.HOME_SwitchAnnounceAndCalendar && options.HOME_AddCalendar) {
         $('.darklight-homepage-calendar-widget').insertBefore(announcementWidget);
         announcementWidget.insertAfter(courseWidget);
@@ -517,6 +524,14 @@ function homepageFunc() {
             }
         });
     }
+
+    // course tile meta
+    var style = '';
+    if (options.HOME_HideMetaTerm)
+        style += 'd2l-organization-info {display: none!important}';
+    if (options.HOME_HideMetaEndDate)
+        style += 'd2l-user-activity-usage {display: none!important}';
+    injectCSS(style, 'head', 'text');
 }
 
 function homepageCalendar(courseWidget) {
@@ -666,6 +681,36 @@ function customCourseThumbs(courseWidget) {
     }
 }
 
+function courseDirectToContent(courseWidget) {
+
+    if (!options.COURSE_DirectToContent) return;
+
+    // homepage
+    if (typeof courseWidget !== typeof undefined) {
+        var cards = courseWidget.find('d2l-my-courses d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content d2l-enrollment-card');
+        cards.each(function (idx, elem) {
+            var el = $(elem).find('d2l-card div.d2l-card-container a.d2l-focusable').first();
+            var link = el.attr('href');
+            link = link.replace('/d2l/home/', '/d2l/le/content/');
+            link += '/Home';
+            el.attr('href', link);
+        });
+    }
+    // navbar
+    else {
+        setTimeout(function () {
+            var links = $('#courseSelectorId').find('ul.d2l-datalist.vui-list li');
+            links.each(function (idx, elem) {
+                var el = $(elem).find('a.d2l-link.d2l-datalist-item-actioncontrol');
+                var link = el.attr('href');
+                link = link.replace('/d2l/home/', '/d2l/le/content/');
+                link += '/Home';
+                el.attr('href', link);
+            });
+        }, 500);
+    }
+}
+
 function init() {
 
     // back to top button
@@ -702,6 +747,11 @@ function init() {
     if (currURL.match(/\/d2l\/home\/\d+$/)) {
         customCourseThumbs();
     }
+
+    $('.d2l-navigation-s-course-menu d2l-dropdown button').on('click', function () {
+        courseDirectToContent();
+    });
+
 }
 
 init();

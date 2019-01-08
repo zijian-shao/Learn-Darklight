@@ -1304,12 +1304,16 @@ textarea.input-box {
 }
 
 .popup-frame {
-    width: 800px;
+    width: 400px;
     margin: auto;
     background: #fff;
     -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+}
+
+.popup-wide .popup-frame {
+    width: 800px;
 }
 
 .popup-title {
@@ -1332,6 +1336,75 @@ textarea.input-box {
 
 .popup-template {
     display: none;
+}
+
+.popup-content h3 {
+    margin: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #ddd;
+}
+
+.popup-content p {
+    line-height: 1.5em;
+}
+
+.popup-content ul {
+    list-style-type: none;
+    margin: 1em auto;
+}
+
+.popup-content ul li {
+    padding-left: 0.2em;
+    line-height: 2em;
+}
+
+.popup-content ul li small {
+    display: block;
+    float: left;
+    width: 55px;
+    margin: 7px 8px 0 0;
+    padding: 2px 0;
+    line-height: 1.2em;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 9px;
+}
+
+.popup-btn-group {
+    border-top: 1px solid #ddd;
+    padding-top: 1.2em;
+    text-align: center;
+    display: flex;
+}
+
+.popup-btn {
+    display: inline-block;
+    text-transform: uppercase;
+    margin-right: 10px;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+    flex: 1;
+    text-decoration: none !important;
+}
+
+.popup-btn:hover {
+    opacity: 0.9;
+}
+
+.popup-btn:last-child {
+    margin-right: 0;
+}
+
+.popup-btn-black {
+    background: #222 !important;
+    color: #fff !important;
+}
+
+.popup-btn-grey {
+    background: #ddd !important;
+    color: #000 !important;
 }
 
 .alert {
