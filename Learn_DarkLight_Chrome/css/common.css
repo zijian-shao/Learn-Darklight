@@ -325,3 +325,7 @@ i.arrow.down {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.d2l-homepage d2l-card .d2l-card-footer {
+    display: none !important;
+}
