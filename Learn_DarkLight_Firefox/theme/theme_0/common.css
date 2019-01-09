@@ -12,7 +12,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
     background: #fff;
-    min-height: calc(100vh - 143px);
+    min-height: 842px;
 }
 
 .d2l-tiles-container .d2l-page-bg > div, .d2l-tiles-container .d2l-page-main, .d2l-tiles-container .d2l-max-width, .d2l-tiles-container .d2l-min-width {
@@ -125,8 +125,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     background: #000;
 }
 
-.d2l-navigation-s-shadow-gradient {
-    background: none;
+.d2l-navigation-s-shadow-gradient, .d2l-navigation-shadow-gradient {
+    background: none !important;
 }
 
 .d2l-navigation-s-header, d2l-navigation-header {
@@ -137,9 +137,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     height: calc(1rem + 35px);
 }
 
-.d2l-navigation-s-main {
-    border: none;
-    background: #333333;
+.d2l-navigation-s-main, d2l-navigation-bottom-bar {
+    border: none !important;
+    background: #333333 !important;
 }
 
 a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:visited {
@@ -373,20 +373,6 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     border-radius: 0 !important;
 }
 
-/* course tile image ani */
-d2l-image-tile.d2l-course-image-tile .d2l-image-tile-image-area.d2l-image-tile {
-    -webkit-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-    -moz-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-    -ms-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-    -o-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-    transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-}
-
-d2l-image-tile.d2l-course-image-tile:hover .d2l-image-tile-image-area.d2l-image-tile,
-d2l-image-tile.d2l-course-image-tile:focus .d2l-image-tile-image-area.d2l-image-tile {
-
-}
-
 /* new homepage course tabs */
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs {
     height: 20px;
@@ -404,4 +390,8 @@ d2l-image-tile.d2l-course-image-tile:focus .d2l-image-tile-image-area.d2l-image-
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
+}
+
+.d2l-shim {
+    background: #000;
 }

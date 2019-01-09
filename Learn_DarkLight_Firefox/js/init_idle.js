@@ -24,7 +24,12 @@ function initDarklightIdle() {
 
             console.log('New version updated (V' + newVer + ')');
 
-            if (newVer == '1.1.0') {
+            if (newVer == '1.5.0') {
+                browser.runtime.sendMessage({
+                    action: 'createTab',
+                    data: {url: browser.extension.getURL('/html/options.html') + '?whatsnew=1.5.0'}
+                });
+            } else if (newVer == '1.1.3') {
                 // browser.runtime.sendMessage({
                 //     action: 'createTab',
                 //     data: {url: 'https://www.zijianshao.com/dlight/whatsnew/?version=1.1.0&platform=firefox'}
@@ -129,7 +134,6 @@ function initDarklightIdle() {
     params.textContent = jsText;
     document.head.appendChild(params);
 
-    // injectJS(baseURL + 'js/functions.js', 'head');
     $.getScript(baseURL + 'js/functions.js', function () {
         injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions.js', 'head');
         if (options.GLB_EnableCustomStyle)

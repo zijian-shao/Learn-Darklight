@@ -121,7 +121,7 @@ body {
 
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
     background: #323841;
-    min-height: calc(100vh - 143px);
+    min-height: 842px;
 }
 
 .d2l-page-bg {
@@ -214,6 +214,28 @@ body {
 
 .d2l-navigation-s-button:focus d2l-icon, .d2l-navigation-s-button:hover d2l-icon {
     color: #fff;
+}
+
+d2l-icon.d2l-button-subtle-icon.d2l-button-subtle {
+    color: #09b1b9 !important;
+}
+
+.d2l-button-subtle-content.d2l-button-subtle {
+    color: #09b1b9 !important;
+}
+
+button.d2l-button-subtle:focus, .d2l-button-subtle-focus button.d2l-button-subtle {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+button.d2l-button-subtle:hover,
+button.d2l-button-subtle:focus,
+.d2l-button-subtle-hover button.d2l-button-subtle,
+.d2l-button-subtle-focus button.d2l-button-subtle {
+    background: none !important;
+    border: 1px solid #09b1b9 !important;
 }
 
 /* checkboxes */
@@ -332,6 +354,26 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 
 .vui-changed, .vui-dropdown-menu > ul > li.d2l-last-visible-item.vui-dropdown-menu-item-focus, .vui-dropdown-menu > ul > li.vui-dropdown-menu-item-focus {
     background: rgba(255, 255, 255, 0.05);
+}
+
+input[type="text"].d2l-input.d2l-input-search,
+input[type="search"].d2l-input.d2l-input-search,
+input[type="tel"].d2l-input.d2l-input-search,
+input[type="url"].d2l-input.d2l-input-search,
+input[type="email"].d2l-input.d2l-input-search,
+input[type="password"].d2l-input.d2l-input-search,
+input[type="number"].d2l-input.d2l-input-search {
+    background: #424a56 !important;
+    color: #ddd !important;
+    border-color: #424a56 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.d2l-input-search-hover.d2l-input-search input[type="text"].d2l-input.d2l-input-search,
+.d2l-input-search-focus.d2l-input-search input[type="text"].d2l-input.d2l-input-search {
+    border-color: #09b1b9 !important;
 }
 
 /* table */
@@ -634,8 +676,8 @@ d2l-menu-item, d2l-menu-item-link {
     background: #323841;
 }
 
-.d2l-navigation-s-shadow-gradient {
-    background: none;
+.d2l-navigation-s-shadow-gradient, .d2l-navigation-shadow-gradient {
+    background: none !important;
 }
 
 .d2l-navigation-s-header, d2l-navigation-header {
@@ -646,9 +688,9 @@ d2l-menu-item, d2l-menu-item-link {
     height: calc(1rem + 35px);
 }
 
-.d2l-navigation-s-main {
-    border: none;
-    background: #282d34;
+.d2l-navigation-s-main, d2l-navigation-bottom-bar {
+    border: none !important;
+    background: #282d34 !important;
 }
 
 a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:visited {
@@ -1413,6 +1455,11 @@ d2l-alert button.d2l-alert:hover, d2l-alert button.d2l-alert:active {
     border: none !important;
 }
 
+div[role="alert"] div.d_ma_s {
+    background-color: #282d34;
+    border-color: #282d34;
+}
+
 /* datalist */
 .daylight .d2l-datalist-nesteditem-accordion.d2l-datalist-nesteditem-accordion-open, .daylight .d2l-datalist-nesteditem-accordion.d2l-datalist-nesteditem-accordion-open > .d2l-datalist-item-content.d2l-datalist-item-content-first {
     background: #373e48;
@@ -1515,6 +1562,25 @@ d2l-image-tile.d2l-course-image-tile .d2l-image-tile-image-area.d2l-image-tile {
 
 d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
     color: #ddd;
+}
+
+d2l-enrollment-card d2l-card {
+    background: #424a56 !important;
+    border: none !important;
+}
+
+d2l-enrollment-card d2l-card[active="active"] {
+    box-shadow: none !important;
+}
+
+d2l-enrollment-card d2l-card d2l-card-content-meta {
+    color: #999999 !important;
+}
+
+d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon > button:hover,
+d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon > button:focus,
+d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button {
+    background: #09b1b9 !important;
 }
 
 /* new course selector */

@@ -306,11 +306,26 @@ i.arrow.down {
     box-shadow: 0 0 0 10px #fff, 0 0 0 11px #f4f4fc, 0 0 25px 10px rgba(150, 150, 190, 0.2);
 }
 
-/* tmp fix for homepage course tile dropdown button */
-.d2l-homepage d2l-my-courses-content d2l-dropdown-more.d2l-image-tile {
-    -webkit-transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
-    -moz-transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
-    -ms-transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
-    -o-transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
-    transition: color .5s, background .5s, opacity .25s, margin-top .4s ease;
+/* course tiles */
+.d2l-homepage d2l-card {
+    -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -moz-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -ms-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -o-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.d2l-homepage d2l-card .d2l-card-content {
+    padding-bottom: 1.0rem !important;
+}
+
+.darklight-course-thumb {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.d2l-homepage d2l-card .d2l-card-footer {
+    display: none !important;
 }

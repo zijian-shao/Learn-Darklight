@@ -1,4 +1,4 @@
-var baseURL, currURL, options, configs, themeConfigs;
+var baseURL, currURL, options, configs, themeConfigs, courseThumbs;
 
 function injectCSS(src, tag, type) {
     var style;
@@ -74,6 +74,34 @@ function initDarklight() {
         cover.id = 'darklight-load-overlay';
         cover.style = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:' + themeConfigs.overlayColor;
         document.documentElement.appendChild(cover);
+
+        // course thumbs
+        if (options.COURSE_CustomThumb) {
+            if (currURL.match(/\/d2l\/home$/) || currURL.match(/\/d2l\/home\/\d+$/)) {
+                browser.runtime.onMessage.addListener(
+                    function (request, sender, sendResponse) {
+                        if (request.action == 'getCourseThumbsResponse') {
+                            var style = '';
+                            request.data.forEach(function (item, index) {
+                                style += '.darklight-course-thumb-' + item.course_id + ' {';
+                                style += 'background-image: url(' + item.thumb_image + ');';
+                                style += '}';
+                                style += '.darklight-course-thumb-' + item.course_id + ' img {';
+                                style += 'opacity: 0 !important;';
+                                style += '}';
+                            });
+
+                            var styleElem = document.createElement("style");
+                            styleElem.innerText = style;
+                            styleElem.id = 'darklight-course-thumbs';
+                            document.documentElement.appendChild(styleElem);
+                        }
+                    }
+                );
+
+                browser.runtime.sendMessage({action: 'getCourseThumbs'});
+            }
+        }
     }
 
     baseURL = browser.runtime.getURL('');
