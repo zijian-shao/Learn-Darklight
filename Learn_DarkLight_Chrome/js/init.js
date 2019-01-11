@@ -1,4 +1,4 @@
-var baseURL, currURL, options, configs, themeConfigs, courseThumbs;
+var baseURL, currURL, options, configs, themeConfigs;
 
 function injectCSS(src, tag, type) {
     var style;
