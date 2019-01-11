@@ -1583,6 +1583,14 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
     background: #09b1b9 !important;
 }
 
+.darklight-course-thumb {
+    opacity: 0.8;
+}
+
+.darklight-course-thumb img {
+    filter: none;
+}
+
 /* new course selector */
 #courseSelectorId .vui-list > li.vui-active {
     background: #09b1b9;

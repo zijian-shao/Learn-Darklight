@@ -24,10 +24,10 @@ function initDarklightIdle() {
 
             console.log('New version updated (V' + newVer + ')');
 
-            if (newVer == '1.5.0') {
+            if (newVer.match(/1\.5\./) && !oldVer.match(/1\.5\./)) {
                 browser.runtime.sendMessage({
                     action: 'createTab',
-                    data: {url: browser.extension.getURL('/html/options.html') + '?whatsnew=1.5.0'}
+                    data: {url: browser.extension.getURL('/html/options.html') + '?whatsnew=' + newVer}
                 });
             } else if (newVer == '1.1.3') {
                 // browser.runtime.sendMessage({

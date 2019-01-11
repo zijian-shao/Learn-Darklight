@@ -1,4 +1,4 @@
-var baseURL, currURL, options, configs, themeConfigs, courseThumbs;
+var baseURL, currURL, options, configs, themeConfigs;
 
 function injectCSS(src, tag, type) {
     var style;
@@ -35,8 +35,8 @@ function isBrowser(name) {
         return typeof InstallTrigger !== 'undefined';
     else if (name == 'safari')
         return /constructor/i.test(window.HTMLElement) || (function (p) {
-                return p.toString() === "[object SafariRemoteNotification]";
-            })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+            return p.toString() === "[object SafariRemoteNotification]";
+        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
     else if (name == 'ie')
         return /*@cc_on!@*/false || !!document.documentMode;
     else if (name == 'edge')
@@ -107,10 +107,13 @@ function initDarklight() {
     baseURL = browser.runtime.getURL('');
     currURL = window.location.href;
     configs = getOptionListDefault();
+
     browser.storage.sync.get(configs, function (e) {
         options = e;
         init();
     });
+
+
 }
 
 initDarklight();
