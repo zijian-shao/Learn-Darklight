@@ -112,7 +112,8 @@ function initOptions() {
         });
 
         // local
-        refreshThumbList();
+        setTimeout(refreshThumbList, 500);
+
     }
 
     function saveOption(obj, callback) {

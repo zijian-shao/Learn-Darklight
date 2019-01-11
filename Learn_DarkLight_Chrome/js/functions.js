@@ -149,9 +149,18 @@ function fixNavigation() {
     var navHeight = nav.outerHeight();
     // var header = $('.d2l-navigation-s-header');
     var header = $('d2l-navigation-header');
-    var offset = header.height();
+    var offset = header.outerHeight();
 
-    _fixNavigation();
+    if (isBrowser('firefox')) {
+        $(window).on('load', function () {
+            navHeight = nav.outerHeight();
+            offset = header.outerHeight();
+            _fixNavigation();
+        });
+    } else {
+        _fixNavigation();
+    }
+
     $(window).on('scroll', function () {
         _fixNavigation();
     });
@@ -160,8 +169,8 @@ function fixNavigation() {
         if ($(window).width() < 768) {
             header.css('margin-bottom', '0px');
         } else {
-            navHeight = nav.height();
-            offset = header.height();
+            navHeight = nav.outerHeight();
+            offset = header.outerHeight();
             _fixNavigation();
         }
     });
@@ -197,8 +206,10 @@ function isBrowser(name) {
 
 function resizeContentBtn(page) {
 
-    function _getFloatButton(iconSrc, text) {
-        return '<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + iconSrc + '"></div><div class="darklight-fixed-right-button-text">' + text + '</div></a>';
+    function _getFloatButton(iconSrc, text, id) {
+        if (typeof id === typeof undefined) id = '';
+        else id = ' id="' + id + '"';
+        return '<a href="#" class="darklight-fixed-right-button"' + id + '><div class="darklight-fixed-right-button-icon"><img src="' + iconSrc + '"></div><div class="darklight-fixed-right-button-text">' + text + '</div></a>';
     }
 
     function _resizeContentBtn() {
@@ -243,38 +254,32 @@ function resizeContentBtn(page) {
             }, 10);
         });
 
-        iframe.load(function () {
-            // full height
-            // setTimeout(function () {
-            //     if (iframe.hasClass('d2l-fileviewer-rendered-pdf')) {
-            //         var pdfViewerH = iframe.contents().find('#viewer').height()
-            //             + iframe.contents().find('#toolbarContainer').height()
-            //             + 10;
-            //
-            //         var fullHeight = $(_getFloatButton(baseURL + 'img/button-icon-arrows-alt-v.png', 'Content Full Height'));
-            //         fullHeight.on('click', function (e) {
-            //             e.preventDefault();
-            //             iframe.css('height', pdfViewerH + 'px');
-            //             iframe.attr('data-current-height', pdfViewerH);
-            //             $(this).remove();
-            //         });
-            //         fullHeight.appendTo(wrapper);
-            //     }
-            // }, 2000);
-
-            // full screen
+        function _fullScreenBtn() {
             var fullScreenBtn = iframe.contents().find('#fullscreenMode');
-            if (fullScreenBtn.length) {
+            if (fullScreenBtn.length && !$('#darklight-full-screen-mode').length) {
 
-                var fullScr = $(_getFloatButton(baseURL + 'img/button-icon-expand.png', 'Full Screen Mode'));
+                var fullScr = $(_getFloatButton(
+                    baseURL + 'img/button-icon-expand.png',
+                    'Full Screen Mode',
+                    'darklight-full-screen-mode')
+                );
                 fullScr.on('click', function (e) {
                     e.preventDefault();
                     fullScreenBtn.trigger('click');
                 });
+
                 fullScr.appendTo(wrapper);
 
             }
-        });
+        }
+
+        if (isBrowser('firefox')) {
+            setTimeout(_fullScreenBtn, 2000);
+        } else {
+            iframe.on('load', function () {
+                _fullScreenBtn();
+            });
+        }
 
         // unlock body
         function _unlockBody() {
@@ -303,18 +308,17 @@ function resizeContentBtn(page) {
             iframe = $('.d2l-page-main').find('iframe').first();
     }
 
-    if (isBrowser('chrome')) {
+    var interval = setInterval(function () {
         _getIframe();
-        _resizeContentBtn();
-    } else if (isBrowser('firefox') || isBrowser('safari')) {
-        var intervalId = setInterval(function () {
-            _getIframe();
-            if (iframe != null && iframe.length > 0) {
-                clearInterval(intervalId);
+        iframe.each(function (idx, elem) {
+            if ($(elem).attr('src').trim() != '') {
+                clearInterval(interval);
                 _resizeContentBtn();
+                return false;
             }
-        }, 500);
-    }
+        });
+
+    }, 200);
 }
 
 function listMembersBtn() {
