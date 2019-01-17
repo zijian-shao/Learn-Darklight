@@ -112,7 +112,16 @@ function initOptions() {
         });
 
         // local
-        setTimeout(refreshThumbList, 500);
+        setTimeout(function () {
+            var interval = setInterval(function () {
+                var thumbList = $('#saved-thumb-list');
+                if (typeof thumbList.attr('data-list-init') === typeof undefined) {
+                    refreshThumbList();
+                } else {
+                    clearInterval(interval);
+                }
+            }, 500);
+        }, 1000);
 
     }
 
@@ -431,7 +440,7 @@ function initOptions() {
                 if (request.action == 'getCourseThumbsResponse') {
 
                     var thumbList = $('#saved-thumb-list');
-                    thumbList.html('');
+                    thumbList.html('').attr('data-list-init', '1');
 
                     if (!request.data.length) {
                         thumbList.html('None');

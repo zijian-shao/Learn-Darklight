@@ -5,7 +5,7 @@
 function installWelcome(details) {
     if (details.reason === 'install') {
         browser.tabs.create({
-            url: browser.runtime.getURL('') + 'html/options.html'
+            'url': browser.runtime.getURL('/html/options.html?welcome=show')
         });
     }
 }
@@ -90,6 +90,10 @@ function initBackground() {
      */
     console.log('Welcome to Learn Darklight!');
     browser.runtime.onInstalled.addListener(installWelcome);
+    browser.runtime.setUninstallURL("https://www.zijianshao.com/dlight/uninstall/?platform=firefox", function () {
+        if (chrome.runtime.lastError) {
+        }
+    });
 
     var version = getOptionVersion();
     var configs = getOptionListDefault();

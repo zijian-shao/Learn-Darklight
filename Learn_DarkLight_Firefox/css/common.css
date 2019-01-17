@@ -319,11 +319,35 @@ i.arrow.down {
     padding-bottom: 1.0rem !important;
 }
 
+.d2l-enrollment-card-image-container {
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.d2l-enrollment-card-image-container.shown {
+    opacity: 1;
+}
+
+d2l-all-courses-unified-content .d2l-enrollment-card-image-container {
+    opacity: 1;
+}
+
 .darklight-course-thumb {
     background-color: transparent;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+d2l-card.d2l-enrollment-card {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+d2l-card.d2l-enrollment-card .d2l-card-content {
+    background: #fff;
 }
 
 .d2l-homepage d2l-card .d2l-card-footer {
