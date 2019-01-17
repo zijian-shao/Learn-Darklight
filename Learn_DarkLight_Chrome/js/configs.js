@@ -22,7 +22,7 @@ function getOptionListDefault() {
         'GLB_PopupAccessForWaterloo': true,
         'GLB_PopupAccessForLaurier': false,
         'HOME_AutoHideSysAlert': true,
-        'HOME_HideCheckMySys': false,
+        'HOME_HideCheckMySys': true,
         'HOME_AddCalendar': true,
         'HOME_HidePrivacy': true,
         'HOME_HideMetaTerm': false,

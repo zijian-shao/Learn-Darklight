@@ -1564,7 +1564,8 @@ d2l-image-tile-base.d2l-image-tile .d2l-course-image-tile {
     color: #ddd;
 }
 
-d2l-enrollment-card d2l-card {
+d2l-enrollment-card d2l-card,
+d2l-card.d2l-enrollment-card .d2l-card-content {
     background: #424a56 !important;
     border: none !important;
 }
@@ -1583,8 +1584,8 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
     background: #09b1b9 !important;
 }
 
-.darklight-course-thumb {
-    opacity: 0.8;
+.d2l-enrollment-card-image-container.shown {
+    opacity: 0.7 !important;
 }
 
 .darklight-course-thumb img {

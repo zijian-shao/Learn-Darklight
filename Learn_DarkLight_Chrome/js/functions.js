@@ -103,6 +103,16 @@ function isOnScreen(element) {
     return true;
 }
 
+function detectExtConflict() {
+
+    if ($('#darklight-extension').length) {
+        alert("You have multiple versions of Learn Darklight installed. Please disable one of them to avoid unexpected behaviors.");
+    } else {
+        $('<div id="darklight-extension"></div>').appendTo('body');
+    }
+
+}
+
 function addBackToTopButton() {
     function _addBackToTopButton() {
         if ($(window).scrollTop() < 100)
@@ -113,7 +123,7 @@ function addBackToTopButton() {
 
     $('<div class="darklight-back-to-top darklight-back-to-top-hidden" id="darklight-back-to-top"><i class="arrow up"></i></div>').on('click', function (e) {
         e.preventDefault();
-        scrollToUtil(0, 400);
+        scrollToUtil(0, 300);
     }).appendTo('body');
 
     _addBackToTopButton();
@@ -553,7 +563,7 @@ function homepageFunc() {
 
     // course tile thumb
     if (options.COURSE_CustomThumb) {
-        injectCSS('.d2l-enrollment-card-image-container{background-color:rgba(0,0,0,0.02)} .shown.d2l-course-image{opacity:0}', 'body', 'text');
+        injectCSS('.shown.d2l-course-image{opacity:0}.d2l-enrollment-card-image-container{opacity:0}', 'body', 'text');
     }
 }
 
@@ -697,6 +707,8 @@ function customCourseThumbs(courseWidget) {
         });
 
         injectCSS('.shown.d2l-course-image{opacity:1}', 'body', 'text');
+        $('.darklight-course-thumb').addClass('shown');
+
     }
 
     else {
@@ -737,6 +749,9 @@ function courseDirectToContent(courseWidget) {
 }
 
 function init() {
+
+    // conflict detect
+    detectExtConflict();
 
     // back to top button
     if (options.GLB_BackToTopButton) {

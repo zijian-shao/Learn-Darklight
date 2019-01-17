@@ -4,10 +4,9 @@
  */
 function installWelcome(details) {
     if (details.reason === 'install') {
-        // chrome.tabs.create({
-        //     'url': chrome.extension.getURL('/html/welcome.html')
-        // });
-        chrome.runtime.openOptionsPage();
+        chrome.tabs.create({
+            'url': chrome.runtime.getURL('/html/options.html?welcome=show')
+        });
     }
 }
 
@@ -91,6 +90,10 @@ function initBackground() {
      */
     console.log('Welcome to Learn Darklight!');
     chrome.runtime.onInstalled.addListener(installWelcome);
+    chrome.runtime.setUninstallURL("https://www.zijianshao.com/dlight/uninstall/?platform=chrome", function () {
+        if (chrome.runtime.lastError) {
+        }
+    });
 
     var version = getOptionVersion();
     var configs = getOptionListDefault();
@@ -305,6 +308,7 @@ function initBackground() {
             'url': 'https://github.com/SssWind/Learn-Darklight'
         });
     });
+
 }
 
 initBackground();
