@@ -1,0 +1,76 @@
+{
+  "manifest_version": 2,
+  "name": "Learn Darklight Core",
+  "version": "0.0.1",
+  "author": "Zijian Shao",
+  "background": {
+    "scripts": [
+      "js/configs.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon/icon16.png",
+      "24": "icon/icon24.png",
+      "32": "icon/icon32.png"
+    },
+    "default_title": "Learn Darklight Core"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery.js",
+        "js/configs.js",
+        "js/init.js"
+      ],
+      "css": [
+        "css/common.css",
+        "css/theme.css"
+      ],
+      "matches": [
+        "*://learn.uwaterloo.ca/*",
+        "*://mylearningspace.wlu.ca/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/init_idle.js",
+        "js/functions.js",
+        "js/theme.js"
+      ],
+      "matches": [
+        "*://learn.uwaterloo.ca/*",
+        "*://mylearningspace.wlu.ca/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "description": "Learn Darklight Core is a lite extension that applies a dark theme for Waterloo Learn.",
+  "icons": {
+    "128": "icon/icon128.png",
+    "16": "icon/icon16.png",
+    "48": "icon/icon48.png"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "*://learn.uwaterloo.ca/*",
+    "*://mylearningspace.wlu.ca/*"
+  ],
+  "short_name": "Learn Darklight Core",
+  "web_accessible_resources": [
+    "js/*",
+    "css/*",
+    "icon/*",
+    "img/*"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "learndarklightcore@zijianshao.com",
+      "strict_min_version": "42.0"
+    }
+  }
+}
