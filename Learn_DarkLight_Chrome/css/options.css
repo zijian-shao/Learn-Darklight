@@ -958,6 +958,33 @@ hr {
     font-size: 14px;
 }
 
+.thumb-image-type-container {
+    border-radius: 50px;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 4px;
+}
+
+.thumb-image-type {
+    flex: 1;
+    background: #eee;
+    color: #000;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9em;
+    -webkit-transition: background 0.2s ease, color 0.2s ease;
+    -moz-transition: background 0.2s ease, color 0.2s ease;
+    -ms-transition: background 0.2s ease, color 0.2s ease;
+    -o-transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.thumb-image-type.active {
+    background: #333;
+    color: #fff;
+}
+
 .checkbox-group .checkbox-label {
     line-height: 25px;
     overflow: hidden;
@@ -1484,6 +1511,10 @@ textarea.input-box {
 
 .alert a {
     color: inherit;
+}
+
+.alert-file-size .alert {
+    margin-bottom: 0;
 }
 
 @-webkit-keyframes bounceIn {

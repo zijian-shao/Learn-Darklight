@@ -200,6 +200,37 @@ function initBackground() {
             }, null);
         }
 
+        // get course thumbs one
+        else if (request.action == 'getCourseThumbsOne') {
+
+            getDatabase(function (db) {
+                var tx = db.transaction(['course_thumbs'], 'readonly');
+                var os = tx.objectStore('course_thumbs');
+                var req = os.get(request.data.course_id);
+
+                req.onsuccess = function (event) {
+                    chrome.tabs.sendMessage(sender.tab.id, {
+                        action: 'getCourseThumbsOneResponse',
+                        data: [{
+                            course_id: req.result.course_id,
+                            course_code: req.result.course_code,
+                            thumb_image: req.result.thumb_image
+                        }]
+                    });
+                };
+                req.onerror = function (event) {
+                    chrome.tabs.sendMessage(sender.tab.id, {
+                        action: 'getCourseThumbsOneResponse',
+                        data: {
+                            err_code: 2,
+                            err_msg: event.target.error.name + ': ' + event.target.error.message
+                        }
+                    });
+                };
+
+            }, null);
+        }
+
         // add course thumbs
         else if (request.action == 'addCourseThumbs') {
 
@@ -212,14 +243,56 @@ function initBackground() {
                 req1.onsuccess = function (event) {
 
                     if (req1.result) {
+
                         // found in db
-                        chrome.tabs.sendMessage(sender.tab.id, {
-                            action: 'addCourseThumbsResponse',
-                            data: {
-                                err_code: 1,
-                                err_msg: 'This course ID already exists. Please delete the old one before adding.'
-                            }
-                        });
+                        var conf = confirm("This course ID already exists. Do you want to update the existing record?");
+                        if (conf) {
+                            // update
+                            var req = os.put({
+                                course_id: request.data.course_id,
+                                course_code: request.data.course_code,
+                                thumb_image: request.data.thumb_image
+                            });
+                            req.onsuccess = function (event) {
+                                chrome.tabs.sendMessage(sender.tab.id, {
+                                    action: 'addCourseThumbsResponse',
+                                    data: {
+                                        err_code: 0,
+                                        data: {
+                                            msg: 'Custom Cover Picture Updated',
+                                            popup_class: request.data.popup_class
+                                        }
+                                    }
+                                });
+                            };
+                            req.onerror = function (event) {
+                                chrome.tabs.sendMessage(sender.tab.id, {
+                                    action: 'addCourseThumbsResponse',
+                                    data: {
+                                        err_code: 2,
+                                        err_msg: event.target.error.name + ': ' + event.target.error.message
+                                    }
+                                });
+                            };
+
+                        } else {
+                            // give up replace
+                            chrome.tabs.sendMessage(sender.tab.id, {
+                                action: 'addCourseThumbsResponse',
+                                // data: {
+                                //     err_code: 1,
+                                //     err_msg: 'Operation canceled. The existing record was not affected.'
+                                // }
+                                data: {
+                                    err_code: 0,
+                                    data: {
+                                        msg: 'Operation canceled. The existing record was not affected.',
+                                        popup_class: request.data.popup_class
+                                    }
+                                }
+                            });
+                        }
+
                     }
 
                     else {

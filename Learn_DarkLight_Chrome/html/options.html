@@ -122,12 +122,15 @@
                                    data-option-type="switch">
                             <label for="opt-general-1-0"></label>
                         </div>
-                        <label for="opt-general-1-0" class="checkbox-label">Add "Back to top" button</label>
+                        <label for="opt-general-1-0" class="checkbox-label">Add back-to-top button to bottom right
+                            corner</label>
                         <a class="option-tip-toggle">?</a>
                         <div class="option-tip hidden">
                             <p>Add "Back to top" button to each page. Click the button to go back to the top.</p>
                         </div>
                     </div>
+
+                    <hr>
 
                     <!-- Fixed nav bar-->
                     <div class="option-group checkbox-group">
@@ -140,6 +143,21 @@
                         <a class="option-tip-toggle">?</a>
                         <div class="option-tip hidden">
                             <p>Fix the navigation bar at the top if it is not visible on the screen.</p>
+                        </div>
+                    </div>
+
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-2" data-option-name="GLB_BackToTopButtonNavbar"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-2"></label>
+                        </div>
+                        <label for="opt-general-1-2" class="checkbox-label">Add back-to-top button to fixed navigation
+                            bar</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Click the right side of the navigation bar to scroll to top of the page. This function is
+                                only valid when "Auto fix navigation bar" is enabled.</p>
                         </div>
                     </div>
 
@@ -345,13 +363,8 @@
                 <!-- Add thumb -->
                 <div class="group-title">Add Custom Cover Picture</div>
                 <div class="group-content">
-                    <a href="#" class="btn btn-primary" id="add-course-thumbnail">+ Add New</a>
+                    <a href="#" class="btn btn-primary" id="add-course-thumbnail" disabled="">+ Add New</a>
                     <div class="popup-template">
-                        <div class="alert alert-info alert-file-size hidden">
-                            File size exceeds recommended value. Large image may affect extension performance. <br>
-                            You may visit <a href="https://imageresize.org" target="_blank">ImageResize</a> or <a
-                                href="https://tinypng.com" target="_blank">TinyPNG</a> to crop & compress images.
-                        </div>
                         <div class="row">
                             <div class="width-50 pull-left">
                                 <div class="row margin-bottom-10">
@@ -368,14 +381,36 @@
                                                class="input-box block width-90 course-code">
                                     </div>
                                 </div>
+
                                 <div class="row margin-bottom-10">
-                                    <div class="width-33 pull-left uppercase strong">Cover Picture</div>
+                                    <div class="width-33 pull-left uppercase strong">Picture Type</div>
                                     <div class="width-66 pull-left">
-                                        <label class="input-file-label block width-90">
-                                            <div class="input-file-name">Choose an image...</div>
-                                            <input class="input-file thumb-image-file" id="thumb-image-file" type="file"
-                                                   accept="image/*">
-                                        </label>
+                                        <div class="thumb-image-type-container width-90">
+                                            <div class="thumb-image-type thumb-image-type-1 active" data-thumb-type="1">
+                                                Image URL
+                                            </div>
+                                            <div class="thumb-image-type thumb-image-type-0" data-thumb-type="0">
+                                                Upload Image
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row margin-bottom-10">
+                                    <div class="width-33 pull-left uppercase strong">Picture File</div>
+                                    <div class="width-66 pull-left">
+                                        <div class="thumb-image-type-tab thumb-image-type-tab-1">
+                                            <input type="text" minlength="10" maxlength="255"
+                                                   placeholder="eg. https://uw.com/logo.jpg"
+                                                   class="input-box block width-90 thumb-image-url">
+                                        </div>
+                                        <div class="thumb-image-type-tab thumb-image-type-tab-0 hidden">
+                                            <label class="input-file-label block width-90" for="thumb-image-file">
+                                                <div class="input-file-name">Choose an image...</div>
+                                                <input class="input-file thumb-image-file" id="thumb-image-file"
+                                                       type="file" accept="image/*">
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -385,10 +420,15 @@
                                     </p>
                                     <p><strong>2.</strong> Course name is only used to distinguish between different
                                         courses in options page.</p>
-                                    <p><strong>3.</strong> Recommended resolution: 1200x300. Recommended file size: less
-                                        than 200KB.</p>
+                                    <p class="thumb-image-instr thumb-image-instr-1"><strong>3.</strong> Image
+                                        served over a secure connection is recommended.</p>
+                                    <p class="thumb-image-instr thumb-image-instr-0 hidden"><strong>3.</strong>
+                                        Recommended resolution: 1200x300. Recommended file size: less than 200KB.</p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row alert-file-size hidden">
+                            <div class="alert alert-info"></div>
                         </div>
                         <div class="row course-thumb-preview hidden">
                             <hr>
@@ -725,7 +765,8 @@
     <p>This extension is designed to enhance your experience with Waterloo Learn and Laurier MyLearningSpace.</p>
     <p><strong>For various reasons, some of the options are disabled by default. It is recommended that you browse
         through all the options and enable them according to your needs.</strong></p>
-    <p>If you have any questions regarding this extension, please feel free to let me know. See "About" section below.</p>
+    <p>If you have any questions regarding this extension, please feel free to let me know. See "About" section
+        below.</p>
     <div class="popup-btn-group">
         <a href="#" class="popup-btn popup-btn-black">Ok, got it</a>
     </div>
