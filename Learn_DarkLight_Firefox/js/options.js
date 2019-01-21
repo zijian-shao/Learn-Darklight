@@ -13,6 +13,7 @@ function initOptions() {
         window.clearTimeout(timeoutHandle);
         timeoutHandle = setTimeout(function () {
             tst.addClass('darklight-toast-hidden');
+            tst.html('');
         }, 2000);
     }
 
@@ -21,7 +22,7 @@ function initOptions() {
         var rnd = Math.floor(Math.random() * 90000) + 10000;
         var content2;
         if (type === 1)
-            content2 = content;
+            content2 = content.clone();
         else
             content2 = content.next('.popup-template').first().children().clone();
         if (extraClass === undefined) extraClass = '';
@@ -118,6 +119,7 @@ function initOptions() {
                 if (typeof thumbList.attr('data-list-init') === typeof undefined) {
                     refreshThumbList();
                 } else {
+                    $('#add-course-thumbnail').removeAttr('disabled');
                     clearInterval(interval);
                 }
             }, 500);
@@ -138,6 +140,10 @@ function initOptions() {
     }
 
     function onOptionChange(elem) {
+
+        if (typeof elem.attr('data-option-type') === typeof undefined)
+            return;
+
         var inputType = elem.attr('type');
         var optType = elem.attr('data-option-type');
         var optName = elem.attr('data-option-name');
@@ -318,6 +324,10 @@ function initOptions() {
         // course thumbs
         $('#add-course-thumbnail').on('click', function (e) {
             e.preventDefault();
+            if (typeof $(this).attr('disabled') !== typeof undefined) {
+                alert('IndexedDB has not been initialized yet. Please wait.');
+                return;
+            }
             var popupCls = initPopup('Add Custom Cover Picture', $(this), 'popup-wide');
             var popup = $('.' + popupCls);
             var reader = new FileReader(),
@@ -325,12 +335,66 @@ function initOptions() {
                 imgR = popup.find('.cthumb-prev-2'),
                 prevBlk = popup.find('.course-thumb-preview'),
                 fileNm = popup.find('.input-file-name'),
-                container = popup.find('.popup-content');
+                container = popup.find('.popup-content'),
+                alertBlock = container.find('.alert-file-size'),
+                alertContent = alertBlock.find('.alert');
             var thumbBase64 = '';
+
+            // type
+            popup.find('.thumb-image-type').on('click', function (e) {
+                e.preventDefault();
+
+                var type = $(this).attr('data-thumb-type');
+
+                if (type == '0') {
+                    popup.find('.thumb-image-file').trigger('change');
+                } else if (type == '1') {
+                    popup.find('.thumb-image-url').trigger('blur');
+                }
+
+                popup.find('.thumb-image-type').removeClass('active');
+                $(this).addClass('active');
+
+                popup.find('.thumb-image-type-tab').addClass('hidden');
+                popup.find('.thumb-image-type-tab-' + type).removeClass('hidden');
+
+                popup.find('.thumb-image-instr').addClass('hidden');
+                popup.find('.thumb-image-instr-' + type).removeClass('hidden');
+            });
+            // url
+            popup.find('.thumb-image-url').on('blur', function () {
+
+                alertBlock.addClass('hidden');
+
+                $(this).val($(this).val().trim());
+                var url = $(this).val();
+                if (url.trim().match(/^https:\/\//) || url.trim().match(/^http:\/\//)) {
+                    imgL.css('background-image', 'url("' + url + '")');
+                    imgR.css('background-image', 'url("' + url + '")');
+                    prevBlk.removeClass('hidden');
+                    thumbBase64 = url;
+                    if (url.trim().match(/^http:\/\//)) {
+                        alertContent
+                            .html('It\'s recommended to use image served over a secure connection, ' +
+                                'i.e. its URL starts with "https://".<br>' +
+                                'Otherwise, insecure content might be blocked by some browsers.');
+                        alertBlock.removeClass('hidden');
+                    }
+                } else {
+                    if (url != '') {
+                        alertContent.html('Please enter a valid URL.');
+                        alertBlock.removeClass('hidden');
+                    }
+                    imgL.css('background-image', '');
+                    imgR.css('background-image', '');
+                    prevBlk.addClass('hidden');
+                    thumbBase64 = '';
+                }
+            });
             // file
             popup.find('.thumb-image-file').on('change', function () {
 
-                container.find('.alert-file-size').addClass('hidden');
+                alertBlock.addClass('hidden');
                 thumbBase64 = '';
                 fileNm.text('Choose an image...');
                 imgL.css('background-image', '');
@@ -339,7 +403,10 @@ function initOptions() {
 
                 if (this.files && this.files[0]) {
                     if (this.files[0].size > 200 * 1024) {
-                        container.find('.alert-file-size').removeClass('hidden');
+                        alertContent.html('File size exceeds recommended value. Large image affects extension performance. <br>' +
+                            'You may visit <a href="https://imageresize.org" target="_blank">ImageResize</a> or <a ' +
+                            'href="https://tinypng.com" target="_blank">TinyPNG</a> to crop & compress images.');
+                        alertBlock.removeClass('hidden');
                     }
                     fileNm.text('File: ' + this.files[0].name);
                     reader.onload = function (e) {
@@ -365,15 +432,16 @@ function initOptions() {
                     courseCode = popup.find('.course-code').val();
 
                 if (!courseID.match(/^\d+$/)) {
-                    errMsg += 'Course ID should be an integer.\n';
+                    errMsg += '- [Course ID] should be an integer.\n';
                 }
                 if (courseCode.length === 0) {
-                    errMsg += 'Course Code cannot be empty.\n';
+                    errMsg += '- [Course Name] cannot be empty.\n';
                 }
                 if (thumbBase64.length === 0) {
-                    errMsg += 'Image file cannot be empty.\n';
+                    errMsg += '- Please enter a valid image URL or select an image file.\n';
                 }
                 if (errMsg.length !== 0) {
+                    errMsg = 'Failed to add custom cover picture:\n' + errMsg;
                     alert(errMsg);
                     return;
                 }

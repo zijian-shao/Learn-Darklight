@@ -1,4 +1,4 @@
-var baseURL, currURL, options, configs, themeConfigs;
+var baseURL, currURL, currURLHost, options, configs, themeConfigs;
 
 function injectCSS(src, tag, type) {
     var style;
@@ -77,14 +77,22 @@ function initDarklight() {
 
         // course thumbs
         if (options.COURSE_CustomThumb) {
-            if (currURL.match(/\/d2l\/home$/) || currURL.match(/\/d2l\/home\/\d+$/)) {
+            if (currURLHost.match(/\/d2l\/home$/) || currURLHost.match(/\/d2l\/home\/\d+$/)) {
+
+                var act = '';
+                if (currURLHost.match(/\/d2l\/home$/))
+                    act = 'getCourseThumbsResponse';
+                else
+                    act = 'getCourseThumbsOneResponse';
+
                 browser.runtime.onMessage.addListener(
                     function (request, sender, sendResponse) {
-                        if (request.action == 'getCourseThumbsResponse') {
+
+                        if (request.action == act) {
                             var style = '';
                             request.data.forEach(function (item, index) {
                                 style += '.darklight-course-thumb-' + item.course_id + ' {';
-                                style += 'background-image: url(' + item.thumb_image + ');';
+                                style += 'background-image: url("' + item.thumb_image + '");';
                                 style += '}';
                                 style += '.darklight-course-thumb-' + item.course_id + ' img {';
                                 style += 'opacity: 0 !important;';
@@ -99,13 +107,25 @@ function initDarklight() {
                     }
                 );
 
-                browser.runtime.sendMessage({action: 'getCourseThumbs'});
+                if (currURLHost.match(/\/d2l\/home$/)) {
+                    browser.runtime.sendMessage({action: 'getCourseThumbs'});
+                } else {
+                    var courseID = currURLHost.match(/\/d2l\/home\/\d+$/)[0].split('/')[3];
+                    browser.runtime.sendMessage({
+                        action: 'getCourseThumbsOne',
+                        data: {
+                            course_id: courseID
+                        }
+                    });
+                }
+
             }
         }
     }
 
     baseURL = browser.runtime.getURL('');
     currURL = window.location.href;
+    currURLHost = window.location.href.split('#')[0].split('?')[0];
     configs = getOptionListDefault();
 
     browser.storage.sync.get(configs, function (e) {

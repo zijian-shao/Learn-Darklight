@@ -14,6 +14,7 @@ function getOptionListDefault() {
         'GLB_ThemeID': 0,
         'GLB_FixNavigation': true,
         'GLB_BackToTopButton': true,
+        'GLB_BackToTopButtonNavbar': true,
         'GLB_EnableCustomStyle': false,
         'GLB_CustomCSS': '',
         'GLB_CustomJS': '',

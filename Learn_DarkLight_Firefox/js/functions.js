@@ -132,6 +132,29 @@ function addBackToTopButton() {
     });
 }
 
+function addBackToTopButtonNavbar() {
+
+    function _addBackToTopButton() {
+        if ($(window).scrollTop() < 100)
+            $('#darklight-navbar-back-to-top').addClass('darklight-navbar-back-to-top-hidden').delay(200);
+        else
+            $('#darklight-navbar-back-to-top').removeClass('darklight-navbar-back-to-top-hidden');
+    }
+
+    $('<div class="darklight-navbar-back-to-top" id="darklight-navbar-back-to-top">' +
+        '<a href="#"><i class="arrow up"></i></a></div>')
+        .on('click', function (e) {
+            e.preventDefault();
+            scrollToUtil(0, 300);
+        })
+        .appendTo('d2l-navigation d2l-navigation-bottom-bar .d2l-navigation-centerer .d2l-navigation-gutters .d2l-navigation-s-main-wrapper');
+
+    _addBackToTopButton();
+    $(window).on('scroll', function () {
+        _addBackToTopButton();
+    });
+}
+
 function fixNavigation() {
     function _fixNavigation() {
 
@@ -657,7 +680,8 @@ function homepageCalendar(courseWidget) {
                                     var currYear = (new Date()).getFullYear();
 
                                     if (!time.match(/\d+:\d+ [APM]{2}/g)) {
-                                        timestamp = new Date(month + ' ' + day + ', ' + currYear + ' 23:59:59').getTime() / 1000;
+                                        // 'all day' events have highest priority
+                                        timestamp = new Date(month + ' ' + day + ', ' + currYear + ' 00:00:00').getTime() / 1000;
                                     } else {
                                         timestamp = new Date(month + ' ' + day + ', ' + currYear + ' ' + time).getTime() / 1000;
                                     }
@@ -758,6 +782,10 @@ function init() {
         addBackToTopButton();
     }
 
+    if (options.GLB_FixNavigation && options.GLB_BackToTopButtonNavbar) {
+        addBackToTopButtonNavbar();
+    }
+
     // fix navigation
     if (options.GLB_FixNavigation) {
         fixNavigation();
@@ -779,12 +807,12 @@ function init() {
     }
 
     // homepage
-    if (currURL.match(/\/d2l\/home$/)) {
+    if (currURLHost.match(/\/d2l\/home$/)) {
         homepageFunc();
     }
 
     // course home
-    if (currURL.match(/\/d2l\/home\/\d+$/)) {
+    if (currURLHost.match(/\/d2l\/home\/\d+$/)) {
         customCourseThumbs();
     }
 

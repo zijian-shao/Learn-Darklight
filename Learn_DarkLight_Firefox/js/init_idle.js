@@ -127,7 +127,8 @@ function initDarklightIdle() {
 
     // js
     var jsText = 'var baseURL = "' + baseURL + '";';
-    jsText += 'var currURL = "' + window.location.href + '";';
+    jsText += 'var currURL = "' + currURL + '";';
+    jsText += 'var currURLHost = "' + currURLHost + '";';
     jsText += 'var options = ' + JSON.stringify(options) + ';';
     jsText += 'var themeConfig = ' + JSON.stringify(themeConfigs) + ';';
     var params = document.createElement("script");
