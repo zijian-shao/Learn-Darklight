@@ -19,13 +19,74 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     margin-top: 20px;
 }
 
+.daylight .d2l-widget-header {
+    margin: -15px -20px 10px;
+    padding: 10px 20px;
+    background: #333;
+    color: #ddd;
+    border-radius: 5px 5px 0 0;
+    text-decoration-color: #ddd;
+}
+
 .daylight .d2l-widget-header .d2l-heading {
     font-size: 16px !important;
     line-height: 25px !important;
+    font-weight: normal !important;
+    color: #ddd;
+}
+
+.d2l-widget-header d2l-dropdown button.d2l-button-icon {
+    width: 25px !important;
+    min-width: 25px !important;
+    height: 25px !important;
+    min-height: 25px !important;
+    margin-top: 1px !important;
+    margin-bottom: -1px !important;
+    margin-left: 2px !important;
+    padding: 0 !important;
+}
+
+.d2l-widget-header d2l-dropdown button.d2l-button-icon:hover,
+.d2l-widget-header d2l-dropdown button.d2l-button-icon:focus {
+    border: 1px solid #666 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.d2l-widget-header d2l-dropdown button.d2l-button-icon:hover,
+.d2l-widget-header d2l-dropdown button.d2l-button-icon:focus,
+.d2l-widget-header d2l-dropdown button.d2l-button-icon,
+.d2l-widget-header d2l-dropdown-header .d2l-button-icon-hover button.d2l-button-icon,
+.d2l-widget-header d2l-dropdown .d2l-button-icon-focus button.d2l-button-icon {
+    background: none !important;
 }
 
 .daylight .d2l-widget-content {
     padding-bottom: 10px;
+}
+
+.d2l-tile {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+d2l-dropdown-menu .d2l-dropdown-content-top,
+d2l-dropdown-menu .d2l-dropdown-content-bottom {
+    width: 100%;
+}
+
+d2l-dropdown-menu .d2l-dropdown-content-width > div {
+    display: block !important;
+    float: left !important;
+}
+
+d2l-dropdown-menu .d2l-dropdown-content-width > div:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 /* navbar */
@@ -76,6 +137,19 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 
 .d2l-navigation-s-has-branding .d2l-navigation-s-main {
     border: none;
+}
+
+d2l-navigation-button .d2l-navigation-button-notification-indicator.d2l-navigation-button-notification-icon {
+    top: calc(-50% + 4px) !important;
+}
+
+d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-navigation-button-notification-icon {
+    width: 8px !important;
+    height: 8px !important;
+}
+
+.d2l-navigation-s-main-wrapper {
+    height: calc(1rem + 35px);
 }
 
 /* homepage */
@@ -190,16 +264,29 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 }
 
 /* homepage calendar */
+.darklight-homepage-calendar-widget {
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.darklight-homepage-calendar-widget .d2l-widget-header {
+    margin: 0;
+}
+
+.darklight-homepage-calendar-widget .d2l-widget-header .d2l-heading {
+    color: #ddd !important;
+}
+
 .darklight-homepage-calendar-empty {
-    padding: 10px 0 0 !important;
+    /*padding: 10px 0 0 !important;*/
 }
 
 .darklight-homepage-calendar-loading {
-    padding: 20px 0 10px;
+    /*padding: 20px 0 10px;*/
 }
 
 .darklight-homepage-calendar-item {
-    padding: 20px 0;
+    /*padding: 20px 0;*/
     -webkit-transition: padding 0.2s ease, background 0.2s ease;
     -moz-transition: padding 0.2s ease, background 0.2s ease;
     -ms-transition: padding 0.2s ease, background 0.2s ease;
@@ -208,7 +295,7 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 }
 
 .darklight-homepage-calendar-item:hover {
-    padding-left: 15px;
+    /*padding-left: 15px;*/
 }
 
 .darklight-homepage-calendar-content .tag {
