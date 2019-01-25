@@ -430,15 +430,43 @@ input[type="number"].d2l-input.d2l-input-search {
 }
 
 .d2l-contextmenu-ph, .dcm.dcm_handle.bsi-button-menu {
-    -webkit-filter: grayscale(100%) brightness(200%);
-    filter: grayscale(100%) brightness(200%);
+    /*-webkit-filter: grayscale(100%) brightness(200%);*/
+    /*filter: grayscale(100%) brightness(200%);*/
 }
 
 .d2l-contextmenu-ph:focus, .d2l-contextmenu-ph:hover, .dcm.dcm_handle.bsi-button-menu:focus, .dcm.dcm_handle.bsi-button-menu:hover,
 .d2l-contextmenu-ph.d2l-contextmenu-opener-open, .dcm.dcm_handle.d2l-contextmenu-opener-open {
-    border-color: rgba(255, 255, 255, 0.5);
-    -webkit-filter: grayscale(100%) brightness(300%);
-    filter: grayscale(100%) brightness(300%);
+    /*border-color: rgba(255, 255, 255, 0.5);*/
+    /*-webkit-filter: grayscale(100%) brightness(300%);*/
+    /*filter: grayscale(100%) brightness(300%);*/
+}
+
+d2l-dropdown button.d2l-button-icon {
+    width: 25px !important;
+    min-width: 25px !important;
+    height: 25px !important;
+    min-height: 25px !important;
+    margin-top: 1px !important;
+    margin-bottom: -1px !important;
+    margin-left: 2px !important;
+    padding: 0 !important;
+    opacity: 0.8;
+}
+
+d2l-dropdown button.d2l-button-icon:hover,
+d2l-dropdown button.d2l-button-icon:focus {
+    border: 1px solid #999 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+d2l-dropdown button.d2l-button-icon:hover,
+d2l-dropdown button.d2l-button-icon:focus,
+d2l-dropdown button.d2l-button-icon,
+d2l-dropdown .d2l-button-icon-hover button.d2l-button-icon,
+d2l-dropdown .d2l-button-icon-focus button.d2l-button-icon {
+    background: none !important;
 }
 
 .daylight .d2l-widget-header .d2l-heading {
@@ -577,17 +605,21 @@ input[type="number"].d2l-input.d2l-input-search {
     border: none;
 }
 
-.d2l-dropdown-menu-0 {
-    color: #ddd;
+d2l-dropdown-menu {
+    color: #ddd !important;
 }
 
-.d2l-dropdown-menu-0 .d2l-dropdown-content-width.d2l-dropdown-menu,
-.d2l-dropdown-menu-0 .d2l-dropdown-content-pointer.d2l-dropdown-menu > div.d2l-dropdown-menu {
-    background: #323841;
-    border-color: #323841;
-    -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .4);
-    -moz-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .4);
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .4);
+d2l-dropdown-menu .d2l-dropdown-content-width.d2l-dropdown-menu,
+d2l-dropdown-menu .d2l-dropdown-content-pointer.d2l-dropdown-menu > div.d2l-dropdown-menu {
+    background: #323841 !important;
+    border-color: #323841 !important;
+    -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .4) !important;
+    -moz-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .4) !important;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .4) !important;
+}
+
+d2l-dropdown-menu d2l-menu-item-separator {
+    display: none;
 }
 
 d2l-menu-item, d2l-menu-item-link {
@@ -680,7 +712,7 @@ d2l-menu-item, d2l-menu-item-link {
     background: none !important;
 }
 
-.d2l-navigation-s-header, d2l-navigation-header {
+.d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header {
     border-bottom: 2px solid #09b1b9;
 }
 
@@ -688,7 +720,7 @@ d2l-menu-item, d2l-menu-item-link {
     height: calc(1rem + 35px);
 }
 
-.d2l-navigation-s-main, d2l-navigation-bottom-bar {
+.d2l-navigation-s-main, d2l-navigation-bottom-bar, d2l-navigation-main-footer {
     border: none !important;
     background: #282d34 !important;
 }
@@ -739,12 +771,35 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     color: #09b1b9;
 }
 
+.d2l-navigation-button {
+    color: #999 !important;
+}
+
+.d2l-navigation-button:hover,
+.d2l-navigation-button:focus,
+.d2l-navigation-button:hover > *,
+.d2l-navigation-button:focus > *,
+.d2l-navigation-button:hover > * *,
+.d2l-navigation-button:focus > * * {
+    color: #09b1b9 !important;
+}
+
 .d2l-navigation-s-highlight-bar {
     background-color: #09b1b9;
 }
 
 .d2l-navigation-s-button-highlight[data-active] .d2l-navigation-s-highlight-bar {
     background-color: #09b1b9;
+}
+
+.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link,
+.d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link {
+    background: #09b1b9 !important;
+}
+
+.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button,
+.d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button {
+    background: #09b1b9 !important;
 }
 
 .d2l-navigation-s-band-color, d2l-navigation-band {

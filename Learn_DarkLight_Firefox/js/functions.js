@@ -147,7 +147,7 @@ function addBackToTopButtonNavbar() {
             e.preventDefault();
             scrollToUtil(0, 300);
         })
-        .appendTo('d2l-navigation d2l-navigation-bottom-bar .d2l-navigation-centerer .d2l-navigation-gutters .d2l-navigation-s-main-wrapper');
+        .appendTo('d2l-navigation d2l-navigation-main-footer .d2l-navigation-centerer .d2l-navigation-gutters .d2l-navigation-s-main-wrapper');
 
     _addBackToTopButton();
     $(window).on('scroll', function () {
@@ -178,10 +178,10 @@ function fixNavigation() {
         }
     }
 
-    var nav = $('.d2l-navigation-s-main, d2l-navigation-bottom-bar');
+    var nav = $('d2l-navigation-main-footer');
     var navHeight = nav.outerHeight();
     // var header = $('.d2l-navigation-s-header');
-    var header = $('d2l-navigation-header');
+    var header = $('d2l-navigation-main-header');
     var offset = header.outerHeight();
 
     if (isBrowser('firefox')) {

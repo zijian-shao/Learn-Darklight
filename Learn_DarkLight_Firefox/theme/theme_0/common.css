@@ -60,9 +60,36 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .d2l-contextmenu-ph:focus, .d2l-contextmenu-ph:hover, .dcm.dcm_handle.bsi-button-menu:focus, .dcm.dcm_handle.bsi-button-menu:hover,
 .d2l-contextmenu-ph.d2l-contextmenu-opener-open, .dcm.dcm_handle.d2l-contextmenu-opener-open {
-    border-color: rgba(255, 255, 255, 0.5);
-    -webkit-filter: grayscale(100%) brightness(200%);
-    filter: grayscale(100%) brightness(200%);
+    /*border-color: rgba(255, 255, 255, 0.5);*/
+    /*-webkit-filter: grayscale(100%) brightness(200%);*/
+    /*filter: grayscale(100%) brightness(200%);*/
+}
+
+d2l-dropdown button.d2l-button-icon {
+    width: 25px !important;
+    min-width: 25px !important;
+    height: 25px !important;
+    min-height: 25px !important;
+    margin-top: 1px !important;
+    margin-bottom: -1px !important;
+    margin-left: 2px !important;
+    padding: 0 !important;
+}
+
+d2l-dropdown button.d2l-button-icon:hover,
+d2l-dropdown button.d2l-button-icon:focus {
+    border: 1px solid #999 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+d2l-dropdown button.d2l-button-icon:hover,
+d2l-dropdown button.d2l-button-icon:focus,
+d2l-dropdown button.d2l-button-icon,
+d2l-dropdown-header .d2l-button-icon-hover button.d2l-button-icon,
+d2l-dropdown .d2l-button-icon-focus button.d2l-button-icon {
+    background: none !important;
 }
 
 .daylight .d2l-widget-header .d2l-heading {
@@ -129,7 +156,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     background: none !important;
 }
 
-.d2l-navigation-s-header, d2l-navigation-header {
+.d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header {
     border-bottom: 2px solid #FDD54F;
 }
 
@@ -137,7 +164,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     height: calc(1rem + 35px);
 }
 
-.d2l-navigation-s-main, d2l-navigation-bottom-bar {
+.d2l-navigation-s-main, d2l-navigation-bottom-bar, d2l-navigation-main-footer {
     border: none !important;
     background: #333333 !important;
 }
@@ -180,12 +207,35 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     color: #FDD54F;
 }
 
+.d2l-navigation-button {
+    color: #999 !important;
+}
+
+.d2l-navigation-button:hover,
+.d2l-navigation-button:focus,
+.d2l-navigation-button:hover > *,
+.d2l-navigation-button:focus > *,
+.d2l-navigation-button:hover > * *,
+.d2l-navigation-button:focus > * * {
+    color: #FDD54F !important;
+}
+
 .d2l-navigation-s-highlight-bar {
     background-color: #FDD54F;
 }
 
 .d2l-navigation-s-button-highlight[data-active] .d2l-navigation-s-highlight-bar {
     background-color: #FDD54F;
+}
+
+.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link,
+.d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link {
+    background: #FDD54F !important;
+}
+
+.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button,
+.d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button {
+    background: #FDD54F !important;
 }
 
 .d2l-navigation-s-band-color, d2l-navigation-band {

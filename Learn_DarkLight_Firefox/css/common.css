@@ -399,3 +399,8 @@ d2l-card.d2l-enrollment-card .d2l-card-content {
 .d2l-homepage d2l-card .d2l-card-footer {
     display: none !important;
 }
+
+/* navbar */
+.d2l-navigation-s-item *:focus {
+    outline: none;
+}

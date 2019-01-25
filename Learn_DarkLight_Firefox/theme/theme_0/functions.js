@@ -10,12 +10,12 @@ function initTheme() {
         }
 
         // logo - white
-        $('.d2l-navigation-s-logo-link img').attr('src', baseURL + 'img/waterloo_learn_logo.png');
+        $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/waterloo_learn_logo.png');
 
     } else {
 
         // for wlu learn
-        $('.d2l-navigation-s-logo-link img').attr('src', baseURL + 'img/laurier_learn_logo.png');
+        $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/laurier_learn_logo.png');
 
     }
 
