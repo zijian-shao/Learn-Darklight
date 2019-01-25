@@ -10,13 +10,34 @@ function initTheme() {
         }
 
         // logo - white
-        $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/waterloo_learn_logo.png');
+        // $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/waterloo_learn_logo.png');
+
+        var logoImg = $('.d2l-navigation-link-image img');
+        var dlightThemeInterval = setInterval(function () {
+            if (!logoImg.length) {
+                logoImg = $('.d2l-navigation-link-image img');
+            } else if (!logoImg.attr('src').match(/waterloo_learn_logo\.png/)) {
+                logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png');
+            } else {
+                clearInterval(dlightThemeInterval);
+            }
+        }, 200);
 
     } else {
 
         // for wlu learn
-        $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/laurier_learn_logo.png');
+        // $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/laurier_learn_logo.png');
 
+        var logoImg = $('.d2l-navigation-link-image img');
+        var dlightThemeInterval = setInterval(function () {
+            if (!logoImg.length) {
+                logoImg = $('.d2l-navigation-link-image img');
+            } else if (!logoImg.attr('src').match(/laurier_learn_logo\.png/)) {
+                logoImg.attr('src', baseURL + 'img/laurier_learn_logo.png');
+            } else {
+                clearInterval(dlightThemeInterval);
+            }
+        }, 200);
     }
 
     // course home calendar

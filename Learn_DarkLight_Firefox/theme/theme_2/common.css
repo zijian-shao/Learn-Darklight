@@ -441,7 +441,7 @@ input[type="number"].d2l-input.d2l-input-search {
     /*filter: grayscale(100%) brightness(300%);*/
 }
 
-d2l-dropdown button.d2l-button-icon {
+.d2l-widget-header d2l-dropdown button.d2l-button-icon {
     width: 25px !important;
     min-width: 25px !important;
     height: 25px !important;
@@ -453,19 +453,19 @@ d2l-dropdown button.d2l-button-icon {
     opacity: 0.8;
 }
 
-d2l-dropdown button.d2l-button-icon:hover,
-d2l-dropdown button.d2l-button-icon:focus {
+.d2l-widget-header d2l-dropdown button.d2l-button-icon:hover,
+.d2l-widget-header d2l-dropdown button.d2l-button-icon:focus {
     border: 1px solid #999 !important;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
 }
 
-d2l-dropdown button.d2l-button-icon:hover,
-d2l-dropdown button.d2l-button-icon:focus,
-d2l-dropdown button.d2l-button-icon,
-d2l-dropdown .d2l-button-icon-hover button.d2l-button-icon,
-d2l-dropdown .d2l-button-icon-focus button.d2l-button-icon {
+.d2l-widget-header d2l-dropdown button.d2l-button-icon:hover,
+.d2l-widget-header d2l-dropdown button.d2l-button-icon:focus,
+.d2l-widget-header d2l-dropdown button.d2l-button-icon,
+.d2l-widget-header d2l-dropdown .d2l-button-icon-hover button.d2l-button-icon,
+.d2l-widget-header d2l-dropdown .d2l-button-icon-focus button.d2l-button-icon {
     background: none !important;
 }
 
@@ -505,6 +505,35 @@ d2l-dropdown .d2l-button-icon-focus button.d2l-button-icon {
 }
 
 /* dropdown */
+
+d2l-dropdown-menu .d2l-dropdown-content-top,
+d2l-dropdown-menu .d2l-dropdown-content-bottom {
+    width: 100%;
+}
+
+d2l-dropdown-menu .d2l-dropdown-content-width > div {
+    display: block !important;
+    float: left !important;
+}
+
+d2l-dropdown-menu .d2l-dropdown-content-width > div:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+d2l-dropdown button.d2l-button-icon {
+    background: none !important;
+}
+
+d2l-dropdown button.d2l-button-icon:hover,
+d2l-dropdown button.d2l-button-icon:focus {
+    border: 1px solid #999 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
 .daylight .d2l-messagebucket-button-container {
     border: none;
 }
@@ -846,6 +875,15 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
 
 .daylight .d2l-textblock-secondary {
     color: #999;
+}
+
+d2l-navigation-button .d2l-navigation-button-notification-indicator.d2l-navigation-button-notification-icon {
+    top: calc(-50% + 4px) !important;
+}
+
+d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-navigation-button-notification-icon {
+    width: 8px !important;
+    height: 8px !important;
 }
 
 /* homepage */
@@ -1645,6 +1683,10 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
 
 .darklight-course-thumb img {
     filter: none;
+}
+
+#CourseImageBannerPlaceholderId .d2l-course-banner {
+    opacity: 0.6 !important;
 }
 
 /* new course selector */
