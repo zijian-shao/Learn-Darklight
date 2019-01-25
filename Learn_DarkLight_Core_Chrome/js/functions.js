@@ -52,10 +52,10 @@ function fixNavigation() {
         }
     }
 
-    var nav = $('.d2l-navigation-s-main, d2l-navigation-bottom-bar');
+    var nav = $('d2l-navigation-main-footer');
     var navHeight = nav.outerHeight();
     // var header = $('.d2l-navigation-s-header');
-    var header = $('d2l-navigation-header');
+    var header = $('d2l-navigation-main-header');
     var offset = header.outerHeight();
 
     if (isBrowser('firefox')) {
