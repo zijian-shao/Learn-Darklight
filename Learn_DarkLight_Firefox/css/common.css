@@ -96,6 +96,7 @@ i.arrow.down {
     cursor: pointer;
     z-index: 200;
     opacity: 1;
+    border-radius: 5px;
     visibility: visible;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -272,6 +273,11 @@ i.arrow.down {
     padding: 20px 25px;
     border-bottom: 1px dotted #DADBD3;
     overflow: hidden;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .darklight-homepage-calendar-item:last-child {

@@ -1737,7 +1737,7 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
 }
 
 .darklight-homepage-calendar-item:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: #424a56;
 }
 
 .darklight-homepage-calendar-date {
