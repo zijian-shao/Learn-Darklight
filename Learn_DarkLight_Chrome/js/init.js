@@ -1,30 +1,43 @@
-var baseURL, currURL, currURLHost, options, configs, themeConfigs;
+var baseURL, currURL, currURL2, currURLHost, options, configs, themeConfigs;
 
-function injectCSS(src, tag, type) {
+function injectCSS(url, tag, type) {
+
     var style;
+
     if (type === 'text') {
+
         style = $('<style/>');
-        style.text(src);
+
+        style.text(url);
+
     } else {
+
         style = $('<link/>', {
             'rel': 'stylesheet',
             'type': 'text/css',
-            'href': src
+            'href': url
         });
+
     }
-    style.appendTo($(tag));
+
+    $(tag).append(style);
+
 }
 
-function injectJS(src, tag, type) {
+function injectJS(url, tag, type) {
+
     var script = $('<script/>', {
         'type': 'text/javascript'
     });
+
     if (type === 'text') {
-        script.text(src);
+        script.text(url);
     } else {
-        script.attr('src', src);
+        script.attr('src', url);
     }
-    script.appendTo($(tag));
+
+    $(tag).append(script);
+
 }
 
 function isBrowser(name) {
@@ -42,13 +55,17 @@ function isBrowser(name) {
     else if (name == 'edge')
         return !isIE && !!window.StyleMedia;
     else if (name == 'chrome')
-        return !!window.chrome && !!window.chrome.webstore;
+    // return !!window.chrome && !!window.chrome.webstore;
+        return /chrome/.test(navigator.userAgent.toLowerCase());
     else
         return false;
 }
 
 function isWLU() {
-    return currURL.includes('mylearningspace.wlu.ca');
+    if (typeof isWLU.isWLUBool === typeof undefined) {
+        isWLU.isWLUBool = currURL.includes('mylearningspace.wlu.ca');
+    }
+    return isWLU.isWLUBool;
 }
 
 function initDarklight() {
@@ -70,17 +87,19 @@ function initDarklight() {
 
         themeConfigs = getThemeConfigs(options.GLB_ThemeID);
 
-        var cover = document.createElement("div");
-        cover.id = 'darklight-load-overlay';
-        cover.style = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:' + themeConfigs.overlayColor;
-        document.documentElement.appendChild(cover);
+        if (themeConfigs.overlayColor !== 'none') {
+            var cover = document.createElement("div");
+            cover.id = 'darklight-load-overlay';
+            cover.style = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:' + themeConfigs.overlayColor;
+            document.documentElement.appendChild(cover);
+        }
 
         // course thumbs
         if (options.COURSE_CustomThumb) {
-            if (currURLHost.match(/\/d2l\/home$/) || currURLHost.match(/\/d2l\/home\/\d+$/)) {
+            if (currURL2.match(/\/d2l\/home$/) || currURL2.match(/\/d2l\/home\/\d+$/)) {
 
                 var act = '';
-                if (currURLHost.match(/\/d2l\/home$/))
+                if (currURL2.match(/\/d2l\/home$/))
                     act = 'getCourseThumbsResponse';
                 else
                     act = 'getCourseThumbsOneResponse';
@@ -107,10 +126,10 @@ function initDarklight() {
                     }
                 );
 
-                if (currURLHost.match(/\/d2l\/home$/)) {
+                if (currURL2.match(/\/d2l\/home$/)) {
                     chrome.runtime.sendMessage({action: 'getCourseThumbs'});
                 } else {
-                    var courseID = currURLHost.match(/\/d2l\/home\/\d+$/)[0].split('/')[3];
+                    var courseID = currURL2.match(/\/d2l\/home\/\d+$/)[0].split('/')[3];
                     chrome.runtime.sendMessage({
                         action: 'getCourseThumbsOne',
                         data: {
@@ -125,14 +144,14 @@ function initDarklight() {
 
     baseURL = chrome.runtime.getURL('');
     currURL = window.location.href;
-    currURLHost = window.location.href.split('#')[0].split('?')[0];
+    currURL2 = window.location.href.split('#')[0].split('?')[0];
+    currURLHost = window.location.protocol + '//' + window.location.hostname;
     configs = getOptionListDefault();
 
     chrome.storage.sync.get(configs, function (e) {
         options = e;
         init();
     });
-
 
 }
 

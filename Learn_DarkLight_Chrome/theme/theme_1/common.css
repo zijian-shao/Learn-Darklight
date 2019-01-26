@@ -5,11 +5,21 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 #d2l_body, .d2l-body {
-    background: #f6f7f8;
+    /*background: #f6f7f8;*/
 }
 
 .d2l-page-main-padding {
     padding-bottom: 30px;
+}
+
+.d2l-page-main .darklight-waterloo {
+    position: absolute;
+    top: 140px;
+    left: 0;
+    width: 103px;
+    height: 842px;
+    z-index: -1;
+    background: transparent top left no-repeat;
 }
 
 /* widget */
@@ -17,8 +27,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 .daylight .d2l-widget {
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border: 1px solid #D3D9E3;
-    border-bottom: none;
+    border: 1px solid #D3D9E3 !important;
 }
 
 .daylight-widget-demarcation .d2l-widget {
@@ -80,9 +89,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .d2l-tile {
     border-radius: 5px;
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+    /*-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);*/
+    /*-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);*/
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);*/
 }
 
 d2l-dropdown-menu .d2l-dropdown-content-top,
@@ -131,10 +140,10 @@ d2l-dropdown-menu .d2l-dropdown-content-width > div:after {
 
 .d2l-navigation-s-main, d2l-navigation-bottom-bar, d2l-navigation-main-footer {
     border: none !important;
-    background: #333333 !important;
-    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.8) !important;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 d2l-navigation-main-footer a.d2l-navigation-s-link,
@@ -169,6 +178,14 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
     height: calc(1rem + 35px);
 }
 
+.d2l-navigation-shadow-drop-border.d2l-navigation {
+    display: none;
+}
+
+.d2l-navigation-s-shadow-gradient, .d2l-navigation-shadow-gradient {
+    background: none !important;
+}
+
 /* homepage */
 
 .homepage-container .d2l-htmlblock .results {
@@ -188,51 +205,51 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 @media screen and (min-width: 768px) {
 
     .homepage-container > div:not(.homepage-row):not(:last-child), .homepage-row > div:not(:last-child), .homepage-row > div > div:not(:last-child) {
-        margin-right: 3.15464%
+        margin-right: 2.15464%
     }
 
     .homepage-col-1 {
-        width: 4.60825%
+        width: 5.10825%
     }
 
     .homepage-col-2 {
-        width: 13.37113%
+        width: 13.87113%
     }
 
     .homepage-col-3 {
-        width: 22.13402%
+        width: 22.63402%
     }
 
     .homepage-col-4 {
-        width: 30.89691%
+        width: 31.39691%
     }
 
     .homepage-col-5 {
-        width: 39.65979%
+        width: 40.15979%
     }
 
     .homepage-col-6 {
-        width: 48.42268%
+        width: 48.92268%
     }
 
     .homepage-col-7 {
-        width: 57.18557%
+        width: 57.68557%
     }
 
     .homepage-col-8 {
-        width: 65.94845%
+        width: 66.44845%
     }
 
     .homepage-col-9 {
-        width: 74.71134%
+        width: 75.21134%
     }
 
     .homepage-col-10 {
-        width: 83.47423%
+        width: 83.97423%
     }
 
     .homepage-col-11 {
-        width: 92.23711%
+        width: 92.73711%
     }
 
     .homepage-col-12 {
@@ -255,9 +272,9 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 #CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
     border-radius: 5px;
     overflow: hidden;
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
     position: relative;
 }
 
@@ -269,9 +286,9 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
     left: 0;
     right: 0;
     height: 25%;
-    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.05) 100%);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.05) 100%);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.03) 100%);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.03) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.03) 100%);
     z-index: 1;
 }
 
@@ -353,6 +370,10 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 
 .darklight-homepage-calendar-content .tag {
     margin-right: 15px;
+}
+
+.darklight-homepage-calendar-item {
+    padding: 20px;
 }
 
 /* course tile image ani */

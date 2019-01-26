@@ -62,7 +62,7 @@ function getThemeConfigs(id) {
             "name": "Dark Turquoise",
             "author": "Zijian Shao",
             "nightMode": true,
-            "overlayColor": "#282d34"
+            "overlayColor": "#323841"
         },
         "theme_3": {
             "id": 3,
@@ -77,7 +77,7 @@ function getThemeConfigs(id) {
             "name": "Default",
             "author": "D2L",
             "nightMode": false,
-            "overlayColor": "transparent"
+            "overlayColor": "none"
         }
     };
 

@@ -6,24 +6,44 @@ function initTheme() {
             // quiz & survey
             injectCSS('.d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width{min-height:0;}', 'body', 'text');
         } else {
-            $('.d2l-page-main').prepend('<div class="darklight-waterloo" style="background-image: url(' + baseURL + 'img/waterloo_background.png); opacity: 0.2;"></div>');
+            // $('.d2l-page-main').pre  pend('<div class="darklight-waterloo" style="background-image: url(' + baseURL + 'img/waterloo_background.png); opacity: 0.4;"></div>');
         }
 
         // logo - white
-        $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.8);
+        if (isBrowser('firefox')) {
+            var logoImg = $('.d2l-navigation-link-image img');
+            var dlightThemeInterval = setInterval(function () {
+                if (!logoImg.length) {
+                    logoImg = $('.d2l-navigation-link-image img');
+                } else if (!logoImg.attr('src').match(/waterloo_learn_logo\.png/)) {
+                    logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.8);
+                } else {
+                    clearInterval(dlightThemeInterval);
+                }
+            }, 200);
+        } else {
+            $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.8);
+        }
 
     } else {
 
         // for wlu learn (beta)
-        $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/laurier_learn_logo.png').css('opacity', 0.8);
+        if (isBrowser('firefox')) {
+            var logoImg = $('.d2l-navigation-link-image img');
+            var dlightThemeInterval = setInterval(function () {
+                if (!logoImg.length) {
+                    logoImg = $('.d2l-navigation-link-image img');
+                } else if (!logoImg.attr('src').match(/laurier_learn_logo\.png/)) {
+                    logoImg.attr('src', baseURL + 'img/laurier_learn_logo.png').css('opacity', 0.8);
+                } else {
+                    clearInterval(dlightThemeInterval);
+                }
+            }, 200);
+        } else {
+            $('.d2l-navigation-link-image img').attr('src', baseURL + 'img/laurier_learn_logo.png').css('opacity', 0.8);
+        }
 
     }
-
-    // if (currURL.includes('/content/')) {
-    //     var pageHeaderLine = $('.d2l-page-header').next('div').next('div');
-    //     if (pageHeaderLine.text().trim() == '')
-    //         pageHeaderLine.hide();
-    // }
 
     // quiz & survey warning
     if (currURL.match(/\/quizzing\//g)) {
