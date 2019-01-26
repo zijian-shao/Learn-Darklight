@@ -55,7 +55,7 @@ function getThemeConfigs(id) {
             "name": "Bright Daylight",
             "author": "Zijian Shao",
             "nightMode": false,
-            "overlayColor": "#fff"
+            "overlayColor": "#f6f7f8"
         },
         "theme_2": {
             "id": 2,
