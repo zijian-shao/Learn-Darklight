@@ -1,12 +1,21 @@
-/* nav bar */
-.d2l-navigation-s-main {
-    background: #fff;
-}
-
+/* calendar */
 .darklight-homepage-calendar-empty {
     padding: 10px 0 0 !important;
 }
 
 .darklight-homepage-calendar-loading {
     padding: 20px 0 10px;
+}
+
+.darklight-homepage-calendar {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.darklight-homepage-calendar-widget .d2l-widget-header .d2l-heading {
+    font-size: 14px !important;
+}
+
+.darklight-homepage-calendar-item {
+    padding: 20px;
 }

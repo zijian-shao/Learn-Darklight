@@ -116,11 +116,11 @@ body {
 }
 
 #d2l_body, .d2l-body {
-    background: #282d34;
+    background: #323841;
 }
 
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
-    background: #323841;
+    /*background: #323841;*/
     min-height: 842px;
 }
 
@@ -848,6 +848,10 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     border: none !important;
 }
 
+.d2l-navigation-shadow-drop-border.d2l-navigation {
+    display: none;
+}
+
 /* nav mobile */
 .d2l-navigation-s-mobile-menu-mask {
     background: #282d34;
@@ -906,51 +910,51 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 @media screen and (min-width: 768px) {
 
     .homepage-container > div:not(.homepage-row):not(:last-child), .homepage-row > div:not(:last-child), .homepage-row > div > div:not(:last-child) {
-        margin-right: 3.15464%
+        margin-right: 2.15464%
     }
 
     .homepage-col-1 {
-        width: 4.60825%
+        width: 5.10825%
     }
 
     .homepage-col-2 {
-        width: 13.37113%
+        width: 13.87113%
     }
 
     .homepage-col-3 {
-        width: 22.13402%
+        width: 22.63402%
     }
 
     .homepage-col-4 {
-        width: 30.89691%
+        width: 31.39691%
     }
 
     .homepage-col-5 {
-        width: 39.65979%
+        width: 40.15979%
     }
 
     .homepage-col-6 {
-        width: 48.42268%
+        width: 48.92268%
     }
 
     .homepage-col-7 {
-        width: 57.18557%
+        width: 57.68557%
     }
 
     .homepage-col-8 {
-        width: 65.94845%
+        width: 66.44845%
     }
 
     .homepage-col-9 {
-        width: 74.71134%
+        width: 75.21134%
     }
 
     .homepage-col-10 {
-        width: 83.47423%
+        width: 83.97423%
     }
 
     .homepage-col-11 {
-        width: 92.23711%
+        width: 92.73711%
     }
 
     .homepage-col-12 {
@@ -975,8 +979,8 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 }
 
 .d2l-course-banner-container {
-    margin: 0;
-    max-width: none;
+    /*margin: 0;*/
+    /*max-width: none;*/
 }
 
 /* course content */
@@ -1576,6 +1580,10 @@ div[role="alert"] div.d_ma_s {
     color: #09b1b9;
 }
 
+.daylight .d2l-datalist .d2l-textblock-secondary {
+    color: #999;
+}
+
 .d2l-datalist-nesteditem-accordion {
     color: #ddd;
 }
@@ -1687,6 +1695,20 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
 
 #CourseImageBannerPlaceholderId .d2l-course-banner {
     opacity: 0.6 !important;
+}
+
+#CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+}
+
+#CourseImageBannerPlaceholderId .d2l-image-banner-course-name.d2l-image-banner-overlay {
+    background: none;
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#bannerTitle {
+    overflow: visible !important;
 }
 
 /* new course selector */

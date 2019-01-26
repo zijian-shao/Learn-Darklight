@@ -1,43 +1,3 @@
-function injectCSS(url, tag, type) {
-
-    var style;
-
-    if (type === 'text') {
-
-        style = $('<style/>');
-
-        style.text(url);
-
-    } else {
-
-        style = $('<link/>', {
-            'rel': 'stylesheet',
-            'type': 'text/css',
-            'href': url
-        });
-
-    }
-
-    $(tag).append(style);
-
-}
-
-function injectJS(url, tag, type) {
-
-    var script = $('<script/>', {
-        'type': 'text/javascript'
-    });
-
-    if (type === 'text') {
-        script.text(url);
-    } else {
-        script.attr('src', url);
-    }
-
-    $(tag).append(script);
-
-}
-
 function scrollToUtil(pos, time, offset) {
 
     if ($.type(offset) !== 'number')
@@ -141,15 +101,23 @@ function addBackToTopButtonNavbar() {
             $('#darklight-navbar-back-to-top').removeClass('darklight-navbar-back-to-top-hidden');
     }
 
-    $('<div class="darklight-navbar-back-to-top" id="darklight-navbar-back-to-top">' +
-        '<a href="#"><i class="arrow up"></i></a></div>')
-        .on('click', function (e) {
-            e.preventDefault();
-            scrollToUtil(0, 300);
-        })
-        .appendTo('d2l-navigation d2l-navigation-main-footer .d2l-navigation-centerer .d2l-navigation-gutters .d2l-navigation-s-main-wrapper');
+    var navWrapper = undefined;
+    var interval = setInterval(function () {
+        if (typeof navWrapper === typeof undefined || !navWrapper.length) {
+            navWrapper = $('d2l-navigation d2l-navigation-main-footer .d2l-navigation-centerer .d2l-navigation-gutters .d2l-navigation-s-main-wrapper');
+        } else {
+            $('<div class="darklight-navbar-back-to-top" id="darklight-navbar-back-to-top">' +
+                '<a href="#"><i class="arrow up"></i></a></div>')
+                .on('click', function (e) {
+                    e.preventDefault();
+                    scrollToUtil(0, 300);
+                })
+                .appendTo(navWrapper);
+            _addBackToTopButton();
+            clearInterval(interval);
+        }
+    }, 500);
 
-    _addBackToTopButton();
     $(window).on('scroll', function () {
         _addBackToTopButton();
     });
@@ -207,34 +175,6 @@ function fixNavigation() {
             _fixNavigation();
         }
     });
-}
-
-function isWLU() {
-    if (typeof isWLU.isWLUBool === typeof undefined) {
-        isWLU.isWLUBool = currURL.includes('mylearningspace.wlu.ca');
-    }
-    return isWLU.isWLUBool;
-}
-
-function isBrowser(name) {
-    name = name.toLowerCase();
-    if (name == 'opera')
-        return (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-    else if (name == 'firefox')
-        return typeof InstallTrigger !== 'undefined';
-    else if (name == 'safari')
-        return /constructor/i.test(window.HTMLElement) || (function (p) {
-            return p.toString() === "[object SafariRemoteNotification]";
-        })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
-    else if (name == 'ie')
-        return /*@cc_on!@*/false || !!document.documentMode;
-    else if (name == 'edge')
-        return !isIE && !!window.StyleMedia;
-    else if (name == 'chrome')
-    // return !!window.chrome && !!window.chrome.webstore;
-        return /chrome/.test(navigator.userAgent.toLowerCase());
-    else
-        return false;
 }
 
 function resizeContentBtn(page) {
@@ -423,34 +363,39 @@ function listMembersBtn() {
             }
 
             blockPageMsg('Retrieving data - ' + groupNum[counter]);
-            $.get('/d2l/lms/group/group_member_list.d2l?ou=' + ou + '&groupId=' + groupID[counter] + '&d2l_body_type=2', function (data) {
-                var html = $($.parseHTML(data));
-                var table = html.find('.d2l-grid-container .d2l-table.d2l-grid');
-                var names = [];
-                table.find('tr').each(function (idx, elem) {
-                    if (idx > 0) {
-                        var name = $(elem).text().trim();
-                        names.push(name);
-                    }
-                });
-                names = names.join('<br>');
-                finalList['ID_' + groupID[counter]] = {
-                    'group': groupNum[counter],
-                    'names': names
-                };
-                counter++;
-                if (counter >= groupID.length) {
-                    blockPageMsg('Done');
-                    unblockPage();
-                    _showAllGroupMembers();
-                } else {
-                    // wait 100ms till next request (don't wanna blow up the server)
-                    // setTimeout(_getGroupMemberAjax,100);
+            $.ajax({
+                type: 'get',
+                url: currURLHost + '/d2l/lms/group/group_member_list.d2l?ou=' + ou + '&groupId=' + groupID[counter] + '&d2l_body_type=2',
+                success: function (data) {
+                    var html = $($.parseHTML(data));
+                    var table = html.find('.d2l-grid-container .d2l-table.d2l-grid');
+                    var names = [];
+                    table.find('tr').each(function (idx, elem) {
+                        if (idx > 0) {
+                            var name = $(elem).text().trim();
+                            names.push(name);
+                        }
+                    });
+                    names = names.join('<br>');
+                    finalList['ID_' + groupID[counter]] = {
+                        'group': groupNum[counter],
+                        'names': names
+                    };
+                    counter++;
+                    if (counter >= groupID.length) {
+                        blockPageMsg('Done');
+                        unblockPage();
+                        _showAllGroupMembers();
+                    } else {
+                        // wait 100ms till next request (don't wanna blow up the server)
+                        // setTimeout(_getGroupMemberAjax,100);
 
-                    // whatever
-                    _getGroupMemberAjax();
+                        // whatever
+                        _getGroupMemberAjax();
+                    }
                 }
             });
+
         }
 
         _getGroupMemberAjax();
@@ -501,6 +446,14 @@ function homepageFunc() {
             function _waitForCourseLoad(isTabSwitch) {
 
                 var loadSpinner = courseWidget.find('d2l-my-courses d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content div.spinner-container d2l-loading-spinner');
+                var intervalVal = 0, delayVal = 0;
+                if (isBrowser('firefox')) {
+                    intervalVal = 300;
+                    delayVal = 500;
+                } else {
+                    intervalVal = 200;
+                    delayVal = 200;
+                }
 
                 var intervalId = setInterval(function () {
                     if (!loadSpinner.length) {
@@ -527,6 +480,8 @@ function homepageFunc() {
 
                             clearInterval(intervalId);
 
+                            var times = isTabSwitch ? 4 : 1;
+
                             setTimeout(function () {
                                 // calendar
                                 homepageCalendar(courseWidgetTabPanel);
@@ -534,7 +489,7 @@ function homepageFunc() {
                                 customCourseThumbs(courseWidgetTabPanel);
                                 // direct to content
                                 courseDirectToContent(courseWidgetTabPanel);
-                            }, 200);
+                            }, delayVal * times);
 
                             // tab change
                             if (isTabSwitch !== true) {
@@ -545,7 +500,7 @@ function homepageFunc() {
                             }
                         }
                     }
-                }, 200);
+                }, intervalVal);
 
             }
 
@@ -643,73 +598,84 @@ function homepageCalendar(courseWidget) {
     }
 
     function _getCoursePageAjax() {
-        $.get(links[counter], function (data) {
-            var html = $($.parseHTML(data));
-            var calendar = null;
-            var courseCode = html.find('.d2l-navigation-s-link').first().text();
-            courseCode = courseCode.split(' - ');
-            courseCode.pop();
-            courseCode = courseCode.join(' - ');
 
-            // get widget header
-            html.find('.d2l-homepage .d2l-widget .d2l-widget-header').each(function (i, e) {
-                if ($(e).text().match(/Calendar/g)) {
+        if (!links.length) {
+            _displayEvents();
+            return;
+        }
 
-                    // get calendar header
-                    $(e).next('.d2l-widget-content').find('.d2l-collapsepane-header').each(function (i2, e2) {
-                        if ($(e2).text().match(/Upcoming events/g)) {
+        $.ajax({
+            type: 'get',
+            url: currURLHost + links[counter],
+            success: function (data) {
+                var html = $($.parseHTML(data));
+                var calendar = null;
+                var courseCode = html.find('.d2l-navigation-s-link').first().text();
+                courseCode = courseCode.split(' - ');
+                courseCode.pop();
+                courseCode = courseCode.join(' - ');
 
-                            // get calendar list content
-                            calendar = $(e2).next('.d2l-collapsepane-content').find('ul.d2l-datalist');
-                            if (calendar.children('li.d2l-datalist-item').length > 0) {
+                // get widget header
+                html.find('.d2l-homepage .d2l-widget .d2l-widget-header').each(function (i, e) {
+                    if ($(e).text().match(/Calendar/g)) {
 
-                                // if found event
-                                calendar.children('li.d2l-datalist-item').each(function (i3, e3) {
+                        // get calendar header
+                        $(e).next('.d2l-widget-content').find('.d2l-collapsepane-header').each(function (i2, e2) {
+                            if ($(e2).text().match(/Upcoming events/g)) {
 
-                                    var dataContent = $(e3).children('div.d2l-datalist-item-content').first();
-                                    dataContent.find('div.d2l-clear').remove();
+                                // get calendar list content
+                                calendar = $(e2).next('.d2l-collapsepane-content').find('ul.d2l-datalist');
+                                if (calendar.children('li.d2l-datalist-item').length > 0) {
 
-                                    var date = dataContent.children('div').first().children('div').first();
-                                    var month = date.children('div').first().text().trim();
-                                    var day = date.children('div').last().text().trim();
-                                    var time = dataContent.children('div').first().children('div').last().children('span').first().text().trim();
-                                    var title = dataContent.children('div').first().children('div').last().children('div').last().text().trim();
-                                    var link = $(e3).find('#' + $(e3).attr('data-d2l-actionid')).attr('href');
-                                    link = link.substring(0, link.indexOf('#'));
-                                    var timestamp = '';
-                                    var currYear = (new Date()).getFullYear();
+                                    // if found event
+                                    calendar.children('li.d2l-datalist-item').each(function (i3, e3) {
 
-                                    if (!time.match(/\d+:\d+ [APM]{2}/g)) {
-                                        // 'all day' events have highest priority
-                                        timestamp = new Date(month + ' ' + day + ', ' + currYear + ' 00:00:00').getTime() / 1000;
-                                    } else {
-                                        timestamp = new Date(month + ' ' + day + ', ' + currYear + ' ' + time).getTime() / 1000;
-                                    }
+                                        var dataContent = $(e3).children('div.d2l-datalist-item-content').first();
+                                        dataContent.find('div.d2l-clear').remove();
 
-                                    finalList.push({
-                                        'course': courseCode,
-                                        'timestamp': timestamp,
-                                        'month': month,
-                                        'day': day,
-                                        'time': time,
-                                        'title': title,
-                                        'link': link
+                                        var date = dataContent.children('div').first().children('div').first();
+                                        var month = date.children('div').first().text().trim();
+                                        var day = date.children('div').last().text().trim();
+                                        var time = dataContent.children('div').first().children('div').last().children('span').first().text().trim();
+                                        var title = dataContent.children('div').first().children('div').last().children('div').last().text().trim();
+                                        var link = $(e3).find('#' + $(e3).attr('data-d2l-actionid')).attr('href');
+                                        link = link.substring(0, link.indexOf('#'));
+                                        var timestamp = '';
+                                        var currYear = (new Date()).getFullYear();
+
+                                        if (!time.match(/\d+:\d+ [APM]{2}/g)) {
+                                            // 'all day' events have highest priority
+                                            timestamp = new Date(month + ' ' + day + ', ' + currYear + ' 00:00:00').getTime() / 1000;
+                                        } else {
+                                            timestamp = new Date(month + ' ' + day + ', ' + currYear + ' ' + time).getTime() / 1000;
+                                        }
+
+                                        finalList.push({
+                                            'course': courseCode,
+                                            'timestamp': timestamp,
+                                            'month': month,
+                                            'day': day,
+                                            'time': time,
+                                            'title': title,
+                                            'link': link
+                                        });
                                     });
-                                });
 
+                                }
                             }
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
 
-            counter++;
-            if (counter >= links.length) {
-                _displayEvents();
-            } else {
-                _getCoursePageAjax();
+                counter++;
+                if (counter >= links.length) {
+                    _displayEvents();
+                } else {
+                    _getCoursePageAjax();
+                }
             }
         });
+
     }
 
     _getCoursePageAjax();
@@ -759,20 +725,50 @@ function courseDirectToContent(courseWidget) {
     }
     // navbar
     else {
-        setTimeout(function () {
-            var links = $('#courseSelectorId').find('ul.d2l-datalist.vui-list li');
-            links.each(function (idx, elem) {
-                var el = $(elem).find('a.d2l-link.d2l-datalist-item-actioncontrol');
-                var link = el.attr('href');
-                link = link.replace('/d2l/home/', '/d2l/le/content/');
-                link += '/Home';
-                el.attr('href', link);
-            });
+        var courseBtn = undefined;
+        var interval = setInterval(function () {
+            if (typeof courseBtn === typeof undefined || !courseBtn.length) {
+                courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown button');
+            } else {
+                courseBtn.on('click', function () {
+                    var d2lBtn = courseBtn.closest('d2l-navigation-button');
+                    var interval2 = setInterval(function () {
+                        if (d2lBtn.attr('aria-expanded') === 'true') {
+                            var links = $('#courseSelectorId').find('ul.d2l-datalist.vui-list li');
+                            links.each(function (idx, elem) {
+                                var el = $(elem).find('a.d2l-link.d2l-datalist-item-actioncontrol');
+                                var link = el.attr('href');
+                                if (!link.match(/\/content\//)) {
+                                    link = link.replace('/d2l/home/', '/d2l/le/content/');
+                                    link += '/Home';
+                                    el.attr('href', link);
+                                }
+                            });
+                            clearInterval(interval2);
+                        }
+                    }, 200);
+                });
+                clearInterval(interval);
+            }
         }, 500);
     }
 }
 
-function init() {
+function initDarklightFunc() {
+
+    if (!options.GLB_Enabled)
+        return;
+
+    // disable on Waterloo Learn
+    if (!options.GLB_EnableForWaterloo && !isWLU())
+        return;
+
+    // disable on Laurier MLS
+    if (!options.GLB_EnableForLaurier && isWLU())
+        return;
+
+    if (currURL.includes('/content/enforced/'))
+        return;
 
     // conflict detect
     detectExtConflict();
@@ -807,19 +803,22 @@ function init() {
     }
 
     // homepage
-    if (currURLHost.match(/\/d2l\/home$/)) {
+    if (currURL2.match(/\/d2l\/home$/)) {
         homepageFunc();
     }
 
     // course home
-    if (currURLHost.match(/\/d2l\/home\/\d+$/)) {
+    if (currURL2.match(/\/d2l\/home\/\d+$/)) {
         customCourseThumbs();
     }
 
-    $('.d2l-navigation-s-course-menu d2l-dropdown button').on('click', function () {
-        courseDirectToContent();
+    courseDirectToContent();
+
+    // overlay
+    $('#darklight-load-overlay').delay(400).fadeOut(400, function () {
+        $(this).remove();
     });
 
 }
 
-init();
+initDarklightFunc();

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Learn Darklight",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "author": "Zijian Shao",
   "background": {
     "scripts": [
@@ -33,7 +33,8 @@
     },
     {
       "js": [
-        "js/init_idle.js"
+        "js/init_idle.js",
+        "js/functions.js"
       ],
       "matches": [
         "*://learn.uwaterloo.ca/*",
