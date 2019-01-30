@@ -58,6 +58,23 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     border-top-right-radius: 5px;
 }
 
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph {
+    margin-top: 2px;
+    margin-bottom: -2px;
+    margin-left: 6px;
+    -webkit-filter: brightness(120%);
+    filter: brightness(120%);
+}
+
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph:focus,
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph:hover,
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph-focus,
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph-hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    -webkit-filter: grayscale(100%) brightness(200%);
+    filter: grayscale(100%) brightness(200%);
+}
+
 .d2l-contextmenu-ph:focus, .d2l-contextmenu-ph:hover, .dcm.dcm_handle.bsi-button-menu:focus, .dcm.dcm_handle.bsi-button-menu:hover,
 .d2l-contextmenu-ph.d2l-contextmenu-opener-open, .dcm.dcm_handle.d2l-contextmenu-opener-open {
     /*border-color: rgba(255, 255, 255, 0.5);*/
@@ -383,6 +400,14 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 
 .d2l-collapsepane-content > div.d2l-placeholder.d2l-placeholder-live > div.d2l-placeholder.d2l-placeholder-live > div {
     padding-top: 0;
+}
+
+.d2l-page-collapsepane-container {
+    padding-top: 45px;
+}
+
+.daylight .d2l-page-collapsepane-shadow {
+    top: 90px;
 }
 
 /* Back to top button*/

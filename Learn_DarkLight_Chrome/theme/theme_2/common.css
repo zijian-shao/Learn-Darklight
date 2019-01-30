@@ -429,6 +429,20 @@ input[type="number"].d2l-input.d2l-input-search {
     border-top-right-radius: 5px;
 }
 
+.daylight .d2l-contextmenu-ph {
+    -webkit-filter: grayscale(100%) brightness(200%);
+    filter: grayscale(100%) brightness(200%);
+}
+
+.daylight .d2l-contextmenu-ph:focus,
+.daylight .d2l-contextmenu-ph:hover,
+.daylight .d2l-contextmenu-ph-focus,
+.daylight .d2l-contextmenu-ph-hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    -webkit-filter: grayscale(100%) brightness(300%);
+    filter: grayscale(100%) brightness(300%);
+}
+
 .d2l-contextmenu-ph, .dcm.dcm_handle.bsi-button-menu {
     /*-webkit-filter: grayscale(100%) brightness(200%);*/
     /*filter: grayscale(100%) brightness(200%);*/
@@ -1175,6 +1189,14 @@ iframe {
 
 #UpcomingTreePlaceholder > div > div {
     color: #09b1b9;
+}
+
+.d2l-page-collapsepane-container {
+    padding-top: 45px;
+}
+
+.daylight .d2l-page-collapsepane-shadow {
+    top: 90px;
 }
 
 /* progress bar */
