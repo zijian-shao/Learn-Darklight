@@ -483,22 +483,22 @@ function initOptions() {
         if (params.hasOwnProperty('whatsnew')) {
             var whatsnew = $('#whatsnew-content').clone();
             whatsnew.removeAttr('id').removeClass('hidden');
-            whatsnew.find('.popup-btn').on('click', function (e) {
+            var popupCls = initPopup('Learn Darklight', whatsnew, '', 1);
+            $('.' + popupCls).find('.popup-btn').on('click', function (e) {
                 e.preventDefault();
                 window.location.href = removeSearchParameters('whatsnew');
             });
-            initPopup('Learn Darklight', whatsnew, '', 1);
         }
 
         // welcome
         if (params.hasOwnProperty('welcome')) {
             var welcome = $('#welcome-content').clone();
             welcome.removeAttr('id').removeClass('hidden');
-            welcome.find('.popup-btn').on('click', function (e) {
+            var popupCls = initPopup('Learn Darklight', welcome, '', 1);
+            $('.' + popupCls).find('.popup-btn').on('click', function (e) {
                 e.preventDefault();
                 window.location.href = removeSearchParameters('welcome');
             });
-            initPopup('Learn Darklight', welcome, '', 1);
         }
 
         // message listener

@@ -242,17 +242,20 @@ function resizeContentBtn(page) {
                 });
 
                 fullScr.appendTo(wrapper);
+                clearInterval(fullSrcInterval);
 
+            } else {
+                fullSrcCounter++;
+                if (fullSrcCounter > 10) {
+                    clearInterval(fullSrcInterval);
+                }
             }
         }
 
-        if (isBrowser('firefox')) {
-            setTimeout(_fullScreenBtn, 2000);
-        } else {
-            iframe.on('load', function () {
-                _fullScreenBtn();
-            });
-        }
+        var fullSrcCounter = 0;
+        var fullSrcInterval = setInterval(function () {
+            _fullScreenBtn();
+        }, 1000);
 
         // unlock body
         function _unlockBody() {
@@ -276,15 +279,16 @@ function resizeContentBtn(page) {
 
     function _getIframe() {
         if (page == 'content')
-            iframe = $('#ContentView').find('iframe').first();
+            iframe = $('#ContentView').find('iframe');
         else if (page == 'quiz')
-            iframe = $('.d2l-page-main').find('iframe').first();
+            iframe = $('.d2l-page-main').find('iframe');
     }
 
     var interval = setInterval(function () {
         _getIframe();
         iframe.each(function (idx, elem) {
             if ($(elem).attr('src').trim() != '') {
+                iframe = $(elem);
                 clearInterval(interval);
                 _resizeContentBtn();
                 return false;

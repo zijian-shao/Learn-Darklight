@@ -51,6 +51,21 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     /*color: #ddd;*/
 }
 
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph {
+    margin-top: 1px;
+    margin-bottom: -1px;
+    margin-left: 6px;
+}
+
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph:focus,
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph:hover,
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph-focus,
+.daylight .d2l-homepage-header-menu-wrapper .d2l-contextmenu-ph-hover {
+    border-color: #999;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
 .d2l-widget-header d2l-dropdown button.d2l-button-icon {
     width: 25px !important;
     min-width: 25px !important;
@@ -341,6 +356,14 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 
 .darklight-fixed-right-button {
     background: #333;
+}
+
+.d2l-page-collapsepane-container {
+    padding-top: 45px;
+}
+
+.daylight .d2l-page-collapsepane-shadow {
+    top: 90px;
 }
 
 /* file link */
