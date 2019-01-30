@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Learn Darklight",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "author": "Zijian Shao",
   "background": {
     "persistent": false,
