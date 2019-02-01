@@ -78,15 +78,23 @@ function initOptions() {
                 switch (key) {
 
                     case 'GLB_ThemeID':
+                    case 'GLB_CustomFontInfo':
                         var hasFound = false;
                         if (items[key] === true) {
                             optionElem.first().prop('checked', true);
                             hasFound = true;
                         } else {
+                            if (key == 'GLB_CustomFontInfo') {
+                                items[key] = items[key].split('||');
+                                items[key] = items[key][0];
+                            }
                             optionElem.each(function (index, element) {
                                 if ($(element).attr('value') == items[key]) {
                                     $(element).prop('checked', true);
-                                    $(element).parent('.theme-item').addClass('selected');
+                                    if (key == 'GLB_ThemeID')
+                                        $(element).parent('.theme-item').addClass('selected');
+                                    if (key == 'GLB_CustomFontInfo')
+                                        $(element).parent('.font-item').addClass('selected');
                                     hasFound = true;
                                 }
                             });
@@ -210,6 +218,16 @@ function initOptions() {
                     obj[optName] = elem.attr('value');
                     saveOption(obj);
 
+                    break;
+                // font
+                case 'enum-font':
+                    var obj = {};
+                    obj[optName] = elem.attr('value') + '||' + elem.attr('data-font-weight') + '||' + elem.attr('data-font-size');
+                    var fontSrc = elem.attr('data-font-source');
+                    if (typeof fontSrc !== typeof undefined && fontSrc !== false) {
+                        obj[optName] = obj[optName] + '||' + fontSrc;
+                    }
+                    saveOption(obj);
                     break;
             }
         }
@@ -459,6 +477,18 @@ function initOptions() {
             });
         });
 
+        // themes
+        $('input[id^="opt-themes-0-"]').on('change', function () {
+            $('.theme-item').removeClass('selected');
+            $(this).parent('.theme-item').addClass('selected');
+        });
+
+        // fonts
+        $('input[id^="opt-themes-2-"]').on('change', function () {
+            $('.font-item').removeClass('selected');
+            $(this).parent('.font-item').addClass('selected');
+        });
+
         // scroll
         $(window).on('scroll', function () {
             if (!allowHashChange)
@@ -592,16 +622,11 @@ function initOptions() {
                         '</label>';
 
                 $('<div class="theme-item">' + elem_img + elem_input + elem_label + '</div>').appendTo(list);
-
-                $('#opt-themes-0-' + index).on('change', function () {
-                    $('.theme-item').removeClass('selected');
-                    $(this).parent('.theme-item').addClass('selected');
-                });
             }
 
             index++;
         });
-        $('<div class="theme-item theme-item-more">coming soon</div>').appendTo(list);
+        $('<div class="theme-item theme-item-more"><img src="../img/theme-coming-soon.png"></div>').appendTo(list);
     }
 
     function getSearchParameters() {

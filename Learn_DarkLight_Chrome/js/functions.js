@@ -73,6 +73,40 @@ function detectExtConflict() {
 
 }
 
+function customFont() {
+
+    var fontConf = options.GLB_CustomFontInfo.split('||');
+
+    if (fontConf[0].match(/Default/i)) return;
+
+    // fontName||weights||fontSize||source
+    if (fontConf.length == 4) {
+
+        // name, weights, size, source
+        if (fontConf[3] == 'google') {
+            injectCSS('//fonts.googleapis.com/css?family=' + fontConf[0].replace(/ /g, '+') + ':' + fontConf[1], 'head');
+        } else if (fontConf[3] == 'none') {
+
+        } else {
+            injectCSS('//fonts.googleapis.com/css?family=' + fontConf[0].replace(/ /g, '+') + ':' + fontConf[1], 'head');
+        }
+
+    } else if (fontConf.length == 3) {
+
+        // name, weights, size
+        injectCSS('//fonts.googleapis.com/css?family=' + fontConf[0].replace(/ /g, '+') + ':' + fontConf[1], 'head');
+
+    } else {
+
+        // name only
+        injectCSS('//fonts.googleapis.com/css?family=' + fontConf[0].replace(/ /g, '+') + ':200,400,600,800', 'head');
+
+    }
+
+    injectCSS('body, strong, p, a, h1, h2, h3, h4, h5, h6, input, button, select, div {font-family: "'
+        + fontConf[0] + '", "Microsoft YaHei", sans-serif!important;}', 'head', 'text');
+}
+
 function addBackToTopButton() {
     function _addBackToTopButton() {
         if ($(window).scrollTop() < 100)
@@ -442,7 +476,7 @@ function homepageFunc() {
 
             if (options.HOME_AddCalendar) {
                 // insert after courses
-                var calendarWidget = $('<div role="region" class="d2l-widget darklight-homepage-calendar-widget d2l-tile"><div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-2">Upcoming Events</h2></div></div><div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"><div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div></div></div>');
+                var calendarWidget = $('<div role="region" class="d2l-widget darklight-homepage-calendar-widget d2l-tile"><div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-4">Upcoming Events</h2></div></div><div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"><div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div></div></div>');
 
                 calendarWidget.insertAfter(courseWidget);
             }
@@ -777,6 +811,11 @@ function initDarklightFunc() {
     // conflict detect
     detectExtConflict();
 
+    // custom font
+    if (options.GLB_CustomFont) {
+        customFont();
+    }
+
     // back to top button
     if (options.GLB_BackToTopButton) {
         addBackToTopButton();
@@ -824,5 +863,3 @@ function initDarklightFunc() {
     });
 
 }
-
-initDarklightFunc();

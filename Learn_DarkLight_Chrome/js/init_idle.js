@@ -22,7 +22,12 @@ function extensionUpdate() {
 
         console.log('New version updated (V' + newVer + ')');
 
-        if (newVer.match(/1\.5\./) && !oldVer.match(/1\.5\./)) {
+        if (newVer.match(/1\.6\./) && !oldVer.match(/1\.6\./)) {
+            chrome.runtime.sendMessage({
+                action: 'createTab',
+                data: {url: chrome.extension.getURL('/html/options.html') + '?whatsnew=' + newVer}
+            });
+        } else if (newVer.match(/1\.5\./) && !oldVer.match(/1\.5\./)) {
             chrome.runtime.sendMessage({
                 action: 'createTab',
                 data: {url: chrome.extension.getURL('/html/options.html') + '?whatsnew=' + newVer}
@@ -115,11 +120,15 @@ function initDarklightIdle() {
         return;
 
     // favicon
-    var head = $('head');
-    head.find('link[rel="icon"]').remove();
-    head.append($('<link rel="icon" type="image/png" href="' + baseURL + 'icon/icon32.png' + '">'));
+    if (options.GLB_DarklightFavicon) {
+        var head = $('head');
+        head.find('link[rel="icon"]').remove();
+        head.append($('<link rel="icon" type="image/png" href="' + baseURL + 'icon/icon32.png' + '">'));
+    }
 
     // css
+    if (options.GLB_UseSmallerFonts)
+        injectCSS('html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {font-size: 100%;}', 'head', 'text');
     injectCSS(baseURL + 'css/common.css', 'head');
     injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/common.css', 'head');
     if (options.GLB_EnableCustomStyle)
@@ -158,6 +167,8 @@ function initDarklightIdle() {
     });
 
     extensionUpdate();
+
+    initDarklightFunc();
 }
 
 initDarklightIdle();
