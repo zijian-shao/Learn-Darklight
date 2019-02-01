@@ -299,24 +299,25 @@ i.arrow.down {
 
 .darklight-homepage-calendar-date {
     float: left;
-    width: 40px;
+    width: 2.5rem;
     height: auto;
     text-align: center;
-    font-size: 12px;
     color: #565A5C;
 }
 
 .darklight-homepage-calendar-date .month {
     display: block;
     border-bottom: 1px solid #DADBD3;
+    font-size: 0.8rem;
 }
 
 .darklight-homepage-calendar-date .day {
     display: block;
+    font-size: 0.95rem;
 }
 
 .darklight-homepage-calendar-content {
-    margin-left: 55px;
+    margin-left: 3.5rem;
 }
 
 .darklight-homepage-calendar-content .tag {
@@ -325,7 +326,7 @@ i.arrow.down {
     border: 1px solid #ff3c6a;
     border-radius: 3px;
     color: #ff3c6a;
-    font-size: 10px;
+    font-size: 0.7rem;
     line-height: 1em;
 }
 
@@ -333,13 +334,13 @@ i.arrow.down {
     font-weight: bold;
     display: inline-block;
     color: #565a5c;
-    font-size: 12px;
+    font-size: 0.8rem;
 }
 
 .darklight-homepage-calendar-content .course {
     display: inline-block;
-    margin-left: 10px;
-    font-size: 12px;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
     color: #aaa;
 }
 

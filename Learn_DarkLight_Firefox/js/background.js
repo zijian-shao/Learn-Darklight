@@ -91,7 +91,7 @@ function initBackground() {
     console.log('Welcome to Learn Darklight!');
     browser.runtime.onInstalled.addListener(installWelcome);
     browser.runtime.setUninstallURL("https://www.zijianshao.com/dlight/uninstall/?platform=firefox", function () {
-        if (chrome.runtime.lastError) {
+        if (browser.runtime.lastError) {
         }
     });
 

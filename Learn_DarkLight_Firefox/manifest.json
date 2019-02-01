@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Learn Darklight",
-  "version": "1.5.10",
+  "version": "1.6.0",
   "author": "Zijian Shao",
   "background": {
     "scripts": [
@@ -70,7 +70,7 @@
   "applications": {
     "gecko": {
       "id": "learndarklight@zijianshao.com",
-      "strict_min_version": "42.0"
+      "strict_min_version": "57.0"
     }
   }
 }

@@ -19,10 +19,10 @@
         <ul class="nav">
             <li data-option-tab-index="0" data-option-tab-name="general" id="nav-tab-0" class="nav-tab active">General
             </li>
-            <li data-option-tab-index="1" data-option-tab-name="themes" id="nav-tab-1" class="nav-tab">Themes</li>
-            <li data-option-tab-index="2" data-option-tab-name="courses" id="nav-tab-2" class="nav-tab">Courses
+            <li data-option-tab-index="1" data-option-tab-name="themes" id="nav-tab-1" class="nav-tab">Themes
                 <div class="new-tag">NEW</div>
             </li>
+            <li data-option-tab-index="2" data-option-tab-name="courses" id="nav-tab-2" class="nav-tab">Courses</li>
             <li data-option-tab-index="3" data-option-tab-name="pages" id="nav-tab-3" class="nav-tab">Pages</li>
             <li data-option-tab-index="4" data-option-tab-name="about" id="nav-tab-4" class="nav-tab">About</li>
         </ul>
@@ -236,6 +236,8 @@
         <!-- Themes Start -->
         <div data-option-index="1" class="section" id="opt-tab-1">
             <div class="title">Themes</div>
+
+            <!-- Select Theme -->
             <div class="group">
 
                 <!-- Theme list -->
@@ -246,6 +248,145 @@
 
             </div>
 
+            <!-- Fonts -->
+            <div class="group hidden">
+
+                <div class="group-title">Custom Font Control</div>
+                <div class="group-content">
+
+                    <!-- Smaller font size -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-themes-4-0" data-option-name="GLB_CustomFont"
+                                   data-option-type="switch">
+                            <label for="opt-themes-4-0"></label>
+                        </div>
+                        <label for="opt-themes-4-0" class="checkbox-label">Enable custom font</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>When this option is enabled, you can choose a font from the list below to replace the
+                                default font.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="group">
+
+                <div class="group-title full-width">Select Font</div>
+                <div class="group-content full-width font-list">
+
+                    <label for="opt-themes-2-4" class="font-item" title="Default">
+                        <input type="radio" id="opt-themes-2-4" name="GLB_CustomFontInfo" value="Default"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum">
+                        <img src="../img/font-sample-lato.png" alt="Lato">
+                    </label>
+
+                    <label for="opt-themes-2-0" class="font-item" title="Muli">
+                        <input type="radio" id="opt-themes-2-0" name="GLB_CustomFontInfo" value="Muli"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400,600,800" data-font-size="0">
+                        <img src="../img/font-sample-muli.png" alt="Muli">
+                    </label>
+
+                    <label for="opt-themes-2-1" class="font-item" title="Helvetica Neue">
+                        <input type="radio" id="opt-themes-2-1" name="GLB_CustomFontInfo" value="Helvetica Neue"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="300,400,700" data-font-size="0">
+                        <img src="../img/font-sample-helvetica-neue.png" alt="Helvetica Neue">
+                    </label>
+
+                    <label for="opt-themes-2-6" class="font-item" title="Ubuntu">
+                        <input type="radio" id="opt-themes-2-6" name="GLB_CustomFontInfo" value="Ubuntu"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400,500,700" data-font-size="0">
+                        <img src="../img/font-sample-ubuntu.png" alt="Ubuntu">
+                    </label>
+
+                    <label for="opt-themes-2-11" class="font-item" title="Consolas">
+                        <input type="radio" id="opt-themes-2-11" name="GLB_CustomFontInfo" value="Consolas"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400" data-font-size="0" data-font-source="none">
+                        <img src="../img/font-sample-consolas.png" alt="Consolas">
+                    </label>
+
+                    <label for="opt-themes-2-8" class="font-item" title="Comic Sans MS">
+                        <input type="radio" id="opt-themes-2-8" name="GLB_CustomFontInfo" value="Comic Sans MS"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400,700" data-font-size="0">
+                        <img src="../img/font-sample-comic-sans-ms.png" alt="Comic Sans MS">
+                    </label>
+
+                    <label for="opt-themes-2-5" class="font-item" title="Vollkorn">
+                        <input type="radio" id="opt-themes-2-5" name="GLB_CustomFontInfo" value="Vollkorn"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400,600,700" data-font-size="0">
+                        <img src="../img/font-sample-vollkorn.png" alt="Vollkorn">
+                    </label>
+
+                    <label for="opt-themes-2-10" class="font-item" title="Roboto Slab">
+                        <input type="radio" id="opt-themes-2-10" name="GLB_CustomFontInfo" value="Roboto Slab"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400,700" data-font-size="0">
+                        <img src="../img/font-sample-roboto-slab.png" alt="Roboto Slab">
+                    </label>
+
+                    <label for="opt-themes-2-9" class="font-item" title="Roboto Condensed">
+                        <input type="radio" id="opt-themes-2-9" name="GLB_CustomFontInfo" value="Roboto Condensed"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400,700" data-font-size="0">
+                        <img src="../img/font-sample-roboto-condensed.png" alt="Roboto Condensed">
+                    </label>
+
+                    <label for="opt-themes-2-7" class="font-item" title="Raleway">
+                        <input type="radio" id="opt-themes-2-7" name="GLB_CustomFontInfo" value="Raleway"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400,600,700" data-font-size="0">
+                        <img src="../img/font-sample-raleway.png" alt="Raleway">
+                    </label>
+
+
+                    <label for="opt-themes-2-2" class="font-item" title="Roboto">
+                        <input type="radio" id="opt-themes-2-2" name="GLB_CustomFontInfo" value="Roboto"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400,500,700" data-font-size="0">
+                        <img src="../img/font-sample-roboto.png" alt="Roboto">
+                    </label>
+
+                    <label for="opt-themes-2-3" class="font-item" title="Arial">
+                        <input type="radio" id="opt-themes-2-3" name="GLB_CustomFontInfo" value="Arial"
+                               data-option-name="GLB_CustomFontInfo" data-option-type="enum-font"
+                               data-font-weight="400" data-font-size="0" data-font-source="none">
+                        <img src="../img/font-sample-arial.png" alt="Arial">
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- Extra -->
+            <div class="group">
+                <div class="group-title">Extra</div>
+                <div class="group-content">
+
+                    <!-- Smaller font size -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-themes-3-0" data-option-name="GLB_UseSmallerFonts"
+                                   data-option-type="switch">
+                            <label for="opt-themes-3-0"></label>
+                        </div>
+                        <label for="opt-themes-3-0" class="checkbox-label">Smaller font size</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Slightly reduce basic font size to improve the experience on small screens.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <!-- Advanced themes -->
             <div class="advanced-themes-toggle" id="advanced-themes-toggle">
                 <div class="advanced-themes-toggle-text">Advanced</div>
@@ -254,7 +395,7 @@
             <div class="advanced-themes hidden" id="advanced-themes">
                 <!-- Custom style control -->
                 <div class="group">
-                    <div class="group-title">Control</div>
+                    <div class="group-title">Custom Style Control</div>
                     <div class="group-content">
                         <div class="option-group checkbox-group">
                             <div class="checkbox-slide">
@@ -370,14 +511,14 @@
                                 <div class="row margin-bottom-10">
                                     <div class="width-33 pull-left uppercase strong">Course ID</div>
                                     <div class="width-66 pull-left">
-                                        <input type="text" minlength="5" maxlength="10" placeholder="eg. 412305"
+                                        <input type="text" minlength="5" maxlength="10" placeholder="e.g. 412305"
                                                class="input-box block width-90 course-id">
                                     </div>
                                 </div>
                                 <div class="row margin-bottom-10">
                                     <div class="width-33 pull-left uppercase strong">Course Name</div>
                                     <div class="width-66 pull-left">
-                                        <input type="text" minlength="3" maxlength="10" placeholder="eg. ECE 100"
+                                        <input type="text" minlength="3" maxlength="10" placeholder="e.g. ECE 100"
                                                class="input-box block width-90 course-code">
                                     </div>
                                 </div>
@@ -401,7 +542,7 @@
                                     <div class="width-66 pull-left">
                                         <div class="thumb-image-type-tab thumb-image-type-tab-1">
                                             <input type="text" minlength="10" maxlength="255"
-                                                   placeholder="eg. https://uw.com/logo.jpg"
+                                                   placeholder="e.g. https://uw.com/bg.jpg"
                                                    class="input-box block width-90 thumb-image-url">
                                         </div>
                                         <div class="thumb-image-type-tab thumb-image-type-tab-0 hidden">
@@ -730,23 +871,19 @@
 
 <!-- Whats New Start -->
 <div class="whatsnew hidden" id="whatsnew-content">
-    <h3>What's New in V1.5</h3>
+    <h3>What's New in V1.6</h3>
     <ul>
         <li>
-            <small>Courses</small>
-            Custom course cover pictures
+            <small>Themes</small>
+            Customize font family and font size
+        </li>
+        <li>
+            <small>Themes</small>
+            Improved "Bright Daylight" theme
         </li>
         <li>
             <small>Courses</small>
-            Change default course home
-        </li>
-        <li>
-            <small>Pages</small>
-            Hide homepage course tile meta
-        </li>
-        <li>
-            <small>Other</small>
-            New popup and options page
+            Custom cover pics now supports URL
         </li>
         <li>
             <small>Other</small>
