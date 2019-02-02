@@ -190,6 +190,7 @@ i.arrow.down {
     right: 0;
     top: 0;
     z-index: 500;
+    border-top: none !important;
 }
 
 /* fix right buttons */

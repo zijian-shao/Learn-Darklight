@@ -1,4 +1,20 @@
 function initTheme() {
+
+    if (getCustomThemeOption('darkIframe') || getCustomThemeOption('invertIframe')) {
+        var filterText = '';
+        if (getCustomThemeOption('darkIframe'))
+            filterText += 'brightness(0.8) ';
+        if (getCustomThemeOption('invertIframe'))
+            filterText += 'invert(1) ';
+        injectCSS('iframe{-webkit-filter:' + filterText + ';filter:' + filterText + ';}', 'body', 'text');
+    }
+
+    if (getCustomThemeOption('darkCoursePic')) {
+        var cssText = '.d2l-enrollment-card-image-container.shown {opacity: 0.8 !important;}';
+        cssText += '#CourseImageBannerPlaceholderId .d2l-course-banner {opacity: 0.8 !important;}';
+        injectCSS(cssText, 'body', 'text');
+    }
+
     if (!isWLU()) {
 
         // bg - waterloo

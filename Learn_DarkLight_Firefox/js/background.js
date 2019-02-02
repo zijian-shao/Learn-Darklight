@@ -205,14 +205,16 @@ function initBackground() {
                 var req = os.get(request.data.course_id);
 
                 req.onsuccess = function (event) {
-                    browser.tabs.sendMessage(sender.tab.id, {
-                        action: 'getCourseThumbsOneResponse',
-                        data: [{
-                            course_id: req.result.course_id,
-                            course_code: req.result.course_code,
-                            thumb_image: req.result.thumb_image
-                        }]
-                    });
+                    if (typeof req.result !== typeof undefined) {
+                        browser.tabs.sendMessage(sender.tab.id, {
+                            action: 'getCourseThumbsOneResponse',
+                            data: [{
+                                course_id: req.result.course_id,
+                                course_code: req.result.course_code,
+                                thumb_image: req.result.thumb_image
+                            }]
+                        });
+                    }
                 };
                 req.onerror = function (event) {
                     browser.tabs.sendMessage(sender.tab.id, {

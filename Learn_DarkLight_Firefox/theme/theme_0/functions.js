@@ -1,4 +1,21 @@
 function initTheme() {
+
+    var primColor = getCustomThemeOption('navPrimaryColor');
+    // navbar logo top border
+    var cssText = '.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link, .d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link' +
+        '{background:' + primColor + '!important}';
+    // navbar right icons top border
+    cssText += '.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button, .d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button' +
+        '{background:' + primColor + '!important}';
+    // navbar right icons
+    cssText += '.d2l-navigation-button:hover, .d2l-navigation-button:focus, .d2l-navigation-button:hover > *, .d2l-navigation-button:focus > *, .d2l-navigation-button:hover > * *, .d2l-navigation-button:focus > * *' +
+        '{color:' + primColor + '!important}';
+    // navbar line
+    cssText += '.d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header' +
+        '{border-bottom-color:' + primColor + '}';
+    injectCSS(cssText, 'body', 'text');
+
+
     if (!isWLU()) {
 
         // bg - waterloo
