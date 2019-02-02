@@ -18,7 +18,7 @@ function initTheme() {
     if (!isWLU()) {
 
         // bg - waterloo
-        if ((currURL.match(/quizzing/g) || currURL.match(/survey/g))) {
+        if (currURL.match(/quizzing/g) || currURL.match(/survey/g) || currURL.match(/\/admin\//g)) {
             // quiz & survey
             injectCSS('.d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width{min-height:0;}', 'body', 'text');
         } else {
@@ -62,7 +62,7 @@ function initTheme() {
     }
 
     // quiz & survey warning
-    if (currURL.match(/\/quizzing\//g)) {
+    if (currURL.match(/\/quizzing\//g) || currURL.match(/\/admin\//g)) {
         // || currURL.includes('/survey/') || currURL.includes('/dropbox/')
         alert('This theme has made many changes to the original webpage. In order to ensure nothing will go wrong, it\'s recommended to switch to other themes before you continue your work here.');
     }

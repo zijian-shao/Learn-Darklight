@@ -185,9 +185,10 @@ function fixNavigation() {
     }
 
     var nav = $('d2l-navigation-main-footer');
-    var navHeight = nav.outerHeight();
-    // var header = $('.d2l-navigation-s-header');
     var header = $('d2l-navigation-main-header');
+    if (!nav.length || !header.length) return;
+
+    var navHeight = nav.outerHeight();
     var offset = header.outerHeight() + header.offset().top;
 
     if (isBrowser('firefox')) {
