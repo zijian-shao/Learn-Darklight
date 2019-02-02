@@ -1,3 +1,7 @@
+function getCustomThemeOption(name) {
+    return themeCustomConfigs['THEME_ID_' + options.GLB_ThemeID + '_OPT_' + name];
+}
+
 function scrollToUtil(pos, time, offset) {
 
     if ($.type(offset) !== 'number')
@@ -184,12 +188,12 @@ function fixNavigation() {
     var navHeight = nav.outerHeight();
     // var header = $('.d2l-navigation-s-header');
     var header = $('d2l-navigation-main-header');
-    var offset = header.outerHeight();
+    var offset = header.outerHeight() + header.offset().top;
 
     if (isBrowser('firefox')) {
         $(window).on('load', function () {
             navHeight = nav.outerHeight();
-            offset = header.outerHeight();
+            offset = header.outerHeight() + header.offset().top;
             _fixNavigation();
         });
     } else {
@@ -205,7 +209,7 @@ function fixNavigation() {
             header.css('margin-bottom', '0px');
         } else {
             navHeight = nav.outerHeight();
-            offset = header.outerHeight();
+            offset = header.outerHeight() + header.offset().top;
             _fixNavigation();
         }
     });

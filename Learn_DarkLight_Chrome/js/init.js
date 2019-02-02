@@ -1,4 +1,4 @@
-var baseURL, currURL, currURL2, currURLHost, options, configs, themeConfigs;
+var baseURL, currURL, currURL2, currURLHost, options, configs, themeConfigs, themeCustomConfigs;
 
 function injectCSS(url, tag, type) {
 

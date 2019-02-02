@@ -138,18 +138,14 @@ function initDarklightIdle() {
     var jsText = 'var baseURL = "' + baseURL + '";';
     jsText += 'var currURL = "' + currURL + '";';
     jsText += 'var currURL2 = "' + currURL2 + '";';
+    jsText += 'var currURLHost = "' + currURLHost + '";';
     jsText += 'var options = ' + JSON.stringify(options) + ';';
-    jsText += 'var themeConfig = ' + JSON.stringify(themeConfigs) + ';';
+    jsText += 'var themeConfigs = ' + JSON.stringify(themeConfigs) + ';';
     var params = document.createElement("script");
     params.textContent = jsText;
     document.head.appendChild(params);
 
-    // $.getScript(baseURL + 'js/functions.js', function () {
-    //     injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions.js', 'head');
-    //     if (options.GLB_EnableCustomStyle)
-    //         injectJS(options.GLB_CustomJS, 'head', 'text');
-    // });
-
+    // theme js
     var scriptArr = [];
     scriptArr.push({
         type: 'file',
@@ -161,9 +157,19 @@ function initDarklightIdle() {
             content: options.GLB_CustomJS
         });
     }
-    chrome.runtime.sendMessage({
-        action: 'executeScript',
-        data: scriptArr
+
+    // theme options
+    var tConf = themeConfigs['options'];
+    var tConfObj = {};
+    for (var i in tConf)
+        tConfObj['THEME_ID_' + options.GLB_ThemeID + '_OPT_' + tConf[i]['key']] = tConf[i]['value'];
+
+    chrome.storage.sync.get(tConfObj, function (e) {
+        themeCustomConfigs = e;
+        chrome.runtime.sendMessage({
+            action: 'executeScript',
+            data: scriptArr
+        });
     });
 
     extensionUpdate();

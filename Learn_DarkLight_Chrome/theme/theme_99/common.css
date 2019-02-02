@@ -19,3 +19,8 @@
 .darklight-homepage-calendar-item {
     padding: 20px;
 }
+
+/* navbar */
+.d2l-navigation-s-logo img {
+    max-height: 50px;
+}

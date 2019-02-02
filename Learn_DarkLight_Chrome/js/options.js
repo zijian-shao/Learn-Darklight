@@ -18,16 +18,28 @@ function initOptions() {
     }
 
     function initPopup(title, content, extraClass, type) {
+
         $('body').addClass('lock-scroll');
+
         var rnd = Math.floor(Math.random() * 90000) + 10000;
         var content2;
-        if (type === 1)
+
+        if (typeof type === typeof undefined) type = 0;
+
+        if (type === 1) {
+            // clone content
             content2 = content.clone();
-        else
+        } else if (type === 2) {
+            // use content directly, place back to original place when removePopup
+            content2 = content;
+            $('<div id="popup-' + rnd + '-content-placeholder"></div>').insertBefore(content2);
+        } else {
+            // find element with '.popup-template' next to content
             content2 = content.next('.popup-template').first().children().clone();
+        }
         if (extraClass === undefined) extraClass = '';
 
-        var template = $('<div class="popup popup-' + rnd + ' ' + extraClass + '">' +
+        var template = $('<div class="popup popup-' + rnd + ' ' + extraClass + '" data-popup-type="' + type + '">' +
             '<div class="popup-layer"></div>' +
             '<div class="popup-container">' +
             '<div class="popup-frame">' +
@@ -37,7 +49,7 @@ function initOptions() {
             '</div>' +
             '</div>');
         template.find('.popup-title').html(title);
-        template.find('.popup-content').html(content2);
+        template.find('.popup-content').append(content2);
         template.appendTo('body');
         template.addClass('popup-show');
         template.find('.popup-layer').addClass('fadeIn animated');
@@ -46,7 +58,18 @@ function initOptions() {
     }
 
     function removePopup(cls) {
-        $('.' + cls).remove();
+
+        var popup = $('.' + cls);
+
+        if (popup.attr('data-popup-type') != '2') {
+            popup.remove();
+        } else {
+            var popupPlaceholder = $('#' + cls + '-content-placeholder');
+            popup.find('.popup-content').children().insertAfter(popupPlaceholder);
+            popupPlaceholder.remove();
+            popup.remove();
+        }
+
         if (!$('.popup').length) $('body').removeClass('lock-scroll');
     }
 
@@ -92,16 +115,17 @@ function initOptions() {
                                 if ($(element).attr('value') == items[key]) {
                                     $(element).prop('checked', true);
                                     if (key == 'GLB_ThemeID')
-                                        $(element).parent('.theme-item').addClass('selected');
+                                        $(element).closest('.theme-item').addClass('selected');
                                     if (key == 'GLB_CustomFontInfo')
-                                        $(element).parent('.font-item').addClass('selected');
+                                        $(element).closest('.font-item').addClass('selected');
                                     hasFound = true;
                                 }
                             });
                         }
                         if (!hasFound) {
                             optionElem.first().prop('checked', true);
-                            optionElem.first().parent('.theme-item').addClass('selected');
+                            optionElem.first().closest('.theme-item').addClass('selected');
+                            optionElem.first().closest('.font-item').addClass('selected');
                         }
                         break;
 
@@ -229,6 +253,34 @@ function initOptions() {
                     }
                     saveOption(obj);
                     break;
+            }
+        }
+
+        else if (inputType == 'text') {
+
+            switch (optType) {
+                // color
+                case 'color':
+                    if (elem.attr('data-save-on-blur') == 'true') {
+                        var obj = {};
+                        var colorVal = elem.val().trim();
+                        if (colorVal.match(/^#[0-9a-f]{3,6}$/i)
+                            || colorVal.match(/^rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/i)) {
+                            obj[optName] = colorVal;
+                            saveOption(obj);
+                        } else if (colorVal == '') {
+                            elem.val(elem.attr('data-default-value'));
+                            colorVal = elem.val().trim();
+                            obj[optName] = colorVal;
+                            saveOption(obj);
+                        } else {
+                            alert('Save failed:\n- Invalid color syntax. Please use RGB or HEX.');
+                        }
+                    }
+
+                    break;
+
+                default:
             }
         }
     }
@@ -480,13 +532,13 @@ function initOptions() {
         // themes
         $('input[id^="opt-themes-0-"]').on('change', function () {
             $('.theme-item').removeClass('selected');
-            $(this).parent('.theme-item').addClass('selected');
+            $(this).closest('.theme-item').addClass('selected');
         });
 
         // fonts
         $('input[id^="opt-themes-2-"]').on('change', function () {
             $('.font-item').removeClass('selected');
-            $(this).parent('.font-item').addClass('selected');
+            $(this).closest('.font-item').addClass('selected');
         });
 
         // scroll
@@ -497,7 +549,7 @@ function initOptions() {
             var top = $(window).scrollTop();
             var currID = 0;
             $('.section').each(function (index, elem) {
-                if ($(elem).offset().top + $(elem).outerHeight() > top) {
+                if ($(elem).offset().top + $(elem).outerHeight() - $(window).height() / 3 > top) {
                     currID = $(this).attr('data-option-index');
                     return false;
                 }
@@ -605,28 +657,92 @@ function initOptions() {
         $.each(themes, function (i, val) {
 
             if (val['hidden'] !== true) {
-                var nightModeStr = '';
-                if (val['nightMode'])
-                    nightModeStr = ' <small>(Night Mode)</small>';
-
                 var elem_img = '<img src="../theme/theme_' + val['id'] + '/preview.png">',
+                    elem_title = '<div class="theme-name">' + val['name'] + '</div>',
+                    elem_color = '<div class="theme-color" style="background-color:' + val['previewColor'] + '"></div>',
+                    elem_info = '<div class="theme-info">Author / ' + val['author'] + '</div>',
                     elem_input = '<input type="radio" ' +
                         'id="opt-themes-0-' + index + '" ' +
                         'name="GLB_ThemeID" ' +
                         'value="' + val['id'] + '" ' +
                         'data-option-name="GLB_ThemeID" ' +
                         'data-option-type="enum">',
-                    elem_label = '<label for="opt-themes-0-' + index + '">' +
-                        '<div class="theme-name">' + val['name'] + nightModeStr + '</div>' +
-                        '<div class="theme-info">Author: ' + val['author'] + '</div>' +
-                        '</label>';
+                    elem_label = '<label for="opt-themes-0-' + index + '" class="btn btn-primary"></label>';
 
-                $('<div class="theme-item">' + elem_img + elem_input + elem_label + '</div>').appendTo(list);
+                var elem_content = '<div class="theme-content">' + elem_title + elem_color + elem_info + elem_input + elem_label + '</div>';
+
+                $('<div class="theme-item theme-item-' + val['id'] + '" id="theme-item-' + val['id'] + '">' + elem_img + elem_content + '</div>').appendTo(list);
+
+                // theme options
+                if (val['options'] !== undefined) {
+                    var themeCustomConf = {};
+
+                    for (var i in val['options']) {
+                        themeCustomConf['THEME_ID_' + val['id'] + '_OPT_' + val['options'][i]['key']] = val['options'][i]['value'];
+                    }
+
+                    chrome.storage.sync.get(themeCustomConf, function (tConfigs) {
+
+                        // add title
+                        var confElems = '<h3>' + val['name'] + ' Addtional Options</h3><div class="margin-y">';
+
+                        // create and add elem for each opt
+                        for (var i in val['options']) {
+
+                            var elemID = 'theme-id-' + val['id'] + '-opt-' + val['options'][i]['key'];
+                            var optName = 'THEME_ID_' + val['id'] + '_OPT_' + val['options'][i]['key'];
+
+                            if (val['options'][i]['type'] == 'boolean') {
+
+                                var isChecked = tConfigs[optName] ? ' checked' : '';
+                                confElems += '<div class="option-group checkbox-group">' +
+                                    '<div class="checkbox-slide">' +
+                                    '<input type="checkbox" id="' + elemID + '" data-option-name="' + optName + '" data-option-type="switch"' + isChecked + '>' +
+                                    '<label for="' + elemID + '"></label></div>' +
+                                    '<label for="' + elemID + '" class="checkbox-label">' + val['options'][i]['description'] + '</label>' +
+                                    '</div>';
+
+                            } else if (val['options'][i]['type'] == 'color') {
+
+                                confElems += '<div class="option-group input-group">'
+                                confElems += '<label for="' + elemID + '" class="input-label">' + val['options'][i]['description'] + '</label>';
+                                confElems += '<input type="text" minlength="4" maxlength="30" class="input-box block width-100" id="' + elemID + '" ' +
+                                    'data-option-name="' + optName + '" data-option-type="color" data-save-on-blur="true" data-default-value="' + val['options'][i]['value'] + '"' +
+                                    'value="' + tConfigs[optName] + '" placeholder="e.g. ' + val['options'][i]['value'] + '">';
+                                confElems += '</div>';
+
+                            } else if (val['options'][i]['type'] == 'text') {
+
+                            }
+                        }
+
+                        // add close button
+                        confElems += '</div><div class="popup-btn-group"><a href="#" class="popup-btn popup-btn-black">Close</a></div>';
+
+                        // create and add opt btn & content to page
+                        var tOptElem = $('<div class="theme-options" title="Theme Options"><div></div><div></div><div></div></div>');
+                        tOptElem.appendTo('#theme-item-' + val['id']);
+
+                        var tOptContent = $('<div class="theme-options-container hidden"><div class="theme-options-content">' + confElems + '</div></div>');
+                        tOptContent.insertAfter(tOptElem);
+
+                        tOptElem.on('click', function (e) {
+                            e.preventDefault();
+                            var popCls = initPopup('Theme Options', tOptContent.find('.theme-options-content'), '', 2);
+                            var popBtn = $('.' + popCls).find('.popup-btn');
+                            popBtn.off('click');
+                            popBtn.on('click', function (e) {
+                                e.preventDefault();
+                                removePopup(popCls);
+                            });
+                        });
+
+                    });
+                }
             }
 
             index++;
         });
-        $('<div class="theme-item theme-item-more"><img src="../img/theme-coming-soon.png"></div>').appendTo(list);
     }
 
     function getSearchParameters() {
@@ -685,4 +801,3 @@ function initOptions() {
 }
 
 initOptions();
-
