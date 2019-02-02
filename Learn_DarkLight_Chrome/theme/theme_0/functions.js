@@ -13,13 +13,17 @@ function initTheme() {
     // navbar line
     cssText += '.d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header' +
         '{border-bottom-color:' + primColor + '}';
+    // navbar logo icon
+    cssText += '.d2l-navigation-s-highlight-bar{background:' + primColor + '!important}';
+    cssText += '.d2l-navigation-s-button-highlight:focus d2l-icon, .d2l-navigation-s-button-highlight:hover d2l-icon, button.d2l-navigation-s-button-highlight:focus, button.d2l-navigation-s-button-highlight:hover' +
+        '{color:' + primColor + ';}';
     injectCSS(cssText, 'body', 'text');
 
 
     if (!isWLU()) {
 
         // bg - waterloo
-        if ((currURL.match(/quizzing/g) || currURL.match(/survey/g))) {
+        if (currURL.match(/quizzing/g) || currURL.match(/survey/g) || currURL.match(/\/admin\//g)) {
             // quiz & survey
             injectCSS('.d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width{min-height:0;}', 'body', 'text');
         } else {
