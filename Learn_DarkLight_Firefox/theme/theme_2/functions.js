@@ -1,18 +1,52 @@
 function initTheme() {
 
+    // custom options - css
+    var cssText = '';
     if (getCustomThemeOption('darkIframe') || getCustomThemeOption('invertIframe')) {
         var filterText = '';
         if (getCustomThemeOption('darkIframe'))
             filterText += 'brightness(0.8) ';
         if (getCustomThemeOption('invertIframe'))
             filterText += 'invert(1) ';
-        injectCSS('iframe{-webkit-filter:' + filterText + ';filter:' + filterText + ';}', 'body', 'text');
+        cssText += 'iframe{-webkit-filter:' + filterText + ';filter:' + filterText + ';}';
     }
 
     if (getCustomThemeOption('darkCoursePic')) {
-        var cssText = '.d2l-enrollment-card-image-container.shown {opacity: 0.8 !important;}';
+        cssText += '.d2l-enrollment-card-image-container.shown {opacity: 0.8 !important;}';
         cssText += '#CourseImageBannerPlaceholderId .d2l-course-banner {opacity: 0.8 !important;}';
+    }
+
+    if (cssText != '')
         injectCSS(cssText, 'body', 'text');
+
+    // custom options - invert iframe
+    if (getCustomThemeOption('invertIframe') && currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/i)) {
+
+        var iframe = null;
+        var getIframeCounter = 0;
+
+        function _getIframe() {
+            iframe = $('#ContentView').find('iframe');
+        }
+
+        var interval = setInterval(function () {
+            _getIframe();
+            iframe.each(function (idx, elem) {
+                if ($(elem).attr('src').trim() != '') {
+                    clearInterval(interval);
+                    browser.runtime.sendMessage({
+                        action: 'executeScript',
+                        data: {file: 'theme/theme_' + options.GLB_ThemeID + '/functions_iframe.js', allFrames: true}
+                    });
+                    return false;
+                }
+            });
+            getIframeCounter++;
+            if (getIframeCounter > 20) {
+                clearInterval(interval);
+            }
+        }, 300);
+
     }
 
     if (!isWLU()) {

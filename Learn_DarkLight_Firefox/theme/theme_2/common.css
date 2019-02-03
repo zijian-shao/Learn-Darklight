@@ -1707,7 +1707,7 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
 }
 
 /*.d2l-enrollment-card-image-container.shown {*/
-    /*opacity: 0.7 !important;*/
+/*opacity: 0.7 !important;*/
 /*}*/
 
 .darklight-course-thumb img {
@@ -1715,7 +1715,7 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
 }
 
 /*#CourseImageBannerPlaceholderId .d2l-course-banner {*/
-    /*opacity: 0.6 !important;*/
+/*opacity: 0.6 !important;*/
 /*}*/
 
 #CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
@@ -1772,6 +1772,11 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
 /* pdf viewer */
 .d2l-fileviewer-pdf-pdfjs {
     border: none;
+}
+
+#d2l_le_content_printcontainer > .d2l-fileviewer > div {
+    background: #373e48 !important;
+    border-color: #373e48 !important;
 }
 
 /* homepage calendar */
