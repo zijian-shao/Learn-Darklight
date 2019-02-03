@@ -148,13 +148,11 @@ function initDarklightIdle() {
     // theme js
     var scriptArr = [];
     scriptArr.push({
-        type: 'file',
-        content: 'theme/theme_' + options.GLB_ThemeID + '/functions.js'
+        file: 'theme/theme_' + options.GLB_ThemeID + '/functions.js'
     });
     if (options.GLB_EnableCustomStyle) {
         scriptArr.push({
-            type: 'code',
-            content: options.GLB_CustomJS
+            code: options.GLB_CustomJS
         });
     }
 

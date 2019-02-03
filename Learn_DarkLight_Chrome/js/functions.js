@@ -315,6 +315,7 @@ function resizeContentBtn(page) {
     }
 
     var iframe = null;
+    var getIframeCounter = 0;
 
     function _getIframe() {
         if (page == 'content')
@@ -333,8 +334,12 @@ function resizeContentBtn(page) {
                 return false;
             }
         });
+        getIframeCounter++;
+        if (getIframeCounter > 20) {
+            clearInterval(interval);
+        }
+    }, 300);
 
-    }, 200);
 }
 
 function listMembersBtn() {

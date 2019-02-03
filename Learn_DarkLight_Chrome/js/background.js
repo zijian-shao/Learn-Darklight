@@ -125,37 +125,57 @@ function initBackground() {
         // execute script
         if (request.action == 'executeScript') {
 
-            var obj = {};
-            if (Array.isArray(request.data)) {
-
-                for (var i = 0; i < request.data.length; i++) {
-                    obj = {};
-                    obj[request.data[i].type] = request.data[i].content;
+            // request.data = {code:'', allFrames:false, frameId:123};
+            function _executeScript(obj, func) {
+                if (typeof func === 'function')
+                    chrome.tabs.executeScript(sender.tab.id, obj, function () {
+                        func();
+                    });
+                else
                     chrome.tabs.executeScript(sender.tab.id, obj);
-                }
-
-            } else {
-                obj[request.data.type] = request.data.content;
-                chrome.tabs.executeScript(sender.tab.id, obj);
             }
 
-            if (typeof sendResponse === 'function') sendResponse(obj);
+            if (Array.isArray(request.data)) {
+                for (var i in request.data) {
+                    _executeScript(request.data[i], sendResponse);
+                }
+            } else {
+                _executeScript(request.data, sendResponse);
+            }
 
         }
 
         // inject css
         else if (request.action == 'insertCSS') {
 
-            var obj = {};
-            obj[request.data.type] = request.data.content;
-            chrome.tabs.insertCSS(sender.tab.id, obj);
+            function _insertCSS(obj, func) {
+                if (typeof func === 'function')
+                    chrome.tabs.insertCSS(sender.tab.id, obj, function () {
+                        func();
+                    });
+                else
+                    chrome.tabs.insertCSS(sender.tab.id, obj);
+            }
 
-            if (typeof sendResponse === 'function') sendResponse(obj);
+            if (Array.isArray(request.data)) {
+                for (var i in request.data) {
+                    _insertCSS(request.data[i], sendResponse);
+                }
+            } else {
+                _insertCSS(request.data, sendResponse);
+            }
 
         }
 
+        // webNavigation.getAllFrames
+        else if (request.action == 'getAllFrames') {
+            // chrome.webNavigation.getAllFrames({tabId: sender.tab.id}, function (resp) {
+            //     sendResponse(resp);
+            // });
+        }
+
         // app.getDetails
-        else if (request.action == 'getDetails') {
+        else if (request.action == 'getDetails' || request.action == 'getManifest') {
 
             var obj = chrome.runtime.getManifest();
             if (typeof sendResponse === 'function') sendResponse(obj);
