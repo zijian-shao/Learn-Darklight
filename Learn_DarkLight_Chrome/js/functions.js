@@ -107,8 +107,12 @@ function customFont() {
 
     }
 
-    injectCSS('body, strong, p, a, h1, h2, h3, h4, h5, h6, input, button, select, div {font-family: "'
-        + fontConf[0] + '", "Microsoft YaHei", sans-serif!important;}', 'head', 'text');
+    var fontCssText = 'body, strong, p, a, h1, h2, h3, h4, h5, h6, input, button, select, div {font-family: "'
+        + fontConf[0] + '", "Microsoft YaHei", sans-serif!important;}';
+    chrome.runtime.sendMessage({
+        action: 'insertCSS',
+        data: {code: fontCssText}
+    });
 }
 
 function addBackToTopButton() {
@@ -216,7 +220,7 @@ function fixNavigation() {
     });
 }
 
-function resizeContentBtn(page) {
+function contentPageFunc(page) {
 
     function _getFloatButton(iconSrc, text, id) {
         if (typeof id === typeof undefined) id = '';
@@ -224,47 +228,52 @@ function resizeContentBtn(page) {
         return '<a href="#" class="darklight-fixed-right-button"' + id + '><div class="darklight-fixed-right-button-icon"><img src="' + iconSrc + '"></div><div class="darklight-fixed-right-button-text">' + text + '</div></a>';
     }
 
-    function _resizeContentBtn() {
+    function _contentPageFunc() {
         var body = $('body');
 
         var wrapper = $('<div class="darklight-fixed-right-wrapper"></div>');
+        wrapper.appendTo(body);
 
-        // inc iframe
-        var sizeInc = $(_getFloatButton(baseURL + 'img/button-icon-plus.png', 'Content Height <strong>+</strong>'));
-        sizeInc.on('click', function (e) {
-            e.preventDefault();
-            var currH = iframe.attr('data-current-height');
-            if (typeof currH === 'undefined')
-                currH = iframe.height();
-            currH = parseInt(currH);
-            currH += 50;
-            iframe.css('height', currH + 'px');
-            iframe.attr('data-current-height', currH);
-        });
-        sizeInc.appendTo(wrapper);
-
-        // dec iframe
-        var sizeDec = $(_getFloatButton(baseURL + 'img/button-icon-minus.png', 'Content Height <strong>-</strong>'));
-        sizeDec.on('click', function (e) {
-            e.preventDefault();
-            var currH = iframe.attr('data-current-height');
-            if (typeof currH === 'undefined')
-                currH = iframe.height();
-            currH = parseInt(currH);
-            if (currH >= 300) {
-                currH -= 50;
+        if ((iframe.hasClass('d2l-fileviewer-rendered-pdf') && options.COURSE_ContentResizeBtn)
+            || page == 'quiz') {
+            // inc iframe
+            var sizeInc = $(_getFloatButton(baseURL + 'img/button-icon-plus.png', 'Content Height <strong>+</strong>'));
+            sizeInc.on('click', function (e) {
+                e.preventDefault();
+                var currH = iframe.attr('data-current-height');
+                if (typeof currH === 'undefined')
+                    currH = iframe.height();
+                currH = parseInt(currH);
+                currH += 50;
                 iframe.css('height', currH + 'px');
                 iframe.attr('data-current-height', currH);
-            }
-        });
-        sizeDec.appendTo(wrapper);
+            });
+            sizeInc.appendTo(wrapper);
 
+            // dec iframe
+            var sizeDec = $(_getFloatButton(baseURL + 'img/button-icon-minus.png', 'Content Height <strong>-</strong>'));
+            sizeDec.on('click', function (e) {
+                e.preventDefault();
+                var currH = iframe.attr('data-current-height');
+                if (typeof currH === 'undefined')
+                    currH = iframe.height();
+                currH = parseInt(currH);
+                if (currH >= 300) {
+                    currH -= 50;
+                    iframe.css('height', currH + 'px');
+                    iframe.attr('data-current-height', currH);
+                }
+            });
+            sizeDec.appendTo(wrapper);
 
-        $(window).on('resize', function () {
-            setTimeout(function () {
-                iframe.css('height', iframe.attr('data-current-height') + 'px');
-            }, 10);
-        });
+            $(window).on('resize', function () {
+                setTimeout(function () {
+                    if (typeof iframe.attr('data-current-height') !== typeof undefined)
+                        iframe.css('height', iframe.attr('data-current-height') + 'px');
+                }, 10);
+            });
+
+        }
 
         function _fullScreenBtn() {
             var fullScreenBtn = iframe.contents().find('#fullscreenMode');
@@ -280,7 +289,27 @@ function resizeContentBtn(page) {
                     fullScreenBtn.trigger('click');
                 });
 
-                fullScr.appendTo(wrapper);
+                if (options.COURSE_ContentResizeBtn) {
+                    fullScr.appendTo(wrapper);
+                }
+
+                if (options.COURSE_AutoScrollToContent && options.GLB_FixNavigation && $(window).width() >= 768) {
+                    scrollToUtil(iframe, 0, $('d2l-navigation-main-footer').height());
+                }
+
+                if (options.COURSE_AutoScrollToContent && $(window).width() >= 768) {
+                    var currH = 0;
+                    if (options.GLB_FixNavigation)
+                        currH = parseInt($(window).height() - $('d2l-navigation-main-footer').height());
+                    else
+                        currH = parseInt($(window).height());
+                    iframe.css('height', currH + 'px');
+                }
+
+                if (options.COURSE_AutoEnterFullScreen) {
+                    fullScreenBtn.trigger('click');
+                }
+
                 clearInterval(fullSrcInterval);
 
             } else {
@@ -291,15 +320,17 @@ function resizeContentBtn(page) {
             }
         }
 
-        var fullSrcCounter = 0;
-        var fullSrcInterval = setInterval(function () {
-            _fullScreenBtn();
-        }, 1000);
+        if (page == 'content') {
+            var fullSrcCounter = 0;
+            var fullSrcInterval = setInterval(function () {
+                _fullScreenBtn();
+            }, 1000);
+        }
 
         // unlock body
         function _unlockBody() {
             if (body.css('overflow') == 'hidden') {
-                var unlockScroll = $('<a href="#" class="darklight-fixed-right-button"><div class="darklight-fixed-right-button-icon"><img src="' + baseURL + 'img/button-icon-unlock.png"></div><div class="darklight-fixed-right-button-text">Unlock Page Scroll</div></a>');
+                var unlockScroll = $(_getFloatButton(baseURL + 'img/button-icon-unlock.png', 'Unlock Page Scroll'));
                 unlockScroll.on('click', function (e) {
                     e.preventDefault();
                     body.css('overflow', 'auto');
@@ -309,9 +340,9 @@ function resizeContentBtn(page) {
             }
         }
 
-        setTimeout(_unlockBody, 1000);
+        if (options.COURSE_ContentResizeBtn)
+            setTimeout(_unlockBody, 1000);
 
-        wrapper.appendTo(body);
     }
 
     var iframe = null;
@@ -330,7 +361,16 @@ function resizeContentBtn(page) {
             if ($(elem).attr('src').trim() != '') {
                 iframe = $(elem);
                 clearInterval(interval);
-                _resizeContentBtn();
+                _contentPageFunc();
+
+                if (options.COURSE_AutoScrollToContent && $(window).width() >= 768) {
+                    if (options.GLB_FixNavigation) {
+                        scrollToUtil(iframe, 100, $('d2l-navigation-main-footer').height());
+                    } else {
+                        scrollToUtil(iframe, 100, 0);
+                    }
+                }
+
                 return false;
             }
         });
@@ -349,7 +389,12 @@ function listMembersBtn() {
         return;
 
     $('table.d_g.d_gn').removeClass('d_g d_gn').addClass('d2l-table d2l-grid d_gl group-list');
-    injectCSS('.group-list th, .group-list td {border-width: 1px; border-style: solid; padding: 5px 15px;}', 'head', 'text');
+    chrome.runtime.sendMessage({
+        action: 'insertCSS',
+        data: {
+            code: '.group-list th,.group-list td{border-width:1px!important;border-style:solid!important;padding:5px 15px!important;}'
+        }
+    });
 
     var targetBtn = $('button[class="d2l-button"][data-location^="user_group_list.d2l"]');
     if (!targetBtn.length) return;
@@ -585,7 +630,10 @@ function homepageFunc() {
         style += 'd2l-organization-info {display: none!important}';
     if (options.HOME_HideMetaEndDate)
         style += 'd2l-user-activity-usage {display: none!important}';
-    injectCSS(style, 'head', 'text');
+    chrome.runtime.sendMessage({
+        action: 'insertCSS',
+        data: {code: style}
+    });
 
     // course tile thumb
     if (options.COURSE_CustomThumb) {
@@ -845,14 +893,14 @@ function initDarklightFunc() {
         listMembersBtn();
     }
 
-    // content resize
-    if (currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/g) && options.COURSE_ContentResizeBtn) {
-        resizeContentBtn('content');
+    // content page func
+    if (currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/g)) {
+        contentPageFunc('content');
     }
 
     // quiz & survey resize
     if ((currURL.match(/\/quizzing\/user\/attempt\//g) || currURL.match(/\/survey\/user\/attempt\//g)) && options.QUIZ_ContentResizeBtn) {
-        resizeContentBtn('quiz');
+        contentPageFunc('quiz');
     }
 
     // homepage

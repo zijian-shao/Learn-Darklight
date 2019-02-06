@@ -145,22 +145,6 @@
     padding-bottom: 5px;
 }
 
-d2l-dropdown-menu .d2l-dropdown-content-top,
-d2l-dropdown-menu .d2l-dropdown-content-bottom {
-    width: 100%;
-}
-
-d2l-dropdown-menu .d2l-dropdown-content-width > div {
-    display: block !important;
-    float: left !important;
-}
-
-d2l-dropdown-menu .d2l-dropdown-content-width > div:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
 /* navbar */
 
 .d2l-navigation-s-logo img {
@@ -389,8 +373,8 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 }
 
 .d2l-collapsepane-content {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 .d2l-collapsepane-content > div.d2l-placeholder.d2l-placeholder-live > div.d2l-placeholder.d2l-placeholder-live > div {
@@ -432,11 +416,6 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 }
 
 /* course selector */
-.d2l-courseselector-wrapper .d2l-datalist {
-    padding-top: 10px !important;
-    padding-bottom: 0 !important;
-}
-
 .d2l-courseselector-wrapper .d2l-datalist-item {
     border: none;
 }
@@ -492,5 +471,9 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 }
 
 .d2l-shim {
+    background: #000;
+}
+
+.d2l-navigation-s-mobile-menu-mask {
     background: #000;
 }

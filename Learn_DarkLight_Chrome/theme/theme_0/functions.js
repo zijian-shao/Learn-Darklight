@@ -12,12 +12,15 @@ function initTheme() {
         '{color:' + primColor + '!important}';
     // navbar line
     cssText += '.d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header' +
-        '{border-bottom-color:' + primColor + '}';
+        '{border-bottom-color:' + primColor + '!important}';
     // navbar logo icon
     cssText += '.d2l-navigation-s-highlight-bar{background:' + primColor + '!important}';
     cssText += '.d2l-navigation-s-button-highlight:focus d2l-icon, .d2l-navigation-s-button-highlight:hover d2l-icon, button.d2l-navigation-s-button-highlight:focus, button.d2l-navigation-s-button-highlight:hover' +
-        '{color:' + primColor + ';}';
-    injectCSS(cssText, 'body', 'text');
+        '{color:' + primColor + '!important;}';
+    chrome.runtime.sendMessage({
+        action: 'insertCSS',
+        data: {code: cssText}
+    });
 
 
     if (!isWLU()) {
@@ -25,7 +28,10 @@ function initTheme() {
         // bg - waterloo
         if (currURL.match(/quizzing/g) || currURL.match(/survey/g) || currURL.match(/\/admin\//g)) {
             // quiz & survey
-            injectCSS('.d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width{min-height:0;}', 'body', 'text');
+            chrome.runtime.sendMessage({
+                action: 'insertCSS',
+                data: {code: '.d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width{min-height:0!important;}'}
+            });
         } else {
             $('.d2l-page-main').prepend('<div class="darklight-waterloo" style="background-image: url(' + baseURL + 'img/waterloo_background.png)"></div>');
         }

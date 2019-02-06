@@ -34,8 +34,10 @@ function getOptionListDefault() {
         HOME_HideMetaEndDate: false,
         HOME_SwitchAnnounceAndCalendar: false,
         COURSE_ContentResizeBtn: true,
+        COURSE_AutoScrollToContent: false,
         COURSE_CustomThumb: true,
         COURSE_DirectToContent: false,
+        COURSE_AutoEnterFullScreen: false,
         QUIZ_ContentResizeBtn: true,
         GROUP_ListMembersBtn: true
     };

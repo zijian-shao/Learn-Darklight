@@ -379,6 +379,12 @@ hr {
     text-transform: uppercase;
 }
 
+.section .group .group-title:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .section .group .group-title .group-subtitle {
     margin-top: 5px;
     font-weight: lighter;
@@ -396,6 +402,12 @@ hr {
     float: left;
 }
 
+.section .group .group-content:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .section .group .group-title.full-width {
     width: 100%;
     padding: 0;
@@ -408,6 +420,50 @@ hr {
 
 .section .group .group-content p {
     margin-top: 0;
+}
+
+.section .group.group-parent {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.section .group.group-parent .group-content {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+
+.section .group.group-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.section .group.group-child .group-content {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+
+.section .group.group-child:last-child {
+    border-bottom: none;
+    padding-bottom: 20px;
+}
+
+.section .group.group-child:last-child .group-content {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.section .group .space {
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.section .group .space:before, .section .group .space:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .copyright {
