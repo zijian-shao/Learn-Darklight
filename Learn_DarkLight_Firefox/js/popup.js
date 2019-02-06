@@ -39,7 +39,7 @@ function initPopup() {
         return urlText;
     }
 
-    chrome.storage.sync.get(getOptionListDefault(), function (items) {
+    browser.storage.sync.get(getOptionListDefault(), function (items) {
         $('#enable-darklight').prop('checked', items.GLB_Enabled);
 
         var quickLinks = $('#quick-access-links');

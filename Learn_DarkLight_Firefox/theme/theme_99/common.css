@@ -12,10 +12,6 @@
     margin-right: -20px;
 }
 
-.darklight-homepage-calendar-widget .d2l-widget-header .d2l-heading {
-    font-size: 14px !important;
-}
-
 .darklight-homepage-calendar-item {
     padding: 20px;
 }
@@ -23,4 +19,13 @@
 /* navbar */
 .d2l-navigation-s-logo img {
     max-height: 50px;
+}
+
+/* content page panel */
+.d2l-page-collapsepane-container {
+    padding-top: 45px;
+}
+
+.daylight .d2l-page-collapsepane-shadow {
+    top: 90px;
 }

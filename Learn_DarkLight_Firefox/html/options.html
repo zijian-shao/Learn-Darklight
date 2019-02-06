@@ -414,28 +414,28 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Custom CSS -->
-                <div class="group">
+                    <div class="space"></div>
+
+                    <!-- Custom CSS -->
                     <div class="group-title"><label for="custom-css" class="textarea-label">Custom CSS</label></div>
                     <div class="group-content">
                     <textarea name="custom-css" id="custom-css" rows="8" class="input-box width-100 block"
                               data-option-name="GLB_CustomCSS"></textarea>
                     </div>
-                </div>
 
-                <!-- Custom JS -->
-                <div class="group">
+                    <div class="space"></div>
+
+                    <!-- Custom JS -->
                     <div class="group-title"><label for="custom-js" class="textarea-label">Custom JS</label></div>
                     <div class="group-content">
                     <textarea name="custom-js" id="custom-js" rows="8" class="input-box width-100 block"
                               data-option-name="GLB_CustomJS"></textarea>
                     </div>
-                </div>
 
-                <!-- Save custom style buttons -->
-                <div class="group">
+                    <div class="space"></div>
+
+                    <!-- Save custom style buttons -->
                     <div class="group-title">&nbsp;</div>
                     <div class="group-content">
                         <a href="#" class="btn btn-primary" id="custom-save">Save Styles</a>
@@ -443,7 +443,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- Themes End -->
 
@@ -462,7 +461,7 @@
                                    data-option-type="switch">
                             <label for="opt-courses-1-0"></label>
                         </div>
-                        <label for="opt-courses-1-0" class="checkbox-label">Auto re-direct to course content
+                        <label for="opt-courses-1-0" class="checkbox-label">Auto redirect to course content
                             page</label>
                         <a class="option-tip-toggle">?</a>
                         <div class="option-tip hidden">
@@ -475,7 +474,59 @@
                 </div>
             </div>
 
+
+            <!-- Course Content -->
             <div class="group">
+                <div class="group-title">Content</div>
+                <div class="group-content">
+
+                    <!-- Content size control -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-1-1" data-option-name="COURSE_ContentResizeBtn"
+                                   data-option-type="switch">
+                            <label for="opt-pages-1-1"></label>
+                        </div>
+                        <label for="opt-pages-1-1" class="checkbox-label">Add content size control buttons</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Add a group of buttons to the right of course content pages to allow you resize the
+                                content frame or unblock page scroll.</p>
+                        </div>
+                    </div>
+
+                    <!-- Auto scroll to content -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-courses-1-2" data-option-name="COURSE_AutoScrollToContent"
+                                   data-option-type="switch">
+                            <label for="opt-courses-1-2"></label>
+                        </div>
+                        <label for="opt-courses-1-2" class="checkbox-label">Auto jump to course content viewer</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Automatically jump to the top of the content if file is loaded in iframe.</p>
+                        </div>
+                    </div>
+
+                    <!-- Auto enter full screen -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-courses-1-3" data-option-name="COURSE_AutoEnterFullScreen"
+                                   data-option-type="switch">
+                            <label for="opt-courses-1-3"></label>
+                        </div>
+                        <label for="opt-courses-1-3" class="checkbox-label">Auto switch to full screen mode</label>
+                        <a class="option-tip-toggle">?</a>
+                        <div class="option-tip hidden">
+                            <p>Automatically switch to full screen mode if the content file is using pdf viewer.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="group group-parent">
 
                 <!-- Custom thumb control -->
                 <div class="group-title">Custom Cover Control</div>
@@ -499,7 +550,7 @@
 
             </div>
 
-            <div class="group">
+            <div class="group group-child">
 
                 <!-- Add thumb -->
                 <div class="group-title">Add Custom Cover Picture</div>
@@ -586,7 +637,7 @@
                 </div>
 
             </div>
-            <div class="group">
+            <div class="group group-child">
 
                 <!-- Saved thumbs -->
                 <div class="group-title margin-bottom-10">Saved Cover Pictures</div>
@@ -709,30 +760,6 @@
                 </div>
             </div>
 
-            <!-- Course Content -->
-            <div class="group">
-                <div class="group-title">Course Content</div>
-                <div class="group-content">
-
-                    <!-- Content size control -->
-                    <div class="option-group checkbox-group">
-                        <div class="checkbox-slide">
-                            <input type="checkbox" id="opt-pages-1-0" data-option-name="COURSE_ContentResizeBtn"
-                                   data-option-type="switch">
-                            <label for="opt-pages-1-0"></label>
-                        </div>
-                        <label for="opt-pages-1-0" class="checkbox-label">Add content size control buttons to course
-                            content pages</label>
-                        <a class="option-tip-toggle">?</a>
-                        <div class="option-tip hidden">
-                            <p>Add a group of buttons to the right of course content pages to allow you resize the
-                                content frame and unblock page scroll.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
             <!-- Quiz & Survey -->
             <div class="group">
                 <div class="group-title">Quiz & Survey</div>
@@ -769,9 +796,8 @@
                                    data-option-type="switch">
                             <label for="opt-pages-3-0"></label>
                         </div>
-                        <label for="opt-pages-3-0" class="checkbox-label">Add "Display group members" button on
-                            available
-                            groups page</label>
+                        <label for="opt-pages-3-0" class="checkbox-label">Add display group members button on
+                            available groups page</label>
                         <a class="option-tip-toggle">?</a>
                         <div class="option-tip hidden">
                             <p>Click the button and all members of a group will be displayed directly on the page

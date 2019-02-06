@@ -8,16 +8,17 @@ function initTheme() {
             filterText += 'brightness(0.8) ';
         if (getCustomThemeOption('invertIframe'))
             filterText += 'invert(1) ';
-        cssText += 'iframe{-webkit-filter:' + filterText + ';filter:' + filterText + ';}';
+        if (filterText != '')
+            cssText += 'iframe{-webkit-filter:' + filterText + '!important;filter:' + filterText + '!important;}';
     }
-
     if (getCustomThemeOption('darkCoursePic')) {
-        cssText += '.d2l-enrollment-card-image-container.shown {opacity: 0.8 !important;}';
-        cssText += '#CourseImageBannerPlaceholderId .d2l-course-banner {opacity: 0.8 !important;}';
+        cssText += '.d2l-enrollment-card-image-container.shown{opacity:0.8!important;}';
+        cssText += '#CourseImageBannerPlaceholderId .d2l-course-banner{opacity:0.8!important;}';
     }
-
-    if (cssText != '')
-        injectCSS(cssText, 'body', 'text');
+    browser.runtime.sendMessage({
+        action: 'insertCSS',
+        data: {code: cssText}
+    });
 
     // custom options - invert iframe
     if (getCustomThemeOption('invertIframe') && currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/i)) {
@@ -54,7 +55,10 @@ function initTheme() {
         // bg - waterloo
         if (currURL.match(/quizzing/g) || currURL.match(/survey/g) || currURL.match(/\/admin\//g)) {
             // quiz & survey
-            injectCSS('.d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width{min-height:0;}', 'body', 'text');
+            browser.runtime.sendMessage({
+                action: 'insertCSS',
+                data: {code: '.d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width{min-height:0!important;}'}
+            });
         } else {
             // $('.d2l-page-main').pre  pend('<div class="darklight-waterloo" style="background-image: url(' + baseURL + 'img/waterloo_background.png); opacity: 0.4;"></div>');
         }

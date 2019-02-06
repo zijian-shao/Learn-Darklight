@@ -60,7 +60,7 @@ function getUninstallLink() {
     }
 
     var urlText = 'https://www.zijianshao.com/dlight/uninstall/?platform=' + _getBrowser().name.toLowerCase() +
-        '&version=' + encodeURI(chrome.runtime.getManifest().version) +
+        '&version=' + encodeURI(browser.runtime.getManifest().version) +
         '&browser=' + encodeURI(_getBrowser().name + ' ' + _getBrowser().version) +
         '&os=' + encodeURI(_getOS());
 
