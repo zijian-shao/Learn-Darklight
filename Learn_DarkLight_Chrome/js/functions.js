@@ -511,22 +511,22 @@ function homepageFunc() {
                     _alertHtml.find('a').remove();
                     _alertHtml.find('script').remove();
                     if (_alertHtml.text().trim() == '') {
-                        $(e).parents('div.d2l-widget').remove();
+                        $(e).closest('div.d2l-widget').remove();
                     }
                 } else {
                     // remove news if empty
                     if ($(e).parent('div.d2l-widget-header').next('div.d2l-widget-content').text().match(/There are no/)) {
-                        $(e).parents('div.d2l-widget').remove();
+                        $(e).closest('div.d2l-widget').remove();
                     }
                 }
             }
         } else if (headText.match(/Check My System/) && !isWLU()) {
             if (options.HOME_HideCheckMySys) {
-                $(e).parents('div.d2l-widget').remove();
+                $(e).closest('div.d2l-widget').remove();
             }
         } else if (headText.match(/Courses and Communities/) && !isWLU()) {
 
-            courseWidget = $(e).parents('div.d2l-widget');
+            courseWidget = $(e).closest('div.d2l-widget');
 
 
             if (options.HOME_AddCalendar) {
@@ -602,9 +602,9 @@ function homepageFunc() {
 
         } else if (headText.match(/Calendar/) && isWLU()) {
             // for WLU homepage calendar
-            $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
+            $(e).closest('div.d2l-widget').addClass('darklight-course-home-calendar');
         } else if (headText.match(/Announcements/) && !isWLU()) {
-            announcementWidget = $(e).parents('div.d2l-widget');
+            announcementWidget = $(e).closest('div.d2l-widget');
         }
     });
 
@@ -619,7 +619,7 @@ function homepageFunc() {
         var heading = $('.homepage-col-12 .d2l-heading');
         heading.each(function () {
             if ($(this).text().match(/Privacy/)) {
-                $(this).parents('div.homepage-col-12').remove();
+                $(this).closest('div.homepage-col-12').remove();
             }
         });
     }
