@@ -463,7 +463,7 @@ function contentPageFunc() {
                 _fullScreenBtn();
             }, 1000);
 
-            chrome.runtime.sendMessage({
+            browser.runtime.sendMessage({
                 action: 'insertCSS',
                 data: {code: '#d2l_body,.d2l-body{overflow:visible!important}'}
             });
