@@ -29,7 +29,7 @@ function getOptionListDefault() {
         HOME_AutoHideSysAlert: true,
         HOME_HideCheckMySys: true,
         HOME_AddCalendar: true,
-        HOME_ShowWeekDayOnCalendar:false,
+        HOME_ShowWeekDayOnCalendar: false,
         HOME_HidePrivacy: true,
         HOME_HideMetaTerm: false,
         HOME_HideMetaEndDate: false,
@@ -122,7 +122,7 @@ function getThemeConfigs(id) {
             previewColor: "#0088fb",
             overlayColor: "#f6f7f8",
             headerHeight: 110,
-            hidden: false,
+            isNew: true,
             options: [
                 {
                     key: "fullWidthLayout",
@@ -147,4 +147,25 @@ function getThemeConfigs(id) {
     else
         return configs["theme_" + id];
 
+}
+
+function getLink(key) {
+    var list = {
+        darklightStore: 'https://chrome.google.com/webstore/detail/learn-darklight/lhodieepeghcemhpbloffmljoklaklho',
+        azureStore: 'https://chrome.google.com/webstore/detail/waterlooworks-azure/peeaakkcmdoeljddgdkcailflcballmm',
+        autologStore: 'https://chrome.google.com/webstore/detail/waterloo-autolog/ncpmlgiinkikhgijoplpnjggobinhkpl',
+        raspberryStore: 'https://chrome.google.com/webstore/detail/quest-raspberry/ifhnmgllkaeebiklhakndljclagikoak',
+        feedback: 'https://docs.google.com/forms/d/e/1FAIpQLSdrOnFC70L2juZuUzAy0r2xmPPCiWQ5sR7-U_c8ZQIuJYsqsg/viewform?usp=pp_url&entry.131896974=@@extVersion@@&entry.763960959=@@browser@@&entry.1389556052=@@os@@',
+        officialWebsite: 'https://www.zijianshao.com/dlight/',
+        github: 'https://github.com/SssWind/Learn-Darklight',
+        donate: 'https://www.paypal.me/zjshao',
+        linkShare: 'https://www.zijianshao.com/dlight/sharelink/?platform=chrome',
+        facebookShare: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome',
+        twitterShare: 'https://twitter.com/intent/tweet?hashtags=UWaterloo&original_referer=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2F&ref_src=twsrc%5Etfw&text=New%20themes%20for%20Waterloo%20Learn!%20Get%20Learn%20Darklight%20now!&tw_p=tweetbutton&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome',
+        redditShare: 'https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&title=New%20themes%20for%20Waterloo%20Learn!%20Get%20Learn%20Darklight%20now!',
+        gplusShare: 'https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome',
+        linkedInShare: 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome',
+        mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension'
+    };
+    return list[key];
 }

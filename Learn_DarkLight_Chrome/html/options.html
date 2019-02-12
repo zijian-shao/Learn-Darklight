@@ -20,11 +20,12 @@
             <li data-option-tab-index="0" data-option-tab-name="general" id="nav-tab-0" class="nav-tab active">General
             </li>
             <li data-option-tab-index="1" data-option-tab-name="themes" id="nav-tab-1" class="nav-tab">Themes
-                <div class="new-tag">NEW</div>
+                <div class="new-tag margin-left-5">NEW</div>
             </li>
             <li data-option-tab-index="2" data-option-tab-name="courses" id="nav-tab-2" class="nav-tab">Courses</li>
             <li data-option-tab-index="3" data-option-tab-name="pages" id="nav-tab-3" class="nav-tab">Pages</li>
             <li data-option-tab-index="4" data-option-tab-name="about" id="nav-tab-4" class="nav-tab">About</li>
+            <li class="nav-tab link link-donate"><a target="_blank" data-href="donate">Donate</a></li>
         </ul>
         <div class="share">
             <div class="share-title">
@@ -33,27 +34,22 @@
             <!-- Share Box -->
             <div class="share-box">
                 <!-- Facebook Share -->
-                <a data-open-in="popup" data-width="560"
-                   data-href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&display=popup&ref=plugin&src=share_button"
-                   target="_blank" class="share-link share-link-facebook"></a>
-
+                <a data-open-in="popup" data-width="560" data-href="facebookShare" target="_blank"
+                   class="share-link share-link-facebook"></a>
                 <!-- Twitter Share -->
-                <a data-open-in="popup" data-width="500"
-                   data-href="https://twitter.com/intent/tweet?hashtags=UWaterloo&original_referer=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2F&ref_src=twsrc%5Etfw&text=Learn%20Darklight%20is%20a%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn&tw_p=tweetbutton&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
-                   target="_blank" class="share-link share-link-twitter"></a>
-
+                <a data-open-in="popup" data-width="500" data-href="twitterShare" target="_blank"
+                   class="share-link share-link-twitter"></a>
                 <!-- Reddit Share -->
-                <a data-open-in="newtab"
-                   data-href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&title=Learn%20Darklight%20-%20The%20browser%20extension%20that%20offers%20multiple%20themes%20for%20Waterloo%20Learn"
-                   target="_blank" class="share-link share-link-reddit"></a>
-
+                <a data-open-in="newtab" data-href="redditShare" target="_blank"
+                   class="share-link share-link-reddit"></a>
                 <!-- Google Plus Share -->
-                <a data-open-in="popup" data-width="380"
-                   data-href="https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome"
-                   target="_blank" class="share-link share-link-googleplus"></a>
-
+                <!--<a data-open-in="popup" data-width="380" data-href="gplusShare" target="_blank"-->
+                <!--class="share-link share-link-googleplus"></a>-->
+                <!-- LinkedIn Share -->
+                <a data-open-in="popup" data-width="500" data-href="linkedInShare" target="_blank"
+                   class="share-link share-link-linkedin"></a>
                 <!-- Copy Link -->
-                <a data-open-in="copy" class="share-link share-link-copy"></a>
+                <a data-open-in="copy" class="share-link share-link-copy" data-href="linkShare"></a>
             </div>
         </div>
         <div class="copyright">
@@ -149,11 +145,11 @@
                             <label for="opt-general-1-1"></label>
                         </div>
                         <div class="checkbox-content">
-                            <label for="opt-general-1-1" class="checkbox-label">Auto fix navigation bar</label>
+                            <label for="opt-general-1-1" class="checkbox-label">Use sticky navigation bar</label>
                             <a class="option-tip-toggle">?</a>
                         </div>
                         <div class="option-tip hidden">
-                            <p>Fix the navigation bar at the top if it is not visible on the screen.</p>
+                            <p>Stick the navigation bar at the top if it is not visible on the screen.</p>
                         </div>
                     </div>
 
@@ -165,13 +161,12 @@
                         </div>
                         <div class="checkbox-content">
                             <label for="opt-general-1-2" class="checkbox-label">Add back-to-top button to fixed
-                                navigation
-                                bar</label>
+                                navigation bar</label>
                             <a class="option-tip-toggle">?</a>
                         </div>
                         <div class="option-tip hidden">
                             <p>Click the right side of the navigation bar to scroll to top of the page. This function is
-                                only valid when "Auto fix navigation bar" is enabled.</p>
+                                only valid when "Use sticky navigation bar" is enabled.</p>
                         </div>
                     </div>
 
@@ -215,8 +210,7 @@
 
                 <!-- Recommended -->
                 <div class="group-content full-width margin-bottom-10">
-                    <a href="https://chrome.google.com/webstore/detail/waterlooworks-azure/peeaakkcmdoeljddgdkcailflcballmm"
-                       target="_blank">
+                    <a data-href="azureStore" target="_blank">
                         <div class="rec-item">
                             <div class="rec-icon"><img src="../img/options-rec-azure.png" alt="WaterlooWorks Azure">
                             </div>
@@ -226,8 +220,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="https://chrome.google.com/webstore/detail/waterloo-autolog/ncpmlgiinkikhgijoplpnjggobinhkpl"
-                       target="_blank">
+                    <a data-href="autologStore" target="_blank">
                         <div class="rec-item">
                             <div class="rec-icon"><img src="../img/options-rec-log.png" alt="Waterloo Autolog"></div>
                             <div class="rec-info">
@@ -236,8 +229,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="https://chrome.google.com/webstore/detail/quest-raspberry/ifhnmgllkaeebiklhakndljclagikoak"
-                       target="_blank">
+                    <a data-href="raspberryStore" target="_blank">
                         <div class="rec-item">
                             <div class="rec-icon"><img src="../img/options-rec-quest.png" alt="Quest Raspberry"></div>
                             <div class="rec-info">
@@ -259,7 +251,9 @@
             <div class="group">
 
                 <!-- Theme list -->
-                <div class="group-title full-width">Select Theme</div>
+                <div class="group-title full-width">Select Theme
+                    <div class="group-subtitle">Click the 3-dot button to custom each theme</div>
+                </div>
                 <div class="group-content full-width">
                     <div class="theme-list" id="theme-list"></div>
                 </div>
@@ -531,6 +525,7 @@
                             <label for="opt-courses-1-2"></label>
                         </div>
                         <div class="checkbox-content">
+                            <div class="new-tag-o margin-right-5">NEW</div>
                             <label for="opt-courses-1-2" class="checkbox-label">Auto jump to course content
                                 viewer</label>
                             <a class="option-tip-toggle">?</a>
@@ -548,6 +543,7 @@
                             <label for="opt-courses-1-3"></label>
                         </div>
                         <div class="checkbox-content">
+                            <div class="new-tag-o margin-right-5">NEW</div>
                             <label for="opt-courses-1-3" class="checkbox-label">Auto switch to full screen mode</label>
                             <a class="option-tip-toggle">?</a>
                         </div>
@@ -717,8 +713,13 @@
                             <label for="opt-pages-0-7"></label>
                         </div>
                         <div class="checkbox-content">
-                            <label for="opt-pages-0-7" class="checkbox-label">Replace month with weekday on
-                                calendar</label>
+                            <label for="opt-pages-0-7" class="checkbox-label">
+                                <div class="new-tag-o margin-right-5">NEW</div>
+                                Show weekday when hovering over calendar item</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Hover over each calendar item to view weekday</p>
                         </div>
                     </div>
 
@@ -893,13 +894,10 @@
                     </div>
                 </div>
                 <div class="group-content">
-                    <a class="btn btn-primary" href="https://www.zijianshao.com/dlight/" target="_blank">Website</a>
-                    <a class="btn btn-success" href="https://www.paypal.me/zjshao" target="_blank">Donate</a>
-                    <a class="btn btn-default"
-                       href="https://github.com/SssWind/Learn-Darklight" target="_blank">GitHub</a>
-                    <a class="btn btn-default"
-                       href="https://chrome.google.com/webstore/detail/learn-darklight/lhodieepeghcemhpbloffmljoklaklho"
-                       target="_blank">Chrome Store</a>
+                    <a class="btn btn-primary" data-href="officialWebsite" target="_blank">Website</a>
+                    <a class="btn btn-success" data-href="donate" target="_blank">Donate</a>
+                    <a class="btn btn-default" data-href="github" target="_blank">GitHub</a>
+                    <a class="btn btn-default" data-href="darklightStore" target="_blank">Chrome Store</a>
                 </div>
             </div>
 
@@ -909,9 +907,8 @@
                 <div class="group-content">
                     <p>Thanks for using Learn Darklight! This extension offers several themes for the new Waterloo
                         Learn.</p>
-                    <p>If you like this extension, please <a
-                            href="https://chrome.google.com/webstore/detail/learn-darklight/lhodieepeghcemhpbloffmljoklaklho"
-                            target="_blank">rate and leave a comment</a> in Chrome Web Store.</p>
+                    <p>If you like this extension, please <a data-href="darklightStore" target="_blank">rate and leave a
+                        comment</a> in Chrome Web Store.</p>
                 </div>
             </div>
 
@@ -921,10 +918,8 @@
                 <div class="group-content">
                     <p>▷ Don't use other Waterloo Learn extensions with Darklight to avoid unexpected behaviors.</p>
                     <p>▷ Waterloo Learn may change at any time, thus the extension may not function properly.</p>
-                    <p>▷ If you have any questions regarding this extension, please email me at <a
-                            href="mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension">sam.zj.shao@gmail.com</a>
-                        or
-                        <a href="#" target="_blank" id="feedback-link">submit your feedback online</a>.
+                    <p>▷ If you have any questions regarding this extension, please email me at <a data-href="mailTo">sam.zj.shao@gmail.com</a>
+                        or <a target="_blank" id="feedback-link">submit your feedback online</a>.
                     </p>
                 </div>
             </div>
@@ -966,23 +961,23 @@
 <div class="whatsnew hidden" id="whatsnew-content">
     <div class="whatsnew-banner" style="background-image: url(../theme/theme_3/preview.png)"></div>
     <h3>What's New in V1.7</h3>
-    <ul class="margin-y">
+    <ul class="margin-y whatsnew-list">
         <li>
             <small>Themes</small>
             <p>New <span style="color:#0088fb"><strong>Dodger Blue</strong></span> theme<br>
-                <span style="font-size: 0.9em;opacity: 0.6">Navigate to "Themes" section and select</span><br>
+                <span class="desc">Go to "Themes" section to check it out</span><br>
             </p>
         </li>
         <li>
             <small>Courses</small>
             <p>Auto jump to content / enter full screen<br>
-                <span style="font-size: 0.9em;opacity: 0.6">Need to be enabled manually</span>
+                <span class="desc">Need to be enabled manually</span>
             </p>
         </li>
         <li>
             <small>Pages</small>
             <p>Homepage calendar supports weekday<br>
-                <span style="font-size: 0.9em;opacity: 0.6">Need to be enabled manually</span>
+                <span class="desc">Need to be enabled manually</span>
             </p>
         </li>
         <li>
@@ -1000,8 +995,8 @@
 <div class="welcome hidden" id="welcome-content">
     <h3>Thanks for using Learn Darklight</h3>
     <p>This extension is designed to enhance your experience with Waterloo Learn and Laurier MyLearningSpace.</p>
-    <p><strong>For various reasons, some of the options are disabled by default. It is recommended that you browse
-        through all the options and enable them according to your needs.</strong></p>
+    <p><strong>Some options are disabled by default. It is recommended that you browse through all the options and
+        enable them according to your needs.</strong></p>
     <p>If you have any questions regarding this extension, please feel free to let me know. See "About" section
         below.</p>
     <div class="popup-btn-group">

@@ -309,18 +309,6 @@ body > header.darklight-navbar-sticky {
     background: #e8f2f9;
 }
 
-.darklight-homepage-calendar-item .weekday {
-    float: left;
-    margin-right: 5px;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    width: 2.5rem;
-    height: 2.5rem;
-    line-height: 2.5rem;
-    font-size: 0.8rem;
-    text-align: center;
-}
-
 .darklight-homepage-calendar-date {
     float: left;
     width: 2.5rem;
@@ -328,17 +316,66 @@ body > header.darklight-navbar-sticky {
     text-align: center;
     color: #565A5C;
     margin-right: 5px;
+    position: relative;
 }
 
 .darklight-homepage-calendar-date .month {
     display: block;
-    border-bottom: 1px solid #DADBD3;
     font-size: 0.8rem;
 }
 
 .darklight-homepage-calendar-date .day {
     display: block;
     font-size: 0.95rem;
+    border-top: 1px solid #DADBD3;
+}
+
+.darklight-homepage-calendar-date.darklight-homepage-calendar-date-ani .month {
+    -webkit-transition: transform 0.3s, opacity 0.3s;
+    -moz-transition: transform 0.3s, opacity 0.3s;
+    -ms-transition: transform 0.3s, opacity 0.3s;
+    -o-transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.darklight-homepage-calendar-date.darklight-homepage-calendar-date-ani .weekday {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    opacity: 0;
+    font-size: 0.8rem;
+    -webkit-transition: transform 0.3s, opacity 0.3s;
+    -moz-transition: transform 0.3s, opacity 0.3s;
+    -ms-transition: transform 0.3s, opacity 0.3s;
+    -o-transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    -webkit-transform: translateY(0.3rem);
+    -moz-transform: translateY(0.3rem);
+    -ms-transform: translateY(0.3rem);
+    -o-transform: translateY(0.3rem);
+    transform: translateY(0.3rem);
+}
+
+.darklight-homepage-calendar-item:hover .darklight-homepage-calendar-date.darklight-homepage-calendar-date-ani .month {
+    opacity: 0;
+    -webkit-transform: scale(0.85);
+    -moz-transform: scale(0.85);
+    -ms-transform: scale(0.85);
+    -o-transform: scale(0.85);
+    transform: scale(0.85);
+}
+
+.darklight-homepage-calendar-item:hover .darklight-homepage-calendar-date.darklight-homepage-calendar-date-ani .weekday {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateY(0);
 }
 
 .darklight-homepage-calendar-content {
@@ -570,4 +607,9 @@ d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-courseselector-wra
 /* tmp fix for popup max height calc err */
 .d2l-dialog-inline .d2l-dialog-inline-body {
     max-height: none !important;
+}
+
+/* flyout */
+#flyout.flyout-impl {
+    z-index: 490 !important;
 }

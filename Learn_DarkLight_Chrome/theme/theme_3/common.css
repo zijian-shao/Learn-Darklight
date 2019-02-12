@@ -516,6 +516,7 @@ d2l-dropdown div.d2l-dropdown-content-width {
 .d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
     background: #f9fafb;
 }
+
 /* button */
 .d2l-button, .d2l-button * {
     vertical-align: bottom !important;
@@ -532,6 +533,12 @@ d2l-dropdown div.d2l-dropdown-content-width {
 
 .d2l-button[primary].d2l-button-focus, .d2l-button[primary].d2l-button-hover, .d2l-button[primary]:focus, .d2l-button[primary]:hover, .d2l-button[primary][active] {
     background-color: #117ad7;
+}
+
+.d2l-floating-buttons-container.d2l-floating-buttons-floating.d2l-floating-buttons {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 /* new homepage course tabs */

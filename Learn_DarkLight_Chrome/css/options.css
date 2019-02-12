@@ -235,6 +235,10 @@ hr {
     margin: 0 !important;
 }
 
+.margin-top-5 {
+    margin-top: 5px !important;
+}
+
 .margin-top-10 {
     margin-top: 10px !important;
 }
@@ -245,6 +249,22 @@ hr {
 
 .margin-bottom-10 {
     margin-bottom: 10px !important;
+}
+
+.margin-left-5 {
+    margin-left: 5px !important;
+}
+
+.margin-left-10 {
+    margin-left: 10px !important;
+}
+
+.margin-right-5 {
+    margin-right: 5px !important;
+}
+
+.margin-right-10 {
+    margin-right: 10px !important;
 }
 
 .indent-10 {
@@ -335,6 +355,7 @@ hr {
     -ms-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
+    position: relative;
 }
 
 .sidebar .nav > li:hover {
@@ -347,6 +368,35 @@ hr {
     background: #fff;
     font-weight: bold;
     cursor: default;
+}
+
+.sidebar .nav > li.link:before {
+    content: '\00a0';
+}
+
+.sidebar .nav > li.link a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 18px 25px;
+    top: 0;
+    left: 0;
+    color: #aaa;
+    font-weight: normal;
+    text-decoration: none !important;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav > li.link:hover a {
+    color: #fff;
+}
+
+.sidebar .nav > li.link-donate:hover {
+    background: #5bb75b;
 }
 
 .content {
@@ -421,6 +471,11 @@ hr {
     width: 100%;
     padding: 0;
     margin-bottom: 10px;
+}
+
+.section .group .group-title.full-width .group-subtitle {
+    display: inline-block;
+    margin-left: 0.5em;
 }
 
 .section .group .group-content.full-width {
@@ -529,40 +584,24 @@ hr {
     background-image: url(../img/share-facebook.png);
 }
 
-.share-box a.share-link-facebook:hover {
-    /*background-color: #3b5998;*/
-}
-
 .share-box a.share-link-twitter {
     background-image: url(../img/share-twitter.png);
-}
-
-.share-box a.share-link-twitter:hover {
-    /*background-color: #1da1f2;*/
 }
 
 .share-box a.share-link-reddit {
     background-image: url(../img/share-reddit.png);
 }
 
-.share-box a.share-link-reddit:hover {
-    /*background-color: #ff5700;*/
-}
-
 .share-box a.share-link-copy {
     background-image: url(../img/share-copy.png);
-}
-
-.share-box a.share-link-copy:hover {
-    /*background-color: #178bf4;*/
 }
 
 .share-box a.share-link-googleplus {
     background-image: url(../img/share-googleplus.png);
 }
 
-.share-box a.share-link-googleplus:hover {
-    /*background-color: #dc4e41;*/
+.share-box a.share-link-linkedin {
+    background-image: url(../img/share-linkedin.png);
 }
 
 .darklight-toast {
@@ -575,7 +614,7 @@ hr {
     padding: 15px 30px;
     text-align: center;
     color: #fff;
-    background: rgba(91, 183, 91, 0.9);
+    background: rgba(91, 183, 91, 0.95);
     -webkit-box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
     -moz-box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
     box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
@@ -651,7 +690,7 @@ hr {
     float: left;
     width: 49%;
     margin: 0 2% 15px 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
     border: 1px solid #ccc;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -664,9 +703,14 @@ hr {
     margin-right: 0;
 }
 
-.theme-item > img {
+.theme-item img {
     height: 125px;
     float: left;
+}
+
+.theme-item-wrapper {
+    position: relative;
+    overflow: hidden;
 }
 
 .theme-item .theme-content {
@@ -793,6 +837,71 @@ hr {
     -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 4px #5bb75b;
     -moz-box-shadow: 0 0 0 1px #fff, 0 0 0 4px #5bb75b;
     box-shadow: 0 0 0 1px #fff, 0 0 0 4px #5bb75b;
+}
+
+.theme-item-new-tag {
+    position: absolute;
+    display: block;
+    left: -5px;
+    bottom: 15%;
+    width: 51%;
+    height: 2em;
+    padding-right: 5px;
+    line-height: 2em;
+    background: #ed5d31;
+    background: -moz-linear-gradient(left, #ed5d31 0%, #ec873b 100%);
+    background: -webkit-linear-gradient(left, #ed5d31 0%, #ec873b 100%);
+    background: linear-gradient(to right, #ed5d31 0%, #ec873b 100%);
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    transform: skew(-5deg);
+    z-index: 10;
+    -webkit-box-shadow: 2px 2px 0 rgba(179, 91, 55, 0.3);
+    -moz-box-shadow: 2px 2px 0 rgba(179, 91, 55, 0.3);
+    box-shadow: 2px 2px 0 rgba(179, 91, 55, 0.3);
+    -webkit-transition: transform 0.2s ease, opacity 0.2s ease;
+    -moz-transition: transform 0.2s ease, opacity 0.2s ease;
+    -ms-transition: transform 0.2s ease, opacity 0.2s ease;
+    -o-transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.theme-item-new-tag:before {
+    content: '';
+    position: absolute;
+    display: block;
+    left: -2px;
+    bottom: 0;
+    width: 10px;
+    height: 2em;
+    background: #ed5d31;
+    transform: skew(5deg);
+}
+
+.theme-item-new-tag:after {
+    content: '';
+    position: absolute;
+    display: block;
+    left: -7px;
+    bottom: -6px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-top-color: #b94f28;
+    transform: rotate(85deg);
+    z-index: -1;
+}
+
+.theme-item.selected .theme-item-new-tag {
+    transform: translateY(-0.5em);
+    opacity: 0;
+}
+
+.theme-item.theme-item-new .theme-content > label {
+    /*background: #ec873b;*/
+    /*background: #ec873b;*/
+    /*border-color: #ec873b;*/
 }
 
 .font-item {
@@ -1062,18 +1171,44 @@ hr {
 }
 
 .new-tag {
-    margin: 0 0 0 6px;
-    padding: 0 3px;
+    margin: 0;
+    padding: 2px 3px;
+    line-height: 1em;
     display: inline-block;
     width: auto;
     height: auto;
     font-size: 0.7em;
-    line-height: 1.4em;
     background: #ec873b;
     color: #fff;
     text-align: center;
     border-radius: 2px;
     font-weight: bold;
+    -webkit-transform: translateY(-1px);
+    -moz-transform: translateY(-1px);
+    -ms-transform: translateY(-1px);
+    -o-transform: translateY(-1px);
+    transform: translateY(-1px);
+}
+
+.new-tag-o {
+    margin: 0;
+    padding: 2px 3px;
+    line-height: 1em;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    font-size: 0.7em;
+    background: transparent;
+    border: 1.5px solid #ec873b;
+    color: #ec873b;
+    text-align: center;
+    border-radius: 2px;
+    font-weight: bold;
+    -webkit-transform: translateY(-1px);
+    -moz-transform: translateY(-1px);
+    -ms-transform: translateY(-1px);
+    -o-transform: translateY(-1px);
+    transform: translateY(-1px);
 }
 
 .option-group {
@@ -1137,7 +1272,7 @@ hr {
     margin: 0;
     padding: 0 0 10px;
     color: #666;
-    font-size: 0.9em;
+    font-size: 1em;
 }
 
 .thumb-image-type-container {
@@ -1588,33 +1723,6 @@ textarea.input-box {
     margin-bottom: 0;
 }
 
-.popup-content ul {
-    list-style-type: none;
-}
-
-.popup-content ul li {
-    padding-left: 0.2em;
-    line-height: 2em;
-}
-
-.popup-content ul li small {
-    display: block;
-    float: left;
-    width: 70px;
-    margin: 1px 0;
-    padding: 2px 0;
-    line-height: 1.2em;
-    border: 1px solid #000;
-    text-align: center;
-    text-transform: uppercase;
-    border-radius: 10px;
-    font-size: 11px;
-}
-
-.popup-content ul li p {
-    padding-left: 80px;
-}
-
 .popup-btn-group {
     border-top: 1px solid #ddd;
     padding-top: 1.2em;
@@ -1986,6 +2094,12 @@ textarea.input-box {
     .darklight-toast {
         width: 100%;
     }
+
+    .section .group .group-title.full-width .group-subtitle {
+        display: block;
+        margin-left: 0;
+    }
+
 }
 
 @media (max-width: 567px) {
@@ -2022,4 +2136,36 @@ textarea.input-box {
     padding-top: 25%;
     background: transparent center top;
     background-size: cover;
+}
+
+.whatsnew-list {
+    list-style-type: none;
+}
+
+.whatsnew-list li {
+    padding-left: 0.2em;
+    line-height: 2em;
+}
+
+.whatsnew-list li small {
+    display: block;
+    float: left;
+    width: 70px;
+    margin: 1px 0;
+    padding: 2px 0;
+    line-height: 1.2em;
+    border: 1px solid #000;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 10px;
+    font-size: 11px;
+}
+
+.whatsnew-list li p {
+    padding-left: 80px;
+}
+
+.whatsnew-list .desc {
+    font-size: 0.9em;
+    opacity: 0.5;
 }
