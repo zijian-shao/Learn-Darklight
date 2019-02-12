@@ -819,7 +819,7 @@ function homepageCalendar(courseWidget) {
         finalList.sort(_sortEvents);
         placeHolder.html('');
 
-        var todayTag = '', dateElem = '';
+        var todayTag = '', dateElem = '', dateCls = '', weekdayElem = '';
         var today = new Date();
         var targetDay = null;
         for (var i = 0, len = finalList.length; i < len; i++) {
@@ -831,16 +831,22 @@ function homepageCalendar(courseWidget) {
                 todayTag = '';
             }
 
-            dateElem = '<div class="darklight-homepage-calendar-date" title="' +
-                weekdayTxt[finalList[i].weekDay] + ', ' +
-                monthTxt[finalList[i].month] + ' ' + finalList[i].day + ', ' + finalList[i].year +
-                '">';
+
             if (options.HOME_ShowWeekDayOnCalendar) {
-                dateElem += '<span class="month">' + weekdayTxt[finalList[i].weekDay].substring(0, 3).toUpperCase() + '</span>';
+                // dateElem += '<span class="month">' + weekdayTxt[finalList[i].weekDay].substring(0, 3).toUpperCase() + '</span>';
+                dateCls = ' darklight-homepage-calendar-date-ani';
+                weekdayElem = '<span class="weekday">' + weekdayTxt[finalList[i].weekDay].substring(0, 3).toUpperCase() + '</span>';
             } else {
-                dateElem += '<span class="month">' + monthTxt[finalList[i].month].substring(0, 3).toUpperCase() + '</span>';
+                dateCls = '';
+                weekdayElem = '';
             }
-            dateElem += '<span class="day">' + finalList[i].day + '</span></div>';
+
+            dateElem = '<div class="darklight-homepage-calendar-date' + dateCls + '" title="' +
+                weekdayTxt[finalList[i].weekDay] + ', ' + monthTxt[finalList[i].month] + ' ' + finalList[i].day + ', ' + finalList[i].year + '">' +
+                '<span class="month">' + monthTxt[finalList[i].month].substring(0, 3).toUpperCase() + '</span>' +
+                '<span class="day">' + finalList[i].day + '</span>' +
+                weekdayElem +
+                '</div>';
 
             $('<a href="' + finalList[i].link + '" target="_blank" class="darklight-homepage-calendar-item">' +
                 dateElem +

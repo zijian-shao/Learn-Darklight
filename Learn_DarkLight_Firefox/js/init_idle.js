@@ -25,22 +25,9 @@ function extensionUpdate() {
         if (newVer.match(/1\.7\./) && !oldVer.match(/1\.7\./)) {
             browser.runtime.sendMessage({
                 action: 'createTab',
-                data: {url: browser.extension.getURL('/html/options.html') + '?whatsnew=' + newVer}
+                data: {url: browser.extension.getURL('/html/options.html') + '?whatsnew=' + newVer + '#themes'}
             });
-        } else if (newVer.match(/1\.5\./) && !oldVer.match(/1\.5\./)) {
-            browser.runtime.sendMessage({
-                action: 'createTab',
-                data: {url: browser.extension.getURL('/html/options.html') + '?whatsnew=' + newVer}
-            });
-        } else if (newVer == '1.1.3') {
-            // browser.runtime.sendMessage({
-            //     action: 'createTab',
-            //     data: {url: 'https://www.zijianshao.com/dlight/whatsnew/?version=1.1.0&platform=firefox'}
-            // });
-        } else if (newVer == '1.0.0') {
-
         }
-
         console.log('Extension update script executed!');
     });
 }

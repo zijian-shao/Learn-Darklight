@@ -29,7 +29,7 @@ function getOptionListDefault() {
         HOME_AutoHideSysAlert: true,
         HOME_HideCheckMySys: true,
         HOME_AddCalendar: true,
-        HOME_ShowWeekDayOnCalendar:false,
+        HOME_ShowWeekDayOnCalendar: false,
         HOME_HidePrivacy: true,
         HOME_HideMetaTerm: false,
         HOME_HideMetaEndDate: false,
@@ -122,7 +122,7 @@ function getThemeConfigs(id) {
             previewColor: "#0088fb",
             overlayColor: "#f6f7f8",
             headerHeight: 110,
-            hidden: false,
+            isNew: true,
             options: [
                 {
                     key: "fullWidthLayout",
@@ -147,4 +147,25 @@ function getThemeConfigs(id) {
     else
         return configs["theme_" + id];
 
+}
+
+function getLink(key) {
+    var list = {
+        darklightStore: 'https://addons.mozilla.org/firefox/addon/learn-darklight/',
+        azureStore: 'https://addons.mozilla.org/firefox/addon/waterlooworks-azure/',
+        autologStore: 'https://addons.mozilla.org/firefox/addon/waterloo-autolog/',
+        raspberryStore: 'https://addons.mozilla.org/firefox/addon/quest-raspberry/',
+        feedback: 'https://docs.google.com/forms/d/e/1FAIpQLSdrOnFC70L2juZuUzAy0r2xmPPCiWQ5sR7-U_c8ZQIuJYsqsg/viewform?usp=pp_url&entry.131896974=@@extVersion@@&entry.763960959=@@browser@@&entry.1389556052=@@os@@',
+        officialWebsite: 'https://www.zijianshao.com/dlight/',
+        github: 'https://github.com/SssWind/Learn-Darklight',
+        donate: 'https://www.paypal.me/zjshao',
+        linkShare: 'https://www.zijianshao.com/dlight/sharelink/?platform=firefox',
+        facebookShare: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
+        twitterShare: 'https://twitter.com/intent/tweet?hashtags=UWaterloo&original_referer=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2F&ref_src=twsrc%5Etfw&text=New%20themes%20for%20Waterloo%20Learn!%20Get%20Learn%20Darklight%20now!&tw_p=tweetbutton&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
+        redditShare: 'https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox&title=New%20themes%20for%20Waterloo%20Learn!%20Get%20Learn%20Darklight%20now!',
+        gplusShare: 'https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
+        linkedInShare: 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
+        mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension'
+    };
+    return list[key];
 }

@@ -31,12 +31,12 @@ function initOptions() {
             return {name: M[0], version: M[1]};
         }
 
-        var urlText = 'https://docs.google.com/forms/d/e/1FAIpQLSdrOnFC70L2juZuUzAy0r2xmPPCiWQ5sR7-U_c8ZQIuJYsqsg/viewform?usp=pp_url' +
-            '&entry.131896974=' + encodeURI(browser.runtime.getManifest().version) +
-            '&entry.763960959=' + encodeURI(_getBrowser().name + ' ' + _getBrowser().version) +
-            '&entry.1389556052=' + encodeURI(_getOS());
+        var urlTpl = getLink('feedback');
+        urlTpl = urlTpl.replace('@@extVersion@@', encodeURI(browser.runtime.getManifest().version));
+        urlTpl = urlTpl.replace('@@browser@@', encodeURI(_getBrowser().name + ' ' + _getBrowser().version));
+        urlTpl = urlTpl.replace('@@os@@', encodeURI(_getOS()));
 
-        return urlText;
+        return urlTpl;
     }
 
     function showToast(content) {
@@ -340,6 +340,9 @@ function initOptions() {
             if ($(this).hasClass('active'))
                 return;
 
+            if (typeof $(this).attr('data-option-tab-index') === typeof undefined)
+                return;
+
             var prevTabID = $('li.nav-tab.active').attr('data-option-tab-index');
             var thisTabID = $(this).attr('data-option-tab-index');
 
@@ -362,14 +365,14 @@ function initOptions() {
 
         // toggle tips
         $('.option-tip-toggle').on('click', function () {
-            $(this).parents('div.option-group').children('div.option-tip').toggleClass('hidden');
+            $(this).closest('div.option-group').children('div.option-tip').toggleClass('hidden');
         });
 
         // share
         $('.share-link').on('click', function (e) {
             e.preventDefault();
             var openIn = $(this).attr('data-open-in');
-            var href = $(this).attr('data-href');
+            var href = $(this).attr('href');
             if (openIn == 'popup') {
                 var width = $(this).attr('data-width');
                 var height = screen.height * 0.6;
@@ -381,7 +384,7 @@ function initOptions() {
             } else if (openIn == 'newtab') {
                 window.open(href, '_blank');
             } else if (openIn == 'copy') {
-                $('#clipboard-input').val('https://www.zijianshao.com/dlight/sharelink/?platform=firefox').select();
+                $('#clipboard-input').val(href).select();
                 document.execCommand('Copy');
                 alert('Copied to Clipboard~');
             }
@@ -607,7 +610,7 @@ function initOptions() {
             var popupCls = initPopup('Learn Darklight', whatsnew, '', 1);
             $('.' + popupCls).find('.popup-btn').on('click', function (e) {
                 e.preventDefault();
-                window.location.href = removeSearchParameters('whatsnew');
+                window.location.href = removeSearchParameters('whatsnew', true);
             });
         }
 
@@ -618,7 +621,7 @@ function initOptions() {
             var popupCls = initPopup('Learn Darklight', welcome, '', 1);
             $('.' + popupCls).find('.popup-btn').on('click', function (e) {
                 e.preventDefault();
-                window.location.href = removeSearchParameters('welcome');
+                window.location.href = removeSearchParameters('welcome', true);
             });
         }
 
@@ -710,7 +713,20 @@ function initOptions() {
 
                 var elem_content = '<div class="theme-content">' + elem_title + elem_color + elem_info + elem_input + elem_label + '</div>';
 
-                $('<div class="theme-item theme-item-' + val['id'] + '" id="theme-item-' + val['id'] + '">' + elem_img + elem_content + '</div>').appendTo(list);
+                var elem_extra_cls = '';
+                var elem_new_tag = '';
+                if (val['isNew'] === true) {
+                    elem_extra_cls = ' theme-item-new';
+                    elem_new_tag = '<div class="theme-item-new-tag">NEW THEME</div>';
+                }
+
+                var elem_complete = $('<div class="theme-item theme-item-' + val['id'] + elem_extra_cls + '" id="theme-item-' + val['id'] + '">' +
+                    elem_new_tag +
+                    '<div class="theme-item-wrapper">' + elem_img + elem_content + '</div></div>');
+                if (val['isNew'] === true)
+                    elem_complete.prependTo(list);
+                else
+                    elem_complete.appendTo(list);
 
                 // theme options
                 if (val['options'] !== undefined) {
@@ -738,7 +754,7 @@ function initOptions() {
                                     '<div class="checkbox-slide">' +
                                     '<input type="checkbox" id="' + elemID + '" data-option-name="' + optName + '" data-option-type="switch"' + isChecked + '>' +
                                     '<label for="' + elemID + '"></label></div>' +
-                                    '<div class="checkbox-content">'+
+                                    '<div class="checkbox-content">' +
                                     '<label for="' + elemID + '" class="checkbox-label">' + val['options'][i]['description'] + '</label>' +
                                     '</div></div>';
 
@@ -804,7 +820,9 @@ function initOptions() {
         return prmstr != null && prmstr != "" ? _transformToAssocArray(prmstr) : {};
     }
 
-    function removeSearchParameters(sParam) {
+    function removeSearchParameters(sParam, keepHash) {
+
+        var hash = window.location.hash;
         var url = window.location.href.split('?')[0] + '?';
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
@@ -817,10 +835,19 @@ function initOptions() {
                 url = url + sParameterName[0] + '=' + sParameterName[1] + '&'
             }
         }
-        return url.substring(0, url.length - 1);
+
+        if (keepHash !== true) {
+            return url.substring(0, url.length - 1);
+        } else {
+            return url.substring(0, url.length - 1) + hash;
+        }
     }
 
     $(window).on('load', function (e) {
+
+        $('*[data-href]').each(function (idx, elem) {
+            $(elem).attr('href', getLink($(elem).attr('data-href')));
+        });
 
         loadThemes();
 
