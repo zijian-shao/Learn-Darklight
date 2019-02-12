@@ -22,7 +22,7 @@ function extensionUpdate() {
 
         console.log('New version updated (V' + newVer + ')');
 
-        if (newVer.match(/1\.6\./) && !oldVer.match(/1\.6\./)) {
+        if (newVer.match(/1\.7\./) && !oldVer.match(/1\.7\./)) {
             browser.runtime.sendMessage({
                 action: 'createTab',
                 data: {url: browser.extension.getURL('/html/options.html') + '?whatsnew=' + newVer}

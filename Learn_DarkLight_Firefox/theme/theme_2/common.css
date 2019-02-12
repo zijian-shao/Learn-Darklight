@@ -120,7 +120,7 @@ body {
 
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
     /*background: #323841;*/
-    min-height: 842px;
+    /*min-height: 842px;*/
 }
 
 .d2l-page-bg {
@@ -848,6 +848,66 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     display: none;
 }
 
+.d2l-navigation-s-has-branding .d2l-navigation-main-ib {
+    border: none !important;
+    z-index: 100 !important;
+}
+
+.d2l-navigation-ib-item-link-text {
+    color: #ddd;
+}
+
+.d2l-navigation-ib-item-link:focus, .d2l-navigation-ib-item-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.d2l-navigation-ib-item-link:hover .d2l-navigation-ib-item-link-text {
+    color: #ddd !important;
+    text-decoration: none !important;
+}
+
+.d2l-navigation-s-mobile-menu .d2l-navigation-ib-item-link:hover .d2l-navigation-ib-item-link-text {
+    color: #565a5c;
+}
+
+.d2l-navigation-s-linkarea-no-color .d2l-navigation-main-ib-pully[shown]:focus, .d2l-navigation-s-linkarea-no-color .d2l-navigation-main-ib-pully[shown]:focus .d2l-navigation-main-ib-pully-icon, .d2l-navigation-s-linkarea-no-color .d2l-navigation-main-ib-pully[shown]:hover, .d2l-navigation-s-linkarea-no-color .d2l-navigation-main-ib-pully[shown]:hover .d2l-navigation-main-ib-pully-icon, .d2l-navigation-s-no-branding .d2l-navigation-main-ib-pully[shown]:focus, .d2l-navigation-s-no-branding .d2l-navigation-main-ib-pully[shown]:focus .d2l-navigation-main-ib-pully-icon, .d2l-navigation-s-no-branding .d2l-navigation-main-ib-pully[shown]:hover, .d2l-navigation-s-no-branding .d2l-navigation-main-ib-pully[shown]:hover .d2l-navigation-main-ib-pully-icon {
+    background-color: #ddd;
+}
+
+.d2l-navigation-s-has-branding.d2l-branding-navigation-dark-foreground-color .d2l-navigation-main-ib-pully[shown]:focus .d2l-navigation-main-ib-pully-tab-button {
+    display: none;
+}
+
+.d2l-navigation-main-ib-pully-container .d2l-branding-navigation-background-color {
+    background: none !important;
+    border: none !important;
+}
+
+.d2l-navigation-main-ib-pully-tab {
+    background: #282d34 !important;
+}
+
+.d2l-navigation-main-ib-pully-icon {
+    border: none !important;
+}
+
+.d2l-navigation-main-ib-pully-icon d2l-icon svg {
+    -webkit-filter: grayscale(1) brightness(5);
+    filter: grayscale(1) brightness(5);
+}
+
+.d2l-navigation-s-mobile-menu .d2l-branding-navigation-background-color {
+    background: none;
+}
+
+.d2l-navigation-mobile-ib-admin-menu {
+    border: none;
+}
+
 /* nav mobile */
 .d2l-navigation-s-mobile-menu-mask {
     background: #282d34;
@@ -961,6 +1021,10 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 /* button */
 
 .d2l-button, .d2l-button * {
+    vertical-align: bottom !important;
+}
+
+.dcm.bsi-button-menu {
     vertical-align: bottom !important;
 }
 
@@ -1724,6 +1788,10 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
     color: #fff;
 }
 
+.d2l-navigation-s-mobile-menu-course-menu #courseSelectorId .vui-list > li {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
 /* fix right buttons */
 .darklight-fixed-right-button {
     background: #282d34;
@@ -1795,23 +1863,6 @@ d2l-enrollment-card d2l-card d2l-dropdown-more d2l-button-icon[active] > button 
 .darklight-homepage-calendar .darklight-block-page-loader {
     border-top-color: #09b1b9;
     opacity: 0.7;
-}
-
-/* course home calendar */
-.darklight-course-home-calendar .d2l-widget-content {
-    padding: 10px 0;
-}
-
-.darklight-course-home-calendar .d2l-collapsepane-header {
-    border-left: none;
-    border-right: none;
-    border-radius: 0 !important;
-}
-
-.darklight-course-home-calendar .d2l-collapsepane-content {
-    border-left: none;
-    border-right: none;
-    border-radius: 0 !important;
 }
 
 /* course tile image ani */

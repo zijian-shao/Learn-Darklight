@@ -168,59 +168,87 @@ function addBackToTopButtonNavbar() {
 function fixNavigation() {
     function _fixNavigation() {
 
-        if ($(window).width() < 768)
-            return;
+        if (windowW < 768) return;
 
-        var html = null;
-        if (isBrowser('safari'))
-            html = $('body');
-        else
-            html = $('html');
-
-        if (html.scrollTop() < offset) {
+        if (html.scrollTop() < headerH) {
             // is on screen
-            nav.removeClass('darklight-navbar-fixed');
-            header.css('margin-bottom', '0px');
+            footer.removeClass('darklight-navbar-fixed');
+            d2lnav.css('padding-bottom', '0px');
         } else {
             // not on screen
-            nav.addClass('darklight-navbar-fixed');
-            header.css('margin-bottom', navHeight + 'px');
+            footer.addClass('darklight-navbar-fixed');
+            d2lnav.css('padding-bottom', footerH + 'px');
         }
     }
 
-    var nav = $('d2l-navigation-main-footer');
-    var header = $('d2l-navigation-main-header');
-    if (!nav.length || !header.length) return;
-
-    var navHeight = nav.outerHeight();
-    var offset = header.outerHeight() + header.offset().top;
-
-    if (isBrowser('firefox')) {
-        $(window).on('load', function () {
-            navHeight = nav.outerHeight();
-            offset = header.outerHeight() + header.offset().top;
-            _fixNavigation();
-        });
-    } else {
-        _fixNavigation();
+    function _initVars() {
+        footerH = footer.outerHeight();
+        headerH = header.outerHeight() + header.offset().top;
+        d2lnavH = d2lnav.outerHeight();
+        windowW = $(window).width();
     }
+
+    var html = $('html');
+    var footer = $('d2l-navigation-main-footer');
+    var header = $('d2l-navigation-main-header');
+    var d2lnav = $('d2l-navigation');
+    if (!footer.length || !header.length || !d2lnav.length) return;
+
+    var footerH, headerH, d2lnavH, windowW;
+    _initVars();
+    _fixNavigation();
+
+    setTimeout(function () {
+        _initVars();
+    }, 2000);
+
+    $(window).on('load', function () {
+        _initVars();
+        _fixNavigation();
+    });
 
     $(window).on('scroll', function () {
         _fixNavigation();
     });
 
     $(window).on('resize', function () {
+        _initVars();
         if ($(window).width() < 768) {
-            header.css('margin-bottom', '0px');
+            d2lnav.css('padding-bottom', '0px');
         } else {
-            navHeight = nav.outerHeight();
-            offset = header.outerHeight() + header.offset().top;
             _fixNavigation();
         }
     });
 }
 
-function contentPageFunc(page) {
+function fixNavigationSticky() {
+
+    function _testIsOnScr() {
+        if (html.scrollTop() < offset) {
+            // is on screen
+            pageHeader.removeClass('darklight-navbar-sticky-on');
+        } else {
+            // not on screen
+            pageHeader.addClass('darklight-navbar-sticky-on');
+        }
+    }
+
+    var header = $('d2l-navigation-main-header');
+    var footer = $('d2l-navigation-main-footer');
+    if (!header.length || !footer.length) return;
+
+    var offset = themeConfigs.headerHeight;
+    var pageHeader = footer.closest('header');
+    var html = $('html');
+
+    pageHeader.addClass('darklight-navbar-sticky');
+    pageHeader.css('top', '-' + offset + 'px');
+
+    $(window).on('load', _testIsOnScr);
+    $(window).on('scroll', _testIsOnScr);
+}
+
+function quizPageFunc() {
 
     function _getFloatButton(iconSrc, text, id) {
         if (typeof id === typeof undefined) id = '';
@@ -228,15 +256,107 @@ function contentPageFunc(page) {
         return '<a href="#" class="darklight-fixed-right-button"' + id + '><div class="darklight-fixed-right-button-icon"><img src="' + iconSrc + '"></div><div class="darklight-fixed-right-button-text">' + text + '</div></a>';
     }
 
-    function _contentPageFunc() {
+    function _pageFunc() {
         var body = $('body');
-
         var wrapper = $('<div class="darklight-fixed-right-wrapper"></div>');
         wrapper.appendTo(body);
 
-        if ((iframe.hasClass('d2l-fileviewer-rendered-pdf') && options.COURSE_ContentResizeBtn)
-            || page == 'quiz') {
-            // inc iframe
+        var sizeStep = 200;
+
+        // inc iframe
+        var sizeInc = $(_getFloatButton(baseURL + 'img/button-icon-plus.png', 'Content Height <strong>+</strong>'));
+        sizeInc.on('click', function (e) {
+            e.preventDefault();
+            var currH = iframe.attr('data-current-height');
+            if (typeof currH === 'undefined')
+                currH = iframe.height();
+            currH = parseInt(currH);
+            currH += sizeStep;
+            iframe.css('height', currH + 'px');
+            iframe.attr('data-current-height', currH);
+        });
+        sizeInc.appendTo(wrapper);
+
+        // dec iframe
+        var sizeDec = $(_getFloatButton(baseURL + 'img/button-icon-minus.png', 'Content Height <strong>-</strong>'));
+        sizeDec.on('click', function (e) {
+            e.preventDefault();
+            var currH = iframe.attr('data-current-height');
+            if (typeof currH === 'undefined')
+                currH = iframe.height();
+            currH = parseInt(currH);
+            if (currH >= 300) {
+                currH -= sizeStep;
+                iframe.css('height', currH + 'px');
+                iframe.attr('data-current-height', currH);
+            }
+        });
+        sizeDec.appendTo(wrapper);
+
+        $(window).on('resize', function () {
+            setTimeout(function () {
+                if (typeof iframe.attr('data-current-height') !== typeof undefined)
+                    iframe.css('height', iframe.attr('data-current-height') + 'px');
+            }, 10);
+        });
+
+        // unlock body
+        function _unlockBody() {
+            if (body.css('overflow') == 'hidden') {
+                var unlockScroll = $(_getFloatButton(baseURL + 'img/button-icon-unlock.png', 'Unlock Page Scroll'));
+                unlockScroll.on('click', function (e) {
+                    e.preventDefault();
+                    body.css('overflow', 'auto');
+                    $(this).remove();
+                });
+                unlockScroll.appendTo(wrapper);
+            }
+        }
+
+        setTimeout(_unlockBody, 2000);
+    }
+
+    if (!options.QUIZ_ContentResizeBtn) return;
+
+    var iframe = null;
+    var getIframeCounter = 0;
+
+    var interval = setInterval(function () {
+        iframe = $('.d2l-page-main').find('iframe');
+        iframe.each(function (idx, elem) {
+            if ($(elem).attr('src').trim() != '') {
+                iframe = $(elem);
+                clearInterval(interval);
+                _pageFunc();
+                return false;
+            }
+        });
+        getIframeCounter++;
+        if (getIframeCounter > 20) {
+            clearInterval(interval);
+        }
+    }, 300);
+
+}
+
+function contentPageFunc() {
+
+    function _getFloatButton(iconSrc, text, id) {
+        if (typeof id === typeof undefined) id = '';
+        else id = ' id="' + id + '"';
+        return '<a href="#" class="darklight-fixed-right-button"' + id + '><div class="darklight-fixed-right-button-icon"><img src="' + iconSrc + '"></div><div class="darklight-fixed-right-button-text">' + text + '</div></a>';
+    }
+
+    function _pageFunc() {
+
+        var body = $('body');
+        var wrapper = $('<div class="darklight-fixed-right-wrapper"></div>');
+        wrapper.appendTo(body);
+
+        var sizeStep = 50;
+
+        // inc iframe
+        if (options.COURSE_ContentResizeBtn) {
             var sizeInc = $(_getFloatButton(baseURL + 'img/button-icon-plus.png', 'Content Height <strong>+</strong>'));
             sizeInc.on('click', function (e) {
                 e.preventDefault();
@@ -244,13 +364,15 @@ function contentPageFunc(page) {
                 if (typeof currH === 'undefined')
                     currH = iframe.height();
                 currH = parseInt(currH);
-                currH += 50;
+                currH += sizeStep;
                 iframe.css('height', currH + 'px');
                 iframe.attr('data-current-height', currH);
             });
             sizeInc.appendTo(wrapper);
+        }
 
-            // dec iframe
+        // dec iframe
+        if (options.COURSE_ContentResizeBtn) {
             var sizeDec = $(_getFloatButton(baseURL + 'img/button-icon-minus.png', 'Content Height <strong>-</strong>'));
             sizeDec.on('click', function (e) {
                 e.preventDefault();
@@ -259,21 +381,38 @@ function contentPageFunc(page) {
                     currH = iframe.height();
                 currH = parseInt(currH);
                 if (currH >= 300) {
-                    currH -= 50;
+                    currH -= sizeStep;
                     iframe.css('height', currH + 'px');
                     iframe.attr('data-current-height', currH);
                 }
             });
             sizeDec.appendTo(wrapper);
-
-            $(window).on('resize', function () {
-                setTimeout(function () {
-                    if (typeof iframe.attr('data-current-height') !== typeof undefined)
-                        iframe.css('height', iframe.attr('data-current-height') + 'px');
-                }, 10);
-            });
-
         }
+
+        // full height
+        // if (options.COURSE_ContentResizeBtn && iframe.hasClass('d2l-iframe-fit-user-content')) {
+        //     // skip if cross domain
+        //     if (extractHostname(iframe.attr('src')) == window.location.hostname) {
+        //         var sizeFull = $(_getFloatButton(baseURL + 'img/button-icon-arrows-alt-v.png', 'Full height (beta)'));
+        //         sizeFull.on('click', function (e) {
+        //             e.preventDefault();
+        //             iframe.css('height', iframe.contents().height() + 'px');
+        //             iframe.attr('data-full-height', 'true');
+        //             $(this).hide();
+        //         });
+        //         sizeFull.appendTo(wrapper);
+        //     }
+        // }
+
+        $(window).on('resize', function () {
+            setTimeout(function () {
+                if (typeof iframe.attr('data-full-height') !== typeof undefined) {
+                    // sizeFull.trigger('click');
+                } else if (typeof iframe.attr('data-current-height') !== typeof undefined) {
+                    iframe.css('height', iframe.attr('data-current-height') + 'px');
+                }
+            }, 10);
+        });
 
         function _fullScreenBtn() {
             var fullScreenBtn = iframe.contents().find('#fullscreenMode');
@@ -293,16 +432,14 @@ function contentPageFunc(page) {
                     fullScr.appendTo(wrapper);
                 }
 
-                if (options.COURSE_AutoScrollToContent && options.GLB_FixNavigation && $(window).width() >= 768) {
-                    scrollToUtil(iframe, 0, $('d2l-navigation-main-footer').height());
-                }
-
                 if (options.COURSE_AutoScrollToContent && $(window).width() >= 768) {
                     var currH = 0;
-                    if (options.GLB_FixNavigation)
+                    if (options.GLB_FixNavigation) {
+                        scrollToUtil(iframe, 0, $('d2l-navigation-main-footer').height());
                         currH = parseInt($(window).height() - $('d2l-navigation-main-footer').height());
-                    else
+                    } else {
                         currH = parseInt($(window).height());
+                    }
                     iframe.css('height', currH + 'px');
                 }
 
@@ -320,11 +457,16 @@ function contentPageFunc(page) {
             }
         }
 
-        if (page == 'content') {
+        if (iframe.hasClass('d2l-fileviewer-rendered-pdf')) {
             var fullSrcCounter = 0;
             var fullSrcInterval = setInterval(function () {
                 _fullScreenBtn();
             }, 1000);
+
+            chrome.runtime.sendMessage({
+                action: 'insertCSS',
+                data: {code: '#d2l_body,.d2l-body{overflow:visible!important}'}
+            });
         }
 
         // unlock body
@@ -341,29 +483,25 @@ function contentPageFunc(page) {
         }
 
         if (options.COURSE_ContentResizeBtn)
-            setTimeout(_unlockBody, 1000);
+            setTimeout(_unlockBody, 2000);
 
     }
+
+    // if (page == 'content' && !options.COURSE_ContentResizeBtn) return;
 
     var iframe = null;
     var getIframeCounter = 0;
 
-    function _getIframe() {
-        if (page == 'content')
-            iframe = $('#ContentView').find('iframe');
-        else if (page == 'quiz')
-            iframe = $('.d2l-page-main').find('iframe');
-    }
-
     var interval = setInterval(function () {
-        _getIframe();
+        iframe = $('#ContentView').find('iframe');
         iframe.each(function (idx, elem) {
             if ($(elem).attr('src').trim() != '') {
                 iframe = $(elem);
                 clearInterval(interval);
-                _contentPageFunc();
+                _pageFunc();
 
-                if (options.COURSE_AutoScrollToContent && $(window).width() >= 768) {
+                if (iframe.hasClass('d2l-fileviewer-rendered-pdf')
+                    && options.COURSE_AutoScrollToContent && $(window).width() >= 768) {
                     if (options.GLB_FixNavigation) {
                         scrollToUtil(iframe, 100, $('d2l-navigation-main-footer').height());
                     } else {
@@ -657,6 +795,8 @@ function homepageCalendar(courseWidget) {
 
     var counter = 0;
     var placeHolder = $('#darklight-homepage-calendar');
+    var weekdayTxt = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var monthTxt = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var finalList = [];
 
     function _sortEvents(a, b) {
@@ -679,17 +819,36 @@ function homepageCalendar(courseWidget) {
         finalList.sort(_sortEvents);
         placeHolder.html('');
 
-        var todayTag = '';
+        var todayTag = '', dateElem = '';
         var today = new Date();
         var targetDay = null;
         for (var i = 0, len = finalList.length; i < len; i++) {
+
             targetDay = new Date(finalList[i].timestamp * 1000);
             if (targetDay.setHours(0, 0, 0, 0) == today.setHours(0, 0, 0, 0)) {
                 todayTag = '<div class="tag">TODAY</div>';
             } else {
                 todayTag = '';
             }
-            $('<a href="' + finalList[i].link + '" target="_blank" class="darklight-homepage-calendar-item"><div class="darklight-homepage-calendar-date"><span class="month">' + finalList[i].month + '</span><span class="day">' + finalList[i].day + '</span></div><div class="darklight-homepage-calendar-content">' + todayTag + '<div><span class="time">' + finalList[i].time + '</span><span class="course">' + finalList[i].course + '</span></div><div class="title d2l-typography">' + finalList[i].title + '</div></div></a>').appendTo(placeHolder);
+
+            dateElem = '<div class="darklight-homepage-calendar-date" title="' +
+                weekdayTxt[finalList[i].weekDay] + ', ' +
+                monthTxt[finalList[i].month] + ' ' + finalList[i].day + ', ' + finalList[i].year +
+                '">';
+            if (options.HOME_ShowWeekDayOnCalendar) {
+                dateElem += '<span class="month">' + weekdayTxt[finalList[i].weekDay].substring(0, 3).toUpperCase() + '</span>';
+            } else {
+                dateElem += '<span class="month">' + monthTxt[finalList[i].month].substring(0, 3).toUpperCase() + '</span>';
+            }
+            dateElem += '<span class="day">' + finalList[i].day + '</span></div>';
+
+            $('<a href="' + finalList[i].link + '" target="_blank" class="darklight-homepage-calendar-item">' +
+                dateElem +
+                '<div class="darklight-homepage-calendar-content">' +
+                todayTag +
+                '<div><span class="time">' + finalList[i].time + '</span>' +
+                '<span class="course">' + finalList[i].course + '</span></div>' +
+                '<div class="title d2l-typography">' + finalList[i].title + '</div></div></a>').appendTo(placeHolder);
         }
     }
 
@@ -736,21 +895,23 @@ function homepageCalendar(courseWidget) {
                                         var title = dataContent.children('div').first().children('div').last().children('div').last().text().trim();
                                         var link = $(e3).find('#' + $(e3).attr('data-d2l-actionid')).attr('href');
                                         link = link.substring(0, link.indexOf('#'));
-                                        var timestamp = '';
                                         var currYear = (new Date()).getFullYear();
+                                        var theDate;
 
                                         if (!time.match(/\d+:\d+ [APM]{2}/g)) {
                                             // 'all day' events have highest priority
-                                            timestamp = new Date(month + ' ' + day + ', ' + currYear + ' 00:00:00').getTime() / 1000;
+                                            theDate = new Date(month + ' ' + day + ', ' + currYear + ' 00:00:00');
                                         } else {
-                                            timestamp = new Date(month + ' ' + day + ', ' + currYear + ' ' + time).getTime() / 1000;
+                                            theDate = new Date(month + ' ' + day + ', ' + currYear + ' ' + time);
                                         }
 
                                         finalList.push({
                                             'course': courseCode,
-                                            'timestamp': timestamp,
-                                            'month': month,
+                                            'timestamp': theDate.getTime() / 1000,
+                                            'year': theDate.getFullYear(),
+                                            'month': theDate.getMonth(),
                                             'day': day,
+                                            'weekDay': theDate.getDay(),
                                             'time': time,
                                             'title': title,
                                             'link': link
@@ -792,7 +953,7 @@ function customCourseThumbs(courseWidget) {
             img.addClass('darklight-course-thumb darklight-course-thumb-' + code);
         });
 
-        injectCSS('.shown.d2l-course-image{opacity:1}', 'body', 'text');
+        injectCSS('.shown.d2l-course-image{opacity:1}d2l-card.d2l-enrollment-card{background:none}', 'body', 'text');
         $('.darklight-course-thumb').addClass('shown');
 
     }
@@ -850,6 +1011,18 @@ function courseDirectToContent(courseWidget) {
     }
 }
 
+function dropboxMarkFunc() {
+    var header = $('div.sticky-assessment-navigation');
+    if (!header.length) return;
+
+    var hideBtn = $('<div class="dropbox-header-toggle">Toggle Header</div>');
+    hideBtn.on('click', function (e) {
+        e.preventDefault();
+        header.toggle();
+    });
+    hideBtn.insertAfter(header);
+}
+
 function initDarklightFunc() {
 
     if (!options.GLB_Enabled)
@@ -885,7 +1058,8 @@ function initDarklightFunc() {
 
     // fix navigation
     if (options.GLB_FixNavigation) {
-        fixNavigation();
+        // fixNavigation();
+        fixNavigationSticky();
     }
 
     // display group members
@@ -895,12 +1069,12 @@ function initDarklightFunc() {
 
     // content page func
     if (currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/g)) {
-        contentPageFunc('content');
+        contentPageFunc();
     }
 
     // quiz & survey resize
-    if ((currURL.match(/\/quizzing\/user\/attempt\//g) || currURL.match(/\/survey\/user\/attempt\//g)) && options.QUIZ_ContentResizeBtn) {
-        contentPageFunc('quiz');
+    if (currURL.match(/\/quizzing\/user\/attempt\//g) || currURL.match(/\/survey\/user\/attempt\//g)) {
+        quizPageFunc();
     }
 
     // homepage
@@ -911,9 +1085,21 @@ function initDarklightFunc() {
     // course home
     if (currURL2.match(/\/d2l\/home\/\d+$/)) {
         customCourseThumbs();
+
+        $('.d2l-widget-header').each(function (i, e) {
+            var headText = $(e).text();
+            if (headText.match(/Calendar/)) {
+                $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
+            }
+        });
     }
 
     courseDirectToContent();
+
+    // dropbox mark
+    if (currURL.match(/\/d2l\/lms\/dropbox\/admin\/mark\/folder_user_mark\.d2l/i)) {
+        // dropboxMarkFunc();
+    }
 
     // overlay
     $('#darklight-load-overlay').delay(400).fadeOut(400, function () {

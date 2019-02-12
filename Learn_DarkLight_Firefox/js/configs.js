@@ -29,6 +29,7 @@ function getOptionListDefault() {
         HOME_AutoHideSysAlert: true,
         HOME_HideCheckMySys: true,
         HOME_AddCalendar: true,
+        HOME_ShowWeekDayOnCalendar:false,
         HOME_HidePrivacy: true,
         HOME_HideMetaTerm: false,
         HOME_HideMetaEndDate: false,
@@ -55,8 +56,16 @@ function getThemeConfigs(id) {
             author: "Zijian Shao",
             previewColor: "#fdd54f",
             overlayColor: "#222",
+            headerHeight: 92,
             options: [
                 {
+                    key: "showWaterlooLogo",
+                    type: "boolean",
+                    value: true,
+                    description: "Show 'Waterloo' on the side <small>(Waterloo Learn)</small>"
+                }, {
+                    type: "separator"
+                }, {
                     key: "navPrimaryColor",
                     type: "color",
                     value: "#fdd54f",
@@ -70,6 +79,7 @@ function getThemeConfigs(id) {
             author: "Zijian Shao",
             previewColor: "#333",
             overlayColor: "#f6f7f8",
+            headerHeight: 91,
             options: [
                 {
                     key: "whiteNavbar",
@@ -85,6 +95,7 @@ function getThemeConfigs(id) {
             author: "Zijian Shao",
             previewColor: "#09b3bc",
             overlayColor: "#323841",
+            headerHeight: 92,
             options: [
                 {
                     key: "darkCoursePic",
@@ -106,18 +117,28 @@ function getThemeConfigs(id) {
         },
         theme_3: {
             id: 3,
-            name: "TEST",
-            author: "Zijian Shao",
-            previewColor: "#000",
-            overlayColor: "#fff",
-            hidden: true
+            name: "Dodger Blue",
+            author: "Zijian Shao & TIM",
+            previewColor: "#0088fb",
+            overlayColor: "#f6f7f8",
+            headerHeight: 110,
+            hidden: false,
+            options: [
+                {
+                    key: "fullWidthLayout",
+                    type: "boolean",
+                    value: true,
+                    description: "Full-width layout"
+                }
+            ]
         },
         theme_99: {
             id: 99,
             name: "Learn Default",
             author: "D2L",
-            previewColor: "#22a3ff",
-            overlayColor: "#f6f7f8"
+            previewColor: "#bbb",
+            overlayColor: "#f6f7f8",
+            headerHeight: 90
         }
     };
 
