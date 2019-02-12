@@ -1,3 +1,8 @@
+/* common */
+.hidden {
+    display: none !important;
+}
+
 /* arrows */
 i.arrow {
     border: solid black;
@@ -193,6 +198,12 @@ i.arrow.down {
     border-top: none !important;
 }
 
+body > header.darklight-navbar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 500;
+}
+
 /* fix right buttons */
 .darklight-fixed-right-wrapper {
     position: fixed;
@@ -298,12 +309,25 @@ i.arrow.down {
     background: #e8f2f9;
 }
 
+.darklight-homepage-calendar-item .weekday {
+    float: left;
+    margin-right: 5px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
 .darklight-homepage-calendar-date {
     float: left;
     width: 2.5rem;
     height: auto;
     text-align: center;
     color: #565A5C;
+    margin-right: 5px;
 }
 
 .darklight-homepage-calendar-date .month {
@@ -365,11 +389,11 @@ i.arrow.down {
 
 /* course tiles */
 .d2l-homepage d2l-card {
-    -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease;
-    -moz-transition: transform 0.3s ease, box-shadow 0.3s ease;
-    -ms-transition: transform 0.3s ease, box-shadow 0.3s ease;
-    -o-transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    -moz-transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    -ms-transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    -o-transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .d2l-homepage d2l-card .d2l-card-content {
@@ -458,10 +482,51 @@ d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-courseselector-wra
     padding-bottom: 10px !important;
 }
 
+.d2l-navigation-s-button:focus d2l-icon, .d2l-navigation-s-button:hover d2l-icon {
+    height: 18px;
+    width: 18px;
+}
+
+.d2l-navigation-s-mobile-menu-course-menu #courseSelectorId .vui-list > li {
+    border-top: 1px solid #d3d9e3;
+}
+
 /* course content list loading */
 .d2l-partial-render-shim1, .d2l-partial-render-shim2,
 .d2l-partial-render-shimbg1, .d2l-partial-render-shimbg2 {
     z-index: 100;
+}
+
+/* course home calendar */
+.darklight-course-home-calendar .d2l-widget-content {
+    padding: 0 0 10px !important;
+}
+
+.darklight-course-home-calendar .d2l-collapsepane-header {
+    border-left: none;
+    border-right: none;
+    border-radius: 0 !important;
+}
+
+.darklight-course-home-calendar .d2l-collapsepane-content {
+    border-left: none;
+    border-right: none;
+    border-radius: 0 !important;
+}
+
+/* dropbox marking header */
+.dropbox-header-toggle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 50;
+    padding: 4px 20px;
+    width: 100px;
+    color: #fff;
 }
 
 /* tmp fix for dropdown */
@@ -475,4 +540,34 @@ d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-courseselector-wra
 
 .vui-dropdown-menu > ul > li[role=separator] {
     display: none;
+}
+
+.d2l-homepage-header-wrapper {
+    margin-right: 0;
+}
+
+.d2l-widget-header .d2l-heading {
+    margin-right: 0;
+}
+
+/* tmp fix for notifications */
+.d2l-navigation-s-notifications-wrapper {
+    display: block;
+    margin: 0 -5px;
+}
+
+.d2l-navigation-s-personal-menu {
+    padding-left: 10px;
+}
+
+@media (max-width: 931px) {
+    .d2l-navigation-s-course-menu .d2l-navigation-s-button-highlight,
+    .d2l-navigation-s-course-menu d2l-navigation-button-notification-icon {
+        margin: 0 15px;
+    }
+}
+
+/* tmp fix for popup max height calc err */
+.d2l-dialog-inline .d2l-dialog-inline-body {
+    max-height: none !important;
 }

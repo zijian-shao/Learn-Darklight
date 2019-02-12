@@ -29,3 +29,26 @@
 .daylight .d2l-page-collapsepane-shadow {
     top: 90px;
 }
+
+/* course home calendar */
+.darklight-course-home-calendar .d2l-widget-content {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+/* bg gradient */
+.d2l-navigation-s-shadow-gradient, .d2l-navigation-shadow-gradient {
+    background: none !important;
+}
+
+.d2l-page-main:before {
+    content: "";
+    background: linear-gradient(to bottom, rgba(249, 250, 251, 1) 0%, rgba(249, 250, 251, 0) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    max-height: 400px;
+    z-index: -1;
+}

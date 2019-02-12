@@ -696,10 +696,10 @@ function initOptions() {
         $.each(themes, function (i, val) {
 
             if (val['hidden'] !== true) {
-                var elem_img = '<img src="../theme/theme_' + val['id'] + '/preview.png">',
-                    elem_title = '<div class="theme-name">' + val['name'] + '</div>',
+                var elem_img = '<img src="../theme/theme_' + val['id'] + '/preview.png" alt="' + val['name'] + '" title="' + val['name'] + '">',
+                    elem_title = '<div class="theme-name" title="' + val['name'] + '">' + val['name'] + '</div>',
                     elem_color = '<div class="theme-color" style="background-color:' + val['previewColor'] + '"></div>',
-                    elem_info = '<div class="theme-info">Author / ' + val['author'] + '</div>',
+                    elem_info = '<div class="theme-info" title="' + val['author'] + '">Author / ' + val['author'] + '</div>',
                     elem_input = '<input type="radio" ' +
                         'id="opt-themes-0-' + index + '" ' +
                         'name="GLB_ThemeID" ' +
@@ -738,8 +738,9 @@ function initOptions() {
                                     '<div class="checkbox-slide">' +
                                     '<input type="checkbox" id="' + elemID + '" data-option-name="' + optName + '" data-option-type="switch"' + isChecked + '>' +
                                     '<label for="' + elemID + '"></label></div>' +
+                                    '<div class="checkbox-content">'+
                                     '<label for="' + elemID + '" class="checkbox-label">' + val['options'][i]['description'] + '</label>' +
-                                    '</div>';
+                                    '</div></div>';
 
                             } else if (val['options'][i]['type'] == 'color') {
 
@@ -752,6 +753,8 @@ function initOptions() {
 
                             } else if (val['options'][i]['type'] == 'text') {
 
+                            } else if (val['options'][i]['type'] == 'separator') {
+                                confElems += '<hr>';
                             }
                         }
 

@@ -96,6 +96,7 @@ body {
     min-width: 1000px;
     font-size: 14px;
     background: #222;
+    overflow-x: hidden;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -232,6 +233,14 @@ hr {
 
 .margin-0 {
     margin: 0 !important;
+}
+
+.margin-top-10 {
+    margin-top: 10px !important;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px !important;
 }
 
 .margin-bottom-10 {
@@ -571,15 +580,16 @@ hr {
     -moz-box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
     box-shadow: 0 0 5px rgba(91, 183, 91, 0.5);
     z-index: 500;
-    -webkit-transition: top 0.2s linear;
-    -moz-transition: top 0.2s linear;
-    -ms-transition: top 0.2s linear;
-    -o-transition: top 0.2s linear;
-    transition: top 0.2s linear;
+    -webkit-transition: top 0.2s linear, opacity 0.2s linear;
+    -moz-transition: top 0.2s linear, opacity 0.2s linear;
+    -ms-transition: top 0.2s linear, opacity 0.2s linear;
+    -o-transition: top 0.2s linear, opacity 0.2s linear;
+    transition: top 0.2s linear, opacity 0.2s linear;
 }
 
 .darklight-toast-hidden {
     top: -60px;
+    opacity: 0;
 }
 
 .color-scheme {
@@ -773,6 +783,11 @@ hr {
     background: #999;
 }
 
+.theme-options-content hr {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
 .theme-item.selected {
     border-color: #fff;
     -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 4px #5bb75b;
@@ -922,14 +937,14 @@ hr {
     position: absolute;
     left: 15px;
     bottom: 10px;
-    font-size: 18px;
+    font-size: 1.3em;
     color: #fff;
     z-index: 2;
 }
 
 .saved-thumb-item-title small {
     padding-left: 8px;
-    font-size: 12px;
+    font-size: 0.7em;
     opacity: 0.6;
 }
 
@@ -940,7 +955,7 @@ hr {
     right: 15px;
     padding: 8px 15px;
     color: #fff;
-    font-size: 12px;
+    font-size: 0.7em;
     background: rgba(0, 0, 0, 0.6);
     z-index: 2;
     -webkit-transition: all 0.2s ease;
@@ -1072,12 +1087,12 @@ hr {
 }
 
 .option-tip-toggle, .option-tip-toggle:visited, .option-tip-toggle:focus {
-    display: block;
-    float: left;
+    display: inline-block;
+    /*float: left;*/
     width: 16px;
     height: 16px;
     line-height: 14px;
-    margin: 5px 0 0 10px;
+    margin: 5px 0 0;
     color: #aaa;
     font-size: 12px;
     font-weight: bold;
@@ -1122,7 +1137,7 @@ hr {
     margin: 0;
     padding: 0 0 10px;
     color: #666;
-    font-size: 14px;
+    font-size: 0.9em;
 }
 
 .thumb-image-type-container {
@@ -1152,12 +1167,17 @@ hr {
     color: #fff;
 }
 
+.checkbox-group .checkbox-content {
+    margin-left: 65px;
+}
+
 .checkbox-group .checkbox-label {
     line-height: 25px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    float: left;
+    /*float: left;*/
+    padding-right: 5px;
 }
 
 .checkbox-group .checkbox-label small,
@@ -1174,7 +1194,7 @@ label.checkbox-label {
     float: left;
     width: 50px;
     height: 25px;
-    margin: 0 15px 0 0;
+    margin: 0;
     position: relative;
     border: 1px solid #ddd;
     border-radius: 50px;
@@ -1526,12 +1546,20 @@ textarea.input-box {
     color: #fff;
     font-weight: bold;
     text-transform: uppercase;
+    height: 45px;
 }
 
 .popup-content {
     background: #fff;
     padding: 30px;
     text-align: left;
+    max-height: calc(100vh - 45px);
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.popup-content::-webkit-scrollbar {
+    width: 0;
 }
 
 .popup-show {
@@ -1828,3 +1856,170 @@ textarea.input-box {
     animation-fill-mode: both;
 }
 
+@media (max-width: 991px) {
+    body {
+        min-width: 0;
+        font-size: 12px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar > * {
+        display: none;
+    }
+
+    .sidebar .logo {
+        display: block;
+        margin: auto;
+        padding: 20px 0;
+        text-align: center;
+        height: auto;
+    }
+
+    .sidebar .logo-img {
+        margin: auto;
+    }
+
+    .content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .section .title {
+        font-size: 20px;
+        padding: 18px 20px;
+    }
+
+    .section .group {
+        margin: 20px 0 0 20px;
+        padding: 0 20px 10px 0;
+    }
+
+    .section .group .group-title {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 0;
+    }
+
+    .section .group .group-title-empty {
+        display: none;
+    }
+
+    .section .group .group-content {
+        width: 100%;
+    }
+
+    .rec-item {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .rec-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .checkbox-group .checkbox-content {
+        margin-left: 60px;
+    }
+
+    .option-tip-toggle, .option-tip-toggle:visited, .option-tip-toggle:focus {
+        /*display: none;*/
+        opacity: 1;
+    }
+
+    .advanced-themes-toggle {
+        margin: 0;
+    }
+
+    .popup-frame {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .font-item:before {
+        display: none;
+    }
+
+    .font-item img {
+        margin: 0;
+    }
+
+    .section .group .space {
+        margin-bottom: 5px;
+    }
+
+    .theme-item .theme-content > label {
+        width: auto;
+    }
+
+    .width-33, .width-66, .width-50, .width-80, .width-90, .width-100 {
+        width: 100%;
+    }
+
+    .popup-wide .popup-frame {
+        width: 100%;
+    }
+
+    .cthumb-prev-1 {
+        width: 100%;
+        padding-top: 45%;
+        margin-bottom: 10px;
+        height: auto;
+    }
+
+    .cthumb-prev-2 {
+        width: 100%;
+        padding-top: 25%;
+        height: auto;
+    }
+
+    .darklight-toast {
+        width: 100%;
+    }
+}
+
+@media (max-width: 567px) {
+    .theme-item {
+        width: 100%;
+    }
+
+    .font-list {
+        text-align: center;
+    }
+
+    .font-item {
+        margin: 0 auto 15px;
+        width: 100%;
+        max-width: 240px;
+        float: none;
+    }
+
+    .font-item:nth-child(3n) {
+        margin-right: auto;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 0 0 5px;
+    }
+}
+
+.whatsnew-banner {
+    width: auto;
+    height: auto;
+    margin: -30px -30px 30px;
+    padding-top: 25%;
+    background: transparent center top;
+    background-size: cover;
+}
