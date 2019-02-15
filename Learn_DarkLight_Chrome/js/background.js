@@ -225,9 +225,10 @@ function initBackground() {
         // open new tab
         else if (request.action == 'createTab') {
 
-            chrome.tabs.create({
-                'url': request.data.url
-            });
+            request.data['index'] = sender.tab.index + 1;
+            chrome.tabs.create(request.data);
+
+            if (typeof sendResponse === 'function') sendResponse();
 
         }
 
@@ -258,6 +259,8 @@ function initBackground() {
                     }
                 };
             }, null);
+
+            if (typeof sendResponse === 'function') sendResponse();
         }
 
         // get course thumbs one
@@ -291,6 +294,8 @@ function initBackground() {
                 };
 
             }, null);
+
+            if (typeof sendResponse === 'function') sendResponse();
         }
 
         // add course thumbs
@@ -390,6 +395,8 @@ function initBackground() {
 
                 };
             }, null);
+
+            if (typeof sendResponse === 'function') sendResponse();
         }
 
         // delete course thumbs
@@ -421,6 +428,8 @@ function initBackground() {
                     });
                 };
             }, null);
+
+            if (typeof sendResponse === 'function') sendResponse();
         }
 
     });

@@ -40,7 +40,7 @@ d2l-navigation {
     right: 0;
     height: 50vh;
     max-height: 400px;
-    z-index: -1;
+    z-index: -10;
 }
 
 .d2l-tiles-container .d2l-page-main:before {
@@ -517,6 +517,14 @@ d2l-dropdown div.d2l-dropdown-content-width {
     background: #f9fafb;
 }
 
+.darklight-fixed-right-button {
+    background: #21253c;
+}
+
+.darklight-fixed-right-button:hover {
+    background: #21253c;
+}
+
 /* button */
 .d2l-button, .d2l-button * {
     vertical-align: bottom !important;
@@ -535,10 +543,13 @@ d2l-dropdown div.d2l-dropdown-content-width {
     background-color: #117ad7;
 }
 
-.d2l-floating-buttons-container.d2l-floating-buttons-floating.d2l-floating-buttons {
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
+.bsi-button-menu.bsi-button-menu-primary, .bsi-button-menu.bsi-button-menu-primary.vui-disabled:focus, .bsi-button-menu.bsi-button-menu-primary.vui-disabled:hover {
+    background-color: #118dee;
+    border-color: #117ad7;
+}
+
+.bsi-button-menu.bsi-button-menu-primary:hover {
+    background-color: #117ad7;
 }
 
 /* new homepage course tabs */

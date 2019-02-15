@@ -22,7 +22,7 @@ function extensionUpdate() {
 
         console.log('New version updated (V' + newVer + ')');
 
-        if (newVer.match(/1\.7\./) && !oldVer.match(/1\.7\./)) {
+        if (newVer.match(/2\.0\./) && !oldVer.match(/2\.0\./)) {
             chrome.runtime.sendMessage({
                 action: 'createTab',
                 data: {url: chrome.extension.getURL('/html/options.html') + '?whatsnew=' + newVer + '#themes'}
@@ -108,9 +108,19 @@ function initDarklightIdle() {
 
     // favicon
     if (options.GLB_DarklightFavicon) {
-        var head = $('head');
-        head.find('link[rel="icon"]').remove();
-        head.append($('<link rel="icon" type="image/png" href="' + baseURL + 'icon/icon32.png' + '">'));
+        var icon = $('head').find('link[rel="icon"]');
+        icon.attr({
+            type: 'image/png',
+            href: baseURL + 'icon/icon48.png'
+        });
+        setTimeout(function () {
+            if (!icon.length) {
+                icon.attr({
+                    type: 'image/png',
+                    href: baseURL + 'icon/icon48.png'
+                });
+            }
+        }, 2000);
     }
 
     // css

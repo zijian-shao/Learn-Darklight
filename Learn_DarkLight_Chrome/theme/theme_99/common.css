@@ -50,5 +50,5 @@
     right: 0;
     height: 50vh;
     max-height: 400px;
-    z-index: -1;
+    z-index: -10;
 }

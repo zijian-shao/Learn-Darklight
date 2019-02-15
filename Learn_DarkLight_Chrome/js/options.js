@@ -39,6 +39,59 @@ function initOptions() {
         return urlTpl;
     }
 
+    function blockPage(color, msg, time) {
+        if ($('#darklight-block-page').length)
+            return;
+
+        if (time === undefined || !Number.isInteger(time) || time == null || time === false)
+            time = 300;
+
+        var elem = $('<div/>', {
+            'id': 'darklight-block-page',
+            'class': 'darklight-block-page'
+        });
+
+        if (color !== undefined && color !== '')
+            elem.css('background-color', color);
+        if (msg === undefined)
+            msg = 'Loading';
+
+        elem.append($('<div class="darklight-block-page-wrapper">' +
+            '<div class="darklight-block-page-loader"></div>' +
+            '<div class="darklight-block-page-message">' + msg + '</div>' +
+            '</div>')).hide().appendTo('body').fadeIn(time);
+
+    }
+
+    function blockPageMsg(msg) {
+        $('#darklight-block-page').find('.darklight-block-page-message').text(msg);
+    }
+
+    function unblockPage(time) {
+
+        if (time === undefined || !Number.isInteger(time) || time == null || time === false)
+            time = 300;
+
+        $('#darklight-block-page').fadeOut(time, function () {
+            $(this).remove();
+        });
+
+    }
+
+    function scrollToUtil(pos, time, offset) {
+
+        if ($.type(offset) !== 'number')
+            offset = 0;
+
+        if ($.type(pos) === 'object')
+            pos = pos.offset().top;
+        else if ($.type(pos) === 'string')
+            pos = $(pos).first().offset().top;
+
+        $('html').animate({scrollTop: pos - offset}, time);
+
+    }
+
     function showToast(content) {
         var tst = $('#darklight-toast');
         if (content !== undefined) {
@@ -174,6 +227,15 @@ function initOptions() {
                         optionElem.val(items[key]);
                         break;
 
+                    case 'HOME_CourseTileContextMenuData':
+                        var contentList = items[key];
+                        contentList.forEach(function (cl) {
+                            cl.list.forEach(function (c) {
+                                $('input[data-option-name="' + key + '"][data-menu-group="' + cl.name + '"][data-menu-name="' + c.name + '"]').first().prop('checked', c.visible);
+                            });
+                        });
+                        break;
+
                     default:
                         optionElem.prop('checked', items[key]);
                 }
@@ -190,8 +252,14 @@ function initOptions() {
                 if (typeof thumbList.attr('data-list-init') === typeof undefined) {
                     refreshThumbList();
                 } else {
-                    $('#add-course-thumbnail').removeAttr('disabled');
                     clearInterval(interval);
+                    $('#add-course-thumbnail').removeAttr('disabled');
+                    var params = getSearchParameters();
+                    if (params['action'] === 'add-custom-cover') {
+                        unblockPage(0);
+                        scrollToUtil($('#opt-courses-0-0').closest('div.group'), 0, 30);
+                        $('#add-course-thumbnail').trigger('click');
+                    }
                 }
             }, 500);
         }, 1000);
@@ -212,7 +280,8 @@ function initOptions() {
 
     function onOptionChange(elem) {
 
-        if (typeof elem.attr('data-option-type') === typeof undefined)
+        if (typeof elem.attr('data-option-type') === typeof undefined
+            || typeof elem.attr('data-option-name') === typeof undefined)
             return;
 
         var inputType = elem.attr('type');
@@ -262,6 +331,25 @@ function initOptions() {
 
                     var obj = {};
                     obj[optName] = contentObj;
+                    saveOption(obj);
+
+                    break;
+
+                // course tile context menu
+                case 'item-tile-context-menu':
+
+                    var contentList = getOptionListDefault()[optName];
+                    var i, j;
+
+                    for (i = 0; i < contentList.length; i++) {
+                        for (j = 0; j < contentList[i].list.length; j++) {
+                            var targetElem = $('input[data-option-name="' + optName + '"][data-menu-group="' + contentList[i].name + '"][data-menu-name="' + contentList[i].list[j].name + '"]').first();
+                            contentList[i].list[j].visible = targetElem.length ? targetElem.is(':checked') : false;
+                        }
+                    }
+
+                    var obj = {};
+                    obj[optName] = contentList;
                     saveOption(obj);
 
                     break;
@@ -451,7 +539,19 @@ function initOptions() {
                 alertBlock = container.find('.alert-file-size'),
                 alertContent = alertBlock.find('.alert');
             var thumbBase64 = '';
+            var params = getSearchParameters();
 
+            // params
+            if (params['action'] === 'add-custom-cover') {
+                if (params['course-id'] !== undefined) {
+                    popup.find('.course-id').val(params['course-id']);
+                    popup.find('.course-code').focus();
+                }
+                if (params['course-name'] !== undefined) {
+                    popup.find('.course-code').val(decodeURIComponent(params['course-name']));
+                    popup.find('.thumb-image-url').focus();
+                }
+            }
             // type
             popup.find('.thumb-image-type').on('click', function (e) {
                 e.preventDefault();
@@ -534,7 +634,12 @@ function initOptions() {
             popup.find('.btn-cancel').on('click', function (e) {
                 e.preventDefault();
                 var r = confirm('Are you sure you want to cancel?');
-                if (r) removePopup(popupCls);
+                if (r) {
+                    if (params['action'] === 'add-custom-cover') {
+                        window.location.href = removeSearchParameters(['action', 'course-id', 'course-name'], true);
+                    }
+                    removePopup(popupCls);
+                }
             });
             // add btn
             popup.find('.btn-add').on('click', function (e) {
@@ -572,13 +677,13 @@ function initOptions() {
         });
 
         // themes
-        $('input[id^="opt-themes-0-"]').on('change', function () {
+        $('input[id^="opt-theme-item-"]').on('change', function () {
             $('.theme-item').removeClass('selected');
             $(this).closest('.theme-item').addClass('selected');
         });
 
         // fonts
-        $('input[id^="opt-themes-2-"]').on('change', function () {
+        $('input[id^="opt-font-item-"]').on('change', function () {
             $('.font-item').removeClass('selected');
             $(this).closest('.font-item').addClass('selected');
         });
@@ -673,6 +778,9 @@ function initOptions() {
                 else if (request.action == 'addCourseThumbsResponse') {
 
                     if (request.data.err_code === 0) {
+                        if (params['action'] === 'add-custom-cover') {
+                            window.location.href = removeSearchParameters(['action', 'course-id', 'course-name'], true);
+                        }
                         showToast(request.data.data.msg);
                         refreshThumbList();
                         removePopup(request.data.data.popup_class);
@@ -704,12 +812,12 @@ function initOptions() {
                     elem_color = '<div class="theme-color" style="background-color:' + val['previewColor'] + '"></div>',
                     elem_info = '<div class="theme-info" title="' + val['author'] + '">Author / ' + val['author'] + '</div>',
                     elem_input = '<input type="radio" ' +
-                        'id="opt-themes-0-' + index + '" ' +
+                        'id="opt-theme-item-' + index + '" ' +
                         'name="GLB_ThemeID" ' +
                         'value="' + val['id'] + '" ' +
                         'data-option-name="GLB_ThemeID" ' +
                         'data-option-type="enum">',
-                    elem_label = '<label for="opt-themes-0-' + index + '" class="btn btn-primary"></label>';
+                    elem_label = '<label for="opt-theme-item-' + index + '" class="btn btn-primary"></label>';
 
                 var elem_content = '<div class="theme-content">' + elem_title + elem_color + elem_info + elem_input + elem_label + '</div>';
 
@@ -803,6 +911,53 @@ function initOptions() {
         });
     }
 
+    function loadContextMenuList() {
+        var key = 'HOME_CourseTileContextMenuData';
+        var tplList = getOptionListDefault()[key];
+        var el = '';
+        var idx = 0;
+        tplList.forEach(function (cl) {
+            el += '<div class="option-group checkbox-group checkbox-group-square margin-top-10 inline-block width-25 pull-left">';
+            el += '<div class="group-title full-width">' + cl.name + '</div>';
+            cl.list.forEach(function (c) {
+
+                el += '<div class="checkbox-item"><div class="checkbox-square">' +
+
+                    '<input type="checkbox" id="opt-course-tile-context-menu-items-' + idx + '" ' +
+                    'data-option-name="' + key + '" ' +
+                    'data-option-type="item-tile-context-menu" ' +
+                    'data-menu-group="' + cl.name + '" ' +
+                    'data-menu-name="' + c.name + '">' +
+
+                    '<label for="opt-course-tile-context-menu-items-' + idx + '"></label></div>' +
+                    '<div class="checkbox-content"><label for="opt-course-tile-context-menu-items-' + idx + '" class="checkbox-label">' + c.name + '</label></div></div>';
+                idx++;
+            });
+            el += '</div>';
+        });
+        $(el).appendTo($('#course-tile-context-menu-items-container'));
+    }
+
+    function loadFontList() {
+        var li = getFontConfigs();
+        var i;
+        var el = '';
+        for (i = 0; i < li.length; i++) {
+            var weightInfo = '';
+            if (li[i].weight !== undefined) weightInfo = ' data-font-weight="' + li[i].weight + '"';
+            var sizeInfo = '';
+            if (li[i].size !== undefined) sizeInfo = ' data-font-size="' + li[i].size + '"';
+            var sourceInfo = '';
+            if (li[i].source !== undefined) sourceInfo = ' data-font-source="' + li[i].source + '"';
+            el += '<label for="opt-font-item-' + i + '" class="font-item" title="' + li[i].name + '">' +
+                '<input type="radio" id="opt-font-item-' + i + '" name="GLB_CustomFontInfo" value="' + li[i].name + '" ' +
+                'data-option-name="GLB_CustomFontInfo" data-option-type="enum-font" ' +
+                weightInfo + sizeInfo + sourceInfo + '>' +
+                '<img src="../img/' + li[i].image + '" alt="' + li[i].name + '"></label>';
+        }
+        $(el).appendTo($('#font-list'));
+    }
+
     function getSearchParameters() {
 
         // stack overflow 5448545
@@ -820,10 +975,13 @@ function initOptions() {
         return prmstr != null && prmstr != "" ? _transformToAssocArray(prmstr) : {};
     }
 
-    function removeSearchParameters(sParam, keepHash) {
+    function removeSearchParameters(sParam, keepHash, fromString) {
 
         var hash = window.location.hash;
+
         var url = window.location.href.split('?')[0] + '?';
+        if (typeof fromString !== typeof undefined) url = fromString.split('?')[0] + '?';
+
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
             sParameterName,
@@ -831,8 +989,20 @@ function initOptions() {
 
         for (i = 0; i < sURLVariables.length; i++) {
             sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] != sParam) {
-                url = url + sParameterName[0] + '=' + sParameterName[1] + '&'
+            if (Array.isArray(sParam)) {
+                var matched = false;
+                sParam.forEach(function (pr) {
+                    if (sParameterName[0] == pr) {
+                        matched = true;
+                    }
+                });
+                if (!matched) {
+                    url = url + sParameterName[0] + '=' + sParameterName[1] + '&';
+                }
+            } else {
+                if (sParameterName[0] != sParam) {
+                    url = url + sParameterName[0] + '=' + sParameterName[1] + '&';
+                }
             }
         }
 
@@ -843,13 +1013,37 @@ function initOptions() {
         }
     }
 
+    function processSearchParameters() {
+        // jump to
+        var params = getSearchParameters();
+        if (params['section'] !== undefined) {
+            window.location.hash = params['section'];
+        }
+
+        if (params['action'] !== undefined) {
+            var action = params['action'];
+            if (action == 'add-custom-cover') {
+                blockPage('', 'Just a second', 0);
+            }
+        }
+    }
+
+    window.addEventListener("hashchange", onHashChange, false);
+
+    var timeoutHandle = setTimeout(function () {
+    }, 0);
+
     $(window).on('load', function (e) {
 
         $('*[data-href]').each(function (idx, elem) {
             $(elem).attr('href', getLink($(elem).attr('data-href')));
         });
 
+        processSearchParameters();
+
         loadThemes();
+        loadFontList();
+        loadContextMenuList();
 
         restoreOptions();
 
@@ -864,11 +1058,6 @@ function initOptions() {
         $('body').append(clipBoardInput);
 
     });
-
-    window.addEventListener("hashchange", onHashChange, false);
-
-    var timeoutHandle = setTimeout(function () {
-    }, 0);
 
 }
 

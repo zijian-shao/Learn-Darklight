@@ -203,8 +203,8 @@ d2l-navigation-separator d2l-icon.d2l-navigation-separator {
 }
 
 .d2l-icon-0[icon*="d2l-tier3:"] {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
 
 .d2l-navigation-s-divider d2l-icon {
@@ -526,4 +526,9 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 
 .d2l-navigation-s-mobile-menu-mask {
     background: #000;
+}
+
+/* popup page */
+.d2l-popup-page {
+    background: #fff;
 }

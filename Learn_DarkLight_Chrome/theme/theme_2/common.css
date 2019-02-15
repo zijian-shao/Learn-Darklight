@@ -8,6 +8,10 @@
     color: #ddd;
 }
 
+.daylight span.dfl a, .daylight span.dfl a:focus {
+    color: #09b1b9;
+}
+
 .d2l-link-0 .d2l-link-elem.d2l-link, .d2l-link-0 .d2l-link-elem.d2l-link:active, .d2l-link-0 .d2l-link-elem.d2l-link:link, .d2l-link-0 .d2l-link-elem.d2l-link:visited {
     color: #09b1b9;
 }
@@ -250,6 +254,63 @@ button.d2l-button-subtle:focus,
 
 .vui-input[type=checkbox]:checked {
     background-color: #09b1b9;
+}
+
+.d2l-button, .d2l-button * {
+    vertical-align: bottom !important;
+}
+
+.dcm.bsi-button-menu {
+    vertical-align: bottom !important;
+}
+
+.bsi-button-menu {
+    outline: none !important;
+}
+
+.bsi-button-menu.bsi-button-menu-primary:not(.vui-disabled):focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.bsi-button-menu:not(.vui-disabled):not(.bsi-button-menu-primary):focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #999;
+}
+
+.bsi-button-menu,
+.bsi-button-menu.vui-disabled:focus,
+.bsi-button-menu.vui-disabled:hover,
+.bsi-button-menu:focus,
+.bsi-button-menu:hover,
+.bsi-button-menu:link,
+bsi-button-menu:visited {
+    background: none;
+    border-color: #999;
+    color: #999;
+}
+
+.bsi-button-menu:hover {
+    background: #09b1b9;
+    border-color: #09b1b9;
+    color: #fff;
+}
+
+.bsi-button-menu.bsi-button-menu-primary {
+    background: none;
+    border-color: #09b1b9;
+    color: #09b1b9;
+}
+
+.bsi-button-menu.bsi-button-menu-primary:hover,
+.bsi-button-menu.bsi-button-menu-primary.vui-disabled:focus,
+.bsi-button-menu.bsi-button-menu-primary.vui-disabled:hover {
+    background: #09b1b9;
+    border-color: #09b1b9;
+    color: #fff;
 }
 
 /* selects */
@@ -518,6 +579,14 @@ input[type="number"].d2l-input.d2l-input-search {
 }
 
 /* dropdown */
+.d2l-admin-tools-column {
+    color: #ddd;
+}
+
+div[class^="d2l-dropdown-content-"] {
+    color: #ddd;
+}
+
 d2l-dropdown button.d2l-button-icon {
     background: none !important;
 }
@@ -616,7 +685,7 @@ d2l-dropdown button.d2l-button-icon:focus {
 .d2l-dropdown-content-width.d2l-dropdown-content,
 .d2l-dropdown-content-pointer.d2l-dropdown-content > div.d2l-dropdown-content {
     background: #373e48 !important;
-    border-color: #424a56 !important;
+    border-color: #373e48 !important;
     -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
     -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
@@ -637,7 +706,7 @@ d2l-dropdown-menu {
 d2l-dropdown-menu .d2l-dropdown-content-width.d2l-dropdown-menu,
 d2l-dropdown-menu .d2l-dropdown-content-pointer.d2l-dropdown-menu > div.d2l-dropdown-menu {
     background: #373e48 !important;
-    border-color: #424a56 !important;
+    border-color: #373e48 !important;
     -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
     -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
@@ -689,7 +758,9 @@ d2l-menu-item, d2l-menu-item-link {
 
 .vui-dropdown-menu {
     background: #373e48;
-    border: 1px solid #424a56 !important;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
 }
 
 .vui-dropdown-menu > ul > li {
@@ -793,8 +864,8 @@ d2l-navigation-separator d2l-icon.d2l-navigation-separator {
 }
 
 .d2l-icon-0[icon*="d2l-tier3:"] {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
 
 .d2l-navigation-s-divider d2l-icon {
@@ -1035,16 +1106,6 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
     }
 }
 
-/* button */
-
-.d2l-button, .d2l-button * {
-    vertical-align: bottom !important;
-}
-
-.dcm.bsi-button-menu {
-    vertical-align: bottom !important;
-}
-
 /* course banner */
 .d2l-course-tile-0 .course-image.d2l-course-tile {
     background: none;
@@ -1081,12 +1142,6 @@ iframe {
 /*-webkit-filter: brightness(0.8);*/
 /*filter: brightness(0.8);*/
 /*}*/
-
-.d2l-popup-title {
-    background: #323841;
-    border: none;
-    color: #ddd;
-}
 
 .d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
     background: #f9fafb;
@@ -1369,6 +1424,18 @@ iframe {
 
 d2l-more-less:not([expanded]):not([inactive]) .more-less-blur.d2l-more-less {
     background: none !important;
+}
+
+#threadListPlaceholder > div,
+#postListPlaceholder > div {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+div[id^="threadListItemContents_"] > div,
+#threadListPlaceholder > div > div:last-child,
+div[id^="postContents_"] > div,
+#postListPlaceholder > div > div:last-child {
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* groups */
@@ -1784,12 +1851,18 @@ d2l-dropdown-more d2l-button-icon[active] > button {
 
 #CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
     border-radius: 0 0 8px 8px;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 #CourseImageBannerPlaceholderId .d2l-image-banner-course-name.d2l-image-banner-overlay {
     background: none;
     text-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 8px 8px;
+}
+
+.d2l-course-banner {
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
 }
 
 #bannerTitle {
@@ -1952,4 +2025,38 @@ d2l-loading-spinner .d2l-loading-spinner-bg-blur.d2l-loading-spinner {
 .d2l-home .d2l-tabs-scroll-left-container.d2l-tabs, .d2l-home .d2l-tabs-scroll-right-container.d2l-tabs {
     background-color: #373e48 !important;
     box-shadow: 0 0 12px 18px #373e48 !important;
+}
+
+#UserProgressLoginHistoryDataListId {
+    background: #373e48;
+    margin: -11px -11px 0 -11px;
+
+}
+
+.d2l-charttooltip {
+    background-color: #373e48;
+}
+
+.daylight .d2l-charttooltip {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.d2l-grid-header-cell a, .d2l-grid-header-cell a:hover, .d2l-grid-header-cell a:visited {
+    color: #ddd;
+}
+
+/* popup page */
+.d2l-popup-page .d2l-popup-title {
+    background: #424a56 !important;
+    border-color: #424a56 !important;
+}
+
+.d2l-popup-page .d2l-popup-buttons {
+    background: #424a56 !important;
+    border-color: #424a56 !important;
+}
+
+/* context menu */
+li.d2l-contextmenu-item-title {
+    background: rgba(255, 255, 255, 0.05);
 }
