@@ -124,8 +124,7 @@ function initDarklightIdle() {
     }
 
     // css
-    if (options.GLB_UseSmallerFonts)
-        injectCSS('html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {font-size: 100%;}', 'head', 'text');
+    injectCSS('html{font-size:' + options.GLB_BasicFontSize + 'px}', 'head', 'text');
     injectCSS(baseURL + 'css/common.css', 'head');
     injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/common.css', 'head');
     if (options.GLB_EnableCustomStyle)

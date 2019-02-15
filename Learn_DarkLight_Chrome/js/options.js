@@ -188,43 +188,34 @@ function initOptions() {
 
             for (var key in items) {
 
-                optionElem = $('input[data-option-name="' + key + '"]');
+                optionElem = $('input[data-option-name="' + key + '"], ' +
+                    'textarea[data-option-name="' + key + '"]');
 
                 switch (key) {
 
                     case 'GLB_ThemeID':
                     case 'GLB_CustomFontInfo':
                         var hasFound = false;
-                        if (items[key] === true) {
-                            optionElem.first().prop('checked', true);
-                            hasFound = true;
-                        } else {
-                            if (key == 'GLB_CustomFontInfo') {
-                                items[key] = items[key].split('||');
-                                items[key] = items[key][0];
-                            }
-                            optionElem.each(function (index, element) {
-                                if ($(element).attr('value') == items[key]) {
-                                    $(element).prop('checked', true);
-                                    if (key == 'GLB_ThemeID')
-                                        $(element).closest('.theme-item').addClass('selected');
-                                    if (key == 'GLB_CustomFontInfo')
-                                        $(element).closest('.font-item').addClass('selected');
-                                    hasFound = true;
-                                }
-                            });
+                        if (key == 'GLB_CustomFontInfo') {
+                            items[key] = items[key].split('||');
+                            items[key] = items[key][0];
                         }
+                        optionElem.each(function (index, element) {
+                            if ($(element).attr('value') == items[key]) {
+                                $(element).prop('checked', true);
+                                if (key == 'GLB_ThemeID')
+                                    $(element).closest('.theme-item').addClass('selected');
+                                if (key == 'GLB_CustomFontInfo')
+                                    $(element).closest('.font-item').addClass('selected');
+                                hasFound = true;
+                            }
+                        });
+
                         if (!hasFound) {
-                            optionElem.first().prop('checked', true);
+                            optionElem.first().prop('checked', true).trigger('change');
                             optionElem.first().closest('.theme-item').addClass('selected');
                             optionElem.first().closest('.font-item').addClass('selected');
                         }
-                        break;
-
-                    case 'GLB_CustomCSS':
-                    case 'GLB_CustomJS':
-                        optionElem = $('textarea[data-option-name="' + key + '"]');
-                        optionElem.val(items[key]);
                         break;
 
                     case 'HOME_CourseTileContextMenuData':
@@ -236,8 +227,16 @@ function initOptions() {
                         });
                         break;
 
+                    case 'GLB_BasicFontSize':
+                        optionElem.val(items[key]);
+                        $('.font-size-tags span:nth-child(' + (items[key] - 10) + ')').addClass('selected');
+                        break;
+
                     default:
-                        optionElem.prop('checked', items[key]);
+                        if (typeof items[key] == typeof true)
+                            optionElem.prop('checked', items[key]);
+                        else
+                            optionElem.val(items[key]);
                 }
 
             }
@@ -410,6 +409,22 @@ function initOptions() {
                 default:
             }
         }
+
+        else if (inputType == 'range') {
+
+            switch (optType) {
+
+                case 'slider':
+
+                    var obj = {};
+                    obj[optName] = elem.val();
+                    saveOption(obj);
+
+                    break;
+
+                default:
+            }
+        }
     }
 
     function bindEvents() {
@@ -453,7 +468,7 @@ function initOptions() {
 
         // toggle tips
         $('.option-tip-toggle').on('click', function () {
-            $(this).closest('div.option-group').children('div.option-tip').toggleClass('hidden');
+            $(this).closest('div.option-group').find('div.option-tip').toggleClass('hidden');
         });
 
         // share
@@ -686,6 +701,16 @@ function initOptions() {
         $('input[id^="opt-font-item-"]').on('change', function () {
             $('.font-item').removeClass('selected');
             $(this).closest('.font-item').addClass('selected');
+        });
+
+        // font size
+        $('input[id="opt-themes-3-0"]').on('change', function () {
+            var currVal = $(this).val();
+            $('.font-size-tags span').removeClass('selected');
+            $('.font-size-tags span:nth-child(' + (currVal - 10) + ')').addClass('selected');
+        });
+        $('.font-size-tags span').on('click', function (e) {
+            $('input[id="opt-themes-3-0"]').val(parseInt($(this).text(), 10)).trigger('change');
         });
 
         // scroll

@@ -15,6 +15,15 @@ function initTheme() {
         cssText += '.d2l-enrollment-card-image-container.shown{opacity:0.8!important;}';
         cssText += '#CourseImageBannerPlaceholderId .d2l-course-banner{opacity:0.8!important;}';
     }
+    if (getCustomThemeOption('fullWidthLayout')) {
+        cssText += '.d2l-max-width {max-width:none!important}' +
+            '.d2l-page-bg{max-width:none!important}' +
+            'd2l-navigation-main-header>div.d2l-navigation-centerer{max-width:none!important}' +
+            'd2l-navigation-main-footer>div.d2l-navigation-centerer{max-width:none!important}' +
+            '.max-width.d2l-simple-overlay{max-width:none!important}' +
+            '.d2l-navigation-s-centerer{max-width:none!important}' +
+            '.daylight iframe.d2l-navbar-margin{max-width:none!important;width:100%!important;padding:0!important}';
+    }
     chrome.runtime.sendMessage({
         action: 'insertCSS',
         data: {code: cssText}
