@@ -160,7 +160,7 @@
                             <label for="opt-general-1-2"></label>
                         </div>
                         <div class="checkbox-content">
-                            <label for="opt-general-1-2" class="checkbox-label">Add back-to-top button to fixed
+                            <label for="opt-general-1-2" class="checkbox-label">Add back-to-top button to sticky
                                 navigation bar</label>
                             <a class="option-tip-toggle">?</a>
                         </div>
@@ -294,26 +294,31 @@
             </div>
 
             <!-- Extra -->
-            <div class="group">
-                <div class="group-title">Font Extra</div>
+            <div class="group option-group width-auto">
+                <div class="group-title">Font Size
+                    <a class="option-tip-toggle margin-left-5">?</a>
+                    <div class="group-subtitle">Unit: px</div>
+                </div>
                 <div class="group-content">
-
-                    <!-- Smaller font size -->
-                    <div class="option-group checkbox-group">
-                        <div class="checkbox-slide">
-                            <input type="checkbox" id="opt-themes-3-0" data-option-name="GLB_UseSmallerFonts"
-                                   data-option-type="switch">
-                            <label for="opt-themes-3-0"></label>
-                        </div>
-                        <div class="checkbox-content">
-                            <label for="opt-themes-3-0" class="checkbox-label">Smaller font size</label>
-                            <a class="option-tip-toggle">?</a>
-                        </div>
-                        <div class="option-tip hidden">
-                            <p>Slightly reduce basic font size to improve the experience on small screens.</p>
-                        </div>
+                    <input type="range" id="opt-themes-3-0" data-option-name="GLB_BasicFontSize"
+                           data-option-type="slider" min="11" max="20" step="1" class="block width-100 input-range">
+                    <div class="font-size-tags">
+                        <span>11</span>
+                        <span>12</span>
+                        <span>13</span>
+                        <span>14</span>
+                        <span>15</span>
+                        <span>16</span>
+                        <span>17</span>
+                        <span>18</span>
+                        <span>19</span>
+                        <span>20</span>
                     </div>
-
+                </div>
+                <div class="option-tip hidden">
+                    <p>▷ Adjust the root font size here. Learn will calculate all the other font sizes automatically
+                        based on the root font size.</p>
+                    <p>▷ Default value for Learn is 18px. Recommend value is 16px.</p>
                 </div>
             </div>
 

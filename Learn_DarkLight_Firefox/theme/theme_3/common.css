@@ -187,8 +187,8 @@ d2l-navigation-main-footer a.d2l-navigation-s-link:visited {
 
 d2l-navigation-main-header d2l-icon.d2l-navigation-button-icon {
     color: rgba(255, 255, 255, 0.6) !important;
-    width: 24px !important;
-    height: 24px !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
 }
 
 button.d2l-navigation-button:hover d2l-icon.d2l-navigation-button-icon,
@@ -554,7 +554,8 @@ d2l-dropdown div.d2l-dropdown-content-width {
 
 /* new homepage course tabs */
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs {
-    height: 20px;
+    height: 100%;
+    transform: translateY(0px);
 }
 
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus {

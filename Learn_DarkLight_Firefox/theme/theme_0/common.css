@@ -202,9 +202,9 @@ d2l-navigation-separator d2l-icon.d2l-navigation-separator {
     color: #999
 }
 
-.d2l-icon-0[icon*="d2l-tier3:"] {
-    width: 24px;
-    height: 24px;
+d2l-navigation-main-header d2l-icon.d2l-navigation-button-icon {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
 }
 
 .d2l-navigation-s-divider d2l-icon {
@@ -459,22 +459,40 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 /* Back to top button*/
 
 .darklight-back-to-top {
-    background: rgba(80, 80, 80, 0.5);
+    background: rgba(80, 80, 80, 0.4);
 }
 
 .darklight-back-to-top:hover {
-    background: rgba(80, 80, 80, 0.8);
+    background: rgba(80, 80, 80, 0.6);
     -webkit-box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
     -moz-box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
     box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
 }
 
 .darklight-back-to-top .arrow {
-    border-color: rgba(200, 200, 200, 0.5);
+    border-color: rgba(200, 200, 200, 0.4);
 }
 
 .darklight-back-to-top:hover .arrow {
     border-color: rgba(200, 200, 200, 0.8);
+}
+
+@media (max-width: 1350px) {
+    .darklight-back-to-top {
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .darklight-back-to-top:hover {
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .darklight-back-to-top .arrow {
+        border-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .darklight-back-to-top:hover .arrow {
+        border-color: rgba(255, 255, 255, 0.9);
+    }
 }
 
 /* file link */
@@ -503,7 +521,8 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 
 /* new homepage course tabs */
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs {
-    height: 20px;
+    height: 100%;
+    transform: translateY(0px);
 }
 
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus {

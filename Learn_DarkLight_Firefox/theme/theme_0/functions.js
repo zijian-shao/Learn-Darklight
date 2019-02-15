@@ -1,8 +1,9 @@
 function initTheme() {
 
+    var cssText = '';
     var primColor = getCustomThemeOption('navPrimaryColor');
     // navbar logo top border
-    var cssText = '.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link, .d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link' +
+    cssText += '.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link, .d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link' +
         '{background:' + primColor + '!important}';
     // navbar right icons top border
     cssText += '.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button, .d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button' +
@@ -17,7 +18,20 @@ function initTheme() {
     cssText += '.d2l-navigation-s-highlight-bar{background:' + primColor + '!important}';
     cssText += '.d2l-navigation-s-button-highlight:focus d2l-icon, .d2l-navigation-s-button-highlight:hover d2l-icon, button.d2l-navigation-s-button-highlight:focus, button.d2l-navigation-s-button-highlight:hover' +
         '{color:' + primColor + '!important;}';
-    browser.runtime.sendMessage({
+    if (getCustomThemeOption('fullWidthLayout')) {
+        cssText += '.d2l-max-width {max-width:none!important}' +
+            '.d2l-page-bg{max-width:none!important}' +
+            'd2l-navigation-main-header>div.d2l-navigation-centerer{max-width:none!important}' +
+            'd2l-navigation-main-footer>div.d2l-navigation-centerer{max-width:none!important}' +
+            '.max-width.d2l-simple-overlay{max-width:none!important}' +
+            '.d2l-navigation-s-centerer{max-width:none!important}' +
+            '.daylight iframe.d2l-navbar-margin{max-width:none!important;width:100%!important;padding:0!important}';
+        cssText += '.darklight-back-to-top{background:rgba(0,0,0,0.3)!important}' +
+            '.darklight-back-to-top:hover{background:rgba(0,0,0,0.6)!important}' +
+            '.darklight-back-to-top .arrow{border-color:rgba(255,255,255,0.8)!important}' +
+            '.darklight-back-to-top:hover .arrow{border-color:rgba(255,255,255,0.9)!important}';
+    }
+    chrome.runtime.sendMessage({
         action: 'insertCSS',
         data: {code: cssText}
     });

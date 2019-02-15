@@ -122,9 +122,9 @@
     max-height: 40px;
 }
 
-.d2l-icon-0[icon*="d2l-tier3:"] {
-    width: 24px;
-    height: 24px;
+d2l-navigation-main-header d2l-icon.d2l-navigation-button-icon {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
 }
 
 .d2l-navigation-s-band-color, d2l-navigation-band {
@@ -385,10 +385,6 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
     margin: 0;
 }
 
-.darklight-homepage-calendar-content .tag {
-    margin-right: 15px;
-}
-
 .darklight-homepage-calendar-item {
     padding: 20px;
 }
@@ -409,7 +405,8 @@ d2l-image-tile.d2l-course-image-tile:focus .d2l-image-tile-image-area.d2l-image-
 
 /* new homepage course tabs */
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs {
-    height: 20px;
+    height: 100%;
+    transform: translateY(0px);
 }
 
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus {

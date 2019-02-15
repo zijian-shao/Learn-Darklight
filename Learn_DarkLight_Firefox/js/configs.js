@@ -13,7 +13,7 @@ function getOptionListDefault() {
         GLB_Enabled: true,
         GLB_ThemeID: 0,
         GLB_CustomFont: true,
-        GLB_CustomFontInfo: 'Default',
+        GLB_CustomFontInfo: 'Lato',
         GLB_DarklightFavicon: true,
         GLB_FixNavigation: true,
         GLB_BackToTopButton: true,
@@ -21,7 +21,7 @@ function getOptionListDefault() {
         GLB_EnableCustomStyle: false,
         GLB_CustomCSS: '',
         GLB_CustomJS: '',
-        GLB_UseSmallerFonts: true,
+        GLB_BasicFontSize: 16,
         GLB_EnableForWaterloo: true,
         GLB_EnableForLaurier: true,
         GLB_PopupAccessForWaterloo: true,
@@ -35,7 +35,7 @@ function getOptionListDefault() {
         HOME_HideMetaEndDate: false,
         HOME_SwitchAnnounceAndCalendar: false,
         HOME_RemoveAnnounceFormat: false,
-        HOME_HidePinnedIcon: false,
+        HOME_HidePinnedIcon: true,
         HOME_CourseTileContextMenu: true,
         HOME_CourseTileContextMenuData: [
             {
@@ -97,6 +97,11 @@ function getThemeConfigs(id) {
                     value: true,
                     description: "Show 'Waterloo' on the side <small>(Waterloo Learn)</small>"
                 }, {
+                    key: "fullWidthLayout",
+                    type: "boolean",
+                    value: false,
+                    description: "Full-width layout"
+                }, {
                     type: "separator"
                 }, {
                     key: "navPrimaryColor",
@@ -119,6 +124,11 @@ function getThemeConfigs(id) {
                     type: "boolean",
                     value: false,
                     description: "Use white navigation bar"
+                }, {
+                    key: "fullWidthLayout",
+                    type: "boolean",
+                    value: false,
+                    description: "Full-width layout"
                 }
             ]
         },
@@ -145,6 +155,11 @@ function getThemeConfigs(id) {
                     type: "boolean",
                     value: false,
                     description: "Invert the color of iframes"
+                }, {
+                    key: "fullWidthLayout",
+                    type: "boolean",
+                    value: false,
+                    description: "Full-width layout"
                 }
             ]
         },
@@ -158,15 +173,15 @@ function getThemeConfigs(id) {
             isNew: true,
             options: [
                 {
+                    key: "useThemeLogo",
+                    type: "boolean",
+                    value: true,
+                    description: "Use theme logo"
+                }, {
                     key: "fullWidthLayout",
                     type: "boolean",
                     value: true,
                     description: "Full-width layout"
-                }, {
-                    key: "useThemeLogo",
-                    type: "boolean",
-                    value: true,
-                    description: "Use theme logo <small>(Waterloo Learn)</small>"
                 }
             ]
         },

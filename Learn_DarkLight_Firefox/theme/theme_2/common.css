@@ -863,9 +863,9 @@ d2l-navigation-separator d2l-icon.d2l-navigation-separator {
     color: #999
 }
 
-.d2l-icon-0[icon*="d2l-tier3:"] {
-    width: 24px;
-    height: 24px;
+d2l-navigation-main-header d2l-icon.d2l-navigation-button-icon {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
 }
 
 .d2l-navigation-s-divider d2l-icon {
@@ -2006,7 +2006,8 @@ d2l-loading-spinner .d2l-loading-spinner-bg-blur.d2l-loading-spinner {
 }
 
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs {
-    height: 20px;
+    height: 100%;
+    transform: translateY(0px);
 }
 
 .d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus {
