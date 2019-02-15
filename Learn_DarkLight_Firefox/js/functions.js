@@ -12,30 +12,31 @@ function scrollToUtil(pos, time, offset) {
     else if ($.type(pos) === 'string')
         pos = $(pos).first().offset().top;
 
-    var html = null;
-    if (isBrowser('safari'))
-        html = $('body');
-    else
-        html = $('html');
-
-    html.animate({scrollTop: pos - offset}, time);
+    $('html').animate({scrollTop: pos - offset}, time);
 
 }
 
-function blockPage(color) {
+function blockPage(color, msg, time) {
     if ($('#darklight-block-page').length)
         return;
+
+    if (time === undefined || !Number.isInteger(time) || time == null || time === false)
+        time = 300;
 
     var elem = $('<div/>', {
         'id': 'darklight-block-page',
         'class': 'darklight-block-page'
     });
 
-    if (color !== undefined)
+    if (color !== undefined && color !== '')
         elem.css('background-color', color);
+    if (msg === undefined)
+        msg = 'Loading';
 
-
-    elem.append($('<div class="darklight-block-page-wrapper"><div class="darklight-block-page-loader"></div><div class="darklight-block-page-message">Loading</div></div>')).hide().appendTo('body').fadeIn(300);
+    elem.append($('<div class="darklight-block-page-wrapper">' +
+        '<div class="darklight-block-page-loader"></div>' +
+        '<div class="darklight-block-page-message">' + msg + '</div>' +
+        '</div>')).hide().appendTo('body').fadeIn(time);
 
 }
 
@@ -43,9 +44,12 @@ function blockPageMsg(msg) {
     $('#darklight-block-page').find('.darklight-block-page-message').text(msg);
 }
 
-function unblockPage() {
+function unblockPage(time) {
 
-    $('#darklight-block-page').fadeOut(300, function () {
+    if (time === undefined || !Number.isInteger(time) || time == null || time === false)
+        time = 300;
+
+    $('#darklight-block-page').fadeOut(time, function () {
         $(this).remove();
     });
 
@@ -81,7 +85,7 @@ function customFont() {
 
     var fontConf = options.GLB_CustomFontInfo.split('||');
 
-    if (fontConf[0].match(/Default/i)) return;
+    if (fontConf[0].match(/Default/i) || fontConf[0].match(/^Lato$/i)) return;
 
     // fontName||weights||fontSize||source
     if (fontConf.length == 4) {
@@ -144,6 +148,7 @@ function addBackToTopButtonNavbar() {
     }
 
     var navWrapper = undefined;
+    var intervalCnt = 0;
     var interval = setInterval(function () {
         if (typeof navWrapper === typeof undefined || !navWrapper.length) {
             navWrapper = $('d2l-navigation d2l-navigation-main-footer .d2l-navigation-centerer .d2l-navigation-gutters .d2l-navigation-s-main-wrapper');
@@ -156,6 +161,10 @@ function addBackToTopButtonNavbar() {
                 })
                 .appendTo(navWrapper);
             _addBackToTopButton();
+            clearInterval(interval);
+        }
+        intervalCnt++;
+        if (intervalCnt > 20) {
             clearInterval(interval);
         }
     }, 500);
@@ -418,6 +427,25 @@ function contentPageFunc() {
             var fullScreenBtn = iframe.contents().find('#fullscreenMode');
             if (fullScreenBtn.length && !$('#darklight-full-screen-mode').length) {
 
+                // test is pdf or ppt
+                var isPDF = false;
+                if (iframe.closest('div.d2l-fileviewer').children('div.d2l-fileviewer-pdf-pdfjs').length)
+                    isPDF = true;
+
+                // org full scr btn
+                fullScreenBtn.on('click', function () {
+                    if (isPDF) {
+                        setTimeout(function () {
+                            if (!iframe.hasClass('d2l-fileviewer-rendered-pdf-dialog')) {
+                                // fix for sticky navbar
+                                $('body').css('overflow', '');
+                                $('html').css('overflow', '');
+                            }
+                        }, 10);
+                    }
+                });
+
+                // sidebar full scr btn
                 var fullScr = $(_getFloatButton(
                     baseURL + 'img/button-icon-expand.png',
                     'Full Screen Mode',
@@ -427,11 +455,10 @@ function contentPageFunc() {
                     e.preventDefault();
                     fullScreenBtn.trigger('click');
                 });
-
-                if (options.COURSE_ContentResizeBtn) {
+                if (options.COURSE_ContentResizeBtn)
                     fullScr.appendTo(wrapper);
-                }
 
+                // scroll to content
                 if (options.COURSE_AutoScrollToContent && $(window).width() >= 768) {
                     var currH = 0;
                     if (options.GLB_FixNavigation) {
@@ -449,24 +476,19 @@ function contentPageFunc() {
 
                 clearInterval(fullSrcInterval);
 
-            } else {
-                fullSrcCounter++;
-                if (fullSrcCounter > 10) {
-                    clearInterval(fullSrcInterval);
-                }
+            }
+            fullSrcCounter++;
+            if (fullSrcCounter > 10) {
+                clearInterval(fullSrcInterval);
             }
         }
 
+        var fullSrcInterval = null;
+        var fullSrcCounter = 0;
         if (iframe.hasClass('d2l-fileviewer-rendered-pdf')) {
-            var fullSrcCounter = 0;
-            var fullSrcInterval = setInterval(function () {
+            fullSrcInterval = setInterval(function () {
                 _fullScreenBtn();
             }, 1000);
-
-            browser.runtime.sendMessage({
-                action: 'insertCSS',
-                data: {code: '#d2l_body,.d2l-body{overflow:visible!important}'}
-            });
         }
 
         // unlock body
@@ -666,6 +688,8 @@ function homepageFunc() {
 
             courseWidget = $(e).closest('div.d2l-widget');
 
+            if (options.HOME_HidePinnedIcon)
+                courseWidget.addClass('darklight-hide-pin-icon');
 
             if (options.HOME_AddCalendar) {
                 // insert after courses
@@ -677,7 +701,7 @@ function homepageFunc() {
             function _waitForCourseLoad(isTabSwitch) {
 
                 var loadSpinner = courseWidget.find('d2l-my-courses d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content div.spinner-container d2l-loading-spinner');
-                var intervalVal = 0, delayVal = 0;
+                var intervalVal = 0, delayVal = 0, intervalCounter = 0;
                 if (isBrowser('firefox')) {
                     intervalVal = 300;
                     delayVal = 500;
@@ -708,7 +732,7 @@ function homepageFunc() {
                         });
 
                         if (courseTileLoaded) {
-
+                            // loaded
                             clearInterval(intervalId);
 
                             var times = isTabSwitch ? 4 : 1;
@@ -720,6 +744,8 @@ function homepageFunc() {
                                 customCourseThumbs(courseWidgetTabPanel);
                                 // direct to content
                                 courseDirectToContent(courseWidgetTabPanel);
+                                // quick access
+                                courseTileContextMenu(courseWidgetTabPanel);
                             }, delayVal * times);
 
                             // tab change
@@ -729,8 +755,15 @@ function homepageFunc() {
                                     _waitForCourseLoad(true);
                                 });
                             }
+
                         }
                     }
+
+                    intervalCounter++;
+                    if (intervalCounter > 50) {
+                        clearInterval(intervalId);
+                    }
+
                 }, intervalVal);
 
             }
@@ -749,7 +782,8 @@ function homepageFunc() {
     // switch calendar and announce
     if (options.HOME_SwitchAnnounceAndCalendar && options.HOME_AddCalendar) {
         $('.darklight-homepage-calendar-widget').insertBefore(announcementWidget);
-        announcementWidget.insertAfter(courseWidget);
+        if (announcementWidget != null)
+            announcementWidget.insertAfter(courseWidget);
     }
 
     // remove homepage privacy notice
@@ -774,8 +808,13 @@ function homepageFunc() {
     });
 
     // course tile thumb
-    if (options.COURSE_CustomThumb) {
+    if (options.COURSE_CustomThumb && !isWLU()) {
         injectCSS('.shown.d2l-course-image{opacity:0}.d2l-enrollment-card-image-container{opacity:0}', 'body', 'text');
+    }
+
+    // remove announcement inline styles
+    if (announcementWidget != null) {
+        removeAnnouncePageFormat(true, announcementWidget);
     }
 }
 
@@ -787,9 +826,14 @@ function homepageCalendar(courseWidget) {
     var links = [];
     courseWidget.find('d2l-my-courses-content d2l-enrollment-card d2l-card').each(function (i, e) {
         if ($(e).find('d2l-course-image img.d2l-course-image').is(':visible')) {
-            var link = $(e).children('div.d2l-card-container').children('a.d2l-focusable').first().attr('href');
-            if (link !== undefined)
-                links.push(link);
+            var link = $(e).children('div.d2l-card-container').children('a.d2l-focusable').first();
+
+            if (typeof link.attr('data-home-href') !== typeof undefined) {
+                links.push(link.attr('data-home-href'));
+            } else if (typeof link.attr('href') !== typeof undefined) {
+                links.push(link.attr('href'));
+            }
+
         }
     });
 
@@ -947,16 +991,68 @@ function homepageCalendar(courseWidget) {
 
 function customCourseThumbs(courseWidget) {
 
-    if (!options.COURSE_CustomThumb) return;
+    if (!options.COURSE_CustomThumb || isWLU()) return;
 
+    // homepage tiles
     if (typeof courseWidget !== typeof undefined) {
         var cards = courseWidget.find('d2l-my-courses-content d2l-enrollment-card d2l-card div.d2l-card-container');
         cards.each(function (idx, elem) {
-            var link = $(elem).children('a.d2l-focusable').first().attr('href');
-            var code = link.split('/');
-            code = code[code.length - 1];
+            // thumb
+            var code = $(elem).children('a.d2l-focusable').first().attr('href').match(/\/\d+/)[0].substring(1);
             var img = $(elem).find('.d2l-card-link-container .d2l-card-header .d2l-enrollment-card-image-container').first();
             img.addClass('darklight-course-thumb darklight-course-thumb-' + code);
+            var name = $(elem).find('div.d2l-card-link-container div.d2l-card-content d2l-organization-name');
+            name = name.text().trim().split(' - ')[0];
+
+            // dropdown link
+            var moreBtn = $(elem).find('d2l-dropdown-more');
+            moreBtn.on('click', function (e) {
+                var dropDownMenu = $(elem).find('d2l-dropdown-menu');
+                if (!dropDownMenu.find('d2l-menu-item.darklight-custom-course-pic').length) {
+                    var menuContainer = dropDownMenu.find('d2l-menu div.d2l-menu-items');
+                    var menuLink = $('<d2l-menu-item class="style-scope d2l-enrollment-card darklight-custom-course-pic"><span class="style-scope d2l-menu-item darklight-custom-course-pic-text">Customize</span></d2l-menu-item>');
+                    menuLink.on('click', function (e) {
+                        e.preventDefault();
+                        browser.runtime.sendMessage({
+                            action: 'createTab',
+                            data: {
+                                url: baseURL + 'html/options.html?action=add-custom-cover&course-id=' + code + '&course-name=' + encodeURIComponent(name)
+                            }
+                        });
+                    });
+                    menuLink.appendTo(menuContainer);
+                    menuLink.removeAttr('aria-haspopup');
+
+                    var elem1 = menuLink.find('span.d2l-menu-item').not('.darklight-custom-course-pic-text');
+                    var elem2 = menuLink.find('d2l-icon');
+                    var succeed = false;
+                    if (elem1.length && elem2.length) {
+                        elem1.remove();
+                        elem2.remove();
+                        succeed = true;
+                    }
+
+                    if (!succeed) {
+                        var intvCnt = 0;
+                        var intv = setInterval(function () {
+                            if (!elem1.length || !elem2.length) {
+                                elem1 = menuLink.find('span.d2l-menu-item').not('.darklight-custom-course-pic-text');
+                                elem2 = menuLink.find('d2l-icon');
+                            } else {
+                                elem1.remove();
+                                elem2.remove();
+                                clearInterval(intv);
+                            }
+                            intvCnt++;
+                            if (intvCnt > 20) {
+                                clearInterval(intv);
+                            }
+                        }, 100);
+                    }
+                }
+            });
+
+
         });
 
         injectCSS('.shown.d2l-course-image{opacity:1}d2l-card.d2l-enrollment-card{background:none}', 'body', 'text');
@@ -964,6 +1060,7 @@ function customCourseThumbs(courseWidget) {
 
     }
 
+    // course home banner
     else {
         var code = currURL.split('/');
         code = code[code.length - 1];
@@ -980,40 +1077,244 @@ function courseDirectToContent(courseWidget) {
         var cards = courseWidget.find('d2l-my-courses-content d2l-enrollment-card');
         cards.each(function (idx, elem) {
             var el = $(elem).find('d2l-card div.d2l-card-container a.d2l-focusable').first();
-            var link = el.attr('href');
-            link = link.replace('/d2l/home/', '/d2l/le/content/');
-            link += '/Home';
-            el.attr('href', link);
+            if (typeof el.attr('data-home-href') === typeof undefined) {
+                el.attr('data-home-href', el.attr('href'));
+                el.attr('href', el.attr('href').replace('/d2l/home/', '/d2l/le/content/') + '/Home');
+            }
         });
     }
     // navbar
     else {
         var courseBtn = undefined;
+        var intervalCnt = 0, intervalCnt2 = 0;
+
+        // wait for course selector button
         var interval = setInterval(function () {
+
             if (typeof courseBtn === typeof undefined || !courseBtn.length) {
                 courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown button');
             } else {
+                clearInterval(interval);
+
                 courseBtn.on('click', function () {
+
                     var d2lBtn = courseBtn.closest('d2l-navigation-button');
+
+                    // wait for dropdown menu
                     var interval2 = setInterval(function () {
+
                         if (d2lBtn.attr('aria-expanded') === 'true') {
-                            var links = $('#courseSelectorId').find('ul.d2l-datalist.vui-list li');
+                            clearInterval(interval2);
+
+                            var links = $('#courseSelectorId').find('ul.d2l-datalist.vui-list li a.d2l-link.d2l-datalist-item-actioncontrol');
                             links.each(function (idx, elem) {
-                                var el = $(elem).find('a.d2l-link.d2l-datalist-item-actioncontrol');
-                                var link = el.attr('href');
-                                if (!link.match(/\/content\//)) {
-                                    link = link.replace('/d2l/home/', '/d2l/le/content/');
-                                    link += '/Home';
-                                    el.attr('href', link);
+                                var el = $(elem);
+                                if (typeof el.attr('data-home-href') === typeof undefined) {
+                                    el.attr('data-home-href', el.attr('href'));
+                                    el.attr('href', el.attr('href').replace('/d2l/home/', '/d2l/le/content/') + '/Home');
                                 }
                             });
+                        }
+
+                        intervalCnt2++;
+                        if (intervalCnt2 > 40) {
                             clearInterval(interval2);
                         }
+
                     }, 200);
+
                 });
+            }
+
+            intervalCnt++;
+            if (intervalCnt > 20) {
                 clearInterval(interval);
             }
+
         }, 500);
+    }
+}
+
+function courseTileContextMenu(courseWidget) {
+
+    if (!options.HOME_CourseTileContextMenu) return;
+
+    function _showContextMenu(id, contentList, pos, courseName) {
+        $('#darklight-context-menu').remove();
+        var menu = '';
+
+        if (courseName !== undefined) {
+            menu += '<li class="d2l-contextmenu-item-header"><div>' + courseName + '</div></li>';
+        }
+        contentList.forEach(function (cl) {
+            var menuTmp = '', cntTmp = 0;
+
+            cl.list.forEach(function (c) {
+                if (c.visible) {
+                    menuTmp += '<li class="d2l-contextmenu-item" role="presentation">' +
+                        '<a class="vui-dropdown-menu-item-link" tabindex="-1" role="menuitem" href="';
+                    if (c.name == 'Course Home') {
+                        menuTmp += '/d2l/home/' + id;
+                    } else if (c.name == 'Content') {
+                        menuTmp += '/d2l/le/content/' + id + '/Home';
+                    } else if (c.name == 'Grades') {
+                        menuTmp += '/d2l/lms/grades/my_grades/main.d2l?ou=' + id;
+                    } else if (c.name == 'Dropbox') {
+                        menuTmp += '/d2l/lms/dropbox/dropbox.d2l?ou=' + id;
+                    } else if (c.name == 'Quizzes') {
+                        menuTmp += '/d2l/lms/quizzing/quizzing.d2l?ou=' + id;
+                    } else if (c.name == 'Surveys') {
+                        menuTmp += '/d2l/lms/survey/surveys.d2l?ou=' + id;
+                    } else if (c.name == 'Classlist') {
+                        menuTmp += '/d2l/lms/classlist/classlist.d2l?ou=' + id;
+                    } else if (c.name == 'Discussions') {
+                        menuTmp += '/d2l/le/' + id + '/discussions/List';
+                    } else if (c.name == 'Groups') {
+                        menuTmp += '/d2l/lms/group/group_list.d2l?ou=' + id;
+                    } else if (c.name == 'Online Rooms') {
+                        menuTmp += '/d2l/im/onlinerooms/roomlist.d2l?ou=' + id;
+                    } else if (c.name == 'Checklist') {
+                        menuTmp += '/d2l/lms/checklist/checklists.d2l?ou=' + id;
+                    } else if (c.name == 'Rubrics') {
+                        menuTmp += '/d2l/lp/rubrics/list.d2l?ou=' + id;
+                    }
+                    menuTmp += '"><span>' + c.name + '</span></a></li>';
+                    cntTmp++;
+                }
+            });
+
+
+            if (cl.name !== undefined && cntTmp > 0) {
+                var extra = '';
+                if (cl.name == '') extra = ' empty';
+                menuTmp = '<li class="d2l-contextmenu-item-title' + extra + '"><div>' + cl.name + '</div></li>' + menuTmp;
+            }
+
+            menu += menuTmp;
+
+        });
+
+        menu = $(menu);
+        menu.find('li').first().addClass('d2l-first-visible-item');
+        menu.find('li').last().addClass('d2l-last-visible-item');
+        var ul = $('<ul class="d2l-contextmenu-daylightoff" ' +
+            'data-floatingcontainerid="darklight-context-menu" ' +
+            'role="presentation"></ul>');
+        menu.appendTo(ul);
+        var contain = $('<div id="darklight-context-menu" ' +
+            'class="d2l-floating-container vui-dropdown-menu d2l-floating-container-autoclose darklight-context-menu" role="menu" ' +
+            'tabindex="0"></div>');
+        ul.appendTo(contain);
+        var zindex = 90;
+        if (courseWidget === undefined) zindex = 1500;
+        contain.css({
+            left: pos.x,
+            top: pos.y,
+            'z-index': zindex
+        });
+        contain.appendTo($('body'));
+
+        if (contain.height() + (pos.y - $(window).scrollTop() + 20) > $(window).height()
+            && contain.height() < $(window).height() - 100
+            && contain.height() < pos.y - $('body header').height()) {
+            contain.css({
+                top: pos.y - contain.height()
+            });
+        }
+
+        contain.find('li.d2l-contextmenu-item').hover(function () {
+            $(this).addClass('d2l-contextmenu-item-hover vui-dropdown-menu-item-focus');
+        }, function () {
+            $(this).removeClass('d2l-contextmenu-item-hover vui-dropdown-menu-item-focus');
+        });
+
+        $('html').on('click', function (e) {
+            if (!e.target.matches('#darklight-context-menu')) {
+                $('#darklight-context-menu').remove();
+            }
+        });
+
+    }
+
+    // homepage
+    if (courseWidget !== undefined) {
+        if (typeof courseWidget.attr('data-context-menu-init') !== typeof undefined) return;
+        courseWidget.attr('data-context-menu-init', 'true');
+
+        var contentList = options.HOME_CourseTileContextMenuData;
+        var cards = courseWidget.find('d2l-my-courses-content d2l-enrollment-card d2l-card div.d2l-card-container');
+
+        cards.each(function (idx, elem) {
+            var code = $(elem).children('a.d2l-focusable').first().attr('href').match(/\/\d+/)[0].substring(1);
+            $(elem).contextmenu(function (e) {
+                e.preventDefault();
+                _showContextMenu(code, contentList, {
+                    x: e.pageX,
+                    y: e.pageY
+                });
+            });
+        });
+    }
+    // course selector
+    else {
+
+        var courseBtn = undefined;
+        var intervalCnt = 0, intervalCnt2 = 0;
+        var contentList = options.HOME_CourseTileContextMenuData;
+
+        // wait for course selector button
+        var interval = setInterval(function () {
+
+            if (typeof courseBtn === typeof undefined || !courseBtn.length) {
+                courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown button');
+            } else {
+                clearInterval(interval);
+
+                courseBtn.on('click', function () {
+
+                    var d2lBtn = courseBtn.closest('d2l-navigation-button');
+
+                    // wait for dropdown menu
+                    var interval2 = setInterval(function () {
+
+                        if (d2lBtn.attr('aria-expanded') === 'true') {
+                            clearInterval(interval2);
+
+                            var linksLi = $('#courseSelectorId').find('ul.d2l-datalist.vui-list li');
+                            linksLi.each(function (idx, elem) {
+                                var el = $(elem).find('a.d2l-link.d2l-datalist-item-actioncontrol');
+                                if (typeof el.attr('data-context-menu-init') === typeof undefined) {
+                                    el.attr('data-context-menu-init', 'true');
+                                    var code = el.attr('href').match(/\/\d+/)[0].substring(1);
+                                    var name = el.text().trim().split(' - ')[0];
+                                    $(elem).contextmenu(function (e) {
+                                        e.preventDefault();
+                                        _showContextMenu(code, contentList, {
+                                            x: e.pageX,
+                                            y: e.pageY
+                                        }, name);
+                                    });
+                                }
+                            });
+                        }
+
+                        intervalCnt2++;
+                        if (intervalCnt2 > 40) {
+                            clearInterval(interval2);
+                        }
+
+                    }, 200);
+
+                });
+            }
+
+            intervalCnt++;
+            if (intervalCnt > 20) {
+                clearInterval(interval);
+            }
+
+        }, 500);
+
     }
 }
 
@@ -1027,6 +1328,55 @@ function dropboxMarkFunc() {
         header.toggle();
     });
     hideBtn.insertAfter(header);
+}
+
+function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
+    function _removeCSS(elem) {
+        elem.css({
+            'font-size': '',
+            'line-height': '',
+            'margin': '',
+            'padding': '',
+            'font-family': ''
+        });
+    }
+
+    if (!options.HOME_RemoveAnnounceFormat) return;
+
+    if (counter === undefined) {
+        counter = 0;
+    } else if (counter > 20) {
+        return;
+    }
+
+    if (isHomepage === true) {
+
+        if (announcementWidget.find('template').length) {
+            setTimeout(function () {
+                removeAnnouncePageFormat(true, announcementWidget, counter++);
+            }, 500);
+            return;
+        }
+
+        announcementWidget.find('div.d2l-widget-content ul.d2l-datalist').children('li').each(function (i, e) {
+            _removeCSS($(e).find('div.d2l-htmlblock').find('p, span, ul, ol, li, table, tr, th, td'));
+        });
+
+    } else {
+        var announceTable = $('#wrapper');
+
+        if (!announceTable.length || announceTable.find('template').length) {
+            setTimeout(function () {
+                removeAnnouncePageFormat(false, null, counter++);
+            }, 500);
+            return;
+        }
+
+        announceTable.find('table.d2l-table tr.d_detailsRow').each(function (i, e) {
+            _removeCSS($(e).find('td div.d2l-htmlblock').find('p, span, ul, ol, li, table, tr, th, td'));
+        });
+
+    }
 }
 
 function initDarklightFunc() {
@@ -1094,17 +1444,40 @@ function initDarklightFunc() {
 
         $('.d2l-widget-header').each(function (i, e) {
             var headText = $(e).text();
-            if (headText.match(/Calendar/)) {
-                $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
+            if (headText.match(/Calendar/i)) {
+                $(e).closest('div.d2l-widget').addClass('darklight-course-home-calendar');
+            } else if (headText.match(/Announcements/i)) {
+                removeAnnouncePageFormat(true, $(e).closest('div.d2l-widget'));
             }
         });
     }
 
     courseDirectToContent();
+    courseTileContextMenu();
 
     // dropbox mark
     if (currURL.match(/\/d2l\/lms\/dropbox\/admin\/mark\/folder_user_mark\.d2l/i)) {
         // dropboxMarkFunc();
+    }
+
+    // announcement page
+    if (currURL.match(/\/d2l\/lms\/news\/main\.d2l/i)) {
+        removeAnnouncePageFormat();
+    }
+
+    // popup page
+    if (window.opener && window.opener !== window) {
+        if (currURL.match(/\/d2l\/le\/content\/\d+\/fullscreen\/\d+\/View/i)) {
+            var cssText = '.d2l-popup-page .d2l-popup-body::-webkit-scrollbar{width:0!important}' +
+                '.d2l-popup-page .d2l-popup-body{scrollbar-width:none}';
+            if ($('.d2l-popup-title').length)
+                cssText += 'iframe.d2l-fileviewer-rendered-pdf{height:calc(100vh - 60px)!important;}';
+            browser.runtime.sendMessage({
+                action: 'insertCSS',
+                data: {code: cssText}
+            });
+            injectCSS('iframe.d2l-fileviewer-rendered-pdf-dialog{height:calc(100vh - 60px)!important;}', 'body', 'text');
+        }
     }
 
     // overlay

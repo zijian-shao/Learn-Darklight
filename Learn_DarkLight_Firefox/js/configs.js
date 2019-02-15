@@ -34,6 +34,39 @@ function getOptionListDefault() {
         HOME_HideMetaTerm: false,
         HOME_HideMetaEndDate: false,
         HOME_SwitchAnnounceAndCalendar: false,
+        HOME_RemoveAnnounceFormat: false,
+        HOME_HidePinnedIcon: false,
+        HOME_CourseTileContextMenu: true,
+        HOME_CourseTileContextMenuData: [
+            {
+                name: 'Common',
+                list: [
+                    {name: 'Course Home', visible: false},
+                    {name: 'Content', visible: true},
+                    {name: 'Grades', visible: true}
+                ]
+            }, {
+                name: 'Submit',
+                list: [
+                    {name: 'Dropbox', visible: true},
+                    {name: 'Quizzes', visible: true},
+                    {name: 'Surveys', visible: false}
+                ]
+            }, {
+                name: 'Connect',
+                list: [
+                    {name: 'Classlist', visible: false},
+                    {name: 'Discussions', visible: true},
+                    {name: 'Groups', visible: false}
+                ]
+            }, {
+                name: 'Resources',
+                list: [
+                    {name: 'Checklist', visible: false},
+                    {name: 'Rubrics', visible: false}
+                ]
+            }
+        ],
         COURSE_ContentResizeBtn: true,
         COURSE_AutoScrollToContent: false,
         COURSE_CustomThumb: true,
@@ -129,6 +162,11 @@ function getThemeConfigs(id) {
                     type: "boolean",
                     value: true,
                     description: "Full-width layout"
+                }, {
+                    key: "useThemeLogo",
+                    type: "boolean",
+                    value: true,
+                    description: "Use theme logo <small>(Waterloo Learn)</small>"
                 }
             ]
         },
@@ -147,6 +185,73 @@ function getThemeConfigs(id) {
     else
         return configs["theme_" + id];
 
+}
+
+function getFontConfigs() {
+    var configs = [
+        {
+            name: "Lato",
+            image: "font-sample-lato.png"
+        }, {
+            name: "Muli",
+            size: 0,
+            weight: "400,600,800",
+            image: "font-sample-muli.png"
+        }, {
+            name: "Helvetica Neue",
+            size: 0,
+            weight: "300,400,700",
+            image: "font-sample-helvetica-neue.png"
+        }, {
+            name: "Ubuntu",
+            size: 0,
+            weight: "400,500,700",
+            image: "font-sample-ubuntu.png"
+        }, {
+            name: "Consolas",
+            size: 0,
+            weight: "400",
+            source: "none",
+            image: "font-sample-consolas.png"
+        }, {
+            name: "Comic Sans MS",
+            size: 0,
+            weight: "400,700",
+            image: "font-sample-comic-sans-ms.png"
+        }, {
+            name: "Vollkorn",
+            size: 0,
+            weight: "400,600,700",
+            image: "font-sample-vollkorn.png"
+        }, {
+            name: "Roboto Slab",
+            size: 0,
+            weight: "400,700",
+            image: "font-sample-roboto-slab.png"
+        }, {
+            name: "Roboto Condensed",
+            size: 0,
+            weight: "400,700",
+            image: "font-sample-roboto-condensed.png"
+        }, {
+            name: "Raleway",
+            size: 0,
+            weight: "400,600,700",
+            image: "font-sample-raleway.png"
+        }, {
+            name: "Roboto",
+            size: 0,
+            weight: "400,500,700",
+            image: "font-sample-roboto.png"
+        }, {
+            name: "Arial",
+            size: 0,
+            weight: "400",
+            source: "none",
+            image: "font-sample-arial.png"
+        }
+    ];
+    return configs;
 }
 
 function getLink(key) {

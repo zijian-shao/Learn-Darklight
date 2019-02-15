@@ -105,7 +105,7 @@ function initDarklight() {
         }
 
         // course thumbs
-        if (options.COURSE_CustomThumb) {
+        if (options.COURSE_CustomThumb && !isWLU()) {
             if (currURL2.match(/\/d2l\/home$/) || currURL2.match(/\/d2l\/home\/\d+$/)) {
 
                 var act = '';

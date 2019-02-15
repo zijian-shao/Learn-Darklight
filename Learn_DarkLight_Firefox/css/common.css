@@ -472,6 +472,23 @@ d2l-card.d2l-enrollment-card .d2l-card-content {
     display: none !important;
 }
 
+/* hide pin icon on course tile */
+.darklight-hide-pin-icon d2l-enrollment-card d2l-card .d2l-card-container .d2l-card-actions d2l-button-icon[icon="d2l-tier1:pin-filled"] {
+    display: none !important;
+}
+
+.darklight-auto-hide-pin-icon d2l-enrollment-card d2l-card .d2l-card-container .d2l-card-actions d2l-button-icon[icon="d2l-tier1:pin-filled"] {
+    opacity: 0 !important;
+    transform: translateY(-10px) !important;
+    transition: transform 200ms ease-out, opacity 200ms ease-out !important;
+}
+
+.darklight-auto-hide-pin-icon d2l-enrollment-card d2l-card:hover .d2l-card-container .d2l-card-actions d2l-button-icon[icon="d2l-tier1:pin-filled"],
+.darklight-auto-hide-pin-icon d2l-enrollment-card d2l-card:focus .d2l-card-container .d2l-card-actions d2l-button-icon[icon="d2l-tier1:pin-filled"] {
+    opacity: 1 !important;
+    transform: translateY(0px) !important;
+}
+
 /* navbar */
 .d2l-navigation-s-item *:focus {
     outline: none;
@@ -612,4 +629,86 @@ d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-courseselector-wra
 /* flyout */
 #flyout.flyout-impl {
     z-index: 490 !important;
+}
+
+/* file viewer */
+.d2l-documentToPdfViewer-fullscreen iframe.d2l-fileviewer-rendered-pdf {
+    height: 100vh !important;
+}
+
+iframe.d2l-fileviewer-rendered-pdf-fullscreen, iframe.d2l-fileviewer-rendered-pdf-dialog {
+    height: 100vh !important;
+}
+
+/* popup page */
+.d2l-popup-page .d2l-popup-title {
+    background: #f4f4f4 !important;
+    height: 60px !important;
+}
+
+.d2l-popup-page .d2l-popup-title .d2l-heading {
+    font-size: 1.5rem !important;
+    line-height: 60px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.d2l-popup-page .d2l-popup-buttons {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f4f4f4 !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.d2l-popup-page .d2l-popup-body {
+
+}
+
+.d2l-popup-page .d2l-fileviewer-pdf-pdfjs {
+    border-top: none !important;
+}
+
+/* float buttons */
+.d2l-floating-buttons-container.d2l-floating-buttons-floating.d2l-floating-buttons {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+/* context menu */
+
+li.d2l-contextmenu-item-header > * {
+    display: block;
+    padding: 0.5rem 1rem calc(0.5rem - 2px);
+    line-height: 1.5em;
+    font-size: 0.95rem;
+    font-weight: lighter;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+li.d2l-contextmenu-item-title {
+    background: #e6eaf0;
+}
+
+li.d2l-contextmenu-item-title > * {
+    display: block;
+    padding: 2px 1rem 0;
+    line-height: 1.5em;
+    font-size: .6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+li.d2l-contextmenu-item-title.empty > * {
+    display: none;
 }

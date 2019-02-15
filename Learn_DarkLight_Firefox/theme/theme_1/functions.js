@@ -14,7 +14,7 @@ function initTheme() {
         cssText += '.d2l-navigation-s-main, d2l-navigation-bottom-bar, d2l-navigation-main-footer' +
             '{box-shadow:0 2px 3px rgba(0, 0, 0, 0.02)!important;}' +
             '.d2l-page-main:before{content:"";background:linear-gradient(to bottom, rgba(249,250,251,1) 0%,rgba(249,250,251,0) 100%);' +
-            'position:absolute;top:0;left:0;right:0;height:50vh;max-height:400px;z-index:-1;}';
+            'position:absolute;top:0;left:0;right:0;height:50vh;max-height:400px;z-index:-10;}';
     }
     browser.runtime.sendMessage({
         action: 'insertCSS',
