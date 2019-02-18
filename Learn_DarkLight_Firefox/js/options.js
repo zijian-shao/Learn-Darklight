@@ -78,7 +78,7 @@ function initOptions() {
 
     }
 
-    function scrollToUtil(pos, time, offset) {
+    function scrollToUtil(pos, time, offset, callback) {
 
         if ($.type(offset) !== 'number')
             offset = 0;
@@ -88,7 +88,11 @@ function initOptions() {
         else if ($.type(pos) === 'string')
             pos = $(pos).first().offset().top;
 
-        $('html').animate({scrollTop: pos - offset}, time);
+        $('html').animate({scrollTop: pos - offset}, time, function () {
+            if (typeof callback === 'function') {
+                callback();
+            }
+        });
 
     }
 
@@ -107,6 +111,26 @@ function initOptions() {
             tst.addClass('darklight-toast-hidden');
             tst.html('');
         }, 2000);
+    }
+
+    function isBrowser(name) {
+        name = name.toLowerCase();
+        if (name == 'opera')
+            return (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+        else if (name == 'firefox')
+            return typeof InstallTrigger !== 'undefined';
+        else if (name == 'safari')
+            return /constructor/i.test(window.HTMLElement) || (function (p) {
+                return p.toString() === "[object SafariRemoteNotification]";
+            })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+        else if (name == 'ie')
+            return /*@cc_on!@*/false || !!document.documentMode;
+        else if (name == 'edge')
+            return !isIE && !!window.StyleMedia;
+        else if (name == 'chrome')
+            return /chrome/.test(navigator.userAgent.toLowerCase());
+        else
+            return false;
     }
 
     function initPopup(title, content, extraClass, type) {
@@ -145,7 +169,7 @@ function initOptions() {
         template.appendTo('body');
         template.addClass('popup-show');
         template.find('.popup-layer').addClass('fadeIn animated');
-        template.find('.popup-frame').addClass('bounceIn animated');
+        template.find('.popup-frame').addClass('fadeInDown animated');
         return 'popup-' + rnd;
     }
 
@@ -245,23 +269,36 @@ function initOptions() {
         });
 
         // local
+        var timeOut = 500, timeIntv = 200;
+        if (isBrowser('firefox')) {
+            timeOut = 1000;
+            timeIntv = 200;
+        }
         setTimeout(function () {
+
+            if (params['whatsnew'] !== undefined) return;
+
+            var thumbList = $('#saved-thumb-list');
+            var intCnt = 0;
             var interval = setInterval(function () {
-                var thumbList = $('#saved-thumb-list');
                 if (typeof thumbList.attr('data-list-init') === typeof undefined) {
                     refreshThumbList();
                 } else {
                     clearInterval(interval);
                     $('#add-course-thumbnail').removeAttr('disabled');
-                    var params = getSearchParameters();
                     if (params['action'] === 'add-custom-cover') {
                         unblockPage(0);
                         scrollToUtil($('#opt-courses-0-0').closest('div.group'), 0, 30);
                         $('#add-course-thumbnail').trigger('click');
                     }
                 }
-            }, 500);
-        }, 1000);
+                intCnt++;
+                if (intCnt > 10) {
+                    alert('IndexedDB initialization failed. It seems like your browser does not support IndexedDB¡£ Some features may not work properly.');
+                    clearInterval(interval);
+                }
+            }, timeIntv);
+        }, timeOut);
 
     }
 
@@ -430,7 +467,6 @@ function initOptions() {
     function bindEvents() {
 
         var allowHashChange = true;
-        var params = getSearchParameters();
 
         // event
         $('input').on('change', function () {
@@ -554,7 +590,6 @@ function initOptions() {
                 alertBlock = container.find('.alert-file-size'),
                 alertContent = alertBlock.find('.alert');
             var thumbBase64 = '';
-            var params = getSearchParameters();
 
             // params
             if (params['action'] === 'add-custom-cover') {
@@ -735,13 +770,14 @@ function initOptions() {
 
         // whats new
         if (params.hasOwnProperty('whatsnew')) {
-            var whatsnew = $('#whatsnew-content').clone();
-            whatsnew.removeAttr('id').removeClass('hidden');
-            var popupCls = initPopup('Learn Darklight', whatsnew, '', 1);
-            $('.' + popupCls).find('.popup-btn').on('click', function (e) {
-                e.preventDefault();
-                window.location.href = removeSearchParameters('whatsnew', true);
-            });
+            // var whatsnew = $('#whatsnew-content').clone();
+            // whatsnew.removeAttr('id').removeClass('hidden');
+            // var popupCls = initPopup('Learn Darklight', whatsnew, '', 1);
+            // $('.' + popupCls).find('.popup-btn').on('click', function (e) {
+            //     e.preventDefault();
+            //     window.location.href = removeSearchParameters('whatsnew', true);
+            // });
+            newFeatureGuide();
         }
 
         // welcome
@@ -987,13 +1023,13 @@ function initOptions() {
 
         // stack overflow 5448545
         function _transformToAssocArray(prmstr) {
-            var params = {};
+            var paramsO = {};
             var prmarr = prmstr.split("&");
             for (var i = 0; i < prmarr.length; i++) {
                 var tmparr = prmarr[i].split("=");
-                params[tmparr[0]] = tmparr[1];
+                paramsO[tmparr[0]] = tmparr[1];
             }
-            return params;
+            return paramsO;
         }
 
         var prmstr = window.location.search.substr(1);
@@ -1040,7 +1076,6 @@ function initOptions() {
 
     function processSearchParameters() {
         // jump to
-        var params = getSearchParameters();
         if (params['section'] !== undefined) {
             window.location.hash = params['section'];
         }
@@ -1053,10 +1088,196 @@ function initOptions() {
         }
     }
 
+    function newFeatureGuide(currState) {
+
+        function _focusElement(el, padding, floatDialog) {
+            function _setCSS() {
+                var elT = el.offset().top - padding[0],
+                    elL = el.offset().left - padding[3],
+                    elW = el.outerWidth() + padding[3] + padding[1],
+                    elH = el.outerHeight() + padding[0] + padding[2],
+                    winT = $(window).scrollTop(),
+                    winW = $(window).width(),
+                    winH = $(window).height(),
+                    docH = $(document).height();
+                var b1T = 0,
+                    b1L = 0,
+                    b1W = winW,
+                    b1H = elT,
+                    b2T = b1H,
+                    b2L = elL + elW,
+                    b2W = winW - b2L,
+                    b2H = docH - b1H,
+                    b3T = b1H + elH,
+                    b3L = 0,
+                    b3W = b2L,
+                    b3H = docH - b1H - elH,
+                    b4T = b1H,
+                    b4L = 0,
+                    b4W = elL,
+                    b4H = elH,
+                    bsT = b1H,
+                    bsL = elL,
+                    bsW = elW,
+                    bsH = elH;
+                b1.css({top: b1T + 'px', left: b1L + 'px', width: b1W + 'px', height: b1H + 'px'});
+                b2.css({top: b2T + 'px', left: b2L + 'px', width: b2W + 'px', height: b2H + 'px'});
+                b3.css({top: b3T + 'px', left: b3L + 'px', width: b3W + 'px', height: b3H + 'px'});
+                b4.css({top: b4T + 'px', left: b4L + 'px', width: b4W + 'px', height: b4H + 'px'});
+                bs.css({top: bsT + 'px', left: bsL + 'px', width: bsW + 'px', height: bsH + 'px'});
+                if (typeof floatDialog !== typeof  undefined) {
+                    var flW = floatDialog.outerWidth(),
+                        flH = flL + floatDialog.outerHeight(),
+                        flT = b3T + 20,
+                        flL = b4W + (elW / 2) - (flW / 2);
+                    if (flL < 0) {
+                        flL = 10;
+                    } else if (flL + flW > winW) {
+                        flL = winW - flW - 10;
+                    }
+                    if (winW <= 567) {
+                        floatDialog.addClass('update-dialog-fixed-bottom').css({top: '', left: ''});
+                    } else {
+                        floatDialog.removeClass('update-dialog-fixed-bottom').css({top: flT + 'px', left: flL + 'px'});
+                    }
+                }
+            }
+
+            $('#elem-focus-overlay-container').remove();
+
+            if (typeof el === typeof undefined)
+                return;
+
+            if (padding === undefined || !Array.isArray(padding))
+                padding = [0, 0, 0, 0];
+
+            var b, b1, b2, b3, b4, bs;
+            b = $('<div id="elem-focus-overlay-container" class="elem-focus-overlay-container"></div>');
+            b1 = $('<div class="elem-focus-overlay"></div>');
+            b2 = $('<div class="elem-focus-overlay"></div>');
+            b3 = $('<div class="elem-focus-overlay"></div>');
+            b4 = $('<div class="elem-focus-overlay"></div>');
+            bs = $('<div class="elem-focus-overlay-shadow"></div>');
+
+            b1.appendTo(b);
+            b2.appendTo(b);
+            b3.appendTo(b);
+            b4.appendTo(b);
+            bs.appendTo(b);
+
+            var offset = $(window).height() * 0.2;
+            scrollToUtil(el, 0, offset, function () {
+                _setCSS();
+                b.appendTo($('body'));
+            });
+
+            $(window).on('resize', function () {
+                offset = $(window).height() * 0.2;
+                scrollToUtil(el, 0, offset, function () {
+                    _setCSS();
+                });
+            });
+        }
+
+        function _getDialog(title, content, image) {
+            if (typeof image === typeof undefined)
+                image = '';
+            else
+                image = '<div class="dialog-banner"><img src="../img/update/' + image + '" alt="Banner"></div>';
+
+            var elem = '<div class="update-dialog">' +
+                '<div class="tag"></div>' +
+                image +
+                '<div class="dialog-title">' + title + '</div>' +
+                '<div class="dialog-content">' + content + '</div>' +
+                '<div class="dialog-action">' +
+                '<a href="#" class="btn pull-left btn-prev">Back</a>' +
+                '<a href="#" class="btn btn-primary pull-right btn-next">Next</a>' +
+                '<div class="page"></div>' +
+                '</div></div>';
+            elem = $(elem);
+            elem.find('.close').on('click', _skipGuide);
+            return elem;
+        }
+
+        function _nextGuide(e) {
+            e.preventDefault();
+            $('.update-dialog').remove();
+            $('.update-dialog-close').remove();
+            newFeatureGuide(++currState);
+        }
+
+        function _prevGuide(e) {
+            e.preventDefault();
+            $('.update-dialog').remove();
+            $('.update-dialog-close').remove();
+            newFeatureGuide(--currState);
+        }
+
+        function _finishGuide(e) {
+            e.preventDefault();
+            window.location.href = removeSearchParameters('whatsnew');
+        }
+
+        function _skipGuide(e) {
+            e.preventDefault();
+            var r = confirm('Do you want to skip the new feature guide?');
+            if (r) {
+                window.location.href = removeSearchParameters('whatsnew');
+            }
+        }
+
+        if (typeof currState === typeof undefined) currState = 0;
+        var dialog = null;
+
+        // parse target elem
+        var targetElem;
+        var targetElemTxt = updateLog[currState].targetElem;
+        targetElemTxt = targetElemTxt.split('<');
+        if (targetElemTxt.length > 1) {
+            var i;
+            for (i = 0; i < targetElemTxt.length; i++) {
+                if (i == 0)
+                    targetElem = $(targetElemTxt[i].trim());
+                else
+                    targetElem = targetElem.closest(targetElemTxt[i].trim());
+            }
+        } else {
+            targetElem = $(targetElemTxt[0].trim());
+        }
+
+        // dialog
+        var dialog;
+        dialog = _getDialog(updateLog[currState].title, updateLog[currState].desc, updateLog[currState].image);
+        if (currState == 0) {
+            dialog.find('.btn-next').on('click', _nextGuide);
+            dialog.find('.btn-prev').remove();
+        } else if (currState == updateLog.length - 1) {
+            dialog.find('.btn-next').text('Finish').on('click', _finishGuide);
+            dialog.find('.btn-prev').on('click', _prevGuide);
+        } else {
+            dialog.find('.btn-next').on('click', _nextGuide);
+            dialog.find('.btn-prev').on('click', _prevGuide);
+        }
+        dialog.find('.page').text((currState + 1) + ' / ' + updateLog.length);
+        dialog.appendTo($('body'));
+        dialog.addClass('animated fadeInUp');
+        dialog.find('.btn-next').focus();
+
+        $('<div class="update-dialog-close">Skip</div>')
+            .on('click', _skipGuide).appendTo($('body'));
+
+        // focus elem
+        _focusElement(targetElem, updateLog[currState].offset, dialog);
+
+    }
+
     window.addEventListener("hashchange", onHashChange, false);
 
     var timeoutHandle = setTimeout(function () {
     }, 0);
+
+    var params = getSearchParameters();
 
     $(window).on('load', function (e) {
 
@@ -1086,4 +1307,42 @@ function initOptions() {
 
 }
 
+var updateLog = [
+    {
+        targetElem: '#theme-item-3',
+        title: 'New <span style="color:#0088fb">Dodger Blue</span> Theme',
+        desc: 'The new bright theme provides you with a fresh and professional learning experience. <br><small>( Click the 3-dot button to change layout width )</small>',
+        offset: 0
+    }, {
+        targetElem: '#course-tile-context-menu-items-container',
+        image: 'contextmenu.jpg',
+        title: 'Right click menu on course tiles',
+        desc: 'Quick access to different modules with one click. Customize the links here.',
+        offset: [0, 10, 0, 10]
+    }, {
+        targetElem: '#opt-themes-3-0 < .group',
+        title: 'Adjustable page font size',
+        desc: 'Drag the slider to adjust the font size on each page. Recommended value is 16px.',
+        offset: [10, -10, -10, 10]
+    }, {
+        targetElem: '#opt-courses-1-2 < .group',
+        title: 'Document viewer control',
+        desc: 'Skip unnecessary operations and focus on your work.',
+        offset: [10, -10, -10, 10]
+    }, {
+        targetElem: '#opt-pages-4-0 < .group',
+        title: 'Clean up announcement format',
+        desc: 'Automatically remove unnecessary announcement formatting for easy reading.',
+        offset: [10, -10, -10, 10]
+    }, {
+        targetElem: '#image-gallery',
+        image: 'gallery.jpg',
+        title: 'Use image from Brightspace gallery',
+        desc: 'All Brightspace provided images can be found here. Security and stability of images are guaranteed.',
+        offset: [5, 5, 5, 5]
+    }
+];
+
 initOptions();
+
+

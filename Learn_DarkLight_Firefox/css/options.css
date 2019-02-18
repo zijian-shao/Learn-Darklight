@@ -370,6 +370,7 @@ hr {
 
 * {
     scrollbar-width: thin;
+    scrollbar-color: dark;
 }
 
 /* page */
@@ -410,11 +411,11 @@ hr {
     padding: 18px 25px;
     color: #aaa;
     cursor: pointer;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: color 0.2s ease, background 0.2s ease, font-weight 0.2s ease;
+    -moz-transition: color 0.2s ease, background 0.2s ease, font-weight 0.2s ease;
+    -ms-transition: color 0.2s ease, background 0.2s ease, font-weight 0.2s ease;
+    -o-transition: color 0.2s ease, background 0.2s ease, font-weight 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease, font-weight 0.2s ease;
     position: relative;
 }
 
@@ -444,11 +445,11 @@ hr {
     color: #aaa;
     font-weight: normal;
     text-decoration: none !important;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: color 0.2s ease, background 0.2s ease;
+    -moz-transition: color 0.2s ease, background 0.2s ease;
+    -ms-transition: color 0.2s ease, background 0.2s ease;
+    -o-transition: color 0.2s ease, background 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
 }
 
 .sidebar .nav > li.link:hover a {
@@ -751,11 +752,11 @@ hr {
     margin: 0 2% 15px 0;
     /*overflow: hidden;*/
     border: 1px solid #ccc;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -moz-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -ms-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -o-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .theme-item:nth-child(even) {
@@ -993,11 +994,11 @@ hr {
     height: 10px;
     background: #fff;
     z-index: 3;
-    -webkit-transition: opacity 0.2s ease;
-    -moz-transition: opacity 0.2s ease;
-    -ms-transition: opacity 0.2s ease;
-    -o-transition: opacity 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: bottom 0.2s ease, height 0.2s ease;
+    -moz-transition: bottom 0.2s ease, height 0.2s ease;
+    -ms-transition: bottom 0.2s ease, height 0.2s ease;
+    -o-transition: bottom 0.2s ease, height 0.2s ease;
+    transition: bottom 0.2s ease, height 0.2s ease;
 }
 
 .font-item:hover {
@@ -1065,23 +1066,23 @@ hr {
     width: 10%;
     text-align: center;
     cursor: pointer;
-    padding: 10px 0;
-    margin-top: -10px;
+    padding: 5px 0 10px;
     position: relative;
 }
 
 .font-size-tags > span:before {
     content: '';
     display: block;
-    width: 12px;
-    height: 12px;
+    width: 15px;
+    height: 15px;
     margin: auto;
     position: absolute;
-    top: -9px;
+    top: -17.5px;
     left: 0;
     right: 0;
     border-radius: 50%;
     background: #eee;
+    z-index: 0;
 }
 
 .font-size-tags > span:nth-child(6):after {
@@ -1098,10 +1099,6 @@ hr {
 .font-size-tags > span.selected {
     color: #5bb75b;
     font-weight: bold;
-}
-
-.font-size-tags > span.selected:before {
-    display: none;
 }
 
 .font-size-tags > span.selected:after {
@@ -1189,11 +1186,11 @@ hr {
     font-size: 0.8em;
     background: rgba(0, 0, 0, 0.6);
     z-index: 2;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: top 0.2s ease, opacity 0.2s ease;
+    -moz-transition: top 0.2s ease, opacity 0.2s ease;
+    -ms-transition: top 0.2s ease, opacity 0.2s ease;
+    -o-transition: top 0.2s ease, opacity 0.2s ease;
+    transition: top 0.2s ease, opacity 0.2s ease;
     cursor: pointer;
 }
 
@@ -1292,6 +1289,17 @@ hr {
     border-color: #61c261;
 }
 
+.btn.btn-info {
+    color: #fff !important;
+    background: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn.btn-info:hover {
+    background: #138496;
+    border-color: #138496;
+}
+
 .new-tag {
     margin: 0;
     padding: 2px 3px;
@@ -1379,6 +1387,21 @@ hr {
     opacity: 1;
     color: #333;
     border-color: #333;
+}
+
+.option-tip-toggle-text {
+    width: auto;
+    border-radius: 20px;
+    padding: 0 6px;
+    font-weight: normal;
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+.option-tip-toggle-text:hover {
+    color: #333;
+    background: #fff;
 }
 
 .option-tip {
@@ -1515,9 +1538,9 @@ label.checkbox-label {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5e5e5', GradientType=0);
     border-radius: 50px;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    -webkit-transition: left 0.2s ease;
+    transition: left 0.2s ease;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .checkbox-slide input[type=checkbox] {
@@ -1582,11 +1605,11 @@ label.checkbox-label {
     -ms-transform: rotate(-90deg) scale(0);
     -o-transform: rotate(-90deg) scale(0);
     transform: rotate(-90deg) scale(0);
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: opacity 0.2s ease, transform 0.2s ease;
+    -moz-transition: opacity 0.2s ease, transform 0.2s ease;
+    -ms-transition: opacity 0.2s ease, transform 0.2s ease;
+    -o-transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .checkbox-square input[type=checkbox] {
@@ -1645,11 +1668,11 @@ label.checkbox-label {
     background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
     background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: opacity 0.2s ease, transform 0.2s ease;
+    -moz-transition: opacity 0.2s ease, transform 0.2s ease;
+    -ms-transition: opacity 0.2s ease, transform 0.2s ease;
+    -o-transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .radio-group input[type="radio"]:checked + label:after,
@@ -1665,11 +1688,11 @@ label.checkbox-label {
     top: 5px;
     left: 5px;
     border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: opacity 0.2s ease, transform 0.2s ease;
+    -moz-transition: opacity 0.2s ease, transform 0.2s ease;
+    -ms-transition: opacity 0.2s ease, transform 0.2s ease;
+    -o-transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .radio-group input[type="radio"]:not(:checked) + label:after {
@@ -1699,11 +1722,11 @@ label.checkbox-label {
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: border-color 0.2s ease;
+    -moz-transition: border-color 0.2s ease;
+    -ms-transition: border-color 0.2s ease;
+    -o-transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1739,11 +1762,11 @@ textarea.input-box {
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: border-color 0.2s ease, background 0.2s ease;
+    -moz-transition: border-color 0.2s ease, background 0.2s ease;
+    -ms-transition: border-color 0.2s ease, background 0.2s ease;
+    -o-transition: border-color 0.2s ease, background 0.2s ease;
+    transition: border-color 0.2s ease, background 0.2s ease;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1771,16 +1794,19 @@ textarea.input-box {
     -webkit-appearance: none;
     width: 100%;
     margin: 10px 0;
+    z-index: 10;
 }
 
 .input-range::-webkit-slider-runnable-track {
     width: 100%;
-    height: 5px;
+    height: 20px;
     cursor: pointer;
     background: #eee;
-    box-shadow: none;
     border-radius: 10px;
     border: none;
+    -webkit-box-shadow: inset 0 0 0 6px #fff;
+    -moz-box-shadow: inset 0 0 0 6px #fff;
+    box-shadow: inset 0 0 0 6px #fff;
 }
 
 .input-range::-webkit-slider-thumb {
@@ -1792,7 +1818,8 @@ textarea.input-box {
     background: #5bb75b;
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -7px;
+    z-index: 10;
+    position: relative;
 }
 
 .input-range:focus::-webkit-slider-runnable-track {
@@ -1803,10 +1830,12 @@ textarea.input-box {
     width: 100%;
     height: 5px;
     cursor: pointer;
-    box-shadow: none;
     background: #eee;
     border-radius: 10px;
     border: none;
+    -webkit-box-shadow: inset 0 0 0 6px #fff;
+    -moz-box-shadow: inset 0 0 0 6px #fff;
+    box-shadow: inset 0 0 0 6px #fff;
 }
 
 .input-range::-moz-range-thumb {
@@ -1817,6 +1846,8 @@ textarea.input-box {
     border-radius: 50%;
     background: #5bb75b;
     cursor: pointer;
+    z-index: 10;
+    position: relative;
 }
 
 .popup {
@@ -1826,7 +1857,6 @@ textarea.input-box {
     left: 0;
     width: 100%;
     height: 100%;
-
     text-align: center;
     vertical-align: middle;
     z-index: 200;
@@ -2156,8 +2186,8 @@ textarea.input-box {
 @-webkit-keyframes fadeInDown {
     from {
         opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
+        -webkit-transform: translate3d(0, -10%, 0);
+        transform: translate3d(0, -10%, 0);
     }
 
     to {
@@ -2170,8 +2200,8 @@ textarea.input-box {
 @keyframes fadeInDown {
     from {
         opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
+        -webkit-transform: translate3d(0, -10%, 0);
+        transform: translate3d(0, -10%, 0);
     }
 
     to {
@@ -2186,11 +2216,49 @@ textarea.input-box {
     animation-name: fadeInDown;
 }
 
+@-webkit-keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 10%, 0);
+        transform: translate3d(0, 10%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 10%, 0);
+        transform: translate3d(0, 10%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+
 .animated {
     -webkit-animation-duration: 0.3s;
     animation-duration: 0.3s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
+}
+
+.animated-longer {
+    -webkit-animation-duration: 0.6s;
+    animation-duration: 0.6s;
 }
 
 @-webkit-keyframes sk-rotateplane {
@@ -2432,4 +2500,220 @@ textarea.input-box {
 .whatsnew-list .desc {
     font-size: 0.9em;
     opacity: 0.5;
+}
+
+.elem-focus-overlay-container {
+    pointer-events: none;
+    z-index: 100;
+}
+
+.elem-focus-overlay,
+.elem-focus-overlay-shadow {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    pointer-events: auto;
+}
+
+.elem-focus-overlay-shadow {
+    background: none;
+    -webkit-box-shadow: 0 0 10px #000;
+    -moz-box-shadow: 0 0 10px #000;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+.update-dialog {
+    margin: 0 auto;
+    position: absolute;
+    background: #fff;
+    border-radius: 4px;
+    padding: 30px 30px 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+    width: 100%;
+    max-width: 400px;
+}
+
+.update-dialog:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-bottom-color: #fff;
+    top: -30px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+.update-dialog-fixed-bottom {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.update-dialog .dialog-banner {
+    width: auto;
+    height: auto;
+    margin: -30px -30px 30px;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}
+
+.update-dialog .dialog-banner img {
+    width: 100%;
+}
+
+.update-dialog .dialog-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.update-dialog .dialog-content {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5em;
+}
+
+.update-dialog .dialog-action {
+
+}
+
+.update-dialog .dialog-action .btn {
+    min-width: 100px;
+    /*padding: 10px 0;*/
+    cursor: pointer;
+}
+
+.update-dialog .dialog-action .page {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 80px;
+    margin: 0 auto;
+    padding: 12px 0;
+    text-align: center;
+    color: #aaa;
+}
+
+.update-dialog .tag {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.update-dialog .tag:before {
+    content: 'V2.0';
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: -22px;
+    width: 80px;
+    background: #333;
+    color: #fff;
+    padding: 2px 0;
+    text-align: center;
+    font-size: 0.75em;
+    transform: rotate(45deg);
+}
+
+.update-dialog-close {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    z-index: 110;
+    color: #fff;
+    text-transform: uppercase;
+    padding-top: 50px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.update-dialog-close:hover {
+    opacity: 1;
+}
+
+.update-dialog-close:before,
+.update-dialog-close:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    background: #fff;
+    top: calc(50% - 2px);
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    transition: transform 0.3s;
+}
+
+.update-dialog-close:before {
+    transform: rotate(45deg);
+}
+
+.update-dialog-close:after {
+    transform: rotate(-45deg);
+}
+
+.update-dialog-close:hover:before {
+    transform: rotate(135deg);
+}
+
+.update-dialog-close:hover:after {
+    transform: rotate(45deg);
+}
+
+@media (max-width: 567px) {
+    .update-dialog {
+        max-width: none;
+        border-radius: 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .update-dialog:before {
+        display: none;
+    }
+
+    .update-dialog .dialog-action .btn {
+        padding: 12px 0;
+        width: auto;
+        display: inline-block;
+    }
+
+    .update-dialog .dialog-action .page {
+        display: none;
+    }
+
+    .update-dialog .dialog-banner {
+        display: none;
+    }
+
+    .update-dialog .close {
+        opacity: 0.8;
+    }
+
+    .update-dialog-close {
+        top: 20px;
+        right: 20px;
+        opacity: 0.6;
+        background: rgba(0, 0, 0, 0.2);
+        transform: scale(0.8);
+        text-indent: -999em;
+        overflow: hidden;
+    }
 }

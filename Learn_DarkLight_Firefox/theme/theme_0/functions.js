@@ -36,7 +36,6 @@ function initTheme() {
         data: {code: cssText}
     });
 
-
     if (!isWLU()) {
 
         // bg - waterloo
