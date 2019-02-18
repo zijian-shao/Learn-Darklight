@@ -25,7 +25,7 @@ function extensionUpdate() {
         if (newVer.match(/2\.0\./) && !oldVer.match(/2\.0\./)) {
             chrome.runtime.sendMessage({
                 action: 'createTab',
-                data: {url: chrome.extension.getURL('/html/options.html') + '?whatsnew=' + newVer + '#themes'}
+                data: {url: chrome.extension.getURL('/html/options.html') + '?whatsnew=' + newVer}
             });
         }
         console.log('Extension update script executed!');

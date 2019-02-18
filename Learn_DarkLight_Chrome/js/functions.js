@@ -1229,9 +1229,15 @@ function courseTileContextMenu(courseWidget) {
         });
 
         $('html').on('click', function (e) {
-            if (!e.target.matches('#darklight-context-menu')) {
+            // if (!$(e.target).closest('#darklight-context-menu').length) {
+            //     $('#darklight-context-menu').remove();
+            // }
+            if (!$('#darklight-context-menu').has(e.target).length) {
                 $('#darklight-context-menu').remove();
             }
+            // if (!e.target.matches('#darklight-context-menu')) {
+            //     $('#darklight-context-menu').remove();
+            // }
         });
 
     }
@@ -1353,7 +1359,7 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
 
         if (announcementWidget.find('template').length) {
             setTimeout(function () {
-                removeAnnouncePageFormat(true, announcementWidget, counter++);
+                removeAnnouncePageFormat(true, announcementWidget, ++counter);
             }, 500);
             return;
         }
@@ -1367,7 +1373,7 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
 
         if (!announceTable.length || announceTable.find('template').length) {
             setTimeout(function () {
-                removeAnnouncePageFormat(false, null, counter++);
+                removeAnnouncePageFormat(false, null, ++counter);
             }, 500);
             return;
         }
@@ -1377,6 +1383,7 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
         });
 
     }
+
 }
 
 function initDarklightFunc() {

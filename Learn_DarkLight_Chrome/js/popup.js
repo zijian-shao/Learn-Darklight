@@ -89,7 +89,7 @@ function initPopup() {
 
     $('#more-options').on('click', function () {
         chrome.tabs.create({
-            url: chrome.runtime.getURL('/html/options.html')
+            url: chrome.runtime.getURL('/html/options.html#themes')
         });
     });
 

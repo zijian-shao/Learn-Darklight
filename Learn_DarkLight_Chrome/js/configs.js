@@ -29,7 +29,7 @@ function getOptionListDefault() {
         HOME_AutoHideSysAlert: true,
         HOME_HideCheckMySys: true,
         HOME_AddCalendar: true,
-        HOME_ShowWeekDayOnCalendar: false,
+        HOME_ShowWeekDayOnCalendar: true,
         HOME_HidePrivacy: true,
         HOME_HideMetaTerm: false,
         HOME_HideMetaEndDate: false,
@@ -285,7 +285,8 @@ function getLink(key) {
         redditShare: 'https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome&title=New%20themes%20for%20Waterloo%20Learn!%20Get%20Learn%20Darklight%20now!',
         gplusShare: 'https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome',
         linkedInShare: 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome',
-        mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension'
+        mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension',
+        imageGallery: 'https://www.zijianshao.com/dlight/course-images/'
     };
     return list[key];
 }
