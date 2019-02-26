@@ -170,6 +170,26 @@
                         </div>
                     </div>
 
+                    <hr>
+
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-3" data-option-name="GLB_KeepSessionAlive"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-3"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-1-3" class="checkbox-label">Keep session alive and prevent from
+                                logging out (beta)</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Prevents system from logging you out when you are inactive for 180 minutes by sending a
+                                request to the server every 25 minutes. (If it does not work, please report the
+                                issue)</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="group">
@@ -301,19 +321,22 @@
                 </div>
                 <div class="group-content">
                     <input type="range" id="opt-themes-3-0" data-option-name="GLB_BasicFontSize"
-                           data-option-type="slider" min="11" max="20" step="1"
+                           data-option-type="slider" min="12" max="24" step="1"
                            class="block width-100 input-range margin-bottom-0">
                     <div class="font-size-tags">
-                        <span>11</span>
-                        <span>12</span>
-                        <span>13</span>
-                        <span>14</span>
-                        <span>15</span>
-                        <span>16</span>
-                        <span>17</span>
-                        <span>18</span>
-                        <span>19</span>
-                        <span>20</span>
+                        <span data-size="12">12</span>
+                        <span data-size="13">13</span>
+                        <span data-size="14">14</span>
+                        <span data-size="15">15</span>
+                        <span data-size="16" class="recommend">16</span>
+                        <span data-size="17">17</span>
+                        <span data-size="18">18</span>
+                        <span data-size="19">19</span>
+                        <span data-size="20">20</span>
+                        <span data-size="21">21</span>
+                        <span data-size="22">22</span>
+                        <span data-size="23">23</span>
+                        <span data-size="24">24</span>
                     </div>
                 </div>
                 <div class="option-tip hidden">
@@ -725,6 +748,20 @@
 
                     <hr>
 
+                    <!-- Hide cover pic -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-10" data-option-name="HOME_HideCoverPic"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-10"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <div class="new-tag-o margin-right-5">NEW</div>
+                            <label for="opt-pages-0-10" class="checkbox-label">Hide cover picture on course
+                                tiles</label>
+                        </div>
+                    </div>
+
                     <!-- Hide term meta -->
                     <div class="option-group checkbox-group">
                         <div class="checkbox-slide">
@@ -759,6 +796,20 @@
                         <div class="checkbox-content">
                             <div class="new-tag-o margin-right-5">NEW</div>
                             <label for="opt-pages-0-9" class="checkbox-label">Hide pin icon on pinned course
+                                tiles</label>
+                        </div>
+                    </div>
+
+                    <!-- Hide course tab selector -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-11" data-option-name="HOME_HideCourseTabSelector"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-11"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <div class="new-tag-o margin-right-5">NEW</div>
+                            <label for="opt-pages-0-11" class="checkbox-label">Hide tab selector above course
                                 tiles</label>
                         </div>
                     </div>

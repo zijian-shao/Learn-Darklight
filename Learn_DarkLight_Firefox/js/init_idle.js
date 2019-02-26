@@ -131,15 +131,19 @@ function initDarklightIdle() {
         injectCSS(options.GLB_CustomCSS, 'head', 'text');
 
     // js
-    var jsText = 'var baseURL = "' + baseURL + '";';
-    jsText += 'var currURL = "' + currURL + '";';
-    jsText += 'var currURL2 = "' + currURL2 + '";';
-    jsText += 'var currURLHost = "' + currURLHost + '";';
-    jsText += 'var options = ' + JSON.stringify(options) + ';';
-    jsText += 'var themeConfigs = ' + JSON.stringify(themeConfigs) + ';';
+    var jsText = 'var dlightData = {';
+    jsText += 'baseURL : "' + baseURL + '",';
+    jsText += 'currURL : "' + currURL + '",';
+    jsText += 'currURL2 : "' + currURL2 + '",';
+    jsText += 'currURLHost : "' + currURLHost + '",';
+    jsText += 'options : ' + JSON.stringify(options) + ',';
+    jsText += 'themeConfigs : ' + JSON.stringify(themeConfigs) + '';
+    jsText += '}';
     var params = document.createElement("script");
     params.textContent = jsText;
     document.head.appendChild(params);
+
+    injectJS(baseURL + 'js/functions_inject.js', 'head');
 
     // theme js
     var scriptArr = [];
@@ -151,19 +155,9 @@ function initDarklightIdle() {
             code: options.GLB_CustomJS
         });
     }
-
-    // theme options
-    var tConf = themeConfigs['options'];
-    var tConfObj = {};
-    for (var i in tConf)
-        tConfObj['THEME_ID_' + options.GLB_ThemeID + '_OPT_' + tConf[i]['key']] = tConf[i]['value'];
-
-    browser.storage.sync.get(tConfObj, function (e) {
-        themeCustomConfigs = e;
-        browser.runtime.sendMessage({
-            action: 'executeScript',
-            data: scriptArr
-        });
+    browser.runtime.sendMessage({
+        action: 'executeScript',
+        data: scriptArr
     });
 
     extensionUpdate();
@@ -171,4 +165,20 @@ function initDarklightIdle() {
     initDarklightFunc();
 }
 
-initDarklightIdle();
+if (initReady) {
+    initDarklightIdle();
+} else {
+    var initIntvCnt = 0;
+    var initIntv = setInterval(function () {
+        if (initReady) {
+            initDarklightIdle();
+            clearInterval(initIntv);
+        } else {
+            initIntvCnt++;
+            if (initIntvCnt > 50) {
+                $('#darklight-load-overlay').remove();
+                clearInterval(initIntv);
+            }
+        }
+    }, 100);
+}

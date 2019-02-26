@@ -253,7 +253,7 @@ function initOptions() {
 
                     case 'GLB_BasicFontSize':
                         optionElem.val(items[key]);
-                        $('.font-size-tags span:nth-child(' + (items[key] - 10) + ')').addClass('selected');
+                        $('.font-size-tags span[data-size="' + items[key] + '"]').addClass('selected');
                         break;
 
                     default:
@@ -294,7 +294,7 @@ function initOptions() {
                 }
                 intCnt++;
                 if (intCnt > 10) {
-                    alert('IndexedDB initialization failed. It seems like your browser does not support IndexedDB¡£ Some features may not work properly.');
+                    alert('IndexedDB initialization failed. It seems like your browser does not support IndexedDB. Some features may not work properly.');
                     clearInterval(interval);
                 }
             }, timeIntv);
@@ -742,10 +742,10 @@ function initOptions() {
         $('input[id="opt-themes-3-0"]').on('change', function () {
             var currVal = $(this).val();
             $('.font-size-tags span').removeClass('selected');
-            $('.font-size-tags span:nth-child(' + (currVal - 10) + ')').addClass('selected');
+            $('.font-size-tags span[data-size="' + currVal + '"]').addClass('selected');
         });
         $('.font-size-tags span').on('click', function (e) {
-            $('input[id="opt-themes-3-0"]').val(parseInt($(this).text(), 10)).trigger('change');
+            $('input[id="opt-themes-3-0"]').val(parseInt($(this).attr('data-size'), 10)).trigger('change');
         });
 
         // scroll
@@ -1310,6 +1310,7 @@ function initOptions() {
 var updateLog = [
     {
         targetElem: '#theme-item-3',
+        image: 'dodgerblue.jpg',
         title: 'New <span style="color:#0088fb">Dodger Blue</span> Theme',
         desc: 'The new bright theme provides you with a fresh and professional learning experience. <br><small>( Click the 3-dot button to change layout width )</small>',
         offset: 0

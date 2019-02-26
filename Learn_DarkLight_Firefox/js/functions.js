@@ -1,7 +1,3 @@
-function getCustomThemeOption(name) {
-    return themeCustomConfigs['THEME_ID_' + options.GLB_ThemeID + '_OPT_' + name];
-}
-
 function scrollToUtil(pos, time, offset) {
 
     if ($.type(offset) !== 'number')
@@ -542,6 +538,27 @@ function contentPageFunc() {
 
 }
 
+function contentListFunc() {
+    return;
+
+    var listWrapper = $('.d2l-twopanelselector-wrapper').first();
+    if (!listWrapper.length) return;
+    var listWrapperTop = listWrapper.offset().top;
+    var navFooter = $('d2l-navigation-main-footer').first();
+    var navFooterHeight = navFooter.height();
+    var listLeft = listWrapper.find('.d2l-twopanelselector-side').first();
+
+    $(window).on('scroll', function () {
+        if ($(window).scrollTop() > listWrapperTop - navFooterHeight) {
+            listWrapper.addClass('darklight-content-list-float');
+            listLeft.css('top', navFooterHeight + 'px');
+        } else {
+            listWrapper.removeClass('darklight-content-list-float');
+            listLeft.css('top', '');
+        }
+    });
+}
+
 function listMembersBtn() {
 
     var theForm = $('form[id="d2l_form"][action^="user_available_group_list.d2l"]');
@@ -798,10 +815,14 @@ function homepageFunc() {
 
     // course tile meta
     var style = '';
+    if (options.HOME_HideCoverPic)
+        style += 'd2l-enrollment-card .d2l-enrollment-card-image-container {padding-top:0%!important}';
     if (options.HOME_HideMetaTerm)
         style += 'd2l-organization-info {display: none!important}';
     if (options.HOME_HideMetaEndDate)
         style += 'd2l-user-activity-usage {display: none!important}';
+    if (options.HOME_HideCourseTabSelector)
+        style += 'd2l-my-courses d2l-tabs .d2l-tabs-layout {height:0!important; border:none!important;} d2l-my-courses d2l-tabs d2l-tab-panel {margin: 0.5rem 0!important;}';
     browser.runtime.sendMessage({
         action: 'insertCSS',
         data: {code: style}
@@ -1428,6 +1449,11 @@ function initDarklightFunc() {
     // display group members
     if (currURL.match(/\/d2l\/lms\/group\/user_available_group_list\.d2l/g) && options.GROUP_ListMembersBtn) {
         listMembersBtn();
+    }
+
+    // content page func
+    if (currURL2.match(/\/d2l\/le\/content\/\d+\/Home/g)) {
+        contentListFunc();
     }
 
     // content page func

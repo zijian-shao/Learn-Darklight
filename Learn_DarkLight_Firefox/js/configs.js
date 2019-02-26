@@ -26,6 +26,7 @@ function getOptionListDefault() {
         GLB_EnableForLaurier: true,
         GLB_PopupAccessForWaterloo: true,
         GLB_PopupAccessForLaurier: false,
+        GLB_KeepSessionAlive: true,
         HOME_AutoHideSysAlert: true,
         HOME_HideCheckMySys: true,
         HOME_AddCalendar: true,
@@ -33,6 +34,8 @@ function getOptionListDefault() {
         HOME_HidePrivacy: true,
         HOME_HideMetaTerm: false,
         HOME_HideMetaEndDate: false,
+        HOME_HideCoverPic: false,
+        HOME_HideCourseTabSelector: false,
         HOME_SwitchAnnounceAndCalendar: false,
         HOME_RemoveAnnounceFormat: false,
         HOME_HidePinnedIcon: true,
@@ -191,7 +194,7 @@ function getThemeConfigs(id) {
             author: "D2L",
             previewColor: "#bbb",
             overlayColor: "#f6f7f8",
-            headerHeight: 90
+            headerHeight: 95
         }
     };
 
@@ -285,7 +288,7 @@ function getLink(key) {
         redditShare: 'https://www.reddit.com/submit?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox&title=New%20themes%20for%20Waterloo%20Learn!%20Get%20Learn%20Darklight%20now!',
         gplusShare: 'https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
         linkedInShare: 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
-        mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension'
+        mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension',
         imageGallery: 'https://www.zijianshao.com/dlight/course-images/'
     };
     return list[key];

@@ -1,20 +1,14 @@
 function initTheme() {
 
     // custom options - css
-    var cssText = '';
+    // var cssText = '';
     if (getCustomThemeOption('fullWidthLayout')) {
-        cssText += '.d2l-max-width {max-width:none!important}' +
-            '.d2l-page-bg{max-width:none!important}' +
-            'd2l-navigation-main-header>div.d2l-navigation-centerer{max-width:none!important}' +
-            'd2l-navigation-main-footer>div.d2l-navigation-centerer{max-width:none!important}' +
-            '.max-width.d2l-simple-overlay{max-width:none!important}' +
-            '.d2l-navigation-s-centerer{max-width:none!important}' +
-            '.daylight iframe.d2l-navbar-margin{max-width:none!important;width:100%!important;padding:0!important}';
+        $('body').addClass('darklight-fullwidth');
     }
-    chrome.runtime.sendMessage({
-        action: 'insertCSS',
-        data: {code: cssText}
-    });
+    // browser.runtime.sendMessage({
+    //     action: 'insertCSS',
+    //     data: {code: cssText}
+    // });
 
     $('d2l-navigation').append('<div class="blue-banner"></div>');
 
