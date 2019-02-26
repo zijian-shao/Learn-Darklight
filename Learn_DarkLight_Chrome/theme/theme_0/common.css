@@ -17,14 +17,16 @@
     top: 0;
 }
 
-.d2l-page-main .darklight-waterloo {
-    position: absolute;
-    top: 140px;
-    left: 0;
-    width: 103px;
-    height: 842px;
-    z-index: -1;
-    background: transparent top left no-repeat;
+@media (min-width: 1001px) {
+    .darklight-waterloo-side-logo {
+        position: absolute;
+        top: 140px;
+        left: 0;
+        width: 103px;
+        height: 842px;
+        z-index: -1;
+        background: transparent url(../../img/waterloo_background.png) top left no-repeat;
+    }
 }
 
 .d2l-page-main-padding {
@@ -46,7 +48,7 @@
 }
 
 .daylight .d2l-widget-header {
-    background: #111;
+    background: #222;
     padding: 10px 25px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -550,4 +552,21 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 /* popup page */
 .d2l-popup-page {
     background: #fff;
+}
+
+/* fullwidth */
+.darklight-fullwidth .darklight-back-to-top {
+    background: rgba(0, 0, 0, 0.3) !important
+}
+
+.darklight-fullwidth .darklight-back-to-top:hover {
+    background: rgba(0, 0, 0, 0.6) !important
+}
+
+.darklight-fullwidth .darklight-back-to-top .arrow {
+    border-color: rgba(255, 255, 255, 0.8) !important
+}
+
+.darklight-fullwidth .darklight-back-to-top:hover .arrow {
+    border-color: rgba(255, 255, 255, 0.9) !important
 }

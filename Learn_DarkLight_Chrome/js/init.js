@@ -1,4 +1,6 @@
-var baseURL, currURL, currURL2, currURLHost, options, configs, themeConfigs, themeCustomConfigs;
+var baseURL, currURL, currURL2, currURLHost, options, configs, themeConfigs;
+
+var initReady = false;
 
 function injectCSS(url, tag, type) {
 
@@ -78,6 +80,10 @@ function extractHostname(url) {
     return hostname;
 }
 
+function getCustomThemeOption(name) {
+    return options['THEME_ID_' + options.GLB_ThemeID + '_OPT_' + name];
+}
+
 function initDarklight() {
 
     function init() {
@@ -150,6 +156,8 @@ function initDarklight() {
 
             }
         }
+
+        initReady = true;
     }
 
     baseURL = chrome.runtime.getURL('');
@@ -157,6 +165,16 @@ function initDarklight() {
     currURL2 = window.location.href.split('#')[0].split('?')[0];
     currURLHost = window.location.protocol + '//' + window.location.hostname;
     configs = getOptionListDefault();
+
+    // add theme options
+    var fullThemeConf = getThemeConfigs();
+    for (var key in fullThemeConf) {
+        if (Array.isArray(fullThemeConf[key].options)) {
+            fullThemeConf[key].options.forEach(function (ob) {
+                configs['THEME_ID_' + fullThemeConf[key].id + '_OPT_' + ob.key] = ob.value;
+            });
+        }
+    }
 
     chrome.storage.sync.get(configs, function (e) {
         options = e;

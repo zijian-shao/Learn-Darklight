@@ -26,6 +26,7 @@ function getOptionListDefault() {
         GLB_EnableForLaurier: true,
         GLB_PopupAccessForWaterloo: true,
         GLB_PopupAccessForLaurier: false,
+        GLB_KeepSessionAlive: true,
         HOME_AutoHideSysAlert: true,
         HOME_HideCheckMySys: true,
         HOME_AddCalendar: true,
@@ -33,6 +34,8 @@ function getOptionListDefault() {
         HOME_HidePrivacy: true,
         HOME_HideMetaTerm: false,
         HOME_HideMetaEndDate: false,
+        HOME_HideCoverPic: false,
+        HOME_HideCourseTabSelector: false,
         HOME_SwitchAnnounceAndCalendar: false,
         HOME_RemoveAnnounceFormat: false,
         HOME_HidePinnedIcon: true,
@@ -191,7 +194,7 @@ function getThemeConfigs(id) {
             author: "D2L",
             previewColor: "#bbb",
             overlayColor: "#f6f7f8",
-            headerHeight: 90
+            headerHeight: 95
         }
     };
 

@@ -545,12 +545,6 @@ d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-courseselector-wra
     border-top: 1px solid #d3d9e3;
 }
 
-/* course content list loading */
-.d2l-partial-render-shim1, .d2l-partial-render-shim2,
-.d2l-partial-render-shimbg1, .d2l-partial-render-shimbg2 {
-    z-index: 100;
-}
-
 /* course home calendar */
 .darklight-course-home-calendar .d2l-widget-content {
     padding: 0 0 10px !important;
@@ -711,4 +705,89 @@ li.d2l-contextmenu-item-title > * {
 
 li.d2l-contextmenu-item-title.empty > * {
     display: none;
+}
+
+/* homepage course tile image ratio */
+d2l-enrollment-card .d2l-enrollment-card-image-container {
+    position: relative;
+    height: auto !important;
+    padding-top: 45%;
+}
+
+d2l-enrollment-card .d2l-enrollment-card-image-container d2l-course-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    margin: auto;
+}
+
+/* course content list */
+.d2l-partial-render-shim1, .d2l-partial-render-shim2,
+.d2l-partial-render-shimbg1, .d2l-partial-render-shimbg2 {
+    z-index: 100;
+}
+
+@media (min-width: 1001px) {
+    /*.d2l-twopanelselector-wrapper {*/
+    /*position: relative;*/
+    /*}*/
+    /*.d2l-twopanelselector-side.d2l-twopanelselector-side-sep,*/
+    /*.d2l-twopanelselector-main {*/
+    /*display: block;*/
+    /*}*/
+    /*.d2l-twopanelselector-side.d2l-twopanelselector-side-sep {*/
+    /*position: absolute;*/
+    /*height: 100%;*/
+    /*top: auto;*/
+    /*bottom: 0;*/
+    /*left: auto;*/
+    /*overflow-x: hidden;*/
+    /*overflow-y: auto;*/
+    /*scrollbar-width: thin;*/
+    /*-webkit-box-sizing: border-box;*/
+    /*-moz-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
+    /*}*/
+    /*.d2l-twopanelselector-side.d2l-twopanelselector-side-sep::-webkit-scrollbar {*/
+    /*width: 0;*/
+    /*}*/
+    /*.d2l-twopanelselector-main {*/
+    /*margin-left: 320px;*/
+    /*}*/
+    /*.darklight-content-list-float .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {*/
+    /*position: fixed;*/
+    /*}*/
+}
+
+/* full width layout */
+.darklight-fullwidth .d2l-max-width {
+    max-width: none !important
+}
+
+.darklight-fullwidth .d2l-page-bg {
+    max-width: none !important
+}
+
+.darklight-fullwidth d2l-navigation-main-header > div.d2l-navigation-centerer {
+    max-width: none !important
+}
+
+.darklight-fullwidth d2l-navigation-main-footer > div.d2l-navigation-centerer {
+    max-width: none !important
+}
+
+.darklight-fullwidth .max-width.d2l-simple-overlay {
+    max-width: none !important
+}
+
+.darklight-fullwidth .d2l-navigation-s-centerer {
+    max-width: none !important
+}
+
+.darklight-fullwidth .daylight iframe.d2l-navbar-margin {
+    max-width: none !important;
+    width: 100% !important;
+    padding: 0 !important
 }
