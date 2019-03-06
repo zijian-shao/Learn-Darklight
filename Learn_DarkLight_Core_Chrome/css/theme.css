@@ -1,4 +1,4 @@
-body {
+html {
     font-size: 16px !important;
 }
 
@@ -216,8 +216,8 @@ d2l-navigation-separator d2l-icon.d2l-navigation-separator {
 }
 
 .d2l-icon-0[icon*="d2l-tier3:"] {
-    width: 20px !important;
-    height: 20px !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
 }
 
 .d2l-navigation-s-divider d2l-icon {
@@ -397,22 +397,41 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 /* Back to top button*/
 
 .darklight-back-to-top {
-    background: rgba(80, 80, 80, 0.5) !important;
+    background: rgba(80, 80, 80, 0.4) !important;
 }
 
 .darklight-back-to-top:hover {
-    background: rgba(80, 80, 80, 0.8) !important;
+    background: rgba(80, 80, 80, 0.6) !important;
     -webkit-box-shadow: 0 0 10px rgba(150, 150, 150, 0.2) !important;
     -moz-box-shadow: 0 0 10px rgba(150, 150, 150, 0.2) !important;
     box-shadow: 0 0 10px rgba(150, 150, 150, 0.2) !important;
 }
 
 .darklight-back-to-top .arrow {
-    border-color: rgba(200, 200, 200, 0.5) !important;
+    border-color: rgba(200, 200, 200, 0.4) !important;
 }
 
 .darklight-back-to-top:hover .arrow {
-    border-color: rgba(200, 200, 200, 0.8) !important;
+    border-color: rgba(200, 200, 200, 0.4) !important;
+}
+
+
+@media (max-width: 1350px) {
+    .darklight-back-to-top {
+        background: rgba(0, 0, 0, 0.3)!important;
+    }
+
+    .darklight-back-to-top:hover {
+        background: rgba(0, 0, 0, 0.6)!important;
+    }
+
+    .darklight-back-to-top .arrow {
+        border-color: rgba(255, 255, 255, 0.8)!important;
+    }
+
+    .darklight-back-to-top:hover .arrow {
+        border-color: rgba(255, 255, 255, 0.9)!important;
+    }
 }
 
 /* file link */
@@ -478,6 +497,10 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
+}
+
+d2l-my-courses-content .d2l-button-icon-0[translucent] .d2l-button-icon.d2l-button-icon {
+    color: #fff !important;
 }
 
 .d2l-shim {

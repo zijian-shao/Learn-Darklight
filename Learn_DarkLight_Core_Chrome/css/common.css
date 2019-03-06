@@ -96,6 +96,7 @@ i.arrow.down {
     cursor: pointer !important;
     z-index: 200 !important;
     opacity: 1 !important;
+    border-radius: 5px !important;
     visibility: visible !important;
     -webkit-transition: all 0.2s ease !important;
     -moz-transition: all 0.2s ease !important;
