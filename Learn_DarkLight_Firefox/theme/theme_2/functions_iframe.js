@@ -7,7 +7,7 @@ if (window.top != window.self) {
             + '.outlineItem > a,.attachmentsItem > button{color:#000!important}'
             + '.outlineItem > a:hover,.attachmentsItem > button:hover{box-shadow: 0 0 1px #000 inset, 0 0 1px #000!important;}';
         var node = document.createElement('style');
-        node.innerHTML = styleTxt;
+        node.textContent = styleTxt;
         document.body.appendChild(node);
     }
 }
