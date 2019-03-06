@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Learn Darklight",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "author": "Zijian Shao",
   "background": {
     "persistent": false,
@@ -21,8 +21,10 @@
   },
   "content_scripts": [
     {
+      "css": [
+        "css/base.css"
+      ],
       "js": [
-        "js/jquery.js",
         "js/configs.js",
         "js/init.js"
       ],
@@ -34,14 +36,14 @@
     },
     {
       "js": [
-        "js/functions.js",
+        "js/jquery.js",
         "js/init_idle.js"
       ],
       "matches": [
         "*://learn.uwaterloo.ca/*",
         "*://mylearningspace.wlu.ca/*"
       ],
-      "run_at": "document_end"
+      "run_at": "document_idle"
     }
   ],
   "description": "Learn Darklight offers multiple themes for the new Waterloo Learn.",

@@ -97,6 +97,8 @@ function initOptions() {
     }
 
     function showToast(content) {
+        if (welcomeMode) return;
+
         var tst = $('#darklight-toast');
         if (content !== undefined) {
             tst.html(content);
@@ -190,6 +192,8 @@ function initOptions() {
     }
 
     function onHashChange() {
+        if (welcomeMode) return;
+
         var hash = window.location.hash.substring(1);
         if (!hash.length) hash = 'global';
         $('li[data-option-tab-name = "' + hash + '"]').trigger('click');
@@ -240,6 +244,8 @@ function initOptions() {
                             optionElem.first().closest('.theme-item').addClass('selected');
                             optionElem.first().closest('.font-item').addClass('selected');
                         }
+
+                        if (welcomeMode) optionElem.first().closest('.container').addClass('theme-container-' + items[key]);
                         break;
 
                     case 'HOME_CourseTileContextMenuData':
@@ -275,7 +281,7 @@ function initOptions() {
             timeIntv = 200;
         }
         setTimeout(function () {
-
+            if (welcomeMode) return;
             if (params['whatsnew'] !== undefined) return;
 
             var thumbList = $('#saved-thumb-list');
@@ -294,8 +300,9 @@ function initOptions() {
                 }
                 intCnt++;
                 if (intCnt > 10) {
-                    alert('IndexedDB initialization failed. It seems like your browser does not support IndexedDB. Some features may not work properly.');
                     clearInterval(interval);
+                    if (params['action'] === 'add-custom-cover') unblockPage(0);
+                    alert('IndexedDB initialization failed. It seems like your browser does not support IndexedDB. Some features may not work properly.');
                 }
             }, timeIntv);
         }, timeOut);
@@ -730,6 +737,20 @@ function initOptions() {
         $('input[id^="opt-theme-item-"]').on('change', function () {
             $('.theme-item').removeClass('selected');
             $(this).closest('.theme-item').addClass('selected');
+            if (welcomeMode) {
+                $(this).closest('.container').removeClass(function (index, className) {
+                    return (className.match(/(^|\s)theme-container-\d+/g) || []).join(' ');
+                }).addClass('theme-container-' + $(this).val());
+            }
+        });
+        $('input.jscolor').each(function (idx, el) {
+            new jscolor(el, {
+                hash: true,
+                borderRadius: 0,
+                borderWidth: 0,
+                shadowBlur: 5,
+                shadowColor: 'rgba(0,0,0,0.3)'
+            });
         });
 
         // fonts
@@ -750,6 +771,8 @@ function initOptions() {
 
         // scroll
         $(window).on('scroll', function () {
+            if (welcomeMode) return;
+
             if (!allowHashChange)
                 return;
 
@@ -867,7 +890,7 @@ function initOptions() {
         var index = 0;
         $.each(themes, function (i, val) {
 
-            if (val['hidden'] !== true) {
+            if (val['hidden'] !== true && !(welcomeMode && val['id'] >= 99)) {
                 var elem_img = '<img src="../theme/theme_' + val['id'] + '/preview.png" alt="' + val['name'] + '" title="' + val['name'] + '">',
                     elem_title = '<div class="theme-name" title="' + val['name'] + '">' + val['name'] + '</div>',
                     elem_color = '<div class="theme-color" style="background-color:' + val['previewColor'] + '"></div>',
@@ -930,8 +953,8 @@ function initOptions() {
                             } else if (val['options'][i]['type'] == 'color') {
 
                                 confElems += '<div class="option-group input-group">'
-                                confElems += '<label for="' + elemID + '" class="input-label">' + val['options'][i]['description'] + '</label>';
-                                confElems += '<input type="text" minlength="4" maxlength="30" class="input-box block width-100" id="' + elemID + '" ' +
+                                confElems += '<label for="' + elemID + '" class="input-label">' + val['options'][i]['description'] + '<br><small>Leave empty to reset to default</small></label>';
+                                confElems += '<input type="text" minlength="4" maxlength="30" class="input-box block width-100 jscolor" id="' + elemID + '" ' +
                                     'data-option-name="' + optName + '" data-option-type="color" data-save-on-blur="true" data-default-value="' + val['options'][i]['value'] + '"' +
                                     'value="' + tConfigs[optName] + '" placeholder="e.g. ' + val['options'][i]['value'] + '">';
                                 confElems += '</div>';
@@ -1272,12 +1295,15 @@ function initOptions() {
 
     }
 
-    window.addEventListener("hashchange", onHashChange, false);
+    var params = getSearchParameters();
+    var welcomeMode = false;
+    if (window.location.href.match(/welcome\.html/)) welcomeMode = true;
+
+    if (!welcomeMode)
+        window.addEventListener("hashchange", onHashChange, false);
 
     var timeoutHandle = setTimeout(function () {
     }, 0);
-
-    var params = getSearchParameters();
 
     $(window).on('load', function (e) {
 
@@ -1301,7 +1327,7 @@ function initOptions() {
 
         // clipboard input
         var clipBoardInput = $('<div class="width-0 fixed"><input type="text" id="clipboard-input"></div>');
-        $('body').append(clipBoardInput);
+        if (!welcomeMode) $('body').append(clipBoardInput);
 
     });
 

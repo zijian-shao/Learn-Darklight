@@ -439,17 +439,17 @@ function initBackground() {
      */
     createToolbarContextMenu('dlight-website', 'Official Website', ['browser_action'], function () {
         chrome.tabs.create({
-            'url': 'https://www.zijianshao.com/dlight/'
+            url: getLink('officialWebsite')
         });
     });
     createToolbarContextMenu('dlight-contribute', 'Donate', ['browser_action'], function () {
         chrome.tabs.create({
-            'url': 'https://www.paypal.me/zjshao'
+            url: getLink('donate')
         });
     });
     createToolbarContextMenu('dlight-github', 'GitHub', ['browser_action'], function () {
         chrome.tabs.create({
-            'url': 'https://github.com/SssWind/Learn-Darklight'
+            url: getLink('github')
         });
     });
 

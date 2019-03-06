@@ -107,10 +107,15 @@ function getThemeConfigs(id) {
                 }, {
                     type: "separator"
                 }, {
+                    key: "overrideOverlayColor",
+                    type: "color",
+                    value: "#222222",
+                    description: "Loading overlay color"
+                }, {
                     key: "navPrimaryColor",
                     type: "color",
-                    value: "#fdd54f",
-                    description: "Navigation bar primary color <small>(RGB or HEX syntax)</small>"
+                    value: "#FDD54F",
+                    description: "Navigation bar primary & highlight color"
                 }
             ]
         },

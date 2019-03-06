@@ -3,7 +3,7 @@ function initTheme() {
     // custom options - css
     // var cssText = '';
     if (getCustomThemeOption('fullWidthLayout')) {
-        $('body').addClass('darklight-fullwidth');
+        body.addClass('darklight-fullwidth');
     }
     // chrome.runtime.sendMessage({
     //     action: 'insertCSS',

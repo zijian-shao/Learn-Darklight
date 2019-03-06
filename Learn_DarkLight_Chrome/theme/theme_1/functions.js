@@ -17,7 +17,7 @@ function initTheme() {
             'position:absolute;top:0;left:0;right:0;height:50vh;max-height:400px;z-index:-10;}';
     }
     if (getCustomThemeOption('fullWidthLayout')) {
-        $('body').addClass('darklight-fullwidth');
+        body.addClass('darklight-fullwidth');
     }
     chrome.runtime.sendMessage({
         action: 'insertCSS',

@@ -16,7 +16,7 @@ function initTheme() {
         cssText += '#CourseImageBannerPlaceholderId .d2l-course-banner{opacity:0.8!important;}';
     }
     if (getCustomThemeOption('fullWidthLayout')) {
-        $('body').addClass('darklight-fullwidth');
+        body.addClass('darklight-fullwidth');
     }
     chrome.runtime.sendMessage({
         action: 'insertCSS',

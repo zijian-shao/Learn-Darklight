@@ -1,25 +1,25 @@
 function initTheme() {
 
     var cssText = '';
-    var primColor = getCustomThemeOption('navPrimaryColor');
-    // navbar logo top border
-    cssText += '.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link, .d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link' +
-        '{background:' + primColor + '!important}';
-    // navbar right icons top border
-    cssText += '.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button, .d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button' +
-        '{background:' + primColor + '!important}';
-    // navbar right icons
-    cssText += '.d2l-navigation-button:hover, .d2l-navigation-button:focus, .d2l-navigation-button:hover > *, .d2l-navigation-button:focus > *, .d2l-navigation-button:hover > * *, .d2l-navigation-button:focus > * *' +
-        '{color:' + primColor + '!important}';
-    // navbar line
-    cssText += '.d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header' +
-        '{border-bottom-color:' + primColor + '!important}';
-    // navbar logo icon
-    cssText += '.d2l-navigation-s-highlight-bar{background:' + primColor + '!important}';
-    cssText += '.d2l-navigation-s-button-highlight:focus d2l-icon, .d2l-navigation-s-button-highlight:hover d2l-icon, button.d2l-navigation-s-button-highlight:focus, button.d2l-navigation-s-button-highlight:hover' +
-        '{color:' + primColor + '!important;}';
+    cssText += ':root{--darklight-nav-primary-color:' + getCustomThemeOption('navPrimaryColor') + '}' +
+        // navbar logo top border
+        '.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link, .d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link' +
+        '{background:var(--darklight-nav-primary-color)!important}' +
+        // navbar right icons top border
+        '.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button, .d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button' +
+        '{background:var(--darklight-nav-primary-color)!important}' +
+        // navbar right icons
+        '.d2l-navigation-button:hover, .d2l-navigation-button:focus, .d2l-navigation-button:hover > *, .d2l-navigation-button:focus > *, .d2l-navigation-button:hover > * *, .d2l-navigation-button:focus > * *' +
+        '{color:var(--darklight-nav-primary-color)!important}' +
+        // navbar line
+        '.d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header' +
+        '{border-bottom-color:var(--darklight-nav-primary-color)!important}' +
+        // navbar logo icon
+        '.d2l-navigation-s-highlight-bar{background:var(--darklight-nav-primary-color)!important}' +
+        '.d2l-navigation-s-button-highlight:focus d2l-icon, .d2l-navigation-s-button-highlight:hover d2l-icon, button.d2l-navigation-s-button-highlight:focus, button.d2l-navigation-s-button-highlight:hover' +
+        '{color:var(--darklight-nav-primary-color)!important;}';
     if (getCustomThemeOption('fullWidthLayout')) {
-        $('body').addClass('darklight-fullwidth');
+        body.addClass('darklight-fullwidth');
     }
     chrome.runtime.sendMessage({
         action: 'insertCSS',
@@ -36,7 +36,7 @@ function initTheme() {
                 data: {code: '.d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width{min-height:0!important;}'}
             });
         } else {
-            $('body').prepend('<div class="darklight-waterloo-side-logo"></div>');
+            body.prepend('<div class="darklight-waterloo-side-logo"></div>');
         }
 
         // logo - white
