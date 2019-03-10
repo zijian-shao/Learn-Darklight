@@ -35,7 +35,14 @@ $.fn.uwCalendar = function (action, data) {
     // loading
     else if (action == 'loading') {
         this.find('.darklight-homepage-calendar')
-            .html('<div class="darklight-homepage-calendar-loading"><div class="darklight-block-page-loader"></div> Loading calendar, please wait...</div>');
+            .html('<div class="darklight-homepage-calendar-loading">' +
+                '<div class="darklight-block-page-loader"></div>' +
+                '<div class="darklight-homepage-calendar-loading-msg">Loading calendar (0%)</div></div>');
+    }
+
+    // loading msg
+    else if (action == 'loadingMsg') {
+        this.find('.darklight-homepage-calendar-loading-msg').html(data);
     }
 
     // list empty
@@ -891,6 +898,10 @@ function homepageFunc() {
                 calendarWidget.uwCalendar('init').uwCalendar('loading').insertAfter(courseWidget);
             }
 
+            if (options.COURSE_CustomThumb && !isWLU()) {
+                courseWidget.addClass('darklight-course-thumb-loading');
+            }
+
             function _waitForCourseLoad(isTabSwitch) {
 
                 function _getPanelSelected() {
@@ -1035,16 +1046,12 @@ function homepageFunc() {
     if (options.HOME_HideMetaEndDate)
         style += 'd2l-user-activity-usage {display: none!important}';
     if (options.HOME_HideCourseTabSelector)
-        style += 'd2l-my-courses d2l-tabs .d2l-tabs-layout {height:0!important; border:none!important;} d2l-my-courses d2l-tabs d2l-tab-panel {margin: 0.5rem 0!important;}';
+        style += 'd2l-my-courses d2l-tabs .d2l-tabs-layout {height:0!important; border:none!important;}' +
+            'd2l-my-courses d2l-tabs d2l-tab-panel {margin: 0!important;}';
     browser.runtime.sendMessage({
         action: 'insertCSS',
         data: {code: style}
     });
-
-    // course tile thumb
-    if (options.COURSE_CustomThumb && !isWLU()) {
-        injectCSS('.shown.d2l-course-image{opacity:0}.d2l-enrollment-card-image-container{opacity:0}', 'body', 'text');
-    }
 
     // remove announcement inline styles
     if (announcementWidget != null) {
@@ -1088,6 +1095,7 @@ function homepageCalendar(cards, panelID) {
 
     var counter = 0;
     var finalList = [];
+    var uwCal = $('#darklight-homepage-calendar-widget');
 
     function _sortEvents(a, b) {
         if (a.timestamp < b.timestamp)
@@ -1099,10 +1107,10 @@ function homepageCalendar(cards, panelID) {
 
     function _displayEvents() {
         if (finalList.length === 0) {
-            $('#darklight-homepage-calendar-widget').uwCalendar('empty');
+            uwCal.uwCalendar('empty');
         } else {
             finalList.sort(_sortEvents);
-            $('#darklight-homepage-calendar-widget').uwCalendar('new', {
+            uwCal.uwCalendar('new', {
                 id: panelID,
                 list: finalList
             });
@@ -1185,6 +1193,7 @@ function homepageCalendar(cards, panelID) {
                 });
 
                 counter++;
+                uwCal.uwCalendar('loadingMsg', 'Loading calendar (' + Math.ceil(counter / links.length * 100) + '%)');
                 if (counter >= links.length) {
                     _displayEvents();
                 } else {
@@ -1209,13 +1218,14 @@ function customCourseThumbs(cards) {
         cards.each(function (idx, elem) {
 
             // thumb & dropdown (customize cover menu item)
-            var self = $(elem).children('d2l-card').children('.d2l-card-container');
+            var cardSelf = $(elem);
+            var self = cardSelf.children('d2l-card').children('.d2l-card-container');
             var code = self.children('a').attr('href').match(/\/\d+/)[0].substring(1);
-            var img = self.children('.d2l-card-link-container').children('.d2l-card-header').find('.d2l-enrollment-card-image-container');
+            // var img = self.children('.d2l-card-link-container').children('.d2l-card-header').find('.d2l-enrollment-card-image-container');
             var name = self.children('.d2l-card-link-container').children('.d2l-card-content').find('d2l-organization-name');
             var moreBtn = self.children('.d2l-card-actions').children('d2l-dropdown-more');
 
-            img.addClass('darklight-course-thumb darklight-course-thumb-' + code);
+            cardSelf.addClass('darklight-course-thumb darklight-course-thumb-' + code);
             name = name.text().trim().split(' - ')[0];
 
             moreBtn.on('click', function (e) {
@@ -1266,8 +1276,7 @@ function customCourseThumbs(cards) {
 
         });
 
-        injectCSS('.shown.d2l-course-image{opacity:1}d2l-card.d2l-enrollment-card{background:none}', 'body', 'text');
-        $('.darklight-course-thumb').addClass('shown');
+        cards.first().closest('d2l-tab-panel').addClass('darklight-course-thumb-complete');
 
     }
 
@@ -1556,6 +1565,14 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
             'padding': '',
             'font-family': ''
         });
+
+        $.each(elem, function (i, e) {
+            var self = $(e);
+            if (self.css('color').match(/^rgb\(0, 0, 0\)$/)) {
+                self.css('color', '');
+            }
+        });
+
     }
 
     if (!options.HOME_RemoveAnnounceFormat) return;

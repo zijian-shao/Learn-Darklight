@@ -437,7 +437,17 @@ body > header.darklight-navbar-sticky {
     padding-bottom: 1.0rem !important;
 }
 
-.d2l-enrollment-card-image-container {
+.d2l-homepage d2l-card .d2l-card-footer {
+    display: none !important;
+}
+
+/* course tiles - custom */
+.darklight-course-thumb-loading .d2l-card-link-container > .d2l-card-header {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.darklight-course-thumb-loading .d2l-enrollment-card-image-container {
+    opacity: 0;
     -webkit-transition: opacity 0.5s !important;
     -moz-transition: opacity 0.5s !important;
     -ms-transition: opacity 0.5s !important;
@@ -445,31 +455,23 @@ body > header.darklight-navbar-sticky {
     transition: opacity 0.5s !important;
 }
 
-.d2l-enrollment-card-image-container.shown {
+.darklight-course-thumb-complete .d2l-enrollment-card-image-container {
     opacity: 1 !important;
 }
 
-d2l-all-courses-unified-content .d2l-enrollment-card-image-container {
-    opacity: 1 !important;
-}
-
-.darklight-course-thumb {
+.darklight-course-thumb d2l-course-image {
     background-color: transparent !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
 }
 
-d2l-card.d2l-enrollment-card {
-    background: rgba(0, 0, 0, 0.02) !important;
-}
-
-d2l-card.d2l-enrollment-card .d2l-card-content {
-    background: #fff !important;
-}
-
-.d2l-homepage d2l-card .d2l-card-footer {
-    display: none !important;
+.darklight-course-thumb d2l-course-image img {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
 }
 
 /* hide pin icon on course tile */
@@ -564,17 +566,17 @@ d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-courseselector-wra
 
 /* dropbox marking header */
 .dropbox-header-toggle {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin: auto !important;
-    background: rgba(0, 0, 0, 0.3) !important;
-    cursor: pointer !important;
-    z-index: 50 !important;
-    padding: 4px 20px !important;
-    width: 100px !important;
-    color: #fff !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 50;
+    padding: 4px 20px;
+    width: 100px;
+    color: #fff;
 }
 
 /* tmp fix for dropdown */
@@ -681,31 +683,31 @@ iframe.d2l-fileviewer-rendered-pdf-fullscreen, iframe.d2l-fileviewer-rendered-pd
 /* context menu */
 
 li.d2l-contextmenu-item-header > * {
-    display: block !important;
-    padding: 0.5rem 1rem calc(0.5rem - 2px) !important;
-    line-height: 1.5em !important;
-    font-size: 0.95rem !important;
-    font-weight: lighter !important;
-    text-transform: uppercase !important;
-    text-align: center !important;
+    display: block;
+    padding: 0.5rem 1rem calc(0.5rem - 2px);
+    line-height: 1.5em;
+    font-size: 0.95rem;
+    font-weight: lighter;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 li.d2l-contextmenu-item-title {
-    background: #e6eaf0 !important;
+    background: #e6eaf0;
 }
 
 li.d2l-contextmenu-item-title > * {
-    display: block !important;
-    padding: 2px 1rem 0 !important;
-    line-height: 1.5em !important;
-    font-size: .6rem !important;
-    font-weight: bold !important;
-    text-transform: uppercase !important;
-    text-align: center !important;
+    display: block;
+    padding: 2px 1rem 0;
+    line-height: 1.5em;
+    font-size: .6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 li.d2l-contextmenu-item-title.empty > * {
-    display: none !important;
+    display: none;
 }
 
 /* homepage course tile image ratio */

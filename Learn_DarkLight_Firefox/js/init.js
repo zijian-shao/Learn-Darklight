@@ -192,10 +192,10 @@ function initDarklight() {
                         if (request.action == act) {
                             var style = '';
                             request.data.forEach(function (item, index) {
-                                style += '.darklight-course-thumb-' + item.course_id + ' {';
+                                style += '.darklight-course-thumb-' + item.course_id + ' d2l-course-image {';
                                 style += 'background-image: url("' + item.thumb_image + '");';
                                 style += '}';
-                                style += '.darklight-course-thumb-' + item.course_id + ' img {';
+                                style += '.darklight-course-thumb-' + item.course_id + ' d2l-course-image img {';
                                 style += 'opacity: 0 !important;';
                                 style += '}';
                             });
