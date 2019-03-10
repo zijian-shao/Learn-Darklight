@@ -37,14 +37,9 @@
 
 .daylight .d2l-widget {
     background: #fff;
-    /*border: 1px solid #ddd !important;*/
     border-radius: 5px;
-    margin-bottom: 30px;
+    margin: 20px auto;
     padding: 0;
-}
-
-.daylight-widget-demarcation .d2l-widget {
-    margin-top: 20px;
 }
 
 .daylight .d2l-widget-header {
@@ -140,7 +135,6 @@
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
-
 }
 
 .daylight-widget-demarcation .homepage-container div:last-of-type .d2l-tile.d2l-widget:last-child {
@@ -176,6 +170,7 @@
 .d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header {
     border-bottom-width: 2px;
     border-bottom-style: solid;
+    border-bottom-color:var(--darklight-nav-primary-color)!important;
 }
 
 .d2l-navigation-s-main-wrapper {
@@ -200,11 +195,8 @@ d2l-navigation-separator d2l-icon.d2l-navigation-separator {
     color: #666 !important;
 }
 
-.d2l-icon-0 {
-    color: #999
-}
-
-d2l-navigation-main-header d2l-icon.d2l-navigation-button-icon {
+d2l-navigation-main-header .d2l-navigation-button-icon {
+    color: #999 !important;
     width: 1.5rem !important;
     height: 1.5rem !important;
 }
@@ -217,9 +209,9 @@ d2l-navigation-main-header d2l-icon.d2l-navigation-button-icon {
     color: #999;
 }
 
-/*.d2l-navigation-s-button-highlight:focus d2l-icon, .d2l-navigation-s-button-highlight:hover d2l-icon, button.d2l-navigation-s-button-highlight:focus, button.d2l-navigation-s-button-highlight:hover {*/
-/*color: #FDD54F;*/
-/*}*/
+.d2l-navigation-s-button-highlight:focus d2l-icon, .d2l-navigation-s-button-highlight:hover d2l-icon, button.d2l-navigation-s-button-highlight:focus, button.d2l-navigation-s-button-highlight:hover {
+color: var(--darklight-nav-primary-color);
+}
 
 button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-button-highlight[data-active] d2l-icon {
     color: #FDD54F;
@@ -229,32 +221,32 @@ button.d2l-navigation-s-button-highlight[data-active], button.d2l-navigation-s-b
     color: #999 !important;
 }
 
-/*.d2l-navigation-button:hover,*/
-/*.d2l-navigation-button:focus,*/
-/*.d2l-navigation-button:hover > *,*/
-/*.d2l-navigation-button:focus > *,*/
-/*.d2l-navigation-button:hover > * *,*/
-/*.d2l-navigation-button:focus > * * {*/
-/*color: #FDD54F !important;*/
-/*}*/
+.d2l-navigation-button:hover,
+.d2l-navigation-button:focus,
+.d2l-navigation-button:hover > *,
+.d2l-navigation-button:focus > *,
+.d2l-navigation-button:hover > * *,
+.d2l-navigation-button:focus > * * {
+color: var(--darklight-nav-primary-color) !important;
+}
 
-/*.d2l-navigation-s-highlight-bar {*/
-/*background-color: #FDD54F;*/
-/*}*/
+.d2l-navigation-s-highlight-bar {
+background-color: var(--darklight-nav-primary-color);
+}
 
 .d2l-navigation-s-button-highlight[data-active] .d2l-navigation-s-highlight-bar {
     background-color: #FDD54F;
 }
 
-/*.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link,*/
-/*.d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link {*/
-/*background: #FDD54F !important;*/
-/*}*/
+.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link,
+.d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link {
+background: var(--darklight-nav-primary-color) !important;
+}
 
-/*.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button,*/
-/*.d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button {*/
-/*background: #FDD54F !important;*/
-/*}*/
+.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button,
+.d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button {
+background: var(--darklight-nav-primary-color) !important;
+}
 
 .d2l-navigation-s-band-color, d2l-navigation-band {
     display: none !important;

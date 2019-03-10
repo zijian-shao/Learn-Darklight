@@ -1,23 +1,7 @@
 function initTheme() {
 
     var cssText = '';
-    cssText += ':root{--darklight-nav-primary-color:' + getCustomThemeOption('navPrimaryColor') + '}' +
-        // navbar logo top border
-        '.d2l-navigation-link:hover .d2l-navigation-link-top-border.d2l-navigation-link, .d2l-navigation-link:focus .d2l-navigation-link-top-border.d2l-navigation-link' +
-        '{background:var(--darklight-nav-primary-color)!important}' +
-        // navbar right icons top border
-        '.d2l-navigation-button:hover .d2l-navigation-button-top-border.d2l-navigation-button, .d2l-navigation-button:focus .d2l-navigation-button-top-border.d2l-navigation-button' +
-        '{background:var(--darklight-nav-primary-color)!important}' +
-        // navbar right icons
-        '.d2l-navigation-button:hover, .d2l-navigation-button:focus, .d2l-navigation-button:hover > *, .d2l-navigation-button:focus > *, .d2l-navigation-button:hover > * *, .d2l-navigation-button:focus > * *' +
-        '{color:var(--darklight-nav-primary-color)!important}' +
-        // navbar line
-        '.d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header' +
-        '{border-bottom-color:var(--darklight-nav-primary-color)!important}' +
-        // navbar logo icon
-        '.d2l-navigation-s-highlight-bar{background:var(--darklight-nav-primary-color)!important}' +
-        '.d2l-navigation-s-button-highlight:focus d2l-icon, .d2l-navigation-s-button-highlight:hover d2l-icon, button.d2l-navigation-s-button-highlight:focus, button.d2l-navigation-s-button-highlight:hover' +
-        '{color:var(--darklight-nav-primary-color)!important;}';
+    cssText += ':root{--darklight-nav-primary-color:' + getCustomThemeOption('navPrimaryColor') + '}';
     if (getCustomThemeOption('fullWidthLayout')) {
         body.addClass('darklight-fullwidth');
     }

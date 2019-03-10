@@ -12,8 +12,8 @@ function initTheme() {
             cssText += 'iframe{-webkit-filter:' + filterText + '!important;filter:' + filterText + '!important;}';
     }
     if (getCustomThemeOption('darkCoursePic')) {
-        cssText += '.d2l-enrollment-card-image-container.shown{opacity:0.8!important;}';
-        cssText += '#CourseImageBannerPlaceholderId .d2l-course-banner{opacity:0.8!important;}';
+        cssText += '.d2l-card-link-container>.d2l-card-header{opacity:0.7!important;}';
+        cssText += '#CourseImageBannerPlaceholderId .d2l-course-banner{opacity:0.7!important;}';
     }
     if (getCustomThemeOption('fullWidthLayout')) {
         body.addClass('darklight-fullwidth');
