@@ -1284,7 +1284,7 @@ function customCourseThumbs(cards) {
     else {
         var code = currURL.split('/');
         code = code[code.length - 1].match(/\d+/);
-        $('.d2l-course-banner').addClass('darklight-course-thumb darklight-course-thumb-' + code);
+        $('.d2l-course-banner').addClass('darklight-course-thumb-one darklight-course-thumb-' + code);
     }
 }
 
