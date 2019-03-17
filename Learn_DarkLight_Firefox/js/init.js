@@ -121,11 +121,9 @@ function versionCompare(v1, v2, options) {
 
         if (v1parts[i] == v2parts[i]) {
             continue;
-        }
-        else if (v1parts[i] > v2parts[i]) {
+        } else if (v1parts[i] > v2parts[i]) {
             return 1;
-        }
-        else {
+        } else {
             return -1;
         }
     }
@@ -180,22 +178,26 @@ function initDarklight() {
         if (options.COURSE_CustomThumb && !isWLU()) {
             if (currURL2.match(/\/d2l\/home$/) || currURL2.match(/\/d2l\/home\/\d+$/)) {
 
-                var act = '';
-                if (currURL2.match(/\/d2l\/home$/))
+                var act = '', extraSel = '';
+                if (currURL2.match(/\/d2l\/home$/)) {
                     act = 'getCourseThumbsResponse';
-                else
+                    extraSel = ' d2l-course-image';
+                } else {
                     act = 'getCourseThumbsOneResponse';
+                    extraSel = '';
+                }
 
                 browser.runtime.onMessage.addListener(
                     function (request, sender, sendResponse) {
 
                         if (request.action == act) {
                             var style = '';
+
                             request.data.forEach(function (item, index) {
-                                style += '.darklight-course-thumb-' + item.course_id + ' d2l-course-image {';
+                                style += '.darklight-course-thumb-' + item.course_id + extraSel + ' {';
                                 style += 'background-image: url("' + item.thumb_image + '");';
                                 style += '}';
-                                style += '.darklight-course-thumb-' + item.course_id + ' d2l-course-image img {';
+                                style += '.darklight-course-thumb-' + item.course_id + extraSel + ' img {';
                                 style += 'opacity: 0 !important;';
                                 style += '}';
                             });

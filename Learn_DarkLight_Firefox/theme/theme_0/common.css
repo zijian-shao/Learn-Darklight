@@ -183,12 +183,12 @@
 }
 
 a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:visited {
-    color: #999 !important;
+    color: #aaa !important;
 }
 
 .d2l-navigation-s-item .d2l-navigation-s-group-text,
 .d2l-navigation-s-item .d2l-icon-0 {
-    color: #999 !important;
+    color: #aaa !important;
 }
 
 d2l-navigation-separator d2l-icon.d2l-navigation-separator {
@@ -196,13 +196,13 @@ d2l-navigation-separator d2l-icon.d2l-navigation-separator {
 }
 
 d2l-navigation-main-header .d2l-navigation-button-icon {
-    color: #999 !important;
+    color: #aaa !important;
     width: 1.5rem !important;
     height: 1.5rem !important;
 }
 
 .d2l-navigation-s-divider d2l-icon {
-    color: #444
+    color: #666
 }
 
 .d2l-navigation-s-button-highlight {

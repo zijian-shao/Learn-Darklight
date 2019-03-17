@@ -459,14 +459,16 @@ body > header.darklight-navbar-sticky {
     opacity: 1 !important;
 }
 
-.darklight-course-thumb d2l-course-image {
+.darklight-course-thumb d2l-course-image,
+.darklight-course-thumb-one {
     background-color: transparent !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
 }
 
-.darklight-course-thumb d2l-course-image img {
+.darklight-course-thumb d2l-course-image img,
+.darklight-course-thumb-one img {
     -webkit-transition: none !important;
     -moz-transition: none !important;
     -ms-transition: none !important;
