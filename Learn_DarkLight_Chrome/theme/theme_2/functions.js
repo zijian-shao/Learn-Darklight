@@ -56,13 +56,13 @@ function initTheme() {
     if (!isWLU()) {
 
         // logo - white
-        var logoImg = $('.d2l-navigation-link-image img');
+        var logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
         logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.8);
 
         var themeInvCnt = 0;
         var dlightThemeInterval = setInterval(function () {
             if (!logoImg.length) {
-                logoImg = $('.d2l-navigation-link-image img');
+                logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
             } else if (!logoImg.attr('src').match(/waterloo_learn_logo\.png/)) {
                 logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.8);
             } else {
@@ -77,13 +77,13 @@ function initTheme() {
     } else {
 
         // for wlu learn (beta)
-        var logoImg = $('.d2l-navigation-link-image img');
+        var logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
         logoImg.attr('src', baseURL + 'img/laurier_learn_logo.png').css('opacity', 0.8);
 
         var themeInvCnt = 0;
         var dlightThemeInterval = setInterval(function () {
             if (!logoImg.length) {
-                logoImg = $('.d2l-navigation-link-image img');
+                logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
             } else if (!logoImg.attr('src').match(/laurier_learn_logo\.png/)) {
                 logoImg.attr('src', baseURL + 'img/laurier_learn_logo.png').css('opacity', 0.8);
             } else {

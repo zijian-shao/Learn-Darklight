@@ -1,3 +1,12 @@
+$.fn.sRoot = function () {
+    // require jquery object
+    if (!this instanceof jQuery) {
+        console.log('sRoot requires jQuery object.');
+        return this;
+    }
+    return $(this[0].shadowRoot);
+};
+
 $.fn.uwCalendar = function (action, data) {
     // e.g. $('<div/>').uwCalendar('init');
 
@@ -30,6 +39,15 @@ $.fn.uwCalendar = function (action, data) {
         this.html('<div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-4">Upcoming Events</h2></div></div>' +
             '<div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"></div>' +
             '<div class="darklight-homepage-calendar-saved hidden" hidden></div>');
+    }
+
+    else if (action!=='asdfasdf'){
+        this.find('.darklight-homepage-calendar')
+            .html('<div class="d2l-msg-container d2l-datalist-empty"><div class="d2l-msg-container-inner">' +
+                '<div class="d2l-msg-container-text">Due to the latest Learn update, some functions of Darklight are currently not available.<br>' +
+                '<p>The author is working hard to release an update ASAP.</p>' +
+                'You may click on the icon in browser toolbar to disable the extension temporarily.<br></div>' +
+                '<div class="d2l-clear"></div></div></div>');
     }
 
     // loading
@@ -937,8 +955,7 @@ function homepageFunc() {
                 var intervalId = setInterval(function () {
                     if (!loadSpinner.length) {
                         loadSpinner = _getSpinner();
-                    }
-                    else if (typeof loadSpinner.attr('hidden') === typeof undefined
+                    } else if (typeof loadSpinner.attr('hidden') === typeof undefined
                         || (!_getPanelSelected().find('d2l-my-courses-content d2l-enrollment-card d2l-card div.d2l-card-container').length
                             && typeof _getPanelSelected().find('d2l-my-courses-content d2l-alert').attr('hidden') === typeof undefined)
                     ) {
@@ -1702,6 +1719,11 @@ function initDarklightFunc() {
             injectCSS('iframe.d2l-fileviewer-rendered-pdf-dialog{height:calc(100vh - 60px)!important;}', 'body', 'text');
         }
     }
+
+    // tmp solution for shadow root
+    $('d2l-navigation').sRoot().find('d2l-navigation-band, .d2l-navigation-shadow-drop-border, .d2l-navigation-shadow-gradient').hide();
+    $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img').css('max-height', '40px');
+    // $('d2l-navigation-link-image').sRoot().find('d2l-navigation-link').sRoot().find('.d2l-navigation-link-top-border').css('--d2l-navigation-highlight-border-hover-focus_-_background', '#fdd54f');
 
     // overlay
     removeOverlay();
