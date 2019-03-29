@@ -1,0 +1,8 @@
+/* navbar */
+.d2l-navigation-link-image-container img {
+    max-height: 50px;
+}
+
+.d2l-navigation-shadow-gradient {
+    display: none !important;
+}

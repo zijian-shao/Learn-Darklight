@@ -1,0 +1,13 @@
+d2l-navigation-band,
+.d2l-navigation-shadow-drop-border,
+.d2l-navigation-shadow-gradient {
+    display: none !important;
+}
+
+.d2l-navigation-link-image-container img {
+    max-height: 40px;
+}
+
+:host([icon*="d2l-tier3:"]) {
+    width: 1.5rem !important;
+}

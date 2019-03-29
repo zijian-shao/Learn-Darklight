@@ -17,11 +17,18 @@ function initTheme() {
     }
     if (getCustomThemeOption('fullWidthLayout')) {
         body.addClass('darklight-fullwidth');
+        injectCSSShadow('div.d2l-navigation-centerer {max-width: none !important}',
+            $('d2l-navigation'), 'text', true);
     }
     browser.runtime.sendMessage({
         action: 'insertCSS',
         data: {code: cssText}
     });
+
+    injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_navbar.css',
+        $('d2l-navigation'), 'file', true);
+    injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css',
+        $('.d2l-homepage-header-menu-wrapper d2l-dropdown'), 'file', true);
 
     // custom options - invert iframe
     if (getCustomThemeOption('invertIframe') && currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/i)) {

@@ -16,11 +16,6 @@
     padding: 20px;
 }
 
-/* navbar */
-.d2l-navigation-s-logo img {
-    max-height: 50px;
-}
-
 /* content page panel */
 .d2l-page-collapsepane-container {
     padding-top: 45px;
@@ -37,10 +32,6 @@
 }
 
 /* bg gradient */
-.d2l-navigation-s-shadow-gradient, .d2l-navigation-shadow-gradient {
-    background: none !important;
-}
-
 .d2l-page-main:before {
     content: "";
     background: linear-gradient(to bottom, rgba(249, 250, 251, 1) 0%, rgba(249, 250, 251, 0) 100%);

@@ -39,14 +39,25 @@ $.fn.uwCalendar = function (action, data) {
         this.html('<div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-4">Upcoming Events</h2></div></div>' +
             '<div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"></div>' +
             '<div class="darklight-homepage-calendar-saved hidden" hidden></div>');
-    }
-
-    else if (action!=='asdfasdf'){
+    } else if (action !== 'asdfasdf') {
         this.find('.darklight-homepage-calendar')
             .html('<div class="d2l-msg-container d2l-datalist-empty"><div class="d2l-msg-container-inner">' +
-                '<div class="d2l-msg-container-text">Due to the latest Learn update, some functions of Darklight are currently not available.<br>' +
-                '<p>The author is working hard to release an update ASAP.</p>' +
-                'You may click on the icon in browser toolbar to disable the extension temporarily.<br></div>' +
+                '<div class="d2l-msg-container-text">Recent Learn updates have caused some extension functions not available.<br>' +
+                '<p>The author is making changes and the extension should be back to normal in a few days.</p>' +
+                '<p>Current progress:</p>' +
+                '<ul><li style="color:mediumseagreen">[v] Sticky navigation bar</li>' +
+                '<li style="color:mediumseagreen">[v] Back-to-top button sticky navigation bar</li>' +
+                '<li style="color:mediumseagreen">[v] Classic Darklight Theme</li>' +
+                '<li style="color:mediumseagreen">[v] Bright Daylight Theme</li>' +
+                '<li>[×] Dark Turquoise Theme</li>' +
+                '<li style="color:mediumseagreen">[v] Dodger Blue Theme</li>' +
+                '<li style="color:mediumseagreen">[v] Learn Default Theme</li>' +
+                '<li>[×] Auto redirect to course content page</li>' +
+                '<li>[×] Custom course cover pictures</li>' +
+                '<li>[×] Homepage Calendar</li>' +
+                '<li>[×] Hide elements on course tiles</li>' +
+                '<li>[×] Course tiles context menu</li>' +
+                '<li>[×] Remove announcement styles</li></ul></div>' +
                 '<div class="d2l-clear"></div></div></div>');
     }
 
@@ -142,44 +153,78 @@ $.fn.uwCalendar = function (action, data) {
     return this;
 };
 
-function injectCSS(url, tag, type) {
+function injectCSS(src, tag, type) {
 
     var style;
-
+    var id = 'darklight-css-' + Math.floor(Math.random() * 90000 + 10000);
     if (type === 'text') {
-
-        style = $('<style/>');
-
-        style.text(url);
-
-    } else {
-
-        style = $('<link/>', {
-            'rel': 'stylesheet',
-            'type': 'text/css',
-            'href': url
+        style = $('<style/>', {
+            id: id
         });
-
+        style.text(src);
+    } else {
+        style = $('<link/>', {
+            id: id,
+            rel: 'stylesheet',
+            type: 'text/css',
+            href: src
+        });
     }
 
-    $(tag).append(style);
+    if (typeof tag === typeof {})
+        tag.append(style);
+    else
+        $(tag).append(style);
 
+    return id;
 }
 
-function injectJS(url, tag, type) {
+function injectJS(src, tag, type) {
 
+    var id = 'darklight-js-' + Math.floor(Math.random() * 90000 + 10000);
     var script = $('<script/>', {
-        'type': 'text/javascript'
+        id: id,
+        type: 'text/javascript'
     });
 
     if (type === 'text') {
-        script.text(url);
+        script.text(src);
     } else {
-        script.attr('src', url);
+        script.attr('src', src);
     }
 
-    $(tag).append(script);
+    if (typeof tag === typeof {})
+        tag.append(script);
+    else
+        $(tag).append(script);
 
+    return id;
+}
+
+function injectCSSShadow(src, tag, type, allDom) {
+    tag.each(function () {
+        if (this.shadowRoot !== null) {
+            injectCSS(src, $(this.shadowRoot), type);
+            if (allDom === true) {
+                injectCSSShadow(src, $(this.shadowRoot), type, allDom);
+            }
+        }
+    });
+    if (allDom === true) {
+        tag.children('*').each(function () {
+            injectCSSShadow(src, $(this), type, allDom)
+        });
+    }
+}
+
+function injectJSShadow(el, js, allDom) {
+    el.sRoot().children("*").each(function () {
+        if (this.shadowRoot !== null) {
+            injectJS(js, $(this).sRoot(), 'text');
+            if (allDom === true)
+                injectJSShadow($(this).sRoot(), js);
+        }
+    });
 }
 
 function scrollToUtil(pos, time, offset) {
@@ -365,7 +410,7 @@ function addBackToTopButtonNavbar() {
     var intervalCnt = 0;
     var interval = setInterval(function () {
         if (typeof navWrapper === typeof undefined || !navWrapper.length) {
-            navWrapper = $('d2l-navigation d2l-navigation-main-footer .d2l-navigation-centerer .d2l-navigation-gutters .d2l-navigation-s-main-wrapper');
+            navWrapper = $('d2l-navigation d2l-navigation-main-footer .d2l-navigation-s-main-wrapper');
         } else {
             clearInterval(interval);
             btn.appendTo(navWrapper);
@@ -1721,8 +1766,8 @@ function initDarklightFunc() {
     }
 
     // tmp solution for shadow root
-    $('d2l-navigation').sRoot().find('d2l-navigation-band, .d2l-navigation-shadow-drop-border, .d2l-navigation-shadow-gradient').hide();
-    $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img').css('max-height', '40px');
+    // $('d2l-navigation').sRoot().find('d2l-navigation-band, .d2l-navigation-shadow-drop-border, .d2l-navigation-shadow-gradient').hide();
+    // $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img').css('max-height', '40px');
     // $('d2l-navigation-link-image').sRoot().find('d2l-navigation-link').sRoot().find('.d2l-navigation-link-top-border').css('--d2l-navigation-highlight-border-hover-focus_-_background', '#fdd54f');
 
     // overlay
@@ -1763,6 +1808,15 @@ function initDarklightIdle() {
     // css
     // injectCSS('html{font-size:' + options.GLB_BasicFontSize + 'px}', 'head', 'text');
     // injectCSS(baseURL + 'css/common.css', 'head');
+    $('d2l-dropdown').on('click', function () {
+        var self = $(this);
+        if (self.data('dropdown-init') !== 'true') {
+            self.data('dropdown-init', 'true');
+            injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self, 'file', true);
+        } else if (typeof self.children('d2l-dropdown-menu').attr('render-content') === typeof undefined) {
+            injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self.children('d2l-dropdown-menu'), 'file', true);
+        }
+    });
     injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/common.css', 'head');
     if (options.GLB_EnableCustomStyle)
         injectCSS(options.GLB_CustomCSS, 'head', 'text');

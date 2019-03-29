@@ -4,6 +4,8 @@ function initTheme() {
     // var cssText = '';
     if (getCustomThemeOption('fullWidthLayout')) {
         body.addClass('darklight-fullwidth');
+        injectCSSShadow('div.d2l-navigation-centerer {max-width: none !important}',
+            $('d2l-navigation'), 'text', true);
     }
     // browser.runtime.sendMessage({
     //     action: 'insertCSS',
@@ -11,6 +13,12 @@ function initTheme() {
     // });
 
     $('d2l-navigation').append('<div class="blue-banner"></div>');
+
+    injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_navbar.css',
+        $('d2l-navigation'), 'file', true);
+    injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css',
+        $('.d2l-homepage-header-menu-wrapper d2l-dropdown'), 'file', true);
+
 
     // logo - white
     var logoPath = '', logoFile = '';
@@ -24,15 +32,19 @@ function initTheme() {
         if (isWLU()) logoFile = 'laurier_learn_logo.png';
     }
 
-    var logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
-    logoImg.attr('src', logoPath + logoFile);
+    var logoImg = $('d2l-navigation-link-image');
+    logoImg.each(function () {
+        $(this.shadowRoot).find('.d2l-navigation-link-image-container img').attr('src', logoPath + logoFile);
+    });
 
     var themeInvCnt = 0;
     var dlightThemeInterval = setInterval(function () {
         if (!logoImg.length) {
-            logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
+            logoImg = $('d2l-navigation-link-image');
         } else if (!logoImg.attr('src').includes(logoFile)) {
-            logoImg.attr('src', logoPath + logoFile);
+            logoImg.each(function () {
+                $(this.shadowRoot).find('.d2l-navigation-link-image-container img').attr('src', logoPath + logoFile);
+            });
         } else {
             clearInterval(dlightThemeInterval);
         }
