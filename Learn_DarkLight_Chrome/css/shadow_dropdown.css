@@ -1,0 +1,19 @@
+.d2l-dropdown-content-top,
+.d2l-dropdown-content-bottom {
+    width: 100% !important;
+}
+
+.d2l-dropdown-content-width > div {
+    display: block !important;
+    float: left !important;
+}
+
+.d2l-dropdown-content-width > div:after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
+}
+
+.d2l-dropdown-content-bottom {
+    height: 6px !important;
+}

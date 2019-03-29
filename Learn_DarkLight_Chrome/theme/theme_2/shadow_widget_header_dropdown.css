@@ -1,0 +1,26 @@
+:host {
+    color: #aaa !important;
+}
+
+:host button {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 4px;
+    margin-left: 4px;
+    box-shadow: none !important;
+    border: 1px solid transparent;
+    padding: 0;
+}
+
+button:focus, :host(.d2l-button-icon-focus) button {
+    box-shadow: none !important;
+    border: 1px solid #aaa;
+}
+
+button:hover, button:focus, :host([active]) button, :host(.d2l-button-icon-hover) button, :host(.d2l-button-icon-focus) button {
+    background: none;
+    border: 1px solid #aaa;
+    box-shadow: none !important;
+}

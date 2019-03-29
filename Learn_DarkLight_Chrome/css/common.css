@@ -499,28 +499,8 @@ body > header.darklight-navbar-sticky {
 }
 
 /* dropdown */
-d2l-dropdown-menu .d2l-dropdown-content-top,
-d2l-dropdown-menu .d2l-dropdown-content-bottom {
-    width: 100% !important;
-}
-
-d2l-dropdown-menu .d2l-dropdown-content-width > div {
+d2l-dropdown-menu d2l-menu {
     display: block !important;
-    float: left !important;
-}
-
-d2l-dropdown-menu .d2l-dropdown-content-width > div:after {
-    content: "" !important;
-    display: table !important;
-    clear: both !important;
-}
-
-d2l-dropdown-menu .d2l-dropdown-content-width d2l-menu {
-    display: block !important;
-}
-
-d2l-dropdown-menu .d2l-dropdown-content-bottom {
-    height: 6px !important;
 }
 
 /* course selector */
@@ -536,8 +516,8 @@ d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-dropdown-content-w
 }
 
 d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-courseselector-wrapper .d2l-datalist {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
 }
 
 .d2l-navigation-s-button:focus d2l-icon, .d2l-navigation-s-button:hover d2l-icon {
@@ -772,14 +752,6 @@ d2l-enrollment-card .d2l-enrollment-card-image-container d2l-course-image {
 }
 
 .darklight-fullwidth .d2l-page-bg {
-    max-width: none !important
-}
-
-.darklight-fullwidth d2l-navigation-main-header > div.d2l-navigation-centerer {
-    max-width: none !important
-}
-
-.darklight-fullwidth d2l-navigation-main-footer > div.d2l-navigation-centerer {
     max-width: none !important
 }
 
