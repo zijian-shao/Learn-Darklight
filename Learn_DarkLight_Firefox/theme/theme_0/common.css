@@ -391,26 +391,6 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
     opacity: 0.3;
 }
 
-/* new homepage course tabs */
-.d2l-home .d2l-tabs-scroll-button.d2l-tabs {
-    height: 100%;
-    transform: translateY(0px);
-}
-
-.d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus {
-    background: none !important;
-    border: none !important;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-}
-
-.d2l-home d2l-tab[aria-selected]:focus .d2l-tab-selected-indicator.d2l-tab {
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-}
-
 .d2l-shim {
     background: #000;
 }

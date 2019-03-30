@@ -190,7 +190,11 @@ function initDarklight() {
                 browser.runtime.onMessage.addListener(
                     function (request, sender, sendResponse) {
                         if (request.action === 'getCourseThumbsResponse') {
-                            thumbData = request;
+                            var obj = {};
+                            request.data.forEach(function (e) {
+                                obj['ID_' + e.course_id] = e;
+                            });
+                            thumbData = obj;
                         } else if (request.action === 'getCourseThumbsOneResponse') {
                             var style = '';
                             request.data.forEach(function (item, index) {
