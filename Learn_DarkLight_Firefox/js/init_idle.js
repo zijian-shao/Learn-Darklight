@@ -39,25 +39,25 @@ $.fn.uwCalendar = function (action, data) {
         this.html('<div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-4">Upcoming Events</h2></div></div>' +
             '<div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"></div>' +
             '<div class="darklight-homepage-calendar-saved hidden" hidden></div>');
-    } else if (action !== 'asdfasdf') {
+    } else if (action == 'asdfasdf') {
         this.find('.darklight-homepage-calendar')
             .html('<div class="d2l-msg-container d2l-datalist-empty"><div class="d2l-msg-container-inner">' +
                 '<div class="d2l-msg-container-text">Recent Learn updates have caused some extension functions not available.<br>' +
                 '<p>The author is making changes and the extension should be back to normal in a few days.</p>' +
                 '<p>Current progress:</p>' +
-                '<ul><li style="color:mediumseagreen">[v] Sticky navigation bar</li>' +
-                '<li style="color:mediumseagreen">[v] Back-to-top button sticky navigation bar</li>' +
-                '<li style="color:mediumseagreen">[v] Classic Darklight Theme</li>' +
-                '<li style="color:mediumseagreen">[v] Bright Daylight Theme</li>' +
-                '<li>[×] Dark Turquoise Theme</li>' +
-                '<li style="color:mediumseagreen">[v] Dodger Blue Theme</li>' +
-                '<li style="color:mediumseagreen">[v] Learn Default Theme</li>' +
-                '<li>[×] Auto redirect to course content page</li>' +
-                '<li>[×] Custom course cover pictures</li>' +
-                '<li>[×] Homepage Calendar</li>' +
-                '<li>[×] Hide elements on course tiles</li>' +
-                '<li>[×] Course tiles context menu</li>' +
-                '<li>[×] Remove announcement styles</li></ul></div>' +
+                '<ul><li style="color:mediumseagreen">[âˆš] Sticky navigation bar</li>' +
+                '<li style="color:mediumseagreen">[âˆš] Back-to-top button on navbar</li>' +
+                '<li style="color:mediumseagreen">[âˆš] Classic Darklight Theme</li>' +
+                '<li style="color:mediumseagreen">[âˆš] Bright Daylight Theme</li>' +
+                '<li>[Ã—] Dark Turquoise Theme</li>' +
+                '<li style="color:mediumseagreen">[âˆš] Dodger Blue Theme</li>' +
+                '<li style="color:mediumseagreen">[âˆš] Learn Default Theme</li>' +
+                '<li>[Ã—] Auto redirect to course content page</li>' +
+                '<li>[Ã—] Custom course cover pictures</li>' +
+                '<li>[Ã—] Homepage Calendar</li>' +
+                '<li>[Ã—] Hide elements on course tiles</li>' +
+                '<li>[Ã—] Course tiles context menu</li>' +
+                '<li style="color:mediumseagreen">[âˆš] Remove announcement styles</li></ul></div>' +
                 '<div class="d2l-clear"></div></div></div>');
     }
 
@@ -212,19 +212,25 @@ function injectCSSShadow(src, tag, type, allDom) {
     });
     if (allDom === true) {
         tag.children('*').each(function () {
-            injectCSSShadow(src, $(this), type, allDom)
+            injectCSSShadow(src, $(this), type, allDom);
         });
     }
 }
 
-function injectJSShadow(el, js, allDom) {
-    el.sRoot().children("*").each(function () {
+function injectJSShadow(src, tag, type, allDom) {
+    tag.each(function () {
         if (this.shadowRoot !== null) {
-            injectJS(js, $(this).sRoot(), 'text');
-            if (allDom === true)
-                injectJSShadow($(this).sRoot(), js);
+            injectJS(src, $(this.shadowRoot), type);
+            if (allDom === true) {
+                injectJSShadow(src, $(this.shadowRoot), type, allDom);
+            }
         }
     });
+    if (allDom === true) {
+        tag.children('*').each(function () {
+            injectJSShadow(src, $(this), type, allDom);
+        });
+    }
 }
 
 function scrollToUtil(pos, time, offset) {
@@ -953,39 +959,41 @@ function homepageFunc() {
 
             courseWidget = headSelf.closest('div.d2l-widget');
 
-            if (options.HOME_HidePinnedIcon)
-                courseWidget.addClass('darklight-hide-pin-icon');
+            // if (options.HOME_HidePinnedIcon)
+            //     courseWidget.addClass('darklight-hide-pin-icon');
 
             if (options.HOME_AddCalendar) {
                 var calendarWidget = $('<div/>');
                 calendarWidget.uwCalendar('init').uwCalendar('loading').insertAfter(courseWidget);
             }
 
-            if (options.COURSE_CustomThumb && !isWLU()) {
-                courseWidget.addClass('darklight-course-thumb-loading');
-            }
+            // if (options.COURSE_CustomThumb && !isWLU()) {
+            //     courseWidget.addClass('darklight-course-thumb-loading');
+            // }
 
             function _waitForCourseLoad(isTabSwitch) {
 
                 function _getPanelSelected() {
                     return d2lMyCourses
                         .children('d2l-tabs')
-                        .children('.d2l-tabs:not(.d2l-tabs-layout)')
                         .children('d2l-tab-panel[selected]');
                 }
 
                 function _getSpinner() {
                     return _getPanelSelected()
-                        .children('d2l-my-courses-content')
+                        .children('d2l-my-courses-content').sRoot()
                         .children('.spinner-container')
                         .children('d2l-loading-spinner');
                 }
 
-
                 var d2lMyCourses = courseWidget
                     .children('.d2l-widget-content')
                     .children('.d2l-widget-content-padding')
-                    .children('d2l-my-courses');
+                    .children('d2l-my-courses').sRoot();
+
+                if (options.HOME_HideCourseTabSelector)
+                    injectCSS('d2l-tab-panel {margin: 0!important;}', d2lMyCourses, 'text');
+
                 var loadSpinner = _getSpinner();
                 // .find('d2l-tabs d2l-tab-panel[selected] d2l-my-courses-content div.spinner-container d2l-loading-spinner');
                 var intervalVal = 0, delayVal = 0, intervalCounter = 0;
@@ -1001,8 +1009,11 @@ function homepageFunc() {
                     if (!loadSpinner.length) {
                         loadSpinner = _getSpinner();
                     } else if (typeof loadSpinner.attr('hidden') === typeof undefined
-                        || (!_getPanelSelected().find('d2l-my-courses-content d2l-enrollment-card d2l-card div.d2l-card-container').length
-                            && typeof _getPanelSelected().find('d2l-my-courses-content d2l-alert').attr('hidden') === typeof undefined)
+                        || (!_getPanelSelected().children('d2l-my-courses-content').sRoot()
+                                .children('.my-courses-content').children('.course-tile-grid').children('d2l-enrollment-card').length
+                            // .children('.my-courses-content').children('.course-tile-grid').children('d2l-enrollment-card').sRoot()
+                            // .children('d2l-card').sRoot().children('div.d2l-card-container').length
+                            && typeof _getPanelSelected().children('d2l-my-courses-content').sRoot().find('d2l-alert').attr('hidden') === typeof undefined)
                     ) {
                         // not loaded yet
                     } else {
@@ -1011,17 +1022,36 @@ function homepageFunc() {
                         var courseWidgetTabPanel = _getPanelSelected();
                         var courseWidgetTabPanelID = courseWidgetTabPanel.attr('id');
                         var courseWidgetTabPanelCards = courseWidgetTabPanel
-                            .children('d2l-my-courses-content')
+                            .children('d2l-my-courses-content').sRoot()
                             .children('.my-courses-content')
                             .children('.course-tile-grid')
                             .children('d2l-enrollment-card');
 
+                        // var courseWidgetTabPanelCards = [];
+                        // courseWidgetTabPanel
+                        //     .children('d2l-my-courses-content').sRoot()
+                        //     .children('.my-courses-content')
+                        //     .children('.course-tile-grid')
+                        //     .children('d2l-enrollment-card').each(function () {
+                        //     courseWidgetTabPanelCards.push($(this.shadowRoot).children('d2l-card'));
+                        // });
+
+                        var hideStyle = '';
+                        if (options.HOME_HideCoverPic)
+                            hideStyle += 'd2l-card .d2l-enrollment-card-image-container {padding-top:0%!important}';
+                        if (options.HOME_HideMetaTerm)
+                            hideStyle += 'd2l-card d2l-organization-info {display: none!important}';
+                        if (options.HOME_HideMetaEndDate)
+                            hideStyle += 'd2l-card d2l-user-activity-usage {display: none!important}';
+                        if (options.HOME_HidePinnedIcon)
+                            hideStyle += 'd2l-card d2l-button-icon[icon="d2l-tier1:pin-filled"] {display: none!important}';
+
                         var courseTileLoaded = true;
 
                         courseWidgetTabPanelCards.each(function (idx, elem) {
-                            var self = $(elem);
-                            if (typeof self.find('d2l-card d2l-course-image img').attr('src') === typeof undefined
-                                || self.find('d2l-card d2l-organization-name').text().trim() === '')
+                            // var self = $(elem);
+                            if (typeof $(elem.shadowRoot).find('d2l-card d2l-course-image').sRoot().children('img').attr('src') === typeof undefined
+                                || $(elem.shadowRoot).find('d2l-card d2l-organization-name').sRoot().text().trim() === '')
                                 courseTileLoaded = false;
                         });
 
@@ -1032,20 +1062,26 @@ function homepageFunc() {
                             var times = isTabSwitch ? 4 : 1;
 
                             setTimeout(function () {
+                                // hide elements
+                                courseWidgetTabPanelCards.each(function (idx, elem) {
+                                    injectCSS(hideStyle, $(elem.shadowRoot), 'text');
+                                });
                                 // calendar
                                 homepageCalendar(courseWidgetTabPanelCards, courseWidgetTabPanelID);
                                 // custom course thumb
-                                customCourseThumbs(courseWidgetTabPanelCards);
+                                // customCourseThumbs(courseWidgetTabPanelCards);
                                 // direct to content
                                 courseDirectToContent(courseWidgetTabPanelCards);
                                 // quick access
                                 courseTileContextMenu(courseWidgetTabPanel, courseWidgetTabPanelCards);
+
                             }, delayVal * times);
 
                             // tab change
                             if (isTabSwitch !== true) {
+
                                 d2lMyCourses
-                                    .children('d2l-tabs')
+                                    .children('d2l-tabs').sRoot()
                                     .children('.d2l-tabs-layout')
                                     .children('.d2l-tabs-container')
                                     .children('.d2l-tabs-container-list')
@@ -1056,6 +1092,11 @@ function homepageFunc() {
                                             _waitForCourseLoad(true);
                                         }, 100);
                                     });
+
+                                if (options.HOME_HideCourseTabSelector) {
+                                    injectCSS('.d2l-tabs-layout {height:0!important; border:none!important;}',
+                                        d2lMyCourses.children('d2l-tabs').sRoot(), 'text');
+                                }
                             }
 
                         }
@@ -1100,20 +1141,20 @@ function homepageFunc() {
     }
 
     // course tile meta
-    var style = '';
-    if (options.HOME_HideCoverPic)
-        style += 'd2l-enrollment-card .d2l-enrollment-card-image-container {padding-top:0%!important}';
-    if (options.HOME_HideMetaTerm)
-        style += 'd2l-organization-info {display: none!important}';
-    if (options.HOME_HideMetaEndDate)
-        style += 'd2l-user-activity-usage {display: none!important}';
-    if (options.HOME_HideCourseTabSelector)
-        style += 'd2l-my-courses d2l-tabs .d2l-tabs-layout {height:0!important; border:none!important;}' +
-            'd2l-my-courses d2l-tabs d2l-tab-panel {margin: 0!important;}';
-    browser.runtime.sendMessage({
-        action: 'insertCSS',
-        data: {code: style}
-    });
+    // var style = '';
+    // if (options.HOME_HideCoverPic)
+    //     style += 'd2l-enrollment-card .d2l-enrollment-card-image-container {padding-top:0%!important}';
+    // if (options.HOME_HideMetaTerm)
+    //     style += 'd2l-organization-info {display: none!important}';
+    // if (options.HOME_HideMetaEndDate)
+    //     style += 'd2l-user-activity-usage {display: none!important}';
+    // if (options.HOME_HideCourseTabSelector)
+    //     style += 'd2l-my-courses d2l-tabs .d2l-tabs-layout {height:0!important; border:none!important;}' +
+    //         'd2l-my-courses d2l-tabs d2l-tab-panel {margin: 0!important;}';
+    // chrome.runtime.sendMessage({
+    //     action: 'insertCSS',
+    //     data: {code: style}
+    // });
 
     // remove announcement inline styles
     if (announcementWidget != null) {
@@ -1126,7 +1167,9 @@ function homepageCalendar(cards, panelID) {
 
     if (!options.HOME_AddCalendar) return;
 
-    if (typeof $('#' + panelID).attr('data-calendar-init') !== typeof undefined) {
+    var panelRoot = $('d2l-my-courses').sRoot().children('d2l-tabs');
+
+    if (typeof panelRoot.children('#' + panelID).attr('data-calendar-init') !== typeof undefined) {
         $('#darklight-homepage-calendar-widget').uwCalendar('switchTo', {
             id: panelID
         });
@@ -1136,9 +1179,10 @@ function homepageCalendar(cards, panelID) {
     var links = [];
 
     cards.each(function (i, e) {
-        var self = $(e).children('d2l-card').children('.d2l-card-container');
-        var link = self.children('a');
-        var name = self.children('.d2l-card-link-container').children('.d2l-card-content').find('d2l-organization-name');
+        // var self = $(e.shadowRoot).children('d2l-card').children('.d2l-card-container');
+        var self = $(e.shadowRoot).children('d2l-card');
+        var link = self.sRoot().children('.d2l-card-container').children('a');
+        var name = self.find('d2l-organization-name').sRoot();
         name = name.text().trim().split(' - ')[0];
 
         if (typeof link.attr('data-home-href') !== typeof undefined) {
@@ -1177,7 +1221,7 @@ function homepageCalendar(cards, panelID) {
                 list: finalList
             });
         }
-        $('#' + panelID).attr('data-calendar-init', '1');
+        panelRoot.children('#' + panelID).attr('data-calendar-init', '1');
     }
 
     function _getCoursePageAjax() {
@@ -1357,8 +1401,8 @@ function courseDirectToContent(cards) {
     // homepage
     if (typeof cards !== typeof undefined) {
         cards.each(function (idx, elem) {
-            var self = $(elem).children('d2l-card').children('.d2l-card-container');
-            var link = self.children('a');
+            var self = $(elem.shadowRoot).children('d2l-card');
+            var link = self.sRoot().children('.d2l-card-container').children('a');
             if (typeof link.attr('data-home-href') === typeof undefined) {
                 link.attr('data-home-href', link.attr('href'));
                 link.attr('href', link.attr('href').replace('/d2l/home/', '/d2l/le/content/') + '/Home');
@@ -1367,6 +1411,7 @@ function courseDirectToContent(cards) {
     }
     // navbar
     else {
+
         var courseBtn = undefined;
         var intervalCnt = 0, intervalCnt2 = 0;
 
@@ -1374,13 +1419,15 @@ function courseDirectToContent(cards) {
         var interval = setInterval(function () {
 
             if (typeof courseBtn === typeof undefined || !courseBtn.length) {
-                courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown button');
+                courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon').sRoot()
+                    .children('d2l-navigation-button').sRoot().children('button');
             } else {
                 clearInterval(interval);
 
                 courseBtn.on('click', function () {
 
-                    var d2lBtn = courseBtn.closest('d2l-navigation-button');
+                    var d2lBtn = $('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon').sRoot()
+                        .children('d2l-navigation-button');
 
                     // wait for dropdown menu
                     var interval2 = setInterval(function () {
@@ -1532,7 +1579,7 @@ function courseTileContextMenu(panel, cards) {
         var contentList = options.HOME_CourseTileContextMenuData;
 
         cards.each(function (idx, elem) {
-            var self = $(elem).children('d2l-card').children('.d2l-card-container');
+            var self = $(elem.shadowRoot).children('d2l-card').sRoot().children('.d2l-card-container');
             var code = self.children('a').attr('href').match(/\/\d+/)[0].substring(1);
             self.children('a').contextmenu(function (e) {
                 e.preventDefault();
@@ -1554,13 +1601,15 @@ function courseTileContextMenu(panel, cards) {
         var interval = setInterval(function () {
 
             if (typeof courseBtn === typeof undefined || !courseBtn.length) {
-                courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown button');
+                courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon').sRoot()
+                    .children('d2l-navigation-button').sRoot().children('button');
             } else {
                 clearInterval(interval);
 
                 courseBtn.on('click', function () {
 
-                    var d2lBtn = courseBtn.closest('d2l-navigation-button');
+                    var d2lBtn = $('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon').sRoot()
+                        .children('d2l-navigation-button');
 
                     // wait for dropdown menu
                     var interval2 = setInterval(function () {
@@ -1647,7 +1696,7 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
 
     if (isHomepage === true) {
 
-        if (announcementWidget.find('template').length) {
+        if (announcementWidget.find('ul.d2l-datalist li.d2l-datalist-item div.d2l-htmlblock template').length) {
             setTimeout(function () {
                 removeAnnouncePageFormat(true, announcementWidget, ++counter);
             }, 500);
@@ -1659,18 +1708,20 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
         });
 
     } else {
-        var announceTable = $('#wrapper');
+        var announceTable = $('d2l-table-wrapper');
 
-        if (!announceTable.length || announceTable.find('template').length) {
+        if (!announceTable.length || announceTable.find('ul.d2l-datalist li.d2l-datalist-item div.d2l-htmlblock template').length) {
             setTimeout(function () {
                 removeAnnouncePageFormat(false, null, ++counter);
             }, 500);
             return;
         }
 
-        announceTable.find('table.d2l-table tr.d_detailsRow').each(function (i, e) {
-            _removeCSS($(e).find('td div.d2l-htmlblock').find('p, span, ul, ol, li, table, tr, th, td'));
-        });
+        setTimeout(function () {
+            announceTable.find('table.d2l-table tr.d_detailsRow').each(function (i, e) {
+                _removeCSS($(e).find('td div.d2l-htmlblock').find('p, span, ul, ol, li, table, tr, th, td'));
+            });
+        }, 500);
 
     }
 
@@ -1764,11 +1815,6 @@ function initDarklightFunc() {
             injectCSS('iframe.d2l-fileviewer-rendered-pdf-dialog{height:calc(100vh - 60px)!important;}', 'body', 'text');
         }
     }
-
-    // tmp solution for shadow root
-    // $('d2l-navigation').sRoot().find('d2l-navigation-band, .d2l-navigation-shadow-drop-border, .d2l-navigation-shadow-gradient').hide();
-    // $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img').css('max-height', '40px');
-    // $('d2l-navigation-link-image').sRoot().find('d2l-navigation-link').sRoot().find('.d2l-navigation-link-top-border').css('--d2l-navigation-highlight-border-hover-focus_-_background', '#fdd54f');
 
     // overlay
     removeOverlay();

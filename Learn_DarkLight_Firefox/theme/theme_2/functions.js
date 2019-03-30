@@ -1,4 +1,14 @@
 function initTheme() {
+    // tmp warning
+    if (currURL2.match(/\/d2l\/home$/)) {
+        $('<d2l-alert type="call-to-action" dir="ltr" style="max-width:none">' +
+            '<strong>LEARN DARKLIGHT</strong><br>'+
+            'Learn\'s recent updates have caused some extension functions broken. '+
+            'This theme will be updated in a few days. ' +
+            'Please switch to other themes temporarily. ' +
+            'Apologize for any inconvenience.</d2l-alert>')
+            .prependTo('div.homepage-col-8');
+    }
 
     // custom options - css
     var cssText = '';
@@ -118,6 +128,7 @@ function initTheme() {
             }
         });
     }
+
 }
 
 initTheme();

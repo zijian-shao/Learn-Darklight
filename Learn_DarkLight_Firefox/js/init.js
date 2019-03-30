@@ -1,4 +1,4 @@
-var baseURL, currURL, currURL2, currURLHost, options, configs, themeConfigs;
+var baseURL, currURL, currURL2, currURLHost, options, configs, themeConfigs, thumbData;
 
 var initReady = false;
 
@@ -189,10 +189,10 @@ function initDarklight() {
 
                 browser.runtime.onMessage.addListener(
                     function (request, sender, sendResponse) {
-
-                        if (request.action == act) {
+                        if (request.action === 'getCourseThumbsResponse') {
+                            thumbData = request;
+                        } else if (request.action === 'getCourseThumbsOneResponse') {
                             var style = '';
-
                             request.data.forEach(function (item, index) {
                                 style += '.darklight-course-thumb-' + item.course_id + extraSel + ' {';
                                 style += 'background-image: url("' + item.thumb_image + '");';
@@ -201,7 +201,6 @@ function initDarklight() {
                                 style += 'opacity: 0 !important;';
                                 style += '}';
                             });
-
                             var styleElem = document.createElement("style");
                             styleElem.innerText = style;
                             styleElem.id = 'darklight-course-thumbs';
