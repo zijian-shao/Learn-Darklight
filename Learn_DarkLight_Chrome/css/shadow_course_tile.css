@@ -1,5 +1,5 @@
 /* course tiles */
-.d2l-homepage d2l-card {
+d2l-card {
     -webkit-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
     -moz-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
     -ms-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
@@ -7,22 +7,14 @@
     transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
 }
 
-.d2l-homepage d2l-card .d2l-card-content {
-    padding-bottom: 1.0rem !important;
-}
-
-.d2l-homepage d2l-card .d2l-card-footer {
-    display: none !important;
-}
-
 /* homepage course tile image ratio */
-d2l-enrollment-card .d2l-enrollment-card-image-container {
+d2l-card .d2l-enrollment-card-image-container {
     position: relative !important;
     height: auto !important;
-    padding-top: 45% !important;
+    padding-top: 45%;
 }
 
-d2l-enrollment-card .d2l-enrollment-card-image-container d2l-course-image {
+d2l-card .d2l-enrollment-card-image-container d2l-course-image {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
@@ -32,11 +24,11 @@ d2l-enrollment-card .d2l-enrollment-card-image-container d2l-course-image {
 }
 
 /* course tiles - custom */
-.darklight-course-thumb-loading .d2l-card-link-container > .d2l-card-header {
+d2l-card.darklight-course-thumb-loading div[slot="header"] {
     background: rgba(0, 0, 0, 0.02);
 }
 
-.darklight-course-thumb-loading .d2l-enrollment-card-image-container {
+d2l-card.darklight-course-thumb-loading .d2l-enrollment-card-image-container {
     opacity: 0;
     -webkit-transition: opacity 0.5s !important;
     -moz-transition: opacity 0.5s !important;
@@ -45,21 +37,21 @@ d2l-enrollment-card .d2l-enrollment-card-image-container d2l-course-image {
     transition: opacity 0.5s !important;
 }
 
-.darklight-course-thumb-complete .d2l-enrollment-card-image-container {
+d2l-card.darklight-course-thumb-complete .d2l-enrollment-card-image-container {
     opacity: 1 !important;
 }
 
-.darklight-course-thumb d2l-course-image {
+d2l-card.darklight-course-thumb .d2l-enrollment-card-image-container {
     background-color: transparent !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
 }
 
-.darklight-course-thumb d2l-course-image img {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
-    transition: none !important;
-}
+/*d2l-card.darklight-course-thumb .d2l-enrollment-card-image-container d2l-course-image {*/
+    /*-webkit-transition: none !important;*/
+    /*-moz-transition: none !important;*/
+    /*-ms-transition: none !important;*/
+    /*-o-transition: none !important;*/
+    /*transition: none !important;*/
+/*}*/

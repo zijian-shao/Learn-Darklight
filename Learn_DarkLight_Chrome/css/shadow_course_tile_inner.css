@@ -1,0 +1,8 @@
+/* course tiles */
+.d2l-card-content {
+    padding-bottom: 1.0rem !important;
+}
+
+.d2l-card-footer {
+    display: none !important;
+}
