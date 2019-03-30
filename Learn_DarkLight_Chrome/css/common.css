@@ -424,42 +424,7 @@ body > header.darklight-navbar-sticky {
     box-shadow: 0 0 0 10px #fff, 0 0 0 11px #f4f4fc, 0 0 25px 10px rgba(150, 150, 190, 0.2);
 }
 
-/* course tiles */
-.d2l-homepage d2l-card {
-    -webkit-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
-    -moz-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
-    -ms-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
-    -o-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
-}
-
-.d2l-homepage d2l-card .d2l-card-content {
-    padding-bottom: 1.0rem !important;
-}
-
-.d2l-homepage d2l-card .d2l-card-footer {
-    display: none !important;
-}
-
-/* course tiles - custom */
-.darklight-course-thumb-loading .d2l-card-link-container > .d2l-card-header {
-    background: rgba(0, 0, 0, 0.02);
-}
-
-.darklight-course-thumb-loading .d2l-enrollment-card-image-container {
-    opacity: 0;
-    -webkit-transition: opacity 0.5s !important;
-    -moz-transition: opacity 0.5s !important;
-    -ms-transition: opacity 0.5s !important;
-    -o-transition: opacity 0.5s !important;
-    transition: opacity 0.5s !important;
-}
-
-.darklight-course-thumb-complete .d2l-enrollment-card-image-container {
-    opacity: 1 !important;
-}
-
-.darklight-course-thumb d2l-course-image,
+/* course home course tiles */
 .darklight-course-thumb-one {
     background-color: transparent !important;
     background-position: center !important;
@@ -467,30 +432,12 @@ body > header.darklight-navbar-sticky {
     background-size: cover !important;
 }
 
-.darklight-course-thumb d2l-course-image img,
 .darklight-course-thumb-one img {
     -webkit-transition: none !important;
     -moz-transition: none !important;
     -ms-transition: none !important;
     -o-transition: none !important;
     transition: none !important;
-}
-
-/* hide pin icon on course tile */
-.darklight-hide-pin-icon d2l-enrollment-card d2l-card .d2l-card-container .d2l-card-actions d2l-button-icon[icon="d2l-tier1:pin-filled"] {
-    display: none !important;
-}
-
-.darklight-auto-hide-pin-icon d2l-enrollment-card d2l-card .d2l-card-container .d2l-card-actions d2l-button-icon[icon="d2l-tier1:pin-filled"] {
-    opacity: 0 !important;
-    transform: translateY(-10px) !important;
-    transition: transform 200ms ease-out, opacity 200ms ease-out !important;
-}
-
-.darklight-auto-hide-pin-icon d2l-enrollment-card d2l-card:hover .d2l-card-container .d2l-card-actions d2l-button-icon[icon="d2l-tier1:pin-filled"],
-.darklight-auto-hide-pin-icon d2l-enrollment-card d2l-card:focus .d2l-card-container .d2l-card-actions d2l-button-icon[icon="d2l-tier1:pin-filled"] {
-    opacity: 1 !important;
-    transform: translateY(0px) !important;
 }
 
 /* navbar */
@@ -560,19 +507,6 @@ d2l-navigation-main-header .d2l-navigation-s-course-menu .d2l-courseselector-wra
     width: 100px;
     color: #fff;
 }
-
-/* tmp fix for dropdown */
-/*.vui-dropdown-menu > ul > li[role=separator] + li {*/
-/*border-top: 1px solid #e6eaf0!important;*/
-/*}*/
-
-/*.vui-dropdown-menu > ul > li.d2l-last-visible-item.vui-dropdown-menu-item-focus, .vui-dropdown-menu > ul > li.vui-dropdown-menu-item-focus, .vui-dropdown-menu > ul > li.vui-dropdown-menu-item-focus:last-child {*/
-/*border-color: #29a6ff !important;*/
-/*}*/
-
-/*.vui-dropdown-menu > ul > li[role=separator] {*/
-/*display: none!important;*/
-/*}*/
 
 /* tmp fix for widget heading margin */
 .d2l-homepage-header-wrapper {
@@ -655,15 +589,7 @@ iframe.d2l-fileviewer-rendered-pdf-fullscreen, iframe.d2l-fileviewer-rendered-pd
     border-top: none !important;
 }
 
-/* float buttons */
-.d2l-floating-buttons-container.d2l-floating-buttons-floating.d2l-floating-buttons {
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-}
-
-/* context menu */
-
+/* custom context menu */
 li.d2l-contextmenu-item-header > * {
     display: block;
     padding: 0.5rem 1rem calc(0.5rem - 2px);
@@ -690,22 +616,6 @@ li.d2l-contextmenu-item-title > * {
 
 li.d2l-contextmenu-item-title.empty > * {
     display: none;
-}
-
-/* homepage course tile image ratio */
-d2l-enrollment-card .d2l-enrollment-card-image-container {
-    position: relative !important;
-    height: auto !important;
-    padding-top: 45% !important;
-}
-
-d2l-enrollment-card .d2l-enrollment-card-image-container d2l-course-image {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 100% !important;
-    margin: auto !important;
 }
 
 /* course content list */
@@ -756,10 +666,6 @@ d2l-enrollment-card .d2l-enrollment-card-image-container d2l-course-image {
 }
 
 .darklight-fullwidth .max-width.d2l-simple-overlay {
-    max-width: none !important
-}
-
-.darklight-fullwidth .d2l-navigation-s-centerer {
     max-width: none !important
 }
 
