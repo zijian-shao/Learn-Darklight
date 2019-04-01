@@ -185,12 +185,12 @@ function extensionUpdate() {
 
     console.log('Learn Darklight Core (V' + oldVer + ')');
 
-    chrome.runtime.sendMessage({action: 'getDetails'}, function (response) {
+    browser.runtime.sendMessage({action: 'getDetails'}, function (response) {
 
         newVer = response.version;
 
         // update storage
-        chrome.storage.sync.set({
+        browser.storage.sync.set({
             'EXT_Version': newVer
         });
 
