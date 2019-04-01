@@ -39,28 +39,8 @@ $.fn.uwCalendar = function (action, data) {
         this.html('<div class="d2l-widget-header"><div class="d2l-homepage-header-wrapper"><h2 class="d2l-heading vui-heading-4">Upcoming Events</h2></div></div>' +
             '<div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"></div>' +
             '<div class="darklight-homepage-calendar-saved hidden" hidden></div>');
-    } else if (action == 'asdfasdf') {
-        this.find('.darklight-homepage-calendar')
-            .html('<div class="d2l-msg-container d2l-datalist-empty"><div class="d2l-msg-container-inner">' +
-                '<div class="d2l-msg-container-text">Recent Learn updates have caused some extension functions not available.<br>' +
-                '<p>The author is making changes and the extension should be back to normal in a few days.</p>' +
-                '<p>Current progress:</p>' +
-                '<ul><li style="color:mediumseagreen">[√] Sticky navigation bar</li>' +
-                '<li style="color:mediumseagreen">[√] Back-to-top button on navbar</li>' +
-                '<li style="color:mediumseagreen">[√] Classic Darklight Theme</li>' +
-                '<li style="color:mediumseagreen">[√] Bright Daylight Theme</li>' +
-                '<li>[×] Dark Turquoise Theme</li>' +
-                '<li style="color:mediumseagreen">[√] Dodger Blue Theme</li>' +
-                '<li style="color:mediumseagreen">[√] Learn Default Theme</li>' +
-                '<li>[×] Auto redirect to course content page</li>' +
-                '<li>[×] Custom course cover pictures</li>' +
-                '<li>[×] Homepage Calendar</li>' +
-                '<li>[×] Hide elements on course tiles</li>' +
-                '<li>[×] Course tiles context menu</li>' +
-                '<li style="color:mediumseagreen">[√] Remove announcement styles</li></ul></div>' +
-                '<div class="d2l-clear"></div></div></div>');
     }
-
+    
     // loading
     else if (action == 'loading') {
         this.find('.darklight-homepage-calendar')
@@ -971,8 +951,13 @@ function homepageFunc() {
                 }
 
                 function _getSpinner() {
-                    return _getPanelSelected().querySelector('d2l-my-courses-content').shadowRoot
-                        .querySelector('div.spinner-container > d2l-loading-spinner');
+                    var pn = _getPanelSelected();
+                    if (pn !== null) {
+                        return _getPanelSelected().querySelector('d2l-my-courses-content').shadowRoot
+                            .querySelector('div.spinner-container > d2l-loading-spinner');
+                    } else {
+                        return null;
+                    }
                 }
 
                 var d2lMyCourses = courseWidget[0].querySelector('.d2l-widget-content > .d2l-widget-content-padding > d2l-my-courses');
@@ -1670,6 +1655,47 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
 
 function initDarklightFunc() {
 
+    // drop down tmp
+    $('d2l-dropdown').on('click', function () {
+        var self = $(this);
+        if (self.data('dropdown-init') !== 'true') {
+            self.data('dropdown-init', 'true');
+            injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self, 'file', true);
+        } else if (typeof self.children('d2l-dropdown-menu').attr('render-content') === typeof undefined) {
+            injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self.children('d2l-dropdown-menu'), 'file', true);
+        }
+    });
+
+    // js
+    var jsText = 'var dlightData = {';
+    jsText += 'baseURL : "' + baseURL + '",';
+    jsText += 'currURL : "' + currURL + '",';
+    jsText += 'currURL2 : "' + currURL2 + '",';
+    jsText += 'currURLHost : "' + currURLHost + '",';
+    jsText += 'options : ' + JSON.stringify(options) + ',';
+    jsText += 'themeConfigs : ' + JSON.stringify(themeConfigs) + '';
+    jsText += '}';
+    var params = document.createElement("script");
+    params.textContent = jsText;
+    document.head.appendChild(params);
+
+    injectJS(baseURL + 'js/inject.js', 'head');
+
+    // theme js
+    var scriptArr = [];
+    scriptArr.push({
+        file: 'theme/theme_' + options.GLB_ThemeID + '/functions.js'
+    });
+    if (options.GLB_EnableCustomStyle) {
+        scriptArr.push({
+            code: options.GLB_CustomJS
+        });
+    }
+    browser.runtime.sendMessage({
+        action: 'executeScript',
+        data: scriptArr
+    });
+
     // custom font
     if (options.GLB_CustomFont) {
         customFont();
@@ -1759,6 +1785,9 @@ function initDarklightFunc() {
 
     // overlay
     removeOverlay();
+    setTimeout(function () {
+        removeOverlay(true);
+    }, 3000);
 
 }
 
@@ -1795,48 +1824,9 @@ function initDarklightIdle() {
     // css
     // injectCSS('html{font-size:' + options.GLB_BasicFontSize + 'px}', 'head', 'text');
     // injectCSS(baseURL + 'css/common.css', 'head');
-    $('d2l-dropdown').on('click', function () {
-        var self = $(this);
-        if (self.data('dropdown-init') !== 'true') {
-            self.data('dropdown-init', 'true');
-            injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self, 'file', true);
-        } else if (typeof self.children('d2l-dropdown-menu').attr('render-content') === typeof undefined) {
-            injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self.children('d2l-dropdown-menu'), 'file', true);
-        }
-    });
     injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/common.css', 'head');
     if (options.GLB_EnableCustomStyle)
         injectCSS(options.GLB_CustomCSS, 'head', 'text');
-
-    // js
-    var jsText = 'var dlightData = {';
-    jsText += 'baseURL : "' + baseURL + '",';
-    jsText += 'currURL : "' + currURL + '",';
-    jsText += 'currURL2 : "' + currURL2 + '",';
-    jsText += 'currURLHost : "' + currURLHost + '",';
-    jsText += 'options : ' + JSON.stringify(options) + ',';
-    jsText += 'themeConfigs : ' + JSON.stringify(themeConfigs) + '';
-    jsText += '}';
-    var params = document.createElement("script");
-    params.textContent = jsText;
-    document.head.appendChild(params);
-
-    injectJS(baseURL + 'js/inject.js', 'head');
-
-    // theme js
-    var scriptArr = [];
-    scriptArr.push({
-        file: 'theme/theme_' + options.GLB_ThemeID + '/functions.js'
-    });
-    if (options.GLB_EnableCustomStyle) {
-        scriptArr.push({
-            code: options.GLB_CustomJS
-        });
-    }
-    browser.runtime.sendMessage({
-        action: 'executeScript',
-        data: scriptArr
-    });
 
     if (document.hasFocus()) {
         initDarklightFunc();
