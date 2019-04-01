@@ -203,7 +203,7 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 }
 
 .d2l-navigation-s-item .d2l-navigation-s-group-text,
-.d2l-navigation-s-item .d2l-icon-0 {
+.d2l-navigation-s-item d2l-icon {
     color: #999 !important;
 }
 
@@ -211,14 +211,14 @@ d2l-navigation-separator d2l-icon.d2l-navigation-separator {
     color: #666 !important;
 }
 
-.d2l-icon-0 {
-    color: #999 !important;
-}
+/*.d2l-icon-0 {*/
+    /*color: #999 !important;*/
+/*}*/
 
-.d2l-icon-0[icon*="d2l-tier3:"] {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-}
+/*.d2l-icon-0[icon*="d2l-tier3:"] {*/
+    /*width: 1.5rem !important;*/
+    /*height: 1.5rem !important;*/
+/*}*/
 
 .d2l-navigation-s-divider d2l-icon {
     color: #444 !important;
@@ -442,7 +442,7 @@ d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-nav
 /* course selector */
 .d2l-courseselector-wrapper .d2l-datalist {
     padding-top: 10px !important;
-    padding-bottom: 0 !important;
+    padding-bottom: 10px !important;
 }
 
 .d2l-courseselector-wrapper .d2l-datalist-item {
