@@ -1,46 +1,84 @@
 var baseURL, currURL, options, configs;
 
-function injectCSS(url, tag, type) {
+function injectCSS(src, tag, type) {
 
     var style;
-
+    var id = 'darklight-css-' + Math.floor(Math.random() * 90000 + 10000);
     if (type === 'text') {
-
-        style = $('<style/>');
-
-        style.text(url);
-
-    } else {
-
-        style = $('<link/>', {
-            'rel': 'stylesheet',
-            'type': 'text/css',
-            'href': url
+        style = $('<style/>', {
+            id: id
         });
-
+        style.text(src);
+    } else {
+        style = $('<link/>', {
+            id: id,
+            rel: 'stylesheet',
+            type: 'text/css',
+            href: src
+        });
     }
 
-    $(tag).append(style);
+    if (typeof tag === typeof {})
+        tag.append(style);
+    else
+        $(tag).append(style);
 
+    return id;
 }
 
+function injectJS(src, tag, type) {
 
-function injectJS(url, tag, type) {
-
+    var id = 'darklight-js-' + Math.floor(Math.random() * 90000 + 10000);
     var script = $('<script/>', {
-        'type': 'text/javascript'
+        id: id,
+        type: 'text/javascript'
     });
 
     if (type === 'text') {
-        script.text(url);
+        script.text(src);
     } else {
-        script.attr('src', url);
+        script.attr('src', src);
     }
 
-    $(tag).append(script);
+    if (typeof tag === typeof {})
+        tag.append(script);
+    else
+        $(tag).append(script);
 
+    return id;
 }
 
+function injectCSSShadow(src, tag, type, allDom) {
+    tag.each(function () {
+        if (this.shadowRoot !== null) {
+            injectCSS(src, $(this.shadowRoot), type);
+            if (allDom === true) {
+                injectCSSShadow(src, $(this.shadowRoot), type, allDom);
+            }
+        }
+    });
+    if (allDom === true) {
+        tag.children('*').each(function () {
+            injectCSSShadow(src, $(this), type, allDom);
+        });
+    }
+}
+
+function injectJSShadow(src, tag, type, allDom) {
+    tag.each(function () {
+        if (this.shadowRoot !== null) {
+            injectJS(src, $(this.shadowRoot), type);
+            if (allDom === true) {
+                injectJSShadow(src, $(this.shadowRoot), type, allDom);
+            }
+        }
+    });
+    if (allDom === true) {
+        tag.children('*').each(function () {
+            injectJSShadow(src, $(this), type, allDom);
+        });
+    }
+}
 
 function scrollToUtil(pos, time, offset) {
 
@@ -141,12 +179,108 @@ function isWLU() {
 }
 
 
+function extensionUpdate() {
+
+    var oldVer = options.EXT_Version, newVer;
+
+    console.log('Learn Darklight Core (V' + oldVer + ')');
+
+    chrome.runtime.sendMessage({action: 'getDetails'}, function (response) {
+
+        newVer = response.version;
+
+        // update storage
+        chrome.storage.sync.set({
+            'EXT_Version': newVer
+        });
+
+        // return on install
+        if (oldVer == '0.0.0')
+            return;
+
+        if (versionCompare(oldVer, newVer) >= 0)
+            return;
+
+        console.log('New version updated (V' + newVer + ')');
+
+        if (newVer == '1.0.0') {
+
+        }
+
+        console.log('Extension update script executed!');
+    });
+}
+
+/**
+ * Compare Versions
+ * @param v1
+ * @param v2
+ * @param opt
+ * @returns {*}
+ *  0 if the versions are equal
+ *  a negative integer iff v1 < v2
+ *  a positive integer iff v1 > v2
+ * NaN if either version string is in the wrong format
+ */
+function versionCompare(v1, v2, opt) {
+    var lexicographical = opt && opt.lexicographical,
+        zeroExtend = opt && opt.zeroExtend,
+        v1parts = v1.split('.'),
+        v2parts = v2.split('.');
+
+    function isValidPart(x) {
+        return (lexicographical ? /^\d+[A-Za-z]*$/ : /^\d+$/).test(x);
+    }
+
+    if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
+        return NaN;
+    }
+
+    if (zeroExtend) {
+        while (v1parts.length < v2parts.length) v1parts.push("0");
+        while (v2parts.length < v1parts.length) v2parts.push("0");
+    }
+
+    if (!lexicographical) {
+        v1parts = v1parts.map(Number);
+        v2parts = v2parts.map(Number);
+    }
+
+    for (var i = 0; i < v1parts.length; ++i) {
+        if (v2parts.length == i) {
+            return 1;
+        }
+
+        if (v1parts[i] == v2parts[i]) {
+            continue;
+        } else if (v1parts[i] > v2parts[i]) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    if (v1parts.length != v2parts.length) {
+        return -1;
+    }
+
+    return 0;
+}
+
 function initDarklight() {
 
     function init() {
 
         if (currURL.includes('/content/enforced/'))
             return;
+
+        var cover = document.createElement("div");
+        cover.id = 'darklight-load-overlay';
+        cover.className = 'darklight-load-overlay';
+        cover.style.background = '#111';
+        document.documentElement.appendChild(cover);
+
+        extensionUpdate();
     }
 
     baseURL = chrome.runtime.getURL('');
