@@ -11,3 +11,8 @@ d2l-navigation-band,
 :host([icon*="d2l-tier3:"]) {
     width: 1.5rem !important;
 }
+
+.d2l-navigation-button-notification-indicator-icon {
+    width: 8px !important;
+    height: 8px !important;
+}

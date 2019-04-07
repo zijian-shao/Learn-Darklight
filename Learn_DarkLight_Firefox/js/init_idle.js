@@ -40,7 +40,7 @@ $.fn.uwCalendar = function (action, data) {
             '<div class="d2l-widget-content darklight-homepage-calendar" id="darklight-homepage-calendar"></div>' +
             '<div class="darklight-homepage-calendar-saved hidden" hidden></div>');
     }
-    
+
     // loading
     else if (action == 'loading') {
         this.find('.darklight-homepage-calendar')
@@ -1045,6 +1045,9 @@ function homepageFunc() {
                                             this.setAttribute('data-dropdown-init', '');
                                             injectCSS(baseURL + 'css/shadow_dropdown.css', $(this.querySelector('d2l-dropdown-menu').shadowRoot), 'file');
                                         }
+                                        if (typeof themeOnCourseDropdownClick === 'function') {
+                                            themeOnCourseDropdownClick(this);
+                                        }
                                     });
 
                                     myCards.push({
@@ -1054,6 +1057,10 @@ function homepageFunc() {
                                         linkElem: linkElem,
                                         cardRoot: theCard
                                     });
+
+                                    if (typeof themeOnCourseTileLoaded === 'function') {
+                                        themeOnCourseTileLoaded(theCard);
+                                    }
                                 });
 
                                 // calendar
@@ -1656,14 +1663,37 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
 function initDarklightFunc() {
 
     // drop down tmp
-    $('d2l-dropdown').on('click', function () {
+    $(document).on('click', 'd2l-dropdown', function () {
         var self = $(this);
-        if (self.data('dropdown-init') !== 'true') {
-            self.data('dropdown-init', 'true');
-            injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self, 'file', true);
-        } else if (typeof self.children('d2l-dropdown-menu').attr('render-content') === typeof undefined) {
-            injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self.children('d2l-dropdown-menu'), 'file', true);
+
+        function _injectDropdownCSS() {
+            if (self[0].querySelectorAll('d2l-dropdown-menu, d2l-dropdown-content').length > 0
+                && self[0].querySelectorAll('d2l-dropdown-menu, d2l-dropdown-content')[0].shadowRoot !== null) {
+                setTimeout(function () {
+                    if (self.data('dropdown-init') !== 'true') {
+                        self.data('dropdown-init', 'true');
+                        injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self, 'file', true);
+                    } else if (typeof self.children('d2l-dropdown-menu').attr('render-content') === typeof undefined) {
+                        injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self.children('d2l-dropdown-menu'), 'file', true);
+                    }
+                    if (typeof themeOnDropdownClick === 'function') {
+                        themeOnDropdownClick(self);
+                    }
+                }, 1);
+                return true;
+            }
+            return false;
         }
+
+        _injectDropdownCSS();
+        var intervCount = 0;
+        var interv = setInterval(function () {
+            if (_injectDropdownCSS() === true)
+                clearInterval(interv);
+            intervCount++;
+            if (intervCount > 100)
+                clearInterval(interv);
+        }, 100);
     });
 
     // js

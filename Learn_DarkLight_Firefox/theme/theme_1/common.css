@@ -78,15 +78,6 @@ d2l-navigation-band {
     border: none;
 }
 
-d2l-navigation-button .d2l-navigation-button-notification-indicator.d2l-navigation-button-notification-icon {
-    top: calc(-50% + 4px) !important;
-}
-
-d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-navigation-button-notification-icon {
-    width: 8px !important;
-    height: 8px !important;
-}
-
 .d2l-navigation-s-main-wrapper {
     height: calc(1rem + 35px);
 }

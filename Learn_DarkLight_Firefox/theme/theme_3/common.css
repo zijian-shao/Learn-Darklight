@@ -140,15 +140,6 @@ d2l-navigation-main-footer a.d2l-navigation-s-link:visited {
     color: #aaa !important;
 }
 
-d2l-navigation-button .d2l-navigation-button-notification-indicator.d2l-navigation-button-notification-icon {
-    top: calc(-50% + 4px) !important;
-}
-
-d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-navigation-button-notification-icon {
-    width: 8px !important;
-    height: 8px !important;
-}
-
 #courseSelectorId .vui-list > li {
     border: none;
 }

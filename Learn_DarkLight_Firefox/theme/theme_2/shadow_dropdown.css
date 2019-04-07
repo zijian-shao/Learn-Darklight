@@ -1,0 +1,30 @@
+:host .d2l-dropdown-content-width,
+:host .d2l-dropdown-content-pointer > div.d2l-dropdown-menu {
+    background: #373e48 !important;
+    border-color: #373e48 !important;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
+}
+
+:host d2l-menu-item-separator {
+    display: none;
+}
+
+:host .d2l-dropdown-content-pointer > div {
+    background: #323841;
+    border: none;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .6) !important;
+}
+
+:host, d2l-menu-item {
+    border: none !important;
+    background: none;
+}
+
+d2l-menu-item:hover, d2l-menu-item:focus {
+    background-color: var(--d2l-color-celestine-plus-2);
+}
+

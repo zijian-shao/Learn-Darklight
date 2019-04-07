@@ -448,6 +448,7 @@ body > header.darklight-navbar-sticky {
 /* dropdown */
 d2l-dropdown-menu d2l-menu {
     display: block !important;
+    height: auto !important;
 }
 
 /* course selector */
@@ -674,4 +675,3 @@ li.d2l-contextmenu-item-title.empty > * {
     width: 100% !important;
     padding: 0 !important
 }
-
