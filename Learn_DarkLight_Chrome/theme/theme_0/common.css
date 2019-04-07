@@ -142,15 +142,6 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
     color: #aaa;
 }
 
-d2l-navigation-button .d2l-navigation-button-notification-indicator.d2l-navigation-button-notification-icon {
-    top: calc(-50% + 4px) !important;
-}
-
-d2l-navigation-button .d2l-navigation-button-notification-indicator-icon.d2l-navigation-button-notification-icon {
-    width: 8px !important;
-    height: 8px !important;
-}
-
 .d2l-navigation-s-has-branding .d2l-navigation-main-ib {
     border: none !important;
     z-index: 100 !important;

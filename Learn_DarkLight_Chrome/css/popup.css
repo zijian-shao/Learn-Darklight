@@ -213,7 +213,6 @@ div {
     -webkit-box-shadow: 0 0 0 2px #f6b538;
     -moz-box-shadow: 0 0 0 2px #f6b538;
     box-shadow: 0 0 0 2px #f6b538;
-
 }
 
 .btn-purple:hover {
@@ -272,4 +271,71 @@ div {
 
 .darklight-toast-hidden {
     top: -70px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #000;
+    }
+
+    .header {
+        background: #222;
+        border-bottom-color: #222;
+    }
+
+    .header .logo {
+        filter: invert(1);
+    }
+
+    .checkbox-slide {
+        border-color: #666;
+    }
+
+    .checkbox-slide:after {
+        background: transparent;
+    }
+
+    .checkbox-slide:before {
+        background: #5bb75b;
+    }
+
+    .content {
+        background: #000;
+        border-bottom-color: #000;
+    }
+
+    .btn {
+        color: #fff;
+        border-color: #222;
+        background: #222;
+    }
+
+    .btn-icon img {
+        filter: invert(1);
+    }
+
+    .btn:hover {
+        border-color: #222;
+    }
+
+    .btn:active {
+        background: #333;
+        border-color: #333;
+    }
+
+    .footer {
+        background: #222;
+    }
+
+    .footer .report {
+        color: #999;
+    }
+
+    .footer .report .link {
+        color: #3176c4;
+    }
+
+    .darklight-toast {
+        background: #3d7d3d;
+    }
 }

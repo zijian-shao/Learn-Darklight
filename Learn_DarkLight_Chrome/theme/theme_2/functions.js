@@ -1,14 +1,4 @@
 function initTheme() {
-    // tmp warning
-    if (currURL2.match(/\/d2l\/home$/)) {
-        $('<d2l-alert type="call-to-action" dir="ltr" style="max-width:none">' +
-            '<strong>LEARN DARKLIGHT</strong><br>' +
-            'Learn\'s recent updates have caused some extension functions broken. ' +
-            'This theme will be updated in a few days. ' +
-            'Please switch to other themes temporarily. ' +
-            'Apologize for any inconvenience.</d2l-alert>')
-            .prependTo('div.homepage-col-8');
-    }
 
     // custom options - css
     var cssText = '';
@@ -95,14 +85,14 @@ function initTheme() {
 
         // logo - white
         var logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
-        logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.8);
+        logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.85);
 
         var themeInvCnt = 0;
         var dlightThemeInterval = setInterval(function () {
             if (!logoImg.length) {
                 logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
             } else if (!logoImg.attr('src').match(/waterloo_learn_logo\.png/)) {
-                logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.8);
+                logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.85);
             } else {
                 clearInterval(dlightThemeInterval);
             }
@@ -150,6 +140,47 @@ function initTheme() {
         });
     }
 
+    if (document.querySelector('d2l-input-search') !== null && document.querySelector('d2l-input-search').shadowRoot !== null) {
+        injectCSS(':host{--d2l-input_-_background-color:#424a56;' +
+            '--d2l-input_-_border-color:#424a56;' +
+            '--d2l-input_-_box-shadow:none}',
+            $(document.querySelector('d2l-input-search').shadowRoot), 'text');
+
+    }
+
+    injectCSS('.d2l-floating-buttons-container.d2l-floating-buttons-floating' +
+        '{border:none!important;background:#424a56!important;box-shadow:none!important;}',
+        $('d2l-floating-buttons').sRoot(), 'text');
+
+
+}
+
+function themeOnDropdownClick($elem) {
+    if ($elem.data('theme-dropdown-init') !== 'true') {
+        $elem.data('theme-dropdown-init', 'true');
+        injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_dropdown.css', $elem, 'file', true);
+    } else if (typeof $elem.children('d2l-dropdown-menu').attr('render-content') === typeof undefined) {
+        injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_dropdown.css', $elem.children('d2l-dropdown-menu'), 'file', true);
+    }
+}
+
+function themeOnCourseDropdownClick(elem) {
+    if (!elem.hasAttribute('data-theme-dropdown-init')) {
+        elem.setAttribute('data-theme-dropdown-init', '');
+        injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_dropdown.css', $(elem.querySelector('d2l-dropdown-menu')), 'file');
+        injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_dropdown.css', $(elem.querySelector('d2l-dropdown-menu').shadowRoot), 'file');
+    }
+}
+
+function themeOnCourseTileLoaded(elem) {
+    var extraCSS = '';
+    if (getCustomThemeOption('darkCoursePic')) {
+        extraCSS += '.d2l-card-link-container>.d2l-card-header{opacity:0.7!important;}';
+    }
+    injectCSS(':host{background:#424a56;border:none!important}' +
+        ':host([active]), :host([subtle][active]){box-shadow:0 0 0 4px rgba(9, 177, 185, 0.4)!important;}'
+        + extraCSS,
+        $(elem.shadowRoot), 'text');
 }
 
 initTheme();
