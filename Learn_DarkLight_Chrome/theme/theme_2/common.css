@@ -1,10 +1,11 @@
 html {
-    --d2l-color-celestine: #09b1b9;
-    --d2l-color-gypsum: #424a56;
-    --d2l-color-ferrite: #ddd;
-    --d2l-color-celestine-plus-2: #424a56;
-    --d2l-button-focus_-_box-shadow: 0 0 0 4px rgba(9, 177, 185, 0.3);
-    --d2l-button-focus-plus-border_-_border-color: transparent;
+    --d2l-color-celestine: #09b1b9 !important;
+    --d2l-link-hover_-_color: #09b1b9 !important;
+    --d2l-color-gypsum: #424a56 !important;
+    --d2l-color-ferrite: #ddd !important;
+    --d2l-color-celestine-plus-2: #424a56 !important;
+    --d2l-button-focus_-_box-shadow: 0 0 0 4px rgba(9, 177, 185, 0.3) !important;
+    --d2l-button-focus-plus-border_-_border-color: transparent !important;
 }
 
 .d2l-page-main-padding {
@@ -1696,74 +1697,39 @@ d2l-dropdown-more d2l-button-icon[active] > button {
 
 /* homepage calendar */
 .darklight-homepage-calendar-item {
-    border: none;
+    border: none !important;
 }
 
 .darklight-homepage-calendar-item:hover {
-    background: #424a56;
+    background: #424a56 !important;
 }
 
 .darklight-homepage-calendar-date {
-    color: #ccc;
+    color: #ccc !important;
 }
 
 .darklight-homepage-calendar-date .month {
-    border-color: #ccc;
+    border-color: #ccc !important;
 }
 
 .darklight-homepage-calendar-content .time {
-    color: #aaa;
+    color: #aaa !important;
 }
 
 .darklight-homepage-calendar-content .course {
-    color: #999;
+    color: #999 !important;
 }
 
 .darklight-homepage-calendar-content .tag {
-    border-color: #09b1b9;
-    color: #09b1b9;
+    border-color: #09b1b9 !important;
+    color: #09b1b9 !important;
 }
 
 .darklight-homepage-calendar .darklight-block-page-loader {
-    border-top-color: #09b1b9;
-}
-
-/* new homepage course tabs */
-.d2l-home .d2l-tabs-layout.d2l-tabs {
-    border-bottom-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-.d2l-home .d2l-tab-selected-indicator.d2l-tab {
     border-top-color: #09b1b9 !important;
 }
 
-.d2l-home d2l-tab:hover {
-    color: #09b1b9 !important;
-}
-
-.d2l-home d2l-tab[aria-selected]:focus .d2l-tab-selected-indicator.d2l-tab {
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-}
-
-.d2l-home .d2l-tabs-scroll-left-container.d2l-tabs, .d2l-home .d2l-tabs-scroll-right-container.d2l-tabs {
-    background-color: #373e48 !important;
-    -webkit-box-shadow: 0 0 12px 18px #373e48 !important;
-    -moz-box-shadow: 0 0 12px 18px #373e48 !important;
-    box-shadow: 0 0 12px 18px #373e48 !important;
-}
-
-.d2l-home .d2l-tabs-scroll-button.d2l-tabs:hover d2l-icon, .d2l-home .d2l-tabs-scroll-button.d2l-tabs:focus d2l-icon {
-    color: #09b1b9 !important;
-}
-
-.d2l-home .d2l-tabs-scroll-previous-container.d2l-tabs, .d2l-home .d2l-tabs-scroll-next-container.d2l-tabs,
-.d2l-home .d2l-tabs-scroll-left-container.d2l-tabs, .d2l-home .d2l-tabs-scroll-right-container.d2l-tabs {
-    background-color: #373e48 !important;
-    box-shadow: 0 0 12px 18px #373e48 !important;
-}
-
+/* new homepage course tabs */
 #UserProgressLoginHistoryDataListId {
     background: #373e48;
     margin: -11px -11px 0 -11px;
