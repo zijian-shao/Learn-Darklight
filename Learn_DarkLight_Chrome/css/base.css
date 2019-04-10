@@ -14,6 +14,29 @@
     transition: opacity 0.3s;
 }
 
+.darklight-load-overlay > div {
+    display: block;
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font: 14px Arial, sans-serif !important;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0;
+    animation: darklight-overlay-text 1s forwards 3s;
+}
+
+@keyframes darklight-overlay-text {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .darklight-load-overlay-hide {
     opacity: 0;
     pointer-events: none;
