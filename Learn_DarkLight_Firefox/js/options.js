@@ -400,9 +400,7 @@ function initOptions() {
                 default:
 
             }
-        }
-
-        else if (inputType == 'radio') {
+        } else if (inputType == 'radio') {
 
             switch (optType) {
                 // save "value" attr of the radio
@@ -424,9 +422,7 @@ function initOptions() {
                     saveOption(obj);
                     break;
             }
-        }
-
-        else if (inputType == 'text') {
+        } else if (inputType == 'text') {
 
             switch (optType) {
                 // color
@@ -452,9 +448,7 @@ function initOptions() {
 
                 default:
             }
-        }
-
-        else if (inputType == 'range') {
+        } else if (inputType == 'range') {
 
             switch (optType) {
 
@@ -857,9 +851,7 @@ function initOptions() {
                             }
                         });
                     }
-                }
-
-                else if (request.action == 'addCourseThumbsResponse') {
+                } else if (request.action == 'addCourseThumbsResponse') {
 
                     if (request.data.err_code === 0) {
                         if (params['action'] === 'add-custom-cover') {
@@ -872,9 +864,7 @@ function initOptions() {
                         alert(request.data.err_msg);
                     }
 
-                }
-
-                else if (request.action == 'deleteCourseThumbsResponse') {
+                } else if (request.action == 'deleteCourseThumbsResponse') {
                     showToast(request.data.msg);
                     refreshThumbList();
                 }
@@ -893,7 +883,7 @@ function initOptions() {
             if (val['hidden'] !== true && !(welcomeMode && val['id'] >= 99)) {
                 var elem_img = '<img src="../theme/theme_' + val['id'] + '/preview.png" alt="' + val['name'] + '" title="' + val['name'] + '">',
                     elem_title = '<div class="theme-name" title="' + val['name'] + '">' + val['name'] + '</div>',
-                    elem_color = '<div class="theme-color" style="background-color:' + val['previewColor'] + '"></div>',
+                    elem_color = '<div class="theme-color" style="background:' + val['previewColor'] + '"></div>',
                     elem_info = '<div class="theme-info" title="' + val['author'] + '">Author / ' + val['author'] + '</div>',
                     elem_input = '<input type="radio" ' +
                         'id="opt-theme-item-' + index + '" ' +
@@ -957,6 +947,21 @@ function initOptions() {
                                 confElems += '<input type="text" minlength="4" maxlength="30" class="input-box block width-100 jscolor" id="' + elemID + '" ' +
                                     'data-option-name="' + optName + '" data-option-type="color" data-save-on-blur="true" data-default-value="' + val['options'][i]['value'] + '"' +
                                     'value="' + tConfigs[optName] + '" placeholder="e.g. ' + val['options'][i]['value'] + '">';
+                                confElems += '</div>';
+
+                            } else if (val['options'][i]['type'] == 'enum') {
+
+                                var defaultVal = tConfigs[optName];
+                                var isChecked = '';
+                                confElems += '<div class="option-group radio-group">';
+                                confElems += '<div class="radio-title">'+val['options'][i]['description']+'</div>';
+                                val['options'][i]['items'].forEach(function (v, idx) {
+                                    isChecked = (v['name'] === defaultVal) ? 'checked' : '';
+                                    confElems += '<div class="radio-item">';
+                                    confElems += '<input type="radio" id="' + elemID + '-' + idx + '" name="' + optName + '" value="' + v['name'] + '" data-option-name="' + optName + '" data-option-type="enum" ' + isChecked + '>';
+                                    confElems += '<label for="' + elemID + '-' + idx + '">' + v['description'] + '</label>';
+                                    confElems += '</div>';
+                                });
                                 confElems += '</div>';
 
                             } else if (val['options'][i]['type'] == 'text') {

@@ -15,6 +15,7 @@ function getOptionListDefault() {
         GLB_CustomFont: true,
         GLB_CustomFontInfo: 'Lato',
         GLB_DarklightFavicon: true,
+        GLB_DarklightFaviconInvert: false,
         GLB_FixNavigation: true,
         GLB_BackToTopButton: true,
         GLB_BackToTopButtonNavbar: true,
@@ -90,7 +91,7 @@ function getThemeConfigs(id) {
             id: 0,
             name: "Classic Darklight",
             author: "Zijian Shao",
-            previewColor: "#fdd54f",
+            previewColor: "#000",
             overlayColor: "#222",
             headerHeight: 92,
             options: [
@@ -123,7 +124,7 @@ function getThemeConfigs(id) {
             id: 1,
             name: "Bright Daylight",
             author: "Zijian Shao",
-            previewColor: "#333",
+            previewColor: "#999",
             overlayColor: "#f6f7f8",
             headerHeight: 91,
             options: [
@@ -193,11 +194,58 @@ function getThemeConfigs(id) {
                 }
             ]
         },
+        theme_4: {
+            id: 4,
+            name: "Modern Waterloo",
+            author: "UWaterloo",
+            previewColor: "#fdd54f",
+            overlayColor: "#ffffff",
+            headerHeight: 86,
+            isNew: true,
+            hidden: false,
+            options: [
+                {
+                    key: "colorScheme",
+                    type: "enum",
+                    value: 'default',
+                    items: [{
+                        name: 'default',
+                        description: 'University of Waterloo<span class="color-scheme-preview" style="background:#fdd54f"></span>'
+                    }, {
+                        name: 'ahs',
+                        description: 'Applied Health Sciences<span class="color-scheme-preview" style="background:#0098a5"></span>'
+                    }, {
+                        name: 'art',
+                        description: 'Arts<span class="color-scheme-preview" style="background:#d93f00"></span>'
+                    }, {
+                        name: 'eng',
+                        description: 'Engineering<span class="color-scheme-preview" style="background:#8100b4"></span>'
+                    }, {
+                        name: 'env',
+                        description: 'Environment<span class="color-scheme-preview" style="background:#607000"></span>'
+                    }, {
+                        name: 'mat',
+                        description: 'Mathematics<span class="color-scheme-preview" style="background:#df2498"></span>'
+                    }, {
+                        name: 'sci',
+                        description: 'Science<span class="color-scheme-preview" style="background:#0073ce"></span>'
+                    }],
+                    description: "Select a color scheme"
+                }, {
+                    type: "separator"
+                }, {
+                    key: "fullWidthLayout",
+                    type: "boolean",
+                    value: false,
+                    description: "Full-width layout"
+                }
+            ]
+        },
         theme_99: {
             id: 99,
             name: "Learn Default",
             author: "D2L",
-            previewColor: "#bbb",
+            previewColor: "#ddd",
             overlayColor: "#f6f7f8",
             headerHeight: 95
         }

@@ -6,33 +6,33 @@ d2l-navigation-band,
 
 .d2l-navigation-link-image-container img {
     max-height: 40px;
-    opacity: 0.85;
 }
 
 :host([icon*="d2l-tier2:"]) {
-    color: #666 !important;
+    color: rgba(255, 255, 255, 0.3) !important;
 }
 
 :host([icon*="d2l-tier3:"]) {
-    color: #999 !important;
+    color: rgba(255, 255, 255, 0.6) !important;
     width: 1.5rem !important;
 }
 
 :host button {
-    color: #999;
+    color: #aaa;
 }
 
 :host button:hover, :host button:focus, :host button:hover ::slotted(*), :host button:focus ::slotted(*) {
-    color: #09b1b9 !important;
-    --d2l-icon-fill-color: #09b1b9;
+    color: var(--dlight-nav-header-highlight-color) !important;
+    --d2l-icon-fill-color: var(--dlight-nav-header-highlight-color);
 }
 
 a:hover .d2l-navigation-link-top-border, a:focus .d2l-navigation-link-top-border {
-    background: #09b1b9;
+    background: var(--dlight-nav-header-highlight-color);
+    display: none;
 }
 
 :host button:hover .d2l-navigation-button-top-border, :host button:focus .d2l-navigation-button-top-border {
-    background: #09b1b9;
+    background: var(--dlight-nav-header-highlight-color);
 }
 
 .d2l-navigation-button-notification-indicator-icon {
@@ -40,3 +40,11 @@ a:hover .d2l-navigation-link-top-border, a:focus .d2l-navigation-link-top-border
     height: 8px !important;
 }
 
+.d2l-navigation-header-container {
+    height: 70px;
+}
+
+.d2l-navigation-button-notification-indicator-icon {
+    width: 8px !important;
+    height: 8px !important;
+}

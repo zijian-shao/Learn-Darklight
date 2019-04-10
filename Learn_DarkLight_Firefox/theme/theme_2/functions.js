@@ -17,37 +17,13 @@ function initTheme() {
     }
     if (getCustomThemeOption('fullWidthLayout')) {
         body.addClass('darklight-fullwidth');
-        injectCSSShadow('div.d2l-navigation-centerer {max-width: none !important}',
-            $('d2l-navigation'), 'text', true);
     }
     browser.runtime.sendMessage({
         action: 'insertCSS',
         data: {code: cssText}
     });
 
-    var d2lNavigation = document.getElementsByTagName('d2l-navigation');
-    if (d2lNavigation.length) {
-        d2lNavigation = d2lNavigation[0];
-        if (d2lNavigation.shadowRoot !== null) {
-            d2lNavigation.setAttribute('data-navbar-init', '');
-            injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_navbar.css',
-                $(d2lNavigation), 'file', true);
-        } else {
-            var navCounter = 0;
-            var navInterval = setInterval(function () {
-                if (d2lNavigation.shadowRoot !== null || navCounter > 20) {
-                    clearInterval(navInterval);
-                    d2lNavigation.setAttribute('data-navbar-init', '');
-                    setTimeout(function () {
-                        injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_navbar.css',
-                            $(d2lNavigation), 'file', true);
-                    }, 10);
-                }
-                navCounter++;
-            }, 200);
-        }
-    }
-
+    // widget header dropdown
     injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css',
         $('.d2l-homepage-header-menu-wrapper d2l-dropdown'), 'file', true);
 
@@ -81,50 +57,6 @@ function initTheme() {
 
     }
 
-    if (!isWLU()) {
-
-        // logo - white
-        var logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
-        logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.85);
-
-        var themeInvCnt = 0;
-        var dlightThemeInterval = setInterval(function () {
-            if (!logoImg.length) {
-                logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
-            } else if (!logoImg.attr('src').match(/waterloo_learn_logo\.png/)) {
-                logoImg.attr('src', baseURL + 'img/waterloo_learn_logo.png').css('opacity', 0.85);
-            } else {
-                clearInterval(dlightThemeInterval);
-            }
-            themeInvCnt++;
-            if (themeInvCnt > 20) {
-                clearInterval(dlightThemeInterval);
-            }
-        }, 200);
-
-    } else {
-
-        // for wlu learn (beta)
-        var logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
-        logoImg.attr('src', baseURL + 'img/laurier_learn_logo.png').css('opacity', 0.8);
-
-        var themeInvCnt = 0;
-        var dlightThemeInterval = setInterval(function () {
-            if (!logoImg.length) {
-                logoImg = $('d2l-navigation-link-image').sRoot().find('.d2l-navigation-link-image-container img');
-            } else if (!logoImg.attr('src').match(/laurier_learn_logo\.png/)) {
-                logoImg.attr('src', baseURL + 'img/laurier_learn_logo.png').css('opacity', 0.8);
-            } else {
-                clearInterval(dlightThemeInterval);
-            }
-            themeInvCnt++;
-            if (themeInvCnt > 20) {
-                clearInterval(dlightThemeInterval);
-            }
-        }, 200);
-
-    }
-
     // quiz & survey warning
     if (currURL.match(/\/quizzing\//g) || currURL.match(/\/admin\//g)) {
         // || currURL.includes('/survey/') || currURL.includes('/dropbox/')
@@ -140,6 +72,7 @@ function initTheme() {
         });
     }
 
+    // input search box
     if (document.querySelector('d2l-input-search') !== null && document.querySelector('d2l-input-search').shadowRoot !== null) {
         injectCSS(':host{--d2l-input_-_background-color:#424a56;' +
             '--d2l-input_-_border-color:#424a56;' +
@@ -148,11 +81,48 @@ function initTheme() {
 
     }
 
-    injectCSS('.d2l-floating-buttons-container.d2l-floating-buttons-floating' +
-        '{border:none!important;background:#424a56!important;box-shadow:none!important;}',
-        $('d2l-floating-buttons').sRoot(), 'text');
+    // floating buttons
+    if (document.querySelector('d2l-floating-buttons') !== null && document.querySelector('d2l-floating-buttons').shadowRoot !== null) {
+        injectCSS('.d2l-floating-buttons-container.d2l-floating-buttons-floating' +
+            '{border:none!important;background:#424a56!important;box-shadow:none!important;}',
+            $(document.querySelector('d2l-floating-buttons').shadowRoot), 'text');
+    }
 
+    // wait for navbar
+    var d2lNavigation = document.querySelector('d2l-navigation');
+    if (d2lNavigation !== null) {
+        if (d2lNavigation.shadowRoot !== null) {
+            themeOnNavbarReady(d2lNavigation);
+        } else {
+            var navCounter = 0;
+            var navInterval = setInterval(function () {
+                if (d2lNavigation.shadowRoot !== null || navCounter > 20) {
+                    clearInterval(navInterval);
+                    setTimeout(function () {
+                        themeOnNavbarReady(d2lNavigation);
+                    }, 10);
+                }
+                navCounter++;
+            }, 200);
+        }
+    }
+}
 
+function themeOnNavbarReady(d2lNavigation) {
+    d2lNavigation.setAttribute('data-navbar-init', '');
+    // css
+    injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_navbar.css',
+        $(d2lNavigation), 'file', true);
+    // full width
+    if (getCustomThemeOption('fullWidthLayout')) {
+        injectCSSShadow('div.d2l-navigation-centerer {max-width: none !important}',
+            $(d2lNavigation), 'text', true);
+    }
+    // logo
+    var logoPath = baseURL + 'img/';
+    var logoFile = 'waterloo_learn_logo.png';
+    if (isWLU()) logoFile = 'laurier_learn_logo.png';
+    replaceLogo(logoPath, logoFile);
 }
 
 function themeOnDropdownClick($elem) {

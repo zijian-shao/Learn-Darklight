@@ -1117,16 +1117,6 @@ iframe {
     stroke: none;
 }
 
-/* all courses */
-/*.d2l-simple-overlay-0, .d2l-simple-overlay-0.d2l-simple-overlay-open {*/
-/*    background: #323841;*/
-/*}*/
-
-/*.d2l-simple-overlay-0 .scrollable.d2l-simple-overlay {*/
-/*    background: #323841;*/
-/*    border-color: #09b1b9;*/
-/*}*/
-
 /* toast */
 .d2l-page-message {
     background: #424a56;
