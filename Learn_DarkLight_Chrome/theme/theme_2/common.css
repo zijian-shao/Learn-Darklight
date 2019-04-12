@@ -518,10 +518,6 @@ input[type="number"].d2l-input.d2l-input-search {
     border-bottom-right-radius: 5px;
 }
 
-.d2l-htmlblock ol, .d2l-htmlblock ul {
-    padding-left: 1em;
-}
-
 .daylight .homepage-container div:last-of-type .d2l-widget:last-child {
     border: none;
 }
@@ -1617,21 +1613,7 @@ d2l-dropdown-more d2l-button-icon[active] > button {
 
 #CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
     border-radius: 0 0 8px 8px;
-}
-
-#CourseImageBannerPlaceholderId .d2l-image-banner-course-name.d2l-image-banner-overlay {
-    background: none;
-    text-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3);
-    border-radius: 0 0 8px 8px;
-}
-
-.d2l-course-banner {
-    border-radius: 0 0 8px 8px;
     overflow: hidden;
-}
-
-#bannerTitle {
-    overflow: visible !important;
 }
 
 /* new course selector */

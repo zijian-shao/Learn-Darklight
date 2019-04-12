@@ -214,8 +214,9 @@ function initDarklight() {
         chrome.runtime.sendMessage({
             action: 'insertCSS',
             data: [
-                {code: 'html{font-size:' + options.GLB_BasicFontSize + 'px!important}'},
-                {file: 'css/common.css'}
+                // {code: 'html{font-size:' + options.GLB_BasicFontSize + 'px!important}'},
+                // {file: 'css/common.css'}
+                {code: 'html{font-size:' + options.GLB_BasicFontSize + 'px!important}'}
             ]
         });
 

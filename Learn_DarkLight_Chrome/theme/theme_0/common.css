@@ -79,10 +79,6 @@
     border-bottom-right-radius: 5px;
 }
 
-.d2l-htmlblock ol, .d2l-htmlblock ul {
-    padding-left: 1em;
-}
-
 .d2l-tile {
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
