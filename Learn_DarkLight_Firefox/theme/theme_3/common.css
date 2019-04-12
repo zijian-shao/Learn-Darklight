@@ -145,12 +145,7 @@ d2l-navigation-main-footer a.d2l-navigation-s-link:visited {
 }
 
 .d2l-navigation-s-personal-menu d2l-dropdown d2l-icon {
-    opacity: 0.6;
-    color: #fff !important;
-}
-
-.d2l-navigation-s-personal-menu d2l-dropdown:hover d2l-icon {
-    opacity: 1;
+    color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .d2l-navigation-s-has-branding .d2l-navigation-main-ib {
@@ -347,16 +342,11 @@ d2l-simple-overlay {
     margin-bottom: -10px;
 }
 
-#CourseImageBannerPlaceholderId .d2l-course-banner {
+#CourseImageBannerPlaceholderId .d2l-course-banner-container {
     border-radius: 0 0 5px 5px;
     -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden !important;
-}
-
-#CourseImageBannerPlaceholderId .d2l-image-banner-course-name {
-    border-radius: 0 0 5px 5px;
     overflow: hidden !important;
 }
 
@@ -430,4 +420,9 @@ d2l-simple-overlay {
 
 .d2l-navigation-s-mobile-menu-mask {
     background: #000;
+}
+
+/* homepage calendar */
+.darklight-homepage-calendar {
+    overflow: hidden;
 }

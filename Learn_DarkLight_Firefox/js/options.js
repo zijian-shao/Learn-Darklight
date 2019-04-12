@@ -1340,17 +1340,17 @@ function initOptions() {
 
 var updateLog = [
     {
-        targetElem: '#theme-item-3',
-        image: 'dodgerblue.jpg',
-        title: 'New <span style="color:#0088fb">Dodger Blue</span> Theme',
-        desc: 'The new bright theme provides you with a fresh and professional learning experience. <br><small>( Click the 3-dot button to change layout width )</small>',
+        targetElem: '#theme-item-4',
+        image: 'modernwaterloo.jpg',
+        title: 'Modern Waterloo Theme',
+        desc: 'Apply the official UWaterloo theme to Learn. Get a more consistent experience across sites.<br><small>( Click the 3-dot button to customize )</small>',
         offset: 0
     }, {
-        targetElem: '#course-tile-context-menu-items-container',
-        image: 'contextmenu.jpg',
-        title: 'Right click menu on course tiles',
-        desc: 'Quick access to different modules with one click. Customize the links here.',
-        offset: [0, 10, 0, 10]
+        targetElem: '#opt-general-1-5 < .option-group',
+        image: 'whiteicon.png',
+        title: 'White / Black Favicon',
+        desc: 'Make the favicon visible under dark themes. Make it easier to find the tab.',
+        offset: [40, 10, 5, 10]
     }, {
         targetElem: '#opt-themes-3-0 < .group',
         title: 'Adjustable page font size',

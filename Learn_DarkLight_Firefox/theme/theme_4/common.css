@@ -403,10 +403,15 @@ select.vui-input.vui-input-focus, select.vui-input:focus, select.vui-input:hover
 .darklight-homepage-calendar .d2l-datalist-empty {
     margin-left: 0 !important;
     margin-right: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .darklight-homepage-calendar .darklight-block-page-loader {
     border-top-color: var(--dlight-link-hover-color) !important;
+}
+
+.darklight-homepage-calendar-loading {
+    padding-bottom: 10px;
 }
 
 /* navbar back to top*/

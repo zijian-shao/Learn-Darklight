@@ -202,7 +202,7 @@ function getThemeConfigs(id) {
             overlayColor: "#ffffff",
             headerHeight: 86,
             isNew: true,
-            hidden: false,
+            hidden: true,
             options: [
                 {
                     key: "colorScheme",

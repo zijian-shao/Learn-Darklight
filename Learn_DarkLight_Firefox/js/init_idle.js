@@ -1888,13 +1888,16 @@ function initDarklightIdle() {
 
     // css
     // injectCSS('html{font-size:' + options.GLB_BasicFontSize + 'px}', 'head', 'text');
-    // injectCSS(baseURL + 'css/common.css', 'head');
+    injectCSS(baseURL + 'css/common.css', 'head');
     injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/common.css', 'head');
     if (options.GLB_EnableCustomStyle)
         injectCSS(options.GLB_CustomCSS, 'head', 'text');
 
-    if (document.hasFocus()) {
-        initDarklightFunc();
+    if (document.hasFocus() || true) {
+        // initDarklightFunc();
+        setTimeout(function () {
+            initDarklightFunc();
+        }, 10);
     } else {
         var focusInterval = setInterval(function () {
             if (document.hasFocus()) {

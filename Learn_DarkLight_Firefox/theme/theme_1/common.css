@@ -49,11 +49,6 @@
     padding-bottom: 10px;
 }
 
-.d2l-htmlblock ol, .d2l-htmlblock ul {
-    margin: 0.5em 0;
-    padding-left: 1em;
-}
-
 .d2l-tile {
     border-radius: 5px;
     /*-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);*/
@@ -198,7 +193,7 @@ d2l-navigation-band {
 
 #CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
     border-radius: 5px;
-    /*overflow: hidden;*/
+    overflow: hidden;
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
@@ -218,22 +213,6 @@ d2l-navigation-band {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.03) 100%);
     border-radius: 5px 5px 20px 20px;
     z-index: 1;
-}
-
-#CourseImageBannerPlaceholderId .d2l-image-banner-course-name.d2l-image-banner-overlay {
-    background: none;
-    text-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.d2l-course-banner {
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-#bannerTitle {
-    overflow: visible !important;
 }
 
 /* course home calendar */
