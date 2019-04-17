@@ -262,8 +262,15 @@ function initOptions() {
                         $('.font-size-tags span[data-size="' + items[key] + '"]').addClass('selected');
                         break;
 
+                    case 'GLB_DarklightFaviconInvert':
+                        if (items[key] === true)
+                            $('<link rel="icon" type="image/png" href="/icon/icon32-invert.png">').appendTo('head');
+                        else
+                            $('<link rel="icon" type="image/png" href="/icon/icon32.png">').appendTo('head');
+                        optionElem.prop('checked', items[key]);
+                        break;
                     default:
-                        if (typeof items[key] == typeof true)
+                        if (items[key] === true)
                             optionElem.prop('checked', items[key]);
                         else
                             optionElem.val(items[key]);
@@ -341,6 +348,28 @@ function initOptions() {
 
                     var obj = {};
                     obj[optName] = elem.is(':checked');
+                    // white icon
+                    if (optName == 'GLB_DarklightFaviconInvert') {
+                        if (obj[optName]) {
+                            chrome.browserAction.setIcon({
+                                path: {
+                                    "16": "/icon/icon16-invert.png",
+                                    "24": "/icon/icon24-invert.png",
+                                    "32": "/icon/icon32-invert.png"
+                                }
+                            });
+                            $('head link[rel="icon"]').attr('href', '/icon/icon32-invert.png');
+                        } else {
+                            chrome.browserAction.setIcon({
+                                path: {
+                                    "16": "/icon/icon16.png",
+                                    "24": "/icon/icon24.png",
+                                    "32": "/icon/icon32.png"
+                                }
+                            });
+                            $('head link[rel="icon"]').attr('href', '/icon/icon32.png');
+                        }
+                    }
                     saveOption(obj);
 
                     break;
@@ -954,7 +983,7 @@ function initOptions() {
                                 var defaultVal = tConfigs[optName];
                                 var isChecked = '';
                                 confElems += '<div class="option-group radio-group">';
-                                confElems += '<div class="radio-title">'+val['options'][i]['description']+'</div>';
+                                confElems += '<div class="radio-title">' + val['options'][i]['description'] + '</div>';
                                 val['options'][i]['items'].forEach(function (v, idx) {
                                     isChecked = (v['name'] === defaultVal) ? 'checked' : '';
                                     confElems += '<div class="radio-item">';
@@ -1343,38 +1372,21 @@ var updateLog = [
         targetElem: '#theme-item-4',
         image: 'modernwaterloo.jpg',
         title: 'Modern Waterloo Theme',
-        desc: 'Apply the official UWaterloo theme to Learn. Get a more consistent experience across sites.<br><small>( Click the 3-dot button to customize )</small>',
+        desc: 'Apply the official Waterloo theme to Learn and get a more consistent experience across sites.<br><small>( Click the 3-dot button to customize )</small>',
         offset: 0
     }, {
         targetElem: '#opt-general-1-5 < .option-group',
         image: 'whiteicon.png',
         title: 'White / Black Favicon',
-        desc: 'Make the favicon visible under dark themes. Make it easier to find the tab.',
+        desc: 'Invert the Darklight icon. Make it visible and easier to find when using dark themes.',
         offset: [40, 10, 5, 10]
     }, {
-        targetElem: '#opt-themes-3-0 < .group',
-        title: 'Adjustable page font size',
-        desc: 'Drag the slider to adjust the font size on each page. Recommended value is 16px.',
-        offset: [10, -10, -10, 10]
-    }, {
-        targetElem: '#opt-courses-1-2 < .group',
-        title: 'Document viewer control',
-        desc: 'Skip unnecessary operations and focus on your work.',
-        offset: [10, -10, -10, 10]
-    }, {
-        targetElem: '#opt-pages-4-0 < .group',
-        title: 'Clean up announcement format',
-        desc: 'Automatically remove unnecessary announcement formatting for easy reading.',
-        offset: [10, -10, -10, 10]
-    }, {
         targetElem: '#image-gallery',
-        image: 'gallery.jpg',
-        title: 'Use image from Brightspace gallery',
-        desc: 'All Brightspace provided images can be found here. Security and stability of images are guaranteed.',
+        title: 'New images added to the gallery',
+        desc: 'I LOVE PD (づ￣ 3￣)づ',
         offset: [5, 5, 5, 5]
     }
 ];
 
 initOptions();
-
 

@@ -153,6 +153,22 @@ function initBackground() {
         // if (versionCompare(options.EXT_Version, chrome.app.getDetails().version) < 0)
         //     extensionUpdated(options.EXT_Version, chrome.app.getDetails().version);
 
+        if (options.GLB_DarklightFaviconInvert === true)
+            chrome.browserAction.setIcon({
+                path: {
+                    "16": "/icon/icon16-invert.png",
+                    "24": "/icon/icon24-invert.png",
+                    "32": "/icon/icon32-invert.png"
+                }
+            });
+        else
+            chrome.browserAction.setIcon({
+                path: {
+                    "16": "/icon/icon16.png",
+                    "24": "/icon/icon24.png",
+                    "32": "/icon/icon32.png"
+                }
+            });
     });
 
     /**
@@ -360,9 +376,7 @@ function initBackground() {
                             });
                         }
 
-                    }
-
-                    else {
+                    } else {
                         // add to db
                         var req = os.add({
                             course_id: request.data.course_id,
