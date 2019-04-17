@@ -224,28 +224,28 @@ function listMembersBtn() {
 function homepageFunc() {
 
     $('.d2l-homepage-header-wrapper').each(function (i, e) {
-        var headText = $(e).text();
+        var headSelf = $(e), headText = headSelf.text();
         if (headText.match(/SYSTEM ALERT/) || headText.match(/News/)) {
             if (!isWLU()) {
                 // remove sys alert if empty
-                var alertHtml = $(e).parent('div.d2l-widget-header').next('div.d2l-widget-content').children('div.d2l-htmlblock').first();
-                var _alertHtml = alertHtml.clone();
+                var _alertHtml = headSelf.closest('.d2l-widget').find('.d2l-widget-content .d2l-htmlblock').first().clone();
                 _alertHtml.find('a').remove();
                 _alertHtml.find('script').remove();
-                if (_alertHtml.text().trim() == '') {
-                    $(e).parents('div.d2l-widget').remove();
+                if (_alertHtml.text().trim() === '') {
+                    headSelf.closest('.d2l-widget').addClass('hidden');
                 }
             } else {
                 // remove news if empty
-                if ($(e).parent('div.d2l-widget-header').next('div.d2l-widget-content').text().match(/There are no/)) {
-                    $(e).parents('div.d2l-widget').remove();
+                var _content = headSelf.closest('.d2l-widget').find('.d2l-widget-content');
+                if (_content.find('.d2l-msg-container').length && _content.find('.d2l-msg-container').text().match(/There are no/)) {
+                    headSelf.closest('.d2l-widget').addClass('hidden');
                 }
             }
         } else if (headText.match(/Check My System/) && !isWLU()) {
-            $(e).parents('div.d2l-widget').remove();
+            headSelf.parents('div.d2l-widget').remove();
         } else if (headText.match(/Calendar/) && isWLU()) {
             // for WLU homepage calendar
-            $(e).parents('div.d2l-widget').addClass('darklight-course-home-calendar');
+            headSelf.parents('div.d2l-widget').addClass('darklight-course-home-calendar');
         }
     });
 
