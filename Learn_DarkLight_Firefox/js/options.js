@@ -351,7 +351,7 @@ function initOptions() {
                     // white icon
                     if (optName == 'GLB_DarklightFaviconInvert') {
                         if (obj[optName]) {
-                            chrome.browserAction.setIcon({
+                            browser.browserAction.setIcon({
                                 path: {
                                     "16": "/icon/icon16-invert.png",
                                     "24": "/icon/icon24-invert.png",
@@ -360,7 +360,7 @@ function initOptions() {
                             });
                             $('head link[rel="icon"]').attr('href', '/icon/icon32-invert.png');
                         } else {
-                            chrome.browserAction.setIcon({
+                            browser.browserAction.setIcon({
                                 path: {
                                     "16": "/icon/icon16.png",
                                     "24": "/icon/icon24.png",
@@ -1383,7 +1383,7 @@ var updateLog = [
     }, {
         targetElem: '#image-gallery',
         title: 'New images added to the gallery',
-        desc: 'I LOVE PD (¤Å£þ 3£þ)¤Å',
+        desc: 'I LOVE PD (ï¿½Å£ï¿½ 3ï¿½ï¿½)ï¿½ï¿½',
         offset: [5, 5, 5, 5]
     }
 ];

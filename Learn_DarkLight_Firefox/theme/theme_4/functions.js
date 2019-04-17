@@ -18,7 +18,7 @@ function initTheme() {
     });
     cssText += '}';
 
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
         action: 'insertCSS',
         data: {code: cssText}
     });

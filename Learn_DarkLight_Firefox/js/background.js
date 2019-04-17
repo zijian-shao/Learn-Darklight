@@ -154,7 +154,7 @@ function initBackground() {
         //     extensionUpdated(options.EXT_Version, browser.app.getDetails().version);
 
         if (options.GLB_DarklightFaviconInvert === true)
-            chrome.browserAction.setIcon({
+            browser.browserAction.setIcon({
                 path: {
                     "16": "/icon/icon16-invert.png",
                     "24": "/icon/icon24-invert.png",
@@ -162,7 +162,7 @@ function initBackground() {
                 }
             });
         else
-            chrome.browserAction.setIcon({
+            browser.browserAction.setIcon({
                 path: {
                     "16": "/icon/icon16.png",
                     "24": "/icon/icon24.png",
