@@ -143,6 +143,10 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
     z-index: 100 !important;
 }
 
+.d2l-navigation-s-mobile-menu .d2l-navigation-s-title-container .d2l-navigation-s-link {
+    color: #000 !important;
+}
+
 .d2l-navigation-ib-item-link-text {
     color: #fff;
 }

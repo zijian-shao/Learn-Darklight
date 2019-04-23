@@ -1,3 +1,11 @@
+::selection {
+    background: var(--d2l-color-celestine);
+}
+
+::-moz-selection {
+    background: var(--d2l-color-celestine);
+}
+
 d2l-navigation-band,
 .d2l-navigation-shadow-drop-border,
 .d2l-navigation-shadow-gradient {

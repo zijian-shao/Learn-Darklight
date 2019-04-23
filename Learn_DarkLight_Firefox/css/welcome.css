@@ -128,7 +128,7 @@ small {
 }
 
 .theme-item {
-    flex: 0 0 25%;
+    flex: 0 0 33.333333%;
     border: none;
     margin: 0;
     float: none;
@@ -160,11 +160,12 @@ small {
     display: block;
     float: none;
     height: auto;
+    margin-bottom: -45px;
 }
 
 .theme-item .theme-content {
     position: relative;
-    padding: 15px;
+    padding: 20px;
     border-top: 1px solid #ddd;
     text-align: center;
     background: #fff;
@@ -177,7 +178,7 @@ small {
 }
 
 .theme-item .theme-content .theme-name {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .theme-item .theme-content .theme-color {
@@ -185,7 +186,8 @@ small {
 }
 
 .theme-item .theme-content .theme-info {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
 }
 
 .theme-item .theme-content > label {

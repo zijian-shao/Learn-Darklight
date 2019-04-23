@@ -45,7 +45,7 @@ $.fn.uwCalendar = function (action, data) {
     else if (action == 'loading') {
         this.find('.darklight-homepage-calendar')
             .html('<div class="darklight-homepage-calendar-loading">' +
-                '<div class="darklight-block-page-loader"></div>' +
+                '<div class="darklight-block-page-loader darklight-block-page-loader-d2l"></div>' +
                 '<div class="darklight-homepage-calendar-loading-msg">Loading calendar (0%)</div></div>');
     }
 
@@ -920,11 +920,27 @@ function homepageFunc() {
             if (options.HOME_AutoHideSysAlert) {
                 if (!isWLU()) {
                     // remove sys alert if empty
-                    var _alertHtml = headSelf.closest('.d2l-widget').find('.d2l-widget-content .d2l-htmlblock').first().clone();
+                    var alertHtmlDom = headSelf.closest('.d2l-widget').find('.d2l-widget-content .d2l-htmlblock').first();
+                    var _alertHtml = alertHtmlDom.clone();
                     _alertHtml.find('a').remove();
                     _alertHtml.find('script').remove();
                     if (_alertHtml.text().trim() === '') {
                         headSelf.closest('.d2l-widget').addClass('hidden');
+                    } else if (typeof (Storage) !== typeof undefined) {
+                        // hide for 24 hours
+                        var hideSysTime = window.localStorage.getItem('Darklight.Timestamp.HideSystemAlert');
+                        if (hideSysTime !== null && Math.floor(Date.now() / 1000) - hideSysTime < 86400) {
+                            headSelf.closest('.d2l-widget').addClass('hidden');
+                        } else {
+                            var moreLink = alertHtmlDom.find("p a:contains('Alert History')");
+                            var hideLink = $('<a href="#" style="float:right">Hide For 24 Hours</a>');
+                            hideLink.insertBefore(moreLink);
+                            hideLink.on('click', function (e) {
+                                e.preventDefault();
+                                headSelf.closest('.d2l-widget').addClass('hidden');
+                                window.localStorage.setItem('Darklight.Timestamp.HideSystemAlert', Math.floor(Date.now() / 1000).toString());
+                            });
+                        }
                     }
                 } else {
                     // remove news if empty
@@ -941,6 +957,7 @@ function homepageFunc() {
         } else if (headText.match(/Courses and Communities/) && !isWLU()) {
 
             courseWidget = headSelf.closest('div.d2l-widget');
+            courseWidget.addClass('darklight-homepage-courses-widget');
 
             if (options.HOME_AddCalendar) {
                 var calendarWidget = $('<div/>');
@@ -964,6 +981,19 @@ function homepageFunc() {
                 }
 
                 var d2lMyCourses = courseWidget[0].querySelector('.d2l-widget-content > .d2l-widget-content-padding > d2l-my-courses');
+
+                if (isTabSwitch !== true) {
+                    var d2lMyCoursesLoading = document.createElement('div');
+                    d2lMyCoursesLoading.className = 'darklight-homepage-courses-loading';
+                    d2lMyCoursesLoading.id = 'darklight-homepage-courses-loading';
+                    d2lMyCoursesLoading.innerHTML = '<div class="darklight-block-page-loader darklight-block-page-loader-d2l"></div>';
+                    d2lMyCourses.parentNode.prepend(d2lMyCoursesLoading);
+                }
+
+                var waitCourseLoadingInt = setTimeout(function () {
+                    $('#darklight-homepage-courses-loading').hide();
+                    courseWidget.addClass('darklight-homepage-courses-widget-complete');
+                }, 5000);
 
                 if (options.HOME_HideCourseTabSelector)
                     injectCSS('d2l-tab-panel {margin: 0!important;}', $(d2lMyCourses.shadowRoot), 'text');
@@ -1008,6 +1038,7 @@ function homepageFunc() {
                         if (courseTileLoaded) {
                             // loaded
                             clearInterval(intervalId);
+                            clearTimeout(waitCourseLoadingInt);
 
                             var hideStyle = '';
                             if (options.HOME_HideCoverPic)
@@ -1018,6 +1049,13 @@ function homepageFunc() {
                                 hideStyle += 'd2l-card d2l-user-activity-usage {display: none!important}';
                             if (options.HOME_HidePinnedIcon)
                                 hideStyle += 'd2l-card d2l-button-icon[icon="d2l-tier1:pin-filled"] {display: none!important}';
+
+                            // on tabs available
+                            if (isTabSwitch !== true) {
+                                if (typeof themeOnCourseTabAvailable === 'function') {
+                                    themeOnCourseTabAvailable(d2lMyCourses.shadowRoot.querySelector('d2l-tabs'));
+                                }
+                            }
 
                             var times = isTabSwitch ? 4 : 1;
 
@@ -1075,6 +1113,9 @@ function homepageFunc() {
                                 // quick access
                                 courseTileContextMenu(myPanel, myCards);
 
+                                $('#darklight-homepage-courses-loading').hide(0);
+                                courseWidget.addClass('darklight-homepage-courses-widget-complete');
+
                             }, delayVal * times);
 
                             // tab change
@@ -1084,7 +1125,14 @@ function homepageFunc() {
                                     .querySelectorAll('div.d2l-tabs-layout > div.d2l-tabs-container > div.d2l-tabs-container-list > d2l-tab')
                                     .forEach(function (el) {
                                         $(el).on('click', function (e) {
+
+                                            // if ($(this).attr('aria-selected') === 'true') return;
+
                                             $('#darklight-homepage-calendar-widget').uwCalendar('loading');
+
+                                            $('#darklight-homepage-courses-loading').show();
+                                            courseWidget.removeClass('darklight-homepage-courses-widget-complete');
+
                                             setTimeout(function () {
                                                 _waitForCourseLoad(true);
                                             }, 100);
@@ -1619,12 +1667,16 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
             'font-family': ''
         });
 
-        $.each(elem, function (i, e) {
-            var self = $(e);
-            if (self.css('color').match(/^rgb\(0, 0, 0\)$/)) {
-                self.css('color', '');
-            }
-        });
+        // remove invisible color under dark theme
+        if (themeConfigs.brightness === 'dark') {
+            $.each(elem, function (i, e) {
+                var self = $(e);
+                var hex = rgb2hex(self.css('color'));
+                if (getContrastColor(hex) === '#ffffff') {
+                    self.css('color', invertColor(hex));
+                }
+            });
+        }
 
     }
 

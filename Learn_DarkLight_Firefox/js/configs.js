@@ -9,6 +9,7 @@ function getOptionListDefault() {
 
     var obj = {
         EXT_Version: '0.0.0',
+        EXT_ReceiveNotification: false,
         OPT_Version: 0,
         GLB_Enabled: true,
         GLB_ThemeID: 0,
@@ -93,6 +94,7 @@ function getThemeConfigs(id) {
             author: "Zijian Shao",
             previewColor: "#000",
             overlayColor: "#222",
+            brightness: "bright",
             headerHeight: 92,
             options: [
                 {
@@ -126,6 +128,7 @@ function getThemeConfigs(id) {
             author: "Zijian Shao",
             previewColor: "#999",
             overlayColor: "#f6f7f8",
+            brightness: "bright",
             headerHeight: 91,
             options: [
                 {
@@ -147,6 +150,7 @@ function getThemeConfigs(id) {
             author: "Zijian Shao",
             previewColor: "#09b3bc",
             overlayColor: "#323841",
+            brightness: "dark",
             headerHeight: 92,
             options: [
                 {
@@ -178,6 +182,7 @@ function getThemeConfigs(id) {
             author: "Zijian Shao & TIM",
             previewColor: "#0088fb",
             overlayColor: "#f6f7f8",
+            brightness: "bright",
             headerHeight: 110,
             isNew: true,
             options: [
@@ -200,9 +205,10 @@ function getThemeConfigs(id) {
             author: "UWaterloo",
             previewColor: "#fdd54f",
             overlayColor: "#ffffff",
+            brightness: "bright",
             headerHeight: 86,
             isNew: true,
-            hidden: true,
+            hidden: false,
             options: [
                 {
                     key: "colorScheme",
@@ -234,6 +240,11 @@ function getThemeConfigs(id) {
                 }, {
                     type: "separator"
                 }, {
+                    key: "useThemeLogo",
+                    type: "boolean",
+                    value: true,
+                    description: "Use university logo <small>(Waterloo Learn)</small>"
+                }, {
                     key: "fullWidthLayout",
                     type: "boolean",
                     value: false,
@@ -247,6 +258,7 @@ function getThemeConfigs(id) {
             author: "D2L",
             previewColor: "#ddd",
             overlayColor: "#f6f7f8",
+            brightness: "bright",
             headerHeight: 95
         }
     };

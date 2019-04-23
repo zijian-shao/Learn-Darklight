@@ -24,8 +24,12 @@ function initTheme() {
     });
 
     // widget header dropdown
-    injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css',
-        $('.d2l-homepage-header-menu-wrapper d2l-dropdown'), 'file', true);
+    var dropdownCSS = baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css';
+    var dropdowns = document.querySelectorAll('.d2l-homepage-header-menu-wrapper d2l-dropdown d2l-button-icon');
+    dropdowns.forEach(function (el) {
+        injectCSS(dropdownCSS, $(el.shadowRoot), 'file');
+        injectCSS(dropdownCSS, $(el.shadowRoot.querySelector('button d2l-icon').shadowRoot), 'file');
+    });
 
     // custom options - invert iframe
     if (getCustomThemeOption('invertIframe') && currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/i)) {
@@ -115,8 +119,10 @@ function themeOnNavbarReady(d2lNavigation) {
         $(d2lNavigation), 'file', true);
     // full width
     if (getCustomThemeOption('fullWidthLayout')) {
-        injectCSSShadow('div.d2l-navigation-centerer {max-width: none !important}',
-            $(d2lNavigation), 'text', true);
+        injectCSS('.d2l-navigation-centerer{max-width:none!important}',
+            $(d2lNavigation.querySelector('d2l-navigation-main-header').shadowRoot), 'text');
+        injectCSS('.d2l-navigation-centerer{max-width:none!important}',
+            $(d2lNavigation.querySelector('d2l-navigation-main-footer').shadowRoot), 'text');
     }
     // logo
     var logoPath = baseURL + 'img/';
@@ -148,9 +154,15 @@ function themeOnCourseTileLoaded(elem) {
         extraCSS += '.d2l-card-link-container>.d2l-card-header{opacity:0.7!important;}';
     }
     injectCSS(':host{background:#424a56;border:none!important}' +
-        ':host([active]), :host([subtle][active]){box-shadow:0 0 0 4px rgba(9, 177, 185, 0.4)!important;}'
-        + extraCSS,
+        ':host([active]), :host([subtle][active]){box-shadow:0 0 0 4px rgba(9, 177, 185, 0.4)!important;}' +
+        extraCSS,
         $(elem.shadowRoot), 'text');
+}
+
+function themeOnCourseTabAvailable(d2lTabs) {
+    d2lTabs.querySelectorAll('d2l-tab-panel').forEach(function (elem) {
+        injectCSS('d2l-alert{color:#ddd;background:#424a56;border:#424a56;}', $(elem.querySelector('d2l-my-courses-content').shadowRoot), 'text');
+    });
 }
 
 initTheme();

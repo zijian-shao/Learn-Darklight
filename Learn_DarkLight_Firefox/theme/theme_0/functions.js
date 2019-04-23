@@ -9,8 +9,12 @@ function initTheme() {
     });
 
     // widget header dropdown
-    injectCSSShadow(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css',
-        $('.d2l-homepage-header-menu-wrapper d2l-dropdown'), 'file', true);
+    var dropdownCSS = baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css';
+    var dropdowns = document.querySelectorAll('.d2l-homepage-header-menu-wrapper d2l-dropdown d2l-button-icon');
+    dropdowns.forEach(function (el) {
+        injectCSS(dropdownCSS, $(el.shadowRoot), 'file');
+        injectCSS(dropdownCSS, $(el.shadowRoot.querySelector('button d2l-icon').shadowRoot), 'file');
+    });
 
     // full width
     if (getCustomThemeOption('fullWidthLayout')) {
@@ -55,8 +59,10 @@ function themeOnNavbarReady(d2lNavigation) {
         $(d2lNavigation), 'file', true);
     // full width
     if (getCustomThemeOption('fullWidthLayout')) {
-        injectCSSShadow('div.d2l-navigation-centerer {max-width: none !important}',
-            $(d2lNavigation), 'text', true);
+        injectCSS('.d2l-navigation-centerer{max-width:none!important}',
+            $(d2lNavigation.querySelector('d2l-navigation-main-header').shadowRoot), 'text');
+        injectCSS('.d2l-navigation-centerer{max-width:none!important}',
+            $(d2lNavigation.querySelector('d2l-navigation-main-footer').shadowRoot), 'text');
     }
     // logo
     var logoPath = baseURL + 'img/';
