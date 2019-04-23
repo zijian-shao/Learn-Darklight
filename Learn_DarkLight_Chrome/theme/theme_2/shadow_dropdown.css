@@ -1,3 +1,11 @@
+::selection {
+    background: var(--d2l-color-celestine);
+}
+
+::-moz-selection {
+    background: var(--d2l-color-celestine);
+}
+
 :host .d2l-dropdown-content-width,
 :host .d2l-dropdown-content-pointer > div.d2l-dropdown-menu {
     background: #373e48 !important;

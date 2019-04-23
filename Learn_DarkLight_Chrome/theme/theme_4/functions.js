@@ -4,7 +4,7 @@ function initTheme() {
     var colorScheme = getCustomThemeOption('colorScheme');
     var colorItem = ['--dlight-band-color-1', '--dlight-band-color-2', '--dlight-band-color-3', '--dlight-band-color-4', '--dlight-nav-header-highlight-color', '--dlight-menu-hover-text-color', '--dlight-menu-hover-border-color', '--dlight-menu-hover-background-color', '--dlight-menu-hover-background-color-plus', '--dlight-widget-header-background-color', '--dlight-widget-header-text-color', '--dlight-link-hover-color', '--dlight-btn-primary-background-color', '--dlight-btn-primary-border-color', '--dlight-btn-primary-text-color', '--dlight-btn-primary-hover-background-color', '--dlight-btn-primary-hover-border-color', '--dlight-btn-primary-hover-text-color', '--dlight-btn-primary-hover-box-shadow-color', '--dlight-btn-default-background-color', '--dlight-btn-default-border-color', '--dlight-btn-default-text-color', '--dlight-btn-default-hover-background-color', '--dlight-btn-default-hover-border-color', '--dlight-btn-default-hover-text-color', '--dlight-btn-default-hover-box-shadow-color'];
     var colorData = {
-        default: ['#fffaaa', '#ffea30', '#fdd54f', '#e4b429', '#fdd54f', '#006fbf', '#29a6ff', '#e8f2f9', 'rgba(232,242,249,.6)', '#000000', '#fdd54f', '#006fbf', '#333333', '#333333', '#fdd54f', '#fdd54f', '#fdd54f', '#333333', 'rgba(0,0,0,0.2)', '#f9fafb', '#d3d9e3', '#565a5c', '#333333', '#333333', '#ffffff', 'rgba(0,0,0,0.15)'],
+        default: ['#fffaaa', '#ffea30', '#fdd54f', '#e4b429', '#fdd54f', '#000', '#333', '#eee', '#f2f2f2', '#000000', '#fdd54f', '#dc930c', '#333333', '#333333', '#fdd54f', '#fdd54f', '#fdd54f', '#333333', 'rgba(0,0,0,0.2)', '#f9fafb', '#d3d9e3', '#565a5c', '#333333', '#333333', '#ffffff', 'rgba(0,0,0,0.15)'],
         ahs: ['#97dfef', '#00bed0', '#0098a5', '#005963', '#00bed0', '#0098a5', '#00bed0', '#d5f2f9', 'rgba(213,242,249,.7)', '#0098a5', '#ffffff', '#0098a5', '#0098a5', '#0098a5', '#ffffff', '#97dfef', '#97dfef', '#005963', '#0098a5', '#f9fafb', '#d3d9e3', '#565a5c', '#0098a5', '#0098a5', '#ffffff', '#97dfef'],
         art: ['#ffd5a5', '#fbaf00', '#e78100', '#d93f00', '#fbaf00', '#d93f00', '#e78100', '#ffeedb', 'rgba(255,238,219,.6)', '#d93f00', '#ffffff', '#d93f00', '#d93f00', '#d93f00', '#ffffff', '#ffd5a5', '#ffd5a5', '#d93f00', '#e78100', '#f9fafb', '#d3d9e3', '#565a5c', '#d93f00', '#d93f00', '#ffffff', '#ffd5a5'],
         eng: ['#d0b4ef', '#be33da', '#8100b4', '#57058b', '#d0b4ef', '#8100b4', '#8100b4', '#ece1f9', 'rgba(236,225,249,.7)', '#57058b', '#d0b4ef', '#57058b', '#57058b', '#57058b', '#ffffff', '#d0b4ef', '#d0b4ef', '#57058b', '#8100b4', '#f9fafb', '#d3d9e3', '#565a5c', '#57058b', '#57058b', '#ffffff', '#d0b4ef'],
@@ -17,6 +17,7 @@ function initTheme() {
         cssText += c + ':' + colorData[colorScheme][i] + ';';
     });
     cssText += '}';
+    body.addClass('uw-' + colorScheme);
 
     chrome.runtime.sendMessage({
         action: 'insertCSS',
@@ -44,6 +45,32 @@ function initTheme() {
             }, 200);
         }
     }
+
+    // drop down button observer
+    function _customizeButtons() {
+        document.querySelectorAll('d2l-button-subtle, d2l-button-icon').forEach(function (el) {
+            if (!el.hasAttribute('data-theme-button-init')) {
+                el.setAttribute('data-theme-button-init', '');
+                injectCSS('button:hover, button:focus, :host([active]) button, :host(.d2l-button-subtle-hover) button, :host(.d2l-button-subtle-focus) button{background-color:var(--dlight-menu-hover-background-color);color:var(--dlight-menu-hover-text-color)}' +
+                    'button:hover d2l-icon, button:focus d2l-icon, :host([active]) button d2l-icon, :host(.d2l-button-subtle-hover) button d2l-icon, :host(.d2l-button-subtle-focus) button d2l-icon{color:var(--dlight-menu-hover-text-color)}',
+                    $(el.shadowRoot), 'text');
+            }
+        });
+    }
+
+    _customizeButtons();
+
+    var tabPanel = document.getElementById('d2l_two_panel_selector_main');
+    if (tabPanel !== null) {
+        var observer = new MutationObserver(function (mutationsList, observer) {
+            for (var mutation of mutationsList) {
+                if (mutation.attributeName === 'aria-live') {
+                    _customizeButtons();
+                }
+            }
+        });
+        observer.observe(tabPanel, {attributes: true});
+    }
 }
 
 function themeOnNavbarReady(d2lNavigation) {
@@ -53,12 +80,20 @@ function themeOnNavbarReady(d2lNavigation) {
         $(d2lNavigation), 'file', true);
     // full width
     if (getCustomThemeOption('fullWidthLayout')) {
-        injectCSSShadow('div.d2l-navigation-centerer {max-width: none !important}',
-            $(d2lNavigation), 'text', true);
+        injectCSS('.d2l-navigation-centerer{max-width:none!important}',
+            $(d2lNavigation.querySelector('d2l-navigation-main-header').shadowRoot), 'text');
+        injectCSS('.d2l-navigation-centerer{max-width:none!important}',
+            $(d2lNavigation.querySelector('d2l-navigation-main-footer').shadowRoot), 'text');
     }
     // logo
-    var logoPath = baseURL + 'theme/theme_' + options.GLB_ThemeID + '/';
-    var logoFile = 'uwaterloo_logo.svg';
+    var logoPath = '', logoFile = '';
+    if (getCustomThemeOption('useThemeLogo')) {
+        logoPath = baseURL + 'theme/theme_' + options.GLB_ThemeID + '/';
+        logoFile = 'uwaterloo_logo.svg';
+    } else {
+        logoPath = baseURL + 'img/';
+        logoFile = 'waterloo_learn_logo.png';
+    }
     if (isWLU()) {
         logoPath = baseURL + 'img/';
         logoFile = 'laurier_learn_logo.png';

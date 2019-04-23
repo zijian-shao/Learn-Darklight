@@ -17,15 +17,22 @@
 .darklight-load-overlay > div {
     display: block;
     position: absolute;
-    bottom: 5%;
+    bottom: 50%;
     left: 0;
     right: 0;
     margin: auto;
-    font: 14px Arial, sans-serif !important;
-    text-transform: uppercase;
+    font: 16px Arial, sans-serif !important;
     text-align: center;
     opacity: 0;
-    animation: darklight-overlay-text 1s forwards 3s;
+    animation: darklight-overlay-text 1s forwards 5s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.darklight-load-overlay > div > p {
+    line-height: 1.5;
 }
 
 @keyframes darklight-overlay-text {

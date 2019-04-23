@@ -816,13 +816,6 @@ function initOptions() {
 
         // whats new
         if (params.hasOwnProperty('whatsnew')) {
-            // var whatsnew = $('#whatsnew-content').clone();
-            // whatsnew.removeAttr('id').removeClass('hidden');
-            // var popupCls = initPopup('Learn Darklight', whatsnew, '', 1);
-            // $('.' + popupCls).find('.popup-btn').on('click', function (e) {
-            //     e.preventDefault();
-            //     window.location.href = removeSearchParameters('whatsnew', true);
-            // });
             newFeatureGuide();
         }
 
@@ -909,7 +902,7 @@ function initOptions() {
         var index = 0;
         $.each(themes, function (i, val) {
 
-            if (val['hidden'] !== true && !(welcomeMode && val['id'] >= 99)) {
+            if (val['hidden'] !== true) {
                 var elem_img = '<img src="../theme/theme_' + val['id'] + '/preview.png" alt="' + val['name'] + '" title="' + val['name'] + '">',
                     elem_title = '<div class="theme-name" title="' + val['name'] + '">' + val['name'] + '</div>',
                     elem_color = '<div class="theme-color" style="background:' + val['previewColor'] + '"></div>',

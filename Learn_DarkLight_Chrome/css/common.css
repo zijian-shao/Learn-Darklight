@@ -410,7 +410,7 @@ body > header.darklight-navbar-sticky {
     display: block;
 }
 
-.darklight-homepage-calendar .darklight-block-page-loader {
+.darklight-block-page-loader.darklight-block-page-loader-d2l {
     width: 55px;
     height: 55px;
     border: 5px solid #e6eaf0;
@@ -674,4 +674,29 @@ li.d2l-contextmenu-item-title.empty > * {
     max-width: none !important;
     width: 100% !important;
     padding: 0 !important
+}
+
+/* homepage courses */
+.darklight-homepage-courses-widget .d2l-widget-content {
+    position: relative;
+    max-height: 140px;
+    overflow: hidden;
+}
+
+.darklight-homepage-courses-widget-complete .d2l-widget-content {
+    max-height: none;
+    overflow: visible;
+}
+
+.darklight-homepage-courses-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 100;
+    padding: 30px 0;
 }
