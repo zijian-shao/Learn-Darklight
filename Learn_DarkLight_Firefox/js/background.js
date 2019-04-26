@@ -5,7 +5,7 @@
 function installWelcome(details) {
     if (details.reason === 'install') {
         browser.tabs.create({
-            'url': browser.runtime.getURL('/html/options.html?welcome=show')
+            'url': browser.runtime.getURL('/html/welcome.html')
         });
     }
 }

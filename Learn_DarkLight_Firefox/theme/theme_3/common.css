@@ -342,12 +342,14 @@ d2l-simple-overlay {
     margin-bottom: -10px;
 }
 
-#CourseImageBannerPlaceholderId .d2l-course-banner-container {
-    border-radius: 0 0 5px 5px;
-    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden !important;
+@media (min-width: 1230px) {
+    #CourseImageBannerPlaceholderId .d2l-course-banner-container {
+        border-radius: 0 0 5px 5px;
+        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden !important;
+    }
 }
 
 .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:link::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:visited::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:hover::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:focus::before {

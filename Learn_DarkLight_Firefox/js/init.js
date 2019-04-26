@@ -133,7 +133,7 @@ function extensionUpdate() {
 
         console.log('New version updated (V' + newVer + ')');
 
-        if (newVer.match(/2\.0\./) && !oldVer.match(/2\.0\./)) {
+        if (newVer.match(/3\.0\./) && !oldVer.match(/3\.0\./)) {
             browser.runtime.sendMessage({
                 action: 'createTab',
                 data: {url: browser.extension.getURL('/html/options.html') + '?whatsnew=' + newVer}

@@ -456,8 +456,25 @@ hr {
     color: #fff;
 }
 
-.sidebar .nav > li.link-donate:hover {
+.sidebar .nav > li.link-donate {
     background: #5bb75b;
+}
+
+.sidebar .nav > li.link-donate a {
+    color: #fff;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+.sidebar .nav > li.link-donate a:before {
+    content: "Donate";
+}
+
+.sidebar .nav > li.link-donate:hover a:before {
+    content: "Thank You !";
 }
 
 .content {
@@ -750,7 +767,6 @@ hr {
     float: left;
     width: 49%;
     margin: 0 2% 15px 0;
-    /*overflow: hidden;*/
     border: 1px solid #ccc;
     -webkit-transition: border-color 0.2s ease, box-shadow 0.2s ease;
     -moz-transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -1284,6 +1300,24 @@ hr {
     border-color: #138496;
 }
 
+.btn:focus, .btn.btn-primary:focus {
+    -webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn.btn-success:focus {
+    -webkit-box-shadow: 0 0 0 4px rgba(97, 194, 97, 0.4);
+    -moz-box-shadow: 0 0 0 4px rgba(97, 194, 97, 0.4);
+    box-shadow: 0 0 0 4px rgba(97, 194, 97, 0.4);
+}
+
+.btn.btn-info:focus {
+    -webkit-box-shadow: 0 0 0 4px rgba(17, 187, 214, 0.4);
+    -moz-box-shadow: 0 0 0 4px rgba(17, 187, 214, 0.4);
+    box-shadow: 0 0 0 4px rgba(17, 187, 214, 0.4);
+}
+
 .new-tag {
     margin: 0;
     padding: 2px 3px;
@@ -1710,14 +1744,11 @@ label.checkbox-label {
     margin: 0 4px 4px 0;
     padding: 10px 10px;
     outline: none;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-    -webkit-transition: border-color 0.2s ease;
-    -moz-transition: border-color 0.2s ease;
-    -ms-transition: border-color 0.2s ease;
-    -o-transition: border-color 0.2s ease;
-    transition: border-color 0.2s ease;
+    -webkit-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -moz-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -ms-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -o-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1725,6 +1756,9 @@ label.checkbox-label {
 
 .input-box:focus {
     border-color: #333;
+    -webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
 textarea.input-box {
@@ -1951,10 +1985,10 @@ textarea.input-box {
     flex: 1;
     text-decoration: none !important;
     -webkit-transition: opacity 0.2s ease;
-    -moz-transition: opacity 0.2s ease;
-    -ms-transition: opacity 0.2s ease;
-    -o-transition: opacity 0.2s ease;
-    transition: opacity 0.2s ease;
+    -moz-transition: opacity 0.2s ease, box-shadow 0.2s ease;
+    -ms-transition: opacity 0.2s ease, box-shadow 0.2s ease;
+    -o-transition: opacity 0.2s ease, box-shadow 0.2s ease;
+    transition: opacity 0.2s ease, box-shadow 0.2s ease;
 }
 
 .popup-btn:hover {
@@ -1973,6 +2007,12 @@ textarea.input-box {
 .popup-btn-grey {
     background: #ddd !important;
     color: #000 !important;
+}
+
+.popup-btn:focus {
+    -webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
 .alert {
@@ -2514,6 +2554,16 @@ textarea.input-box {
     pointer-events: none;
 }
 
+.elem-focus-overlay.elem-focus-overlay-fixed {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
 .update-dialog {
     margin: 0 auto;
     position: absolute;
@@ -2537,6 +2587,29 @@ textarea.input-box {
     margin: 0 auto;
     left: 0;
     right: 0;
+}
+
+.update-dialog.no-arrow:before {
+    display: none;
+}
+
+.update-dialog.fixed-center {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: translateY(-50%);
+    animation: dialogCenter 0.3s forwards;
+}
+
+@keyframes dialogCenter {
+    from {
+        transform: translateY(-45%);
+    }
+    to {
+        transform: translateY(-50%);
+    }
 }
 
 .update-dialog-fixed-bottom {
@@ -2603,7 +2676,7 @@ textarea.input-box {
 }
 
 .update-dialog .tag:before {
-    content: 'V2.0';
+    content: 'NEW';
     display: block;
     position: absolute;
     top: 8px;
