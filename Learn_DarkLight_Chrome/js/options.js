@@ -1,5 +1,7 @@
 function initOptions() {
 
+    var options;
+
     function getFeedbackLink() {
         function _getOS() {
             var OSName = "Unknown";
@@ -97,8 +99,6 @@ function initOptions() {
     }
 
     function showToast(content) {
-        if (welcomeMode) return;
-
         var tst = $('#darklight-toast');
         if (content !== undefined) {
             tst.html(content);
@@ -192,9 +192,15 @@ function initOptions() {
     }
 
     function onHashChange() {
-        if (welcomeMode) return;
-
         var hash = window.location.hash.substring(1);
+        if (welcomeMode) {
+            if (!hash.length) hash = 'home';
+            if (hash === 'home')
+                renderStars.aniPlay = true;
+            else
+                renderStars.aniPlay = false;
+            return;
+        }
         if (!hash.length) hash = 'global';
         $('li[data-option-tab-name = "' + hash + '"]').trigger('click');
     }
@@ -213,6 +219,7 @@ function initOptions() {
         chrome.storage.sync.get(configs, function (items) {
 
             var optionElem;
+            options = items;
 
             for (var key in items) {
 
@@ -245,7 +252,8 @@ function initOptions() {
                             optionElem.first().closest('.font-item').addClass('selected');
                         }
 
-                        if (welcomeMode) optionElem.first().closest('.container').addClass('theme-container-' + items[key]);
+                        if (welcomeMode && key === 'GLB_ThemeID')
+                            optionElem.first().closest('.container').addClass('theme-container-' + items[key]);
                         break;
 
                     case 'HOME_CourseTileContextMenuData':
@@ -448,6 +456,7 @@ function initOptions() {
                     if (typeof fontSrc !== typeof undefined && fontSrc !== false) {
                         obj[optName] = obj[optName] + '||' + fontSrc;
                     }
+                    updateFontPreview('family', obj[optName]);
                     saveOption(obj);
                     break;
             }
@@ -485,6 +494,7 @@ function initOptions() {
 
                     var obj = {};
                     obj[optName] = elem.val();
+                    updateFontPreview('size', obj[optName]);
                     saveOption(obj);
 
                     break;
@@ -794,14 +804,15 @@ function initOptions() {
 
         // scroll
         $(window).on('scroll', function () {
-            if (welcomeMode) return;
+            // if (welcomeMode) return;
 
             if (!allowHashChange)
                 return;
 
             var top = $(window).scrollTop();
             var currID = 0;
-            $('.section').each(function (index, elem) {
+            var tarElem = (welcomeMode === true) ? '.container' : '.section';
+            $(tarElem).each(function (index, elem) {
                 if ($(elem).offset().top + $(elem).outerHeight() - $(window).height() / 3 > top) {
                     currID = $(this).attr('data-option-index');
                     return false;
@@ -812,6 +823,14 @@ function initOptions() {
             $('#nav-tab-' + currID).addClass('active');
 
             window.location.hash = $('#nav-tab-' + currID).attr('data-option-tab-name');
+
+            if (welcomeMode) {
+                if (top >= $('#opt-tab-1').offset().top) {
+                    renderStars.aniPlay = false;
+                } else {
+                    renderStars.aniPlay = true;
+                }
+            }
         });
 
         // whats new
@@ -819,15 +838,38 @@ function initOptions() {
             newFeatureGuide();
         }
 
-        // welcome
-        if (params.hasOwnProperty('welcome')) {
-            var welcome = $('#welcome-content').clone();
-            welcome.removeAttr('id').removeClass('hidden');
-            var popupCls = initPopup('Learn Darklight', welcome, '', 1);
-            $('.' + popupCls).find('.popup-btn').on('click', function (e) {
+        // new welcome page
+        if (welcomeMode === true) {
+            // home
+            window.location.hash = '';
+            // start tour
+            $('#home-btn').on('click', function (e) {
                 e.preventDefault();
-                window.location.href = removeSearchParameters('welcome', true);
+                scrollToUtil($('#theme-list').closest('.container'), 600);
             });
+            // font preview
+            var fontPre = document.getElementById('font-preview');
+            fontPre.attachShadow({mode: 'open'});
+            fontPre.shadowRoot.innerHTML = '<div>The quick brown fox jumps over the lazy dog.</div>';
+            updateFontPreview('common', ':host div{line-height:70px;}');
+            updateFontPreview('family', options.GLB_CustomFontInfo);
+            updateFontPreview('size', options.GLB_BasicFontSize);
+            // homepage / course preview
+            var optArr = ['HOME_AddCalendar', 'HOME_SwitchAnnounceAndCalendar', 'HOME_AutoHideSysAlert', 'HOME_HideCheckMySys', 'HOME_HidePrivacy',
+                'HOME_HideCoverPic', 'HOME_HideMetaTerm', 'HOME_HideMetaEndDate', 'HOME_HidePinnedIcon', 'HOME_HideCourseTabSelector'];
+            for (var idx in optArr) {
+                updateWelcomePreview(optArr[idx]);
+                $('input[data-option-name="' + optArr[idx] + '"]').on('change', function () {
+                    updateWelcomePreview($(this).attr('data-option-name'));
+                });
+            }
+            // finish
+            $('#finish-tour').on('click', function (e) {
+                e.preventDefault();
+                window.close();
+            });
+            // home bg
+            renderStars();
         }
 
         // message listener
@@ -1069,6 +1111,255 @@ function initOptions() {
         $(el).appendTo($('#font-list'));
     }
 
+    function updateFontPreview(attribute, data) {
+
+        var fontPre = document.getElementById('font-preview');
+        if (fontPre === null) return;
+
+        if (attribute === 'family') {
+
+            var styFamLink = document.getElementById('style-family-link');
+            if (styFamLink === null) {
+                styFamLink = document.createElement('link');
+                styFamLink.rel = 'stylesheet';
+                styFamLink.id = 'style-family-link';
+                document.querySelector('head').append(styFamLink);
+            }
+
+            var styFam = fontPre.shadowRoot.getElementById('style-family');
+            if (styFam === null) {
+                styFam = document.createElement('style');
+                styFam.id = 'style-family';
+                fontPre.shadowRoot.append(styFam);
+            }
+
+            var fontConf = data.split('||');
+            var fontURL = '';
+
+            // fontName||weights||fontSize||source
+            if (fontConf[0].match(/Default/i) || fontConf[0].match(/^Lato$/i)) {
+                fontURL = '//fonts.googleapis.com/css?family=Lato:400,700';
+            } else if (fontConf.length == 4) {
+                // name, weights, size, source
+                if (fontConf[3] == 'google') {
+                    fontURL = '//fonts.googleapis.com/css?family=' + fontConf[0].replace(/ /g, '+') + ':' + fontConf[1];
+                } else if (fontConf[3] == 'none') {
+
+                } else {
+                    fontURL = '//fonts.googleapis.com/css?family=' + fontConf[0].replace(/ /g, '+') + ':' + fontConf[1];
+                }
+            } else if (fontConf.length == 3) {
+                // name, weights, size
+                fontURL = '//fonts.googleapis.com/css?family=' + fontConf[0].replace(/ /g, '+') + ':' + fontConf[1];
+            } else {
+                // name only
+                fontURL = '//fonts.googleapis.com/css?family=' + fontConf[0].replace(/ /g, '+') + ':200,400,600,800';
+            }
+
+            styFamLink.href = 'https:' + fontURL;
+            styFam.textContent = ':host{font-family:"' + fontConf[0] + '"}';
+
+        } else if (attribute === 'size') {
+
+            var styleSize = fontPre.shadowRoot.getElementById('style-size');
+            if (styleSize === null) {
+                styleSize = document.createElement('style');
+                styleSize.id = 'style-size';
+                fontPre.shadowRoot.append(styleSize);
+            }
+            styleSize.textContent = ':host{font-size:' + data + 'px;}';
+
+        } else if (attribute === 'common') {
+
+            var styleCommon = fontPre.shadowRoot.getElementById('style-common');
+            if (styleCommon === null) {
+                styleCommon = document.createElement('style');
+                styleCommon.id = 'style-common';
+                fontPre.shadowRoot.append(styleCommon);
+            }
+            styleCommon.textContent = data;
+        }
+    }
+
+    function updateWelcomePreview(attribute) {
+        var homePre = $('#homepage-preview');
+        var coursePre = $('#course-preview');
+        var self = $('input[data-option-name="' + attribute + '"]');
+        switch (attribute) {
+            case 'HOME_AddCalendar':
+                if (self.prop('checked')) {
+                    homePre.find('.calendar').removeClass('hidden');
+                    if ($('input[data-option-name="HOME_SwitchAnnounceAndCalendar"]').prop('checked')) {
+                        homePre.find('.calendar').text('Announcements');
+                        homePre.find('.announcements').text('Calendar');
+                    } else {
+                        homePre.find('.calendar').text('Calendar');
+                        homePre.find('.announcements').text('Announcements');
+                    }
+                } else {
+                    homePre.find('.calendar').addClass('hidden');
+                    homePre.find('.calendar').text('Calendar');
+                    homePre.find('.announcements').text('Announcements');
+                }
+                break;
+            case 'HOME_SwitchAnnounceAndCalendar':
+                if (self.prop('checked') && $('input[data-option-name="HOME_AddCalendar"]').prop('checked')) {
+                    homePre.find('.calendar').text('Announcements');
+                    homePre.find('.announcements').text('Calendar');
+                } else {
+                    homePre.find('.calendar').text('Calendar');
+                    homePre.find('.announcements').text('Announcements');
+                }
+                break;
+            case 'HOME_AutoHideSysAlert':
+                if (self.prop('checked')) homePre.find('.sys-alert').addClass('hidden');
+                else homePre.find('.sys-alert').removeClass('hidden');
+                break;
+            case 'HOME_HideCheckMySys':
+                if (self.prop('checked')) homePre.find('.sys-check').addClass('hidden');
+                else homePre.find('.sys-check').removeClass('hidden');
+                break;
+            case 'HOME_HidePrivacy':
+                if (self.prop('checked')) homePre.find('.privacy').addClass('hidden');
+                else homePre.find('.privacy').removeClass('hidden');
+                break;
+            case 'HOME_HideCoverPic':
+                if (self.prop('checked')) coursePre.find('.card-thumb').addClass('hidden');
+                else coursePre.find('.card-thumb').removeClass('hidden');
+                break;
+            case 'HOME_HideMetaTerm':
+                if (self.prop('checked')) coursePre.find('.card-term').addClass('hidden');
+                else coursePre.find('.card-term').removeClass('hidden');
+                break;
+            case 'HOME_HideMetaEndDate':
+                if (self.prop('checked')) coursePre.find('.card-end').addClass('hidden');
+                else coursePre.find('.card-end').removeClass('hidden');
+                break;
+            case 'HOME_HidePinnedIcon':
+                if (self.prop('checked')) coursePre.find('.card-pin').addClass('hidden');
+                else coursePre.find('.card-pin').removeClass('hidden');
+                break;
+            case 'HOME_HideCourseTabSelector':
+                if (self.prop('checked')) coursePre.find('.tabs').addClass('hidden');
+                else coursePre.find('.tabs').removeClass('hidden');
+                break;
+            default:
+                break;
+        }
+    }
+
+    function renderStars() {
+        var WIDTH = window.innerWidth,
+            HEIGHT = window.innerHeight,
+            MAX_PARTICLES = WIDTH / 5,
+            DRAW_INTERVAL = 60,
+            container = document.querySelector('#star-container'),
+            canvas = document.querySelector('#star'),
+            context = canvas.getContext('2d'),
+            gradient = null,
+            pixies = new Array();
+        renderStars.aniPlay = true;
+
+        function setDimensions() {
+            WIDTH = window.innerWidth;
+            HEIGHT = window.innerHeight;
+            container.style.width = WIDTH + 'px';
+            container.style.height = HEIGHT + 'px';
+            canvas.width = WIDTH;
+            canvas.height = HEIGHT;
+        }
+
+        setDimensions();
+        window.addEventListener('resize', setDimensions);
+
+        function Circle() {
+            this.settings = {
+                ttl: 8000,
+                xmax: 5,
+                ymax: 2,
+                rmax: 12,
+                rt: 1,
+                xdef: 960,
+                ydef: 540,
+                xdrift: 4,
+                ydrift: 4,
+                random: true,
+                blink: true
+            };
+
+            this.reset = function () {
+                this.x = (this.settings.random ? WIDTH * Math.random() : this.settings.xdef);
+                this.y = (this.settings.random ? HEIGHT * Math.random() : this.settings.ydef);
+                this.r = ((this.settings.rmax - 1) * Math.random()) + 1;
+                this.dx = (Math.random() * this.settings.xmax) * (Math.random() < .5 ? -1 : 1);
+                this.dy = (Math.random() * this.settings.ymax) * (Math.random() < .5 ? -1 : 1);
+                this.hl = (this.settings.ttl / DRAW_INTERVAL) * (this.r / this.settings.rmax);
+                this.rt = Math.random() * this.hl;
+                this.settings.rt = Math.random() + 1;
+                this.stop = Math.random() * .2 + .4;
+                this.settings.xdrift *= Math.random() * (Math.random() < .5 ? -1 : 1);
+                this.settings.ydrift *= Math.random() * (Math.random() < .5 ? -1 : 1);
+            }
+
+            this.fade = function () {
+                this.rt += this.settings.rt;
+            }
+
+            this.draw = function () {
+                if (this.settings.blink && (this.rt <= 0 || this.rt >= this.hl)) {
+                    this.settings.rt = this.settings.rt * -1;
+                } else if (this.rt >= this.hl) {
+                    this.reset();
+                }
+
+                var newo = 1 - (this.rt / this.hl);
+                context.beginPath();
+                context.arc(this.x, this.y, this.r, 0, Math.PI * 2, true);
+                context.closePath();
+
+                var cr = this.r * newo;
+                gradient = context.createRadialGradient(this.x, this.y, 0, this.x, this.y, (cr <= 0 ? 1 : cr));
+                gradient.addColorStop(0.0, 'rgba(255,255,255,' + newo + ')');
+                gradient.addColorStop(this.stop, 'rgba(80,80,80,' + (newo * .6) + ')');
+                gradient.addColorStop(1.0, 'rgba(80,80,80,0)');
+                context.fillStyle = gradient;
+                context.fill();
+            }
+
+            this.move = function () {
+                this.x += (this.rt / this.hl) * this.dx;
+                this.y += (this.rt / this.hl) * this.dy;
+                if (this.x > WIDTH || this.x < 0) this.dx *= -1;
+                if (this.y > HEIGHT || this.y < 0) this.dy *= -1;
+            }
+
+            this.getX = function () {
+                return this.x;
+            }
+            this.getY = function () {
+                return this.y;
+            }
+        }
+
+        for (var i = 0; i < MAX_PARTICLES; i++) {
+            pixies.push(new Circle());
+            pixies[i].reset();
+        }
+
+        function draw() {
+            if (renderStars.aniPlay === false) return;
+            context.clearRect(0, 0, WIDTH, HEIGHT);
+            for (var i = 0; i < pixies.length; i++) {
+                pixies[i].fade();
+                pixies[i].move();
+                pixies[i].draw();
+            }
+        }
+
+        setInterval(draw, DRAW_INTERVAL);
+
+    }
+
     function getSearchParameters() {
 
         // stack overflow 5448545
@@ -1195,8 +1486,16 @@ function initOptions() {
 
             $('#elem-focus-overlay-container').remove();
 
-            if (typeof el === typeof undefined)
+            if (typeof el === typeof undefined && isFullScr !== true) {
                 return;
+            } else if (isFullScr === true) {
+                $('<div id="elem-focus-overlay-container" class="elem-focus-overlay-container">' +
+                    '<div class="elem-focus-overlay elem-focus-overlay-fixed"></div>' +
+                    '</div>').appendTo('body');
+                floatDialog.addClass('fixed-center');
+                scrollToUtil('body', 0);
+                return;
+            }
 
             if (padding === undefined || !Array.isArray(padding))
                 padding = [0, 0, 0, 0];
@@ -1235,7 +1534,9 @@ function initOptions() {
             else
                 image = '<div class="dialog-banner"><img src="../img/update/' + image + '" alt="Banner"></div>';
 
-            var elem = '<div class="update-dialog">' +
+            var extraClass = '';
+            if (isFullScr === true) extraClass = ' no-arrow';
+            var elem = '<div class="update-dialog' + extraClass + '">' +
                 '<div class="tag"></div>' +
                 image +
                 '<div class="dialog-title">' + title + '</div>' +
@@ -1283,17 +1584,22 @@ function initOptions() {
         // parse target elem
         var targetElem;
         var targetElemTxt = updateLog[currState].targetElem;
-        targetElemTxt = targetElemTxt.split('<');
-        if (targetElemTxt.length > 1) {
-            var i;
-            for (i = 0; i < targetElemTxt.length; i++) {
-                if (i == 0)
-                    targetElem = $(targetElemTxt[i].trim());
-                else
-                    targetElem = targetElem.closest(targetElemTxt[i].trim());
+        var isFullScr = false;
+        if (targetElemTxt !== null) {
+            targetElemTxt = targetElemTxt.split('<');
+            if (targetElemTxt.length > 1) {
+                var i;
+                for (i = 0; i < targetElemTxt.length; i++) {
+                    if (i == 0)
+                        targetElem = $(targetElemTxt[i].trim());
+                    else
+                        targetElem = targetElem.closest(targetElemTxt[i].trim());
+                }
+            } else {
+                targetElem = $(targetElemTxt[0].trim());
             }
         } else {
-            targetElem = $(targetElemTxt[0].trim());
+            isFullScr = true;
         }
 
         // dialog
@@ -1311,7 +1617,7 @@ function initOptions() {
         }
         dialog.find('.page').text((currState + 1) + ' / ' + updateLog.length);
         dialog.appendTo($('body'));
-        dialog.addClass('animated fadeInUp');
+        if (isFullScr !== true) dialog.addClass('animated fadeInUp');
         dialog.find('.btn-next').focus();
 
         $('<div class="update-dialog-close">Skip</div>')
@@ -1326,8 +1632,7 @@ function initOptions() {
     var welcomeMode = false;
     if (window.location.href.match(/welcome\.html/)) welcomeMode = true;
 
-    if (!welcomeMode)
-        window.addEventListener("hashchange", onHashChange, false);
+    window.addEventListener("hashchange", onHashChange, false);
 
     var timeoutHandle = setTimeout(function () {
     }, 0);
@@ -1362,24 +1667,36 @@ function initOptions() {
 
 var updateLog = [
     {
+        targetElem: null,
+        image: 'v3.jpg',
+        title: 'Learn Darklight Updated',
+        desc: 'Click next to view new features in this update.',
+        offset: 0
+    }, {
         targetElem: '#theme-item-4',
-        image: 'modernwaterloo.jpg',
+        image: 'theme.jpg',
         title: 'Modern Waterloo Theme',
-        desc: 'Apply the official Waterloo theme to Learn and get a more consistent experience across sites.<br><small>( Click the 3-dot button to customize )</small>',
+        desc: 'Get consistent experiences across sites. Click the 3-dot button to show more theme options.',
         offset: 0
     }, {
         targetElem: '#opt-general-1-5 < .option-group',
-        image: 'whiteicon.png',
-        title: 'White / Black Favicon',
-        desc: 'Invert the Darklight icon. Make it visible and easier to find when using dark themes.',
+        image: 'icon.jpg',
+        title: 'White / Black icon',
+        desc: 'Make Darklight icon visible and easier to find under dark browser themes.',
         offset: [40, 10, 5, 10]
     }, {
         targetElem: '#image-gallery',
-        title: 'New images added to the gallery',
+        image: 'pd.jpg',
+        title: 'New images added to gallery',
         desc: 'I LOVE PD (づ￣ 3￣)づ',
+        offset: [5, 5, 5, 5]
+    }, {
+        targetElem: null,
+        image: 'dlight.jpg',
+        title: 'More fixes',
+        desc: '- Custom cover pics now display without flashing<br>- Minor adjustments to themes<br>- Modified keep session alive code<br>- Performance improvements<br>- If you find any bugs, please click the icon on browser toolbar and report the issue',
         offset: [5, 5, 5, 5]
     }
 ];
 
 initOptions();
-

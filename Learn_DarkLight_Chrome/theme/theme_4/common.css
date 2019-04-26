@@ -113,21 +113,29 @@ d2l-navigation-band {
 
 .d2l-tiles-container .d2l-page-main-padding {
     padding-top: 2px;
-}
-
-.d2l-tiles-container .d2l-course-banner-container {
-    margin-bottom: 30px;
-    border-radius: 8px;
-    overflow: hidden;
+    padding-bottom: 30px;
 }
 
 .d2l-tile {
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .05);
 }
 
-.d2l-tile.d2l-widget {
-    margin-top: 0;
-    margin-bottom: 30px;
+@media (min-width: 768px) {
+    .d2l-tile.d2l-widget {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .d2l-tiles-container .d2l-course-banner-container {
+        margin-bottom: 30px;
+    }
+}
+
+@media (min-width: 1230px) {
+    .d2l-tiles-container .d2l-course-banner-container {
+        border-radius: 8px;
+        overflow: hidden;
+    }
 }
 
 .d2l-homepage-header-wrapper {
@@ -406,8 +414,8 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 /* darklight components */
 /* homepage calendar */
 .darklight-homepage-calendar .d2l-datalist-empty {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
     margin-bottom: 0 !important;
 }
 
@@ -417,6 +425,44 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 
 .darklight-homepage-calendar-loading {
     padding-bottom: 10px;
+}
+
+.darklight-homepage-calendar {
+    margin: 10px -20px 0;
+}
+
+.darklight-homepage-calendar-item {
+    border-top: 1px solid var(--d2l-color-gypsum);
+    border-bottom: none;
+}
+
+.darklight-homepage-calendar-item:first-child {
+    border-top-color: transparent;
+}
+
+.darklight-homepage-calendar-item:last-child {
+    border-bottom: 1px solid transparent;
+}
+
+.darklight-homepage-calendar-item:hover {
+    background: var(--dlight-menu-hover-background-color);
+    border-top-color: var(--dlight-menu-hover-border-color);
+}
+
+.darklight-homepage-calendar-item:hover + .darklight-homepage-calendar-item {
+    border-top-color: var(--dlight-menu-hover-border-color);
+}
+
+.darklight-homepage-calendar-item:last-child:hover {
+    border-bottom-color: var(--dlight-menu-hover-border-color);
+}
+
+.darklight-homepage-calendar-date .day {
+    transition: border-top 0.2s ease;
+}
+
+.darklight-homepage-calendar-item:hover .darklight-homepage-calendar-date .day {
+    border-top-color: #c3c3bf;
 }
 
 /* navbar back to top*/
@@ -488,5 +534,5 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 .uw-default d2l-navigation-main-footer .d2l-navigation-s-item button.d2l-navigation-s-group:hover d2l-icon,
 .uw-default d2l-navigation-main-footer .d2l-navigation-s-item button.d2l-navigation-s-group:focus d2l-icon,
 .uw-default #courseSelectorId a {
-    color: var(--dlight-menu-hover-text-color) !important;
+    color: var(--dlight-menu-hover-text-color);
 }

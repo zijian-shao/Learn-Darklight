@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Learn Darklight Welcome</title>
+    <title>Learn Darklight</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,11 +11,42 @@
 </head>
 <body>
 
-<div class="container">
+<ul class="nav">
+    <li data-option-tab-index="0" data-option-tab-name="home" id="nav-tab-0" class="nav-tab active" title="Home">Home
+    </li>
+    <li data-option-tab-index="1" data-option-tab-name="theme" id="nav-tab-1" class="nav-tab" title="Theme">Theme</li>
+    <li data-option-tab-index="2" data-option-tab-name="font" id="nav-tab-2" class="nav-tab" title="Font">Font</li>
+    <li data-option-tab-index="3" data-option-tab-name="homepage" id="nav-tab-3" class="nav-tab" title="Homepage">
+        Homepage
+    </li>
+    <li data-option-tab-index="4" data-option-tab-name="course" id="nav-tab-4" class="nav-tab" title="Course">Course
+    </li>
+    <li data-option-tab-index="5" data-option-tab-name="more" id="nav-tab-5" class="nav-tab" title="Last Step">Last
+        Step
+    </li>
+    <li data-option-tab-index="6" data-option-tab-name="complete" id="nav-tab-6" class="nav-tab"
+        title="Ready To Go">Ready To Go
+    </li>
+</ul>
+
+<div class="container home-screen" id="opt-tab-0" data-option-index="0">
+    <div class="home-wrapper">
+        <div class="home-logo">
+            <div class="home-logo-icon"></div>
+            <div class="home-logo-text"></div>
+        </div>
+        <div class="home-btn" id="home-btn">Start tour</div>
+    </div>
+    <div id="star-container">
+        <canvas id="star"></canvas>
+    </div>
+</div>
+
+<div class="container" id="opt-tab-1" data-option-index="1">
     <div class="index">01</div>
     <div class="wrapper">
         <div class="title">Theme
-            <div class="subtitle">Click the 3-dot button on each theme tile to view extra options</div>
+            <div class="subtitle">Click the 3-dot button on each tile to view extra options</div>
         </div>
         <div class="content">
             <div class="theme-list" id="theme-list"></div>
@@ -23,7 +54,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" id="opt-tab-2" data-option-index="2">
     <div class="index">02</div>
     <div class="wrapper">
         <div class="title">Font
@@ -54,18 +85,639 @@
                     <span data-size="24">24</span>
                 </div>
             </div>
+            <div class="font-preview-container">
+                <div>Font preview</div>
+                <div class="font-preview" id="font-preview">asdfasdf</div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="container">
+<div class="container" id="opt-tab-3" data-option-index="3">
     <div class="index">03</div>
     <div class="wrapper">
         <div class="title">Homepage
             <div class="subtitle">Customize the layout and content on your homepage</div>
         </div>
+        <div class="content content-row">
+            <div class="col-4">
+                <div class="row">
+                    <div class="sec-title">Calendar</div>
+                </div>
+                <div class="row">
+                    <!-- Add calendar -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-0" data-option-name="HOME_AddCalendar"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-0"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-pages-0-0" class="checkbox-label">Add calendar to homepage</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Use ajax to request upcoming events from each course, sort and add them to homepage.
+                                (Waterloo Learn only)</p>
+                        </div>
+                    </div>
+
+                    <!-- Show weekday on calendar -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-7" data-option-name="HOME_ShowWeekDayOnCalendar"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-7"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-pages-0-7" class="checkbox-label">Show weekday on mouse hover</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Hover over each calendar item to view weekday</p>
+                        </div>
+                    </div>
+
+                    <!-- Switch announcement & calendar -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-1" data-option-name="HOME_SwitchAnnounceAndCalendar"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-1"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-pages-0-1" class="checkbox-label">Switch announcement and calendar</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>If this option is enabled, the announcement widget will appear on the left and the
+                                calendar will appear on the right. This feature won't work if homepage calendar is not
+                                enabled. (Waterloo Learn only)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sec-title">Widgets</div>
+                </div>
+                <div class="row">
+                    <!-- Hide sys alert -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-2" data-option-name="HOME_AutoHideSysAlert"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-2"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-pages-0-2" class="checkbox-label">Auto hide system alert</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Automatically hide the system alert (Waterloo) / news (Laurier) widget on homepage if its
+                                content is empty.</p>
+                        </div>
+                    </div>
+
+                    <!-- Hide sys check -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-3" data-option-name="HOME_HideCheckMySys"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-3"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-pages-0-3" class="checkbox-label">Hide system check</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Hide the system check widget on homepage to avoid seeing the alert message. (Waterloo
+                                Learn only)</p>
+                        </div>
+                    </div>
+
+                    <!-- Hide privacy widget -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-0-4" data-option-name="HOME_HidePrivacy"
+                                   data-option-type="switch">
+                            <label for="opt-pages-0-4"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-pages-0-4" class="checkbox-label">Hide privacy notice</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Hide the privacy widget at the bottom of homepage. (Waterloo Learn only)</p>
+                        </div>
+                    </div>
+
+                    <!-- Remove announcement inline styles -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-pages-4-0" data-option-name="HOME_RemoveAnnounceFormat"
+                                   data-option-type="switch">
+                            <label for="opt-pages-4-0"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-pages-4-0" class="checkbox-label">Optimize announcement inline
+                                styles</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Remove unnecessary inline styles for announcements on homepage, course home, and view
+                                all announcements pages for easy reading. If you are using a dark theme, invisible
+                                colors will be inverted.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="homepage-preview" id="homepage-preview">
+                    <div class="row">
+                        <div class="widget header">Page Header</div>
+                    </div>
+                    <div class="content-row">
+                        <div class="col-8">
+                            <div class="widget sys-alert">System Alert</div>
+                            <div class="widget courses">Courses and Communities</div>
+                            <div class="widget calendar">Calendar</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="widget sys-check">Check My System</div>
+                            <div class="widget announcements">Announcements</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="widget privacy">Privacy Notice</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="container" id="opt-tab-4" data-option-index="4">
+    <div class="index">04</div>
+    <div class="wrapper">
+        <div class="title">Course
+            <div class="subtitle">Customize homepage course widget and course content page</div>
+        </div>
+        <div class="content">
+            <div class="content-row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="sec-title">Homepage Widget</div>
+                    </div>
+                    <div class="row">
+                        <!-- Hide cover pic -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-pages-0-10" data-option-name="HOME_HideCoverPic"
+                                       data-option-type="switch">
+                                <label for="opt-pages-0-10"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-pages-0-10" class="checkbox-label">Hide course cover picture</label>
+                            </div>
+                        </div>
+
+                        <!-- Hide term meta -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-pages-0-5" data-option-name="HOME_HideMetaTerm"
+                                       data-option-type="switch">
+                                <label for="opt-pages-0-5"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-pages-0-5" class="checkbox-label">Hide course term info</label>
+                            </div>
+                        </div>
+
+                        <!-- Hide end date meta -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-pages-0-6" data-option-name="HOME_HideMetaEndDate"
+                                       data-option-type="switch">
+                                <label for="opt-pages-0-6"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-pages-0-6" class="checkbox-label">Hide course end date info</label>
+                            </div>
+                        </div>
+
+                        <!-- Hide pinned icon -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-pages-0-9" data-option-name="HOME_HidePinnedIcon"
+                                       data-option-type="switch">
+                                <label for="opt-pages-0-9"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-pages-0-9" class="checkbox-label">Hide pinned course icon</label>
+                            </div>
+                        </div>
+
+                        <!-- Hide course tab selector -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-pages-0-11" data-option-name="HOME_HideCourseTabSelector"
+                                       data-option-type="switch">
+                                <label for="opt-pages-0-11"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-pages-0-11" class="checkbox-label">Hide term tab selector</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="course-preview" id="course-preview">
+                        <div class="row">
+                            <div class="header">Courses and Communities</div>
+                        </div>
+                        <div class="row">
+                            <div class="component tabs">
+                                <span>All</span>
+                                <span>1351 - Winter 2035</span>
+                                <span>1349 - Winter 2034</span>
+                                <span>1345 - Winter 2034</span>
+                                <span>1341 - Winter 2034</span>
+                                <span>1339 - Winter 2033</span>
+                            </div>
+                        </div>
+                        <div class="content-row">
+                            <div class="col-4">
+                                <div class="card">
+                                    <div class="card-thumb"></div>
+                                    <div class="card-content">
+                                        <div class="card-title">ECE 123 - Winter 2035</div>
+                                        <div class="card-term">1351 - Winter 2035</div>
+                                        <div class="card-end">Ends May 6, 2019 at 12:00 AM</div>
+                                    </div>
+                                    <div class="card-pin">
+                                        <svg viewBox="0 0 18 18" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g>
+                                                <path d="M14 10a1 1 0 0 1-1 1h-3v4l-1 3-1-3v-4H5a1 1 0 0 1-1-1c0-1.1.9-3 2-3V2a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2v5c1.1 0 2 1.9 2 3z"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card">
+                                    <div class="card-thumb"></div>
+                                    <div class="card-content">
+                                        <div class="card-title">ECE 456 - Winter 2035</div>
+                                        <div class="card-term">1351 - Winter 2035</div>
+                                        <div class="card-end">Ends May 6, 2019 at 12:00 AM</div>
+                                    </div>
+                                    <div class="card-pin">
+                                        <svg viewBox="0 0 18 18" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g>
+                                                <path d="M14 10a1 1 0 0 1-1 1h-3v4l-1 3-1-3v-4H5a1 1 0 0 1-1-1c0-1.1.9-3 2-3V2a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2v5c1.1 0 2 1.9 2 3z"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card">
+                                    <div class="card-thumb"></div>
+                                    <div class="card-content">
+                                        <div class="card-title">ECE 789 - Winter 2035</div>
+                                        <div class="card-term">1351 - Winter 2035</div>
+                                        <div class="card-end">Ends May 6, 2019 at 12:00 AM</div>
+                                    </div>
+                                    <div class="card-pin">
+                                        <svg viewBox="0 0 18 18" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g>
+                                                <path d="M14 10a1 1 0 0 1-1 1h-3v4l-1 3-1-3v-4H5a1 1 0 0 1-1-1c0-1.1.9-3 2-3V2a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2v5c1.1 0 2 1.9 2 3z"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="sec-title">Course Content</div>
+                    </div>
+                    <div class="row">
+                        <!-- Redirect to course content -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-courses-1-0" data-option-name="COURSE_DirectToContent"
+                                       data-option-type="switch">
+                                <label for="opt-courses-1-0"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-courses-1-0" class="checkbox-label">Auto redirect to table of contents</label>
+                                <a class="option-tip-toggle">?</a>
+                            </div>
+                            <div class="option-tip hidden">
+                                <p>When you enter a course though course tiles on homepage or course selector on
+                                    navigation bar, you will be automatically redirect to it's corresponding content
+                                    page.
+                                    You can still access the original course home through other links.</p>
+                            </div>
+                        </div>
+
+                        <!-- Content size control -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-courses-1-1" data-option-name="COURSE_ContentResizeBtn"
+                                       data-option-type="switch">
+                                <label for="opt-courses-1-1"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-courses-1-1" class="checkbox-label">Content size control buttons</label>
+                                <a class="option-tip-toggle">?</a>
+                            </div>
+                            <div class="option-tip hidden">
+                                <p>Add a group of buttons to the right of course content pages to allow you resize the
+                                    content frame or unblock page scroll.</p>
+                            </div>
+                        </div>
+
+                        <!-- Auto scroll to content -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-courses-1-2"
+                                       data-option-name="COURSE_AutoScrollToContent"
+                                       data-option-type="switch">
+                                <label for="opt-courses-1-2"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-courses-1-2" class="checkbox-label">Auto jump to content viewer</label>
+                                <a class="option-tip-toggle">?</a>
+                            </div>
+                            <div class="option-tip hidden">
+                                <p>Automatically jump to the top of the content if file is loaded in iframe.</p>
+                            </div>
+                        </div>
+
+                        <!-- Auto enter full screen -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-courses-1-3"
+                                       data-option-name="COURSE_AutoEnterFullScreen"
+                                       data-option-type="switch">
+                                <label for="opt-courses-1-3"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-courses-1-3" class="checkbox-label">Auto enter full screen</label>
+                                <a class="option-tip-toggle">?</a>
+                            </div>
+                            <div class="option-tip hidden">
+                                <p>Automatically switch to full screen mode if the content file is using pdf viewer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="sec-title">Context Menu</div>
+                    </div>
+                    <div class="row">
+                        <!-- Context menu -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-pages-0-8" data-option-name="HOME_CourseTileContextMenu"
+                                       data-option-type="switch">
+                                <label for="opt-pages-0-8"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-pages-0-8" class="checkbox-label">Right click menu on course
+                                    tiles</label>
+                            </div>
+                        </div>
+
+                        <div id="course-tile-context-menu-items-container"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="opt-tab-5" data-option-index="5">
+    <div class="index">05</div>
+    <div class="wrapper">
+        <div class="title">Last step
+            <div class="subtitle">Global options and platform settings</div>
+        </div>
+        <div class="content content-row">
+            <div class="col-4">
+                <div class="row">
+                    <div class="sec-title">Navigation</div>
+                </div>
+                <div class="row">
+                    <!-- Fixed nav bar-->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-1" data-option-name="GLB_FixNavigation"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-1"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-1-1" class="checkbox-label">Sticky navigation bar</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Stick the navigation bar at the top if it is not visible on the screen.</p>
+                        </div>
+                    </div>
+
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-2" data-option-name="GLB_BackToTopButtonNavbar"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-2"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-1-2" class="checkbox-label">Back-to-top button on sticky
+                                navbar</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Click the right side of the navigation bar to scroll to top of the page. This function is
+                                only valid when "Use sticky navigation bar" is enabled.</p>
+                        </div>
+                    </div>
+
+                    <!-- Back to top -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-0" data-option-name="GLB_BackToTopButton"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-0"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-1-0" class="checkbox-label">Back-to-top button on page
+                                corner</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Add "Back to top" button to each page. Click the button to go back to the top.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="sec-title">Display</div>
+                </div>
+                <div class="row">
+                    <!-- White icon -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-5" data-option-name="GLB_DarklightFaviconInvert"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-5"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-1-5" class="checkbox-label">White Darklight icon</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Make the icon visible on browsers using dark themes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Darklight favicon -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-4" data-option-name="GLB_DarklightFavicon"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-4"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-1-4" class="checkbox-label">Darklight favicon on browser
+                                tabs</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Replace the default orange Brightspace favicon with Darklight's black favicon.</p>
+                        </div>
+                    </div>
+
+                    <!-- Keep session alive -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-1-3" data-option-name="GLB_KeepSessionAlive"
+                                   data-option-type="switch">
+                            <label for="opt-general-1-3"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-1-3" class="checkbox-label">Prevent from logging out</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Prevents system from logging you out when you are inactive for some time. This function
+                                resets the session expire status every 7 minutes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="sec-title">Platform</div>
+                </div>
+                <div class="row">
+                    <!-- Enable for Waterloo Learn -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-0-1" data-option-name="GLB_EnableForWaterloo"
+                                   data-option-type="switch">
+                            <label for="opt-general-0-1"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-0-1" class="checkbox-label">Enable for Waterloo Learn</label>
+                        </div>
+                    </div>
+
+                    <!-- Enable for Laurier MLS -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-0-2" data-option-name="GLB_EnableForLaurier"
+                                   data-option-type="switch">
+                            <label for="opt-general-0-2"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-0-2" class="checkbox-label">Enable for Laurier MLS</label>
+                        </div>
+                    </div>
+
+                    <!-- Link for Waterloo Learn -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-2-0" data-option-name="GLB_PopupAccessForWaterloo"
+                                   data-option-type="switch">
+                            <label for="opt-general-2-0"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-2-0" class="checkbox-label">Button in popup for Waterloo
+                                Learn</label>
+                        </div>
+                    </div>
+
+                    <!-- Link for Laurier MLS -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-general-2-1" data-option-name="GLB_PopupAccessForLaurier"
+                                   data-option-type="switch">
+                            <label for="opt-general-2-1"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-general-2-1" class="checkbox-label">Button in popup for Laurier
+                                MLS</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container finish" id="opt-tab-6" data-option-index="6">
+    <div class="index">YOU ARE ALL SET</div>
+    <div class="wrapper">
+        <div class="title text-center">READY TO GO
+            <div class="subtitle">Thanks for using Learn Darklight</div>
+        </div>
+        <div class="content content-row">
+            <div class="col-4">
+                <img src="../img/welcome-finish.jpg" alt="Ready to go" class="finish-img">
+            </div>
+            <div class="col-8">
+                <ul>
+                    <li>Click the Darklight icon in browser toolbar to show popup</li>
+                    <li>Make any changes by visiting the <strong>extension options</strong> page</li>
+                    <li>If you find any bugs, please use the <strong>report issue</strong> link to submit the problem
+                    </li>
+                    <li>You may now go the detailed options or finish the tour</li>
+                </ul>
+                <div class="action-btns">
+                    <a class="btn btn-primary" href="options.html">Go To Options</a>
+                    <a class="btn btn-default" id="finish-tour" href="#">Finish Tour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container footer">
+    Created by Zijian Shao
+</div>
+
+<!-- Toast Start -->
+<div class="darklight-toast darklight-toast-hidden" id="darklight-toast"></div>
+<!-- Toast End -->
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/configs.js"></script>

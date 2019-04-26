@@ -175,7 +175,7 @@ body {
 }
 
 .d2l-button.d2l-button-focus, .d2l-button:focus {
-    box-shadow: none;
+    box-shadow: 0 0 0 4px rgba(9, 177, 185, 0.4);
     border-color: var(--d2l-color-celestine);
     background-color: var(--d2l-color-celestine);
     color: #fff;
@@ -198,7 +198,9 @@ body {
 }
 
 .d2l-button[primary].d2l-button-focus, .d2l-button[primary]:focus {
-    box-shadow: none;
+    box-shadow: 0 0 0 4px rgba(9, 177, 185, 0.4);
+    color: #fff;
+    background: var(--d2l-color-celestine);
 }
 
 .d2l-simple-overlay-close-button-0 .close-button.d2l-simple-overlay-close-button:focus d2l-icon.d2l-simple-overlay-close-button, .d2l-simple-overlay-close-button-0 .close-button.d2l-simple-overlay-close-button:hover d2l-icon.d2l-simple-overlay-close-button {
@@ -898,19 +900,7 @@ d2l-navigation-main-header d2l-icon.d2l-navigation-button-icon {
     filter: brightness(80%);
 }
 
-.d2l-course-banner-container {
-    /*margin: 0;*/
-    /*max-width: none;*/
-}
-
 /* course content */
-/*#ContentView {*/
-/*background: #fff;*/
-/*color: #000;*/
-/*-webkit-filter: brightness(0.8);*/
-/*filter: brightness(0.8);*/
-/*}*/
-
 iframe {
     background: #fff;
     color: #000;
@@ -1599,9 +1589,11 @@ d2l-dropdown-more d2l-button-icon[active] > button {
     background: rgba(0, 0, 0, 0.3);
 }
 
-#CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
+@media (min-width: 1230px) {
+    #CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
+        border-radius: 0 0 8px 8px;
+        overflow: hidden;
+    }
 }
 
 /* new course selector */
