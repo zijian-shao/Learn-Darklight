@@ -118,6 +118,11 @@ function getThemeConfigs(id) {
                     value: "#222222",
                     description: "Loading overlay color"
                 }, {
+                    key: "overridePageBackgroundColor",
+                    type: "color",
+                    value: "#111111",
+                    description: "Page background color"
+                }, {
                     key: "navPrimaryColor",
                     type: "color",
                     value: "#FDD54F",

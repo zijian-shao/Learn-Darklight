@@ -615,13 +615,15 @@ li.d2l-contextmenu-item-title.empty > * {
 /* homepage courses */
 .darklight-homepage-courses-widget .d2l-widget-content {
     position: relative;
+    height: 140px;
     max-height: 140px;
     overflow: hidden;
 }
 
 .darklight-homepage-courses-widget-complete .d2l-widget-content {
+    height: auto;
     max-height: none;
-    overflow: visible;
+    overflow: auto;
 }
 
 .darklight-homepage-courses-loading {

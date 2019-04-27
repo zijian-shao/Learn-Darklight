@@ -2,7 +2,7 @@ function initTheme() {
 
     var cssText = '';
     cssText += ':root{--darklight-nav-primary-color:' + getCustomThemeOption('navPrimaryColor') + '}';
-
+    cssText += '#d2l_body, .d2l-body {background:' + getCustomThemeOption('overridePageBackgroundColor') + '!important;}';
     browser.runtime.sendMessage({
         action: 'insertCSS',
         data: {code: cssText}

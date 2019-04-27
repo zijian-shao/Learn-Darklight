@@ -31,6 +31,20 @@ function initTheme() {
         injectCSS(dropdownCSS, $(el.shadowRoot.querySelector('button d2l-icon').shadowRoot), 'file');
     });
 
+    // legacy widget viewer
+    if (currURL2.match(/\/d2l\/home\/\d+$/)) {
+        browser.runtime.sendMessage({
+            action: 'executeScript',
+            data: {file: 'theme/theme_' + options.GLB_ThemeID + '/functions_legacy_widget_viewer.js', allFrames: true}
+        });
+        injectCSS('[darklight-legacy-widget-viewer]{filter:none!important;background:none!important}', body, 'text');
+        $('iframe').each(function (idx, el) {
+            if (el.hasAttribute('src') && el.getAttribute('src').match(/\/d2l\/lp\/homepage\/LegacyWidgetViewer\.d2l/gi)) {
+                el.setAttribute('darklight-legacy-widget-viewer', '');
+            }
+        });
+    }
+
     // custom options - invert iframe
     if (getCustomThemeOption('invertIframe') && currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/i)) {
 
@@ -64,7 +78,7 @@ function initTheme() {
     // quiz & survey warning
     if (currURL.match(/\/quizzing\//g) || currURL.match(/\/admin\//g)) {
         // || currURL.includes('/survey/') || currURL.includes('/dropbox/')
-        alert('This theme has made many changes to the original webpage. In order to ensure nothing will go wrong, it\'s recommended to switch to other themes before you continue your work here.');
+        // alert('This theme has made many changes to the original webpage. In order to ensure nothing will go wrong, it\'s recommended to switch to other themes before you continue your work here.');
     }
 
     // calendar - upcoming
@@ -87,9 +101,8 @@ function initTheme() {
 
     // floating buttons
     if (document.querySelector('d2l-floating-buttons') !== null && document.querySelector('d2l-floating-buttons').shadowRoot !== null) {
-        injectCSS('.d2l-floating-buttons-container.d2l-floating-buttons-floating' +
-            '{border:none!important;background:#424a56!important;box-shadow:none!important;}',
-            $(document.querySelector('d2l-floating-buttons').shadowRoot), 'text');
+        injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_float_button.css',
+            $(document.querySelector('d2l-floating-buttons').shadowRoot), 'file');
     }
 
     // wait for navbar
