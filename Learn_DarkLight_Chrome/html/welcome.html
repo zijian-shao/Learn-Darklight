@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css?family=Muli:200,400,800" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/options.css">
     <link rel="stylesheet" type="text/css" href="/css/welcome.css">
 </head>
@@ -400,12 +401,52 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="content-row">
                 <div class="col-4">
                     <div class="row">
-                        <div class="sec-title">Course Content</div>
+                        <div class="sec-title">Context Menu</div>
                     </div>
                     <div class="row">
+                        <!-- Context menu -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-pages-0-8" data-option-name="HOME_CourseTileContextMenu"
+                                       data-option-type="switch">
+                                <label for="opt-pages-0-8"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-pages-0-8" class="checkbox-label">Right click menu on course
+                                    tiles</label>
+                            </div>
+                        </div>
+
+                        <div id="course-tile-context-menu-items-container"></div>
+
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="sec-title">Course Home</div>
+                    </div>
+                    <div class="row">
+                        <!-- Hide course home banner -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-courses-1-4"
+                                       data-option-name="COURSE_HideCourseHomeBanner"
+                                       data-option-type="switch">
+                                <label for="opt-courses-1-4"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-courses-1-4" class="checkbox-label">Hide course home banner</label>
+                                <a class="option-tip-toggle">?</a>
+                            </div>
+                            <div class="option-tip hidden">
+                                <p>Automatically hide the banner image on course home page.</p>
+                            </div>
+                        </div>
+
                         <!-- Redirect to course content -->
                         <div class="option-group checkbox-group">
                             <div class="checkbox-slide">
@@ -414,16 +455,61 @@
                                 <label for="opt-courses-1-0"></label>
                             </div>
                             <div class="checkbox-content">
-                                <label for="opt-courses-1-0" class="checkbox-label">Auto redirect to table of contents</label>
+                                <label for="opt-courses-1-0" class="checkbox-label">Auto redirect to table of
+                                    contents</label>
                                 <a class="option-tip-toggle">?</a>
                             </div>
                             <div class="option-tip hidden">
                                 <p>When you enter a course though course tiles on homepage or course selector on
                                     navigation bar, you will be automatically redirect to it's corresponding content
-                                    page.
-                                    You can still access the original course home through other links.</p>
+                                    page. You can still access the original course home through other links.</p>
                             </div>
                         </div>
+
+                        <!-- Fix side panel -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-courses-1-5"
+                                       data-option-name="COURSE_FixSidePanelSelector"
+                                       data-option-type="switch">
+                                <label for="opt-courses-1-5"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-courses-1-5" class="checkbox-label">Fixed table of contents side
+                                    panel</label>
+                                <a class="option-tip-toggle">?</a>
+                            </div>
+                            <div class="option-tip hidden">
+                                <p>Fix the position of side panel on table of contents page. No need to scroll back to
+                                    top to switch between tabs.</p>
+                            </div>
+                        </div>
+
+                        <!-- Open course content in new tab -->
+                        <div class="option-group checkbox-group">
+                            <div class="checkbox-slide">
+                                <input type="checkbox" id="opt-courses-1-6"
+                                       data-option-name="COURSE_OpenContentInNewTab"
+                                       data-option-type="switch">
+                                <label for="opt-courses-1-6"></label>
+                            </div>
+                            <div class="checkbox-content">
+                                <label for="opt-courses-1-6" class="checkbox-label">Open course content in new
+                                    tab</label>
+                                <a class="option-tip-toggle">?</a>
+                            </div>
+                            <div class="option-tip hidden">
+                                <p>If this options is enabled, all content links on table of contents page will open in
+                                    new tab.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="sec-title">Content Viewer</div>
+                    </div>
+                    <div class="row">
 
                         <!-- Content size control -->
                         <div class="option-group checkbox-group">
@@ -475,28 +561,6 @@
                                 <p>Automatically switch to full screen mode if the content file is using pdf viewer.</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="row">
-                        <div class="sec-title">Context Menu</div>
-                    </div>
-                    <div class="row">
-                        <!-- Context menu -->
-                        <div class="option-group checkbox-group">
-                            <div class="checkbox-slide">
-                                <input type="checkbox" id="opt-pages-0-8" data-option-name="HOME_CourseTileContextMenu"
-                                       data-option-type="switch">
-                                <label for="opt-pages-0-8"></label>
-                            </div>
-                            <div class="checkbox-content">
-                                <label for="opt-pages-0-8" class="checkbox-label">Right click menu on course
-                                    tiles</label>
-                            </div>
-                        </div>
-
-                        <div id="course-tile-context-menu-items-container"></div>
-
                     </div>
                 </div>
             </div>
@@ -703,8 +767,8 @@
                     <li>You may now go the detailed options or finish the tour</li>
                 </ul>
                 <div class="action-btns">
-                    <a class="btn btn-primary" href="options.html">Go To Options</a>
-                    <a class="btn btn-default" id="finish-tour" href="#">Finish Tour</a>
+                    <a class="btn btn-primary" href="options.html" tabindex="-1">Go To Options</a>
+                    <a class="btn btn-default" id="finish-tour" href="#" tabindex="-1">Finish Tour</a>
                 </div>
             </div>
         </div>

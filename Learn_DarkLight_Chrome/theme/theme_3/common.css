@@ -100,31 +100,19 @@ d2l-navigation-main-footer {
     background: rgba(19, 23, 41, 0.8) !important;
     border: none !important;
     z-index: 100 !important;
-    -webkit-transition: box-shadow 0.2s ease;
-    -moz-transition: box-shadow 0.2s ease;
-    -ms-transition: box-shadow 0.2s ease;
-    -o-transition: box-shadow 0.2s ease;
     transition: box-shadow 0.2s ease;
 }
 
 d2l-navigation-main-footer.darklight-navbar-fixed {
-    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @media (min-width: 768px) {
     .darklight-navbar-sticky {
-        -webkit-transition: box-shadow 0.2s;
-        -moz-transition: box-shadow 0.2s;
-        -ms-transition: box-shadow 0.2s;
-        -o-transition: box-shadow 0.2s;
         transition: box-shadow 0.2s;
     }
 
     .darklight-navbar-sticky.darklight-navbar-sticky-on {
-        -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 }
@@ -166,8 +154,6 @@ d2l-navigation-main-footer a.d2l-navigation-s-link:visited {
 .d2l-navigation-ib-item-link:focus, .d2l-navigation-ib-item-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.5);
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
 }
 
@@ -203,7 +189,6 @@ d2l-navigation-main-footer a.d2l-navigation-s-link:visited {
 }
 
 .d2l-navigation-main-ib-pully-icon d2l-icon svg {
-    -webkit-filter: grayscale(1) brightness(5);
     filter: grayscale(1) brightness(5);
 }
 
@@ -288,8 +273,6 @@ d2l-simple-overlay {
 
 .d2l-tile {
     border: none;
-    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     padding: 0 !important;
@@ -345,8 +328,6 @@ d2l-simple-overlay {
 @media (min-width: 1230px) {
     #CourseImageBannerPlaceholderId .d2l-course-banner-container {
         border-radius: 0 0 5px 5px;
-        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden !important;
     }

@@ -9,7 +9,7 @@ function initTheme() {
         if (getCustomThemeOption('invertIframe'))
             filterText += 'invert(1) ';
         if (filterText != '')
-            cssText += 'iframe{-webkit-filter:' + filterText + '!important;filter:' + filterText + '!important;}';
+            cssText += 'iframe{filter:' + filterText + '!important;}';
     }
     if (getCustomThemeOption('darkCoursePic')) {
         cssText += '.d2l-card-link-container>.d2l-card-header{opacity:0.7!important;}';
@@ -109,6 +109,17 @@ function initTheme() {
                 navCounter++;
             }, 200);
         }
+    }
+
+    if (currURL.match(/\/d2l\/login/gi) && currURL.match(/noRedirect=1/gi)) {
+        $('.d2l-page-main, .d2l-login-portal-heading').css({
+            'background': 'none',
+            'color': ''
+        });
+        $('.d2l-login-portal-bordered').css({
+            'background': 'none',
+            'border-color': 'rgba(255,255,255,0.1)'
+        });
     }
 }
 

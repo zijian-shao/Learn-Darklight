@@ -775,25 +775,93 @@ function contentPageFunc() {
 
 }
 
-function contentListFunc() {
-    return;
+function fixSidePanelSelector() {
 
-    var listWrapper = $('.d2l-twopanelselector-wrapper').first();
-    if (!listWrapper.length) return;
-    var listWrapperTop = listWrapper.offset().top;
-    var navFooter = $('d2l-navigation-main-footer').first();
-    var navFooterHeight = navFooter.height();
-    var listLeft = listWrapper.find('.d2l-twopanelselector-side').first();
-
-    $(window).on('scroll', function () {
-        if (window.scrollY > listWrapperTop - navFooterHeight) {
-            listWrapper.addClass('darklight-content-list-float');
-            listLeft.css('top', navFooterHeight + 'px');
+    function _initPanelSidePos() {
+        // reset on mobile layout
+        if (window.innerWidth <= 1000) {
+            panelWrap.removeClass('fix-side-panel');
+            panelSide.attr('style');
+            return;
         } else {
-            listWrapper.removeClass('darklight-content-list-float');
-            listLeft.css('top', '');
+            panelWrap.addClass('fix-side-panel');
         }
-    });
+        // change height
+        footerH = footer.outerHeight();
+        if (window.scrollY < themeConfigs.headerHeight) {
+            panelSide.css('top', (footerH + themeConfigs.headerHeight - window.scrollY) + 'px');
+            panelSide.css('height', 'calc(100vh - ' + (footerH + themeConfigs.headerHeight + panelSidePadTop - window.scrollY) + 'px)');
+        } else {
+            panelSide.css('top', footerH + 'px');
+            panelSide.css('height', 'calc(100vh - ' + (footerH + panelSidePadTop) + 'px)');
+        }
+    }
+
+    function _initfixSidePanelSelector() {
+        _initPanelSidePos();
+        $(window).on('load', function () {
+            _initPanelSidePos();
+            setTimeout(function () {
+                _initPanelSidePos();
+            }, 200);
+        }).on('scroll', function () {
+            _initPanelSidePos();
+        }).on('resize', function () {
+            _initPanelSidePos();
+        });
+    }
+
+    if (!options.COURSE_FixSidePanelSelector) return;
+
+    var panelWrap = $('.d2l-twopanelselector-wrapper');
+    var panelSide = $('.d2l-twopanelselector-side');
+    if (!panelWrap.length || !panelSide.length) return;
+    var panelSidePadTop = Number(panelSide.css('padding-top').match(/\d+/g)[0]);
+    var footerH = 0;
+    var footer = $('d2l-navigation-main-footer');
+
+    // wait for footer
+    if (footer.length) {
+        _initfixSidePanelSelector();
+    } else {
+        var waitNavIntCnt = 0;
+        var waitNavInt = setInterval(function () {
+            if (footer.length) {
+                clearInterval(waitNavInt);
+                _initfixSidePanelSelector();
+            } else {
+                footer = $('d2l-navigation-main-footer');
+            }
+            waitNavIntCnt++;
+            if (waitNavIntCnt > 50) {
+                clearInterval(waitNavInt);
+            }
+        }, 200);
+    }
+}
+
+function openContentInNewTab() {
+
+    if (!options.COURSE_OpenContentInNewTab) return;
+
+    function _openContentInNewTab() {
+        tabPanel.querySelectorAll('.d2l-datalist-container .d2l-datalist .d2l-datalist-item .d2l-inline .d2l-link').forEach(function (el) {
+            el.setAttribute('target', '_blank');
+        });
+    }
+
+    var tabPanel = document.getElementById('d2l_two_panel_selector_main');
+    if (tabPanel !== null) {
+        _openContentInNewTab();
+        var observer = new MutationObserver(function (mutationsList, observer) {
+            for (var mutation of mutationsList) {
+                if (mutation.attributeName === 'aria-live') {
+                    _openContentInNewTab();
+                }
+            }
+        });
+        observer.observe(tabPanel, {attributes: true});
+    }
 }
 
 function listMembersBtn() {
@@ -1836,12 +1904,13 @@ function initDarklightFunc() {
         listMembersBtn();
     }
 
-    // content page func
+    // content index page func
     if (currURL2.match(/\/d2l\/le\/content\/\d+\/Home/g)) {
-        contentListFunc();
+        fixSidePanelSelector();
+        openContentInNewTab();
     }
 
-    // content page func
+    // content viewer page func
     if (currURL.match(/\/d2l\/le\/content\/\d+\/viewContent\/\d+\/View/g)) {
         contentPageFunc();
     }
@@ -1868,6 +1937,10 @@ function initDarklightFunc() {
                 removeAnnouncePageFormat(true, $(e).closest('div.d2l-widget'));
             }
         });
+
+        if (options.COURSE_HideCourseHomeBanner) {
+            $('#CourseImageBannerPlaceholderId').hide();
+        }
     }
 
     courseDirectToContent();

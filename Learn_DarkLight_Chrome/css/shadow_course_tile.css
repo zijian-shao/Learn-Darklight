@@ -1,9 +1,5 @@
 /* course tiles */
 d2l-card {
-    -webkit-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
-    -moz-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
-    -ms-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
-    -o-transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
     transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
 }
 
@@ -30,10 +26,6 @@ d2l-card.darklight-course-thumb-loading div[slot="header"] {
 
 d2l-card.darklight-course-thumb-loading .d2l-enrollment-card-image-container {
     opacity: 0;
-    -webkit-transition: opacity 0.5s !important;
-    -moz-transition: opacity 0.5s !important;
-    -ms-transition: opacity 0.5s !important;
-    -o-transition: opacity 0.5s !important;
     transition: opacity 0.5s !important;
 }
 
@@ -47,11 +39,3 @@ d2l-card.darklight-course-thumb .d2l-enrollment-card-image-container {
     background-repeat: no-repeat !important;
     background-size: cover !important;
 }
-
-/*d2l-card.darklight-course-thumb .d2l-enrollment-card-image-container d2l-course-image {*/
-    /*-webkit-transition: none !important;*/
-    /*-moz-transition: none !important;*/
-    /*-ms-transition: none !important;*/
-    /*-o-transition: none !important;*/
-    /*transition: none !important;*/
-/*}*/

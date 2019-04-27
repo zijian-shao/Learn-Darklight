@@ -89,10 +89,6 @@ small {
     position: relative;
     overflow: hidden;
     background: #fff;
-    -webkit-transition: background 1s ease;
-    -moz-transition: background 1s ease;
-    -ms-transition: background 1s ease;
-    -o-transition: background 1s ease;
     transition: background 1s ease;
 }
 
@@ -131,10 +127,6 @@ small {
     text-transform: uppercase;
     font-weight: lighter;
     margin-bottom: 20px;
-    -webkit-transition: color 0.6s ease;
-    -moz-transition: color 0.6s ease;
-    -ms-transition: color 0.6s ease;
-    -o-transition: color 0.6s ease;
     transition: color 0.6s ease;
 }
 
@@ -235,8 +227,6 @@ small {
 
 .theme-item.selected {
     border: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
 }
 
@@ -244,10 +234,6 @@ small {
     position: relative;
     overflow: hidden;
     border: 1px solid #ddd;
-    -webkit-transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    -moz-transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    -ms-transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    -o-transition: border-color 0.2s ease, box-shadow 0.2s ease;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -362,8 +348,6 @@ small {
 .font-item:hover,
 .font-item.selected {
     border: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
 }
 
@@ -374,10 +358,6 @@ small {
 .font-item img {
     width: 100%;
     border: 1px solid #ccc;
-    -webkit-transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    -moz-transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    -ms-transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    -o-transition: border-color 0.2s ease, box-shadow 0.2s ease;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     float: none;
     margin: 0;
@@ -385,15 +365,11 @@ small {
 
 .font-item:hover img {
     border-color: #fff;
-    -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 4px #ccc;
-    -moz-box-shadow: 0 0 0 1px #fff, 0 0 0 4px #ccc;
     box-shadow: 0 0 0 1px #fff, 0 0 0 4px #ccc;
 }
 
 .font-item.selected img {
     border-color: #fff;
-    -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 4px #5bb75b;
-    -moz-box-shadow: 0 0 0 1px #fff, 0 0 0 4px #5bb75b;
     box-shadow: 0 0 0 1px #fff, 0 0 0 4px #5bb75b;
 }
 
@@ -429,8 +405,6 @@ small {
 
 .input-range::-webkit-slider-runnable-track {
     background: #eee;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
     border-radius: 4px;
 }
@@ -445,8 +419,6 @@ small {
 
 .input-range::-moz-range-track {
     background: #eee;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
 }
 
@@ -518,6 +490,14 @@ small {
 #course-tile-context-menu-items-container .group-title {
     font-weight: bold;
     margin: 0 auto 10px;
+}
+
+#course-tile-context-menu-items-container .width-25 {
+    width: 50% !important;
+}
+
+#course-tile-context-menu-items-container .option-group {
+    margin-bottom: 5px;
 }
 
 .homepage-preview {
