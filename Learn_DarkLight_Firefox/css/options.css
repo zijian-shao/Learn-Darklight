@@ -289,7 +289,7 @@ hr {
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: dark;
+    scrollbar-color: #555 #333;
 }
 
 /* page */

@@ -664,16 +664,14 @@ ul.nav {
 }
 
 ul.nav li {
-    position: relative;
-    text-indent: -999rem;
-    margin-bottom: 25px;
-    cursor: pointer;
-    font-size: 0.6rem;
+    visibility: hidden;
 }
 
 ul.nav li:before {
+    visibility: visible;
+    cursor: pointer;
     content: '';
-    position: absolute;
+    position: relative;
     display: block;
     margin: auto;
     width: 12px;

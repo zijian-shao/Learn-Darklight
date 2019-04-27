@@ -122,7 +122,7 @@ body {
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: dark;
+    scrollbar-color: #323841 #1f242b;
 }
 
 #d2l_body, .d2l-body {
@@ -1641,5 +1641,9 @@ li.d2l-contextmenu-item-title {
 
     .fix-side-panel .d2l-twopanelselector-side::-webkit-scrollbar-thumb:active {
         background: #323841;
+    }
+
+    .fix-side-panel .d2l-twopanelselector-side {
+        scrollbar-color: var(--d2l-color-gypsum) #282d34;
     }
 }
