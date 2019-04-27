@@ -77,6 +77,9 @@ function getOptionListDefault() {
         COURSE_CustomThumb: true,
         COURSE_DirectToContent: false,
         COURSE_AutoEnterFullScreen: false,
+        COURSE_HideCourseHomeBanner: false,
+        COURSE_FixSidePanelSelector: false,
+        COURSE_OpenContentInNewTab: false,
         QUIZ_ContentResizeBtn: true,
         GROUP_ListMembersBtn: true
     };
@@ -345,6 +348,7 @@ function getLink(key) {
         raspberryStore: 'https://addons.mozilla.org/firefox/addon/quest-raspberry/',
         feedback: 'https://docs.google.com/forms/d/e/1FAIpQLSdrOnFC70L2juZuUzAy0r2xmPPCiWQ5sR7-U_c8ZQIuJYsqsg/viewform?usp=pp_url&entry.131896974=@@extVersion@@&entry.763960959=@@browser@@&entry.1389556052=@@os@@',
         officialWebsite: 'https://www.zijianshao.com/dlight/',
+        officialWebsiteVersion: 'https://www.zijianshao.com/dlight/releases/',
         github: 'https://github.com/SssWind/Learn-Darklight',
         donate: 'https://www.paypal.me/zjshao',
         linkShare: 'https://www.zijianshao.com/dlight/sharelink/?platform=firefox',

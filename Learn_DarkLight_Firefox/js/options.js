@@ -1685,6 +1685,11 @@ var updateLog = [
         desc: 'Make Darklight icon visible and easier to find under dark browser themes.',
         offset: [40, 10, 5, 10]
     }, {
+        targetElem: '#opt-courses-1-4 < .group-content',
+        title: 'Customize course home',
+        desc: 'Make it convenient to browse course contents.',
+        offset: [10, 10, 0, 10]
+    }, {
         targetElem: '#image-gallery',
         image: 'pd.jpg',
         title: 'New images added to gallery',

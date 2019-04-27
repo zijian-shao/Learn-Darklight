@@ -12,6 +12,7 @@ d2l-navigation-band,
 div.d2l-navigation-centerer > div.d2l-navigation-gutters > div.d2l-navigation-header-container {
     height: 110px;
 }
+
 @media (max-width: 767px) {
     div.d2l-navigation-centerer > div.d2l-navigation-gutters > div.d2l-navigation-header-container {
         height: 72px;

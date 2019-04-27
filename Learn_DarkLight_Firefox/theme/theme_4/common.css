@@ -94,11 +94,7 @@ d2l-navigation-band {
 
 @media (min-width: 768px) {
     .darklight-navbar-sticky {
-        -webkit-transition: box-shadow 0.2s;
-        -moz-transition: box-shadow 0.2s;
-        -ms-transition: box-shadow 0.2s;
-        -o-transition: box-shadow 0.2s;
-        transition: box-shadow 0.2s;
+         transition: box-shadow 0.2s;
     }
 
     .darklight-navbar-sticky.darklight-navbar-sticky-on {

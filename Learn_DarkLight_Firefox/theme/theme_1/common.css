@@ -51,9 +51,6 @@
 
 .d2l-tile {
     border-radius: 5px;
-    /*-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);*/
-    /*-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);*/
-    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);*/
 }
 
 /* navbar */
@@ -95,8 +92,6 @@ d2l-navigation-band {
     background: #fff !important;
     border-top: 1px solid #eee !important;
     z-index: 100 !important;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
     box-shadow: none !important;
 }
 
@@ -195,8 +190,6 @@ d2l-navigation-band {
     #CourseImageBannerPlaceholderId > div.d2l-course-banner-container {
         border-radius: 5px;
         overflow: hidden;
-        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
-        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.08), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
         position: relative;
     }
@@ -279,20 +272,6 @@ d2l-navigation-band {
 
 .darklight-homepage-calendar-item {
     padding: 20px;
-}
-
-/* course tile image ani */
-d2l-image-tile.d2l-course-image-tile .d2l-image-tile-image-area.d2l-image-tile {
-    -webkit-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-    -moz-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-    -ms-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-    -o-transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-    transition: filter .2s ease, -webkit-filter .2s ease, transform .4s ease;
-}
-
-d2l-image-tile.d2l-course-image-tile:hover .d2l-image-tile-image-area.d2l-image-tile,
-d2l-image-tile.d2l-course-image-tile:focus .d2l-image-tile-image-area.d2l-image-tile {
-
 }
 
 .d2l-shim {

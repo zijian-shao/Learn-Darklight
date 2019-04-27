@@ -80,8 +80,6 @@
 }
 
 .d2l-tile {
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
 }
 
@@ -159,8 +157,6 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 .d2l-navigation-ib-item-link:focus, .d2l-navigation-ib-item-link:hover {
     border-color: rgba(255, 255, 255, 0.5);
     background-color: rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
 }
 
@@ -197,7 +193,6 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 }
 
 .d2l-navigation-main-ib-pully-icon d2l-icon svg {
-    -webkit-filter: grayscale(1) brightness(5);
     filter: grayscale(1) brightness(5);
 }
 
@@ -327,8 +322,6 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 
 .darklight-back-to-top:hover {
     background: rgba(80, 80, 80, 0.6);
-    -webkit-box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
-    -moz-box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
     box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
 }
 
