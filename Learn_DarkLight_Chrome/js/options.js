@@ -866,7 +866,11 @@ function initOptions() {
             // finish
             $('#finish-tour').on('click', function (e) {
                 e.preventDefault();
-                window.close();
+                // window.close();
+                chrome.tabs.getCurrent(function (tab) {
+                    chrome.tabs.remove(tab.id, function () {
+                    });
+                });
             });
             // home bg
             renderStars();
