@@ -4,7 +4,11 @@ $.fn.sRoot = function () {
         console.log('sRoot requires jQuery object.');
         return this;
     }
-    return $(this[0].shadowRoot);
+    if (this[0].shadowRoot === null) {
+        return null;
+    } else {
+        return $(this[0].shadowRoot);
+    }
 };
 
 $.fn.uwCalendar = function (action, data) {
@@ -1055,7 +1059,7 @@ function homepageFunc() {
                     d2lMyCoursesLoading.className = 'darklight-homepage-courses-loading';
                     d2lMyCoursesLoading.id = 'darklight-homepage-courses-loading';
                     d2lMyCoursesLoading.innerHTML = '<div class="darklight-block-page-loader darklight-block-page-loader-d2l"></div>';
-                    d2lMyCourses.parentNode.prepend(d2lMyCoursesLoading);
+                    d2lMyCourses.parentNode.append(d2lMyCoursesLoading);
                 }
 
                 var waitCourseLoadingInt = setTimeout(function () {
@@ -1181,7 +1185,7 @@ function homepageFunc() {
                                 // quick access
                                 courseTileContextMenu(myPanel, myCards);
 
-                                $('#darklight-homepage-courses-loading').hide(0);
+                                $('#darklight-homepage-courses-loading').hide();
                                 courseWidget.addClass('darklight-homepage-courses-widget-complete');
 
                             }, delayVal * times);
@@ -1476,15 +1480,16 @@ function courseDirectToContent(cards) {
         var interval = setInterval(function () {
 
             if (typeof courseBtn === typeof undefined || !courseBtn.length) {
-                courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon').sRoot()
-                    .children('d2l-navigation-button').sRoot().children('button');
+                courseBtn = $(document.querySelector('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon')
+                    .shadowRoot.querySelector(':host > d2l-navigation-button')
+                    .shadowRoot.querySelector(':host > button'));
             } else {
                 clearInterval(interval);
 
                 courseBtn.on('click', function () {
 
-                    var d2lBtn = $('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon').sRoot()
-                        .children('d2l-navigation-button');
+                    var d2lBtn = $(document.querySelector('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon')
+                        .shadowRoot.querySelector(':host > d2l-navigation-button'));
 
                     // wait for dropdown menu
                     var interval2 = setInterval(function () {
@@ -1659,15 +1664,16 @@ function courseTileContextMenu(panel, cards) {
         var interval = setInterval(function () {
 
             if (typeof courseBtn === typeof undefined || !courseBtn.length) {
-                courseBtn = $('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon').sRoot()
-                    .children('d2l-navigation-button').sRoot().children('button');
+                courseBtn = $(document.querySelector('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon')
+                    .shadowRoot.querySelector(':host > d2l-navigation-button')
+                    .shadowRoot.querySelector(':host > button'));
             } else {
                 clearInterval(interval);
 
                 courseBtn.on('click', function () {
 
-                    var d2lBtn = $('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon').sRoot()
-                        .children('d2l-navigation-button');
+                    var d2lBtn = $(document.querySelector('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon')
+                        .shadowRoot.querySelector(':host > d2l-navigation-button'));
 
                     // wait for dropdown menu
                     var interval2 = setInterval(function () {
@@ -1739,9 +1745,12 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
         if (themeConfigs.brightness === 'dark') {
             $.each(elem, function (i, e) {
                 var self = $(e);
-                var hex = rgb2hex(self.css('color'));
-                if (getContrastColor(hex) === '#ffffff') {
-                    self.css('color', invertColor(hex));
+                var orgSty = self.attr('style');
+                if (typeof orgSty !== typeof undefined) {
+                    var hex = rgb2hex(self.css('color'));
+                    if (orgSty.match(/color\:/g) && !orgSty.match(/-color\:/g) && getContrastColor(hex) === '#ffffff') {
+                        self.css('color', invertColor(hex));
+                    }
                 }
             });
         }
@@ -1845,7 +1854,7 @@ function initDarklightFunc() {
         data: scriptArr
     });
 
-    // drop down tmp
+    // drop down
     $(document).on('mouseup', 'd2l-dropdown', function () {
         var self = $(this);
 
@@ -1878,6 +1887,12 @@ function initDarklightFunc() {
                 clearInterval(interv);
         }, 100);
     });
+
+    // floating buttons
+    if (document.querySelector('d2l-floating-buttons') !== null && document.querySelector('d2l-floating-buttons').shadowRoot !== null) {
+        injectCSS(baseURL + 'css/shadow_float_button.css',
+            $(document.querySelector('d2l-floating-buttons').shadowRoot), 'file');
+    }
 
     // custom font
     if (options.GLB_CustomFont) {
@@ -2019,20 +2034,21 @@ function initDarklightIdle() {
     if (options.GLB_EnableCustomStyle)
         injectCSS(options.GLB_CustomCSS, 'head', 'text');
 
-    if (document.hasFocus() || true) {
+    if (!document.hidden) {
         // initDarklightFunc();
+        initDarklightIdle.initialized = true;
         setTimeout(function () {
             initDarklightFunc();
-        }, 10);
+        }, 50);
     } else {
-        var focusInterval = setInterval(function () {
-            if (document.hasFocus()) {
-                clearInterval(focusInterval);
+        document.addEventListener("visibilitychange", function () {
+            if (!document.hidden && initDarklightIdle.initialized !== true) {
+                initDarklightIdle.initialized = true;
                 setTimeout(function () {
                     initDarklightFunc();
-                }, 100);
+                }, 50);
             }
-        }, 300);
+        }, false);
     }
 
 }

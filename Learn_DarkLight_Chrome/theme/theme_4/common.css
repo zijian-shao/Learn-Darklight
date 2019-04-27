@@ -31,6 +31,7 @@ d2l-navigation-main-footer {
 .d2l-navigation-s-personal-menu-wrapper d2l-icon {
     width: 36px;
     height: 36px;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .darklight-navbar-color-band {
@@ -94,7 +95,7 @@ d2l-navigation-band {
 
 @media (min-width: 768px) {
     .darklight-navbar-sticky {
-         transition: box-shadow 0.2s;
+        transition: box-shadow 0.2s;
     }
 
     .darklight-navbar-sticky.darklight-navbar-sticky-on {

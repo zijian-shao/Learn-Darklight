@@ -522,8 +522,10 @@ function initDarklight() {
             document.documentElement.appendChild(cover);
 
             var text = document.createElement("div");
-            text.innerHTML = '<p><strong>Extension didn\'t work?</strong></p>' +
-                '<p>Please click the extension icon in toolbar and report this issue. Thank you.</p>';
+            if (!document.hidden) {
+                text.innerHTML = '<p><strong>Extension didn\'t work?</strong></p>' +
+                    '<p>Please click the extension icon in toolbar and report this issue. Thank you.</p>';
+            }
             text.style.color = invertColor(themeConfigs.overlayColor, true);
             cover.appendChild(text);
         }
