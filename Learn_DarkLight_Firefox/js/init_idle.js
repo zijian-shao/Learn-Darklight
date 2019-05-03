@@ -163,7 +163,7 @@ function injectCSS(src, tag, type) {
     return id;
 }
 
-function injectJS(src, tag, type) {
+function injectJS(src, tag, type, allFrames) {
 
     var id = 'darklight-js-' + Math.floor(Math.random() * 90000 + 10000);
     var script = $('<script/>', {
@@ -182,6 +182,15 @@ function injectJS(src, tag, type) {
     else
         $(tag).append(script);
 
+    if (allFrames === true) {
+        $('iframe').each(function () {
+            var iframeDocument = this.contentDocument || this.contentWindow.document;
+            if (typeof tag !== typeof {})
+                $(iframeDocument).find(tag).append(script);
+            else
+                console.log('Cannot inject JS to object in iframe');
+        });
+    }
     return id;
 }
 
@@ -1029,7 +1038,7 @@ function homepageFunc() {
         } else if (headText.match(/Courses and Communities/) && !isWLU()) {
 
             courseWidget = headSelf.closest('div.d2l-widget');
-            courseWidget.addClass('darklight-homepage-courses-widget');
+            // courseWidget.addClass('darklight-homepage-courses-widget');
 
             if (options.HOME_AddCalendar) {
                 var calendarWidget = $('<div/>');
@@ -1054,13 +1063,13 @@ function homepageFunc() {
 
                 var d2lMyCourses = courseWidget[0].querySelector('.d2l-widget-content > .d2l-widget-content-padding > d2l-my-courses');
 
-                if (isTabSwitch !== true) {
-                    var d2lMyCoursesLoading = document.createElement('div');
-                    d2lMyCoursesLoading.className = 'darklight-homepage-courses-loading';
-                    d2lMyCoursesLoading.id = 'darklight-homepage-courses-loading';
-                    d2lMyCoursesLoading.innerHTML = '<div class="darklight-block-page-loader darklight-block-page-loader-d2l"></div>';
-                    d2lMyCourses.parentNode.append(d2lMyCoursesLoading);
-                }
+                // if (isTabSwitch !== true) {
+                //     var d2lMyCoursesLoading = document.createElement('div');
+                //     d2lMyCoursesLoading.className = 'darklight-homepage-courses-loading';
+                //     d2lMyCoursesLoading.id = 'darklight-homepage-courses-loading';
+                //     d2lMyCoursesLoading.innerHTML = '<div class="darklight-block-page-loader darklight-block-page-loader-d2l"></div>';
+                //     d2lMyCourses.parentNode.append(d2lMyCoursesLoading);
+                // }
 
                 var waitCourseLoadingInt = setTimeout(function () {
                     $('#darklight-homepage-courses-loading').hide();
@@ -1122,18 +1131,18 @@ function homepageFunc() {
                             if (options.HOME_HidePinnedIcon)
                                 hideStyle += 'd2l-card d2l-button-icon[icon="d2l-tier1:pin-filled"] {display: none!important}';
 
-                            // on tabs available
-                            if (isTabSwitch !== true) {
-                                if (typeof themeOnCourseTabAvailable === 'function') {
-                                    themeOnCourseTabAvailable(d2lMyCourses.shadowRoot.querySelector('d2l-tabs'));
-                                }
-                            }
-
                             var times = isTabSwitch ? 4 : 1;
 
                             setTimeout(function () {
 
-                                injectCSS(baseURL + 'css/shadow_course_tab.css', $(d2lMyCourses.shadowRoot.querySelector('d2l-tabs').shadowRoot), 'file');
+                                // on tabs available
+                                if (isTabSwitch !== true) {
+                                    injectCSS(baseURL + 'css/shadow_course_tab.css', $(d2lMyCourses.shadowRoot.querySelector(':host > d2l-tabs').shadowRoot), 'file');
+                                    if (typeof themeOnCourseTabAvailable === 'function') {
+                                        themeOnCourseTabAvailable(d2lMyCourses.shadowRoot.querySelector(':host > d2l-tabs'));
+                                    }
+                                }
+
                                 // init cards
                                 myEnrollCards.forEach(function (el) {
 
@@ -1185,8 +1194,10 @@ function homepageFunc() {
                                 // quick access
                                 courseTileContextMenu(myPanel, myCards);
 
-                                $('#darklight-homepage-courses-loading').hide();
-                                courseWidget.addClass('darklight-homepage-courses-widget-complete');
+                                setTimeout(function () {
+                                    $('#darklight-homepage-courses-loading').hide();
+                                    courseWidget.addClass('darklight-homepage-courses-widget-complete');
+                                }, 100);
 
                             }, delayVal * times);
 
@@ -1833,9 +1844,10 @@ function initDarklightFunc() {
     jsText += 'options : ' + JSON.stringify(options) + ',';
     jsText += 'themeConfigs : ' + JSON.stringify(themeConfigs) + '';
     jsText += '}';
-    var params = document.createElement("script");
-    params.textContent = jsText;
-    document.head.appendChild(params);
+    // var params = document.createElement("script");
+    // params.textContent = jsText;
+    // document.head.appendChild(params);
+    injectJS(jsText, 'head', 'text');
 
     injectJS(baseURL + 'js/inject.js', 'head');
 
@@ -2034,13 +2046,32 @@ function initDarklightIdle() {
     if (options.GLB_EnableCustomStyle)
         injectCSS(options.GLB_CustomCSS, 'head', 'text');
 
+    // init homepage course widget even document hidden
+    if (currURL2.match(/\/d2l\/home$/) && !isWLU()) {
+        var d2lMyCourses = $('d2l-my-courses');
+        var courseWidget = d2lMyCourses.closest('div.d2l-widget');
+        courseWidget.addClass('darklight-homepage-courses-widget');
+
+        var d2lMyCoursesLoading = document.createElement('div');
+        d2lMyCoursesLoading.className = 'darklight-homepage-courses-loading';
+        d2lMyCoursesLoading.id = 'darklight-homepage-courses-loading';
+        d2lMyCoursesLoading.innerHTML = '<div class="darklight-block-page-loader darklight-block-page-loader-d2l"></div>';
+        d2lMyCourses[0].parentNode.append(d2lMyCoursesLoading);
+    }
+
     if (!document.hidden) {
         // initDarklightFunc();
+
+        document.querySelector('#darklight-load-overlay > div').innerHTML = '<p><strong>Extension didn\'t work?</strong></p>' +
+            '<p>Please click the extension icon in toolbar and report this issue. Thank you.</p>';
+
         initDarklightIdle.initialized = true;
         setTimeout(function () {
             initDarklightFunc();
         }, 50);
+
     } else {
+
         document.addEventListener("visibilitychange", function () {
             if (!document.hidden && initDarklightIdle.initialized !== true) {
                 initDarklightIdle.initialized = true;
@@ -2049,6 +2080,7 @@ function initDarklightIdle() {
                 }, 50);
             }
         }, false);
+
     }
 
 }

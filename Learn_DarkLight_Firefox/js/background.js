@@ -343,7 +343,8 @@ function initBackground() {
                                         err_code: 0,
                                         data: {
                                             msg: 'Custom Cover Picture Updated',
-                                            popup_class: request.data.popup_class
+                                            popup_class: request.data.popup_class,
+                                            need_close: request.data.need_close
                                         }
                                     }
                                 });
@@ -370,7 +371,8 @@ function initBackground() {
                                     err_code: 0,
                                     data: {
                                         msg: 'Operation canceled. The existing record was not affected.',
-                                        popup_class: request.data.popup_class
+                                        popup_class: request.data.popup_class,
+                                        need_close: request.data.need_close
                                     }
                                 }
                             });
@@ -390,7 +392,8 @@ function initBackground() {
                                     err_code: 0,
                                     data: {
                                         msg: 'New Custom Cover Picture Added',
-                                        popup_class: request.data.popup_class
+                                        popup_class: request.data.popup_class,
+                                        need_close: request.data.need_close
                                     }
                                 }
                             });

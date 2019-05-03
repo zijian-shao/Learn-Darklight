@@ -34,13 +34,17 @@ function initTheme() {
     // legacy widget viewer
     if (currURL2.match(/\/d2l\/home\/\d+$/)) {
         browser.runtime.sendMessage({
-            action: 'executeScript',
-            data: {file: 'theme/theme_' + options.GLB_ThemeID + '/functions_legacy_widget_viewer.js', allFrames: true}
+            action: 'insertCSS',
+            data: {code: '[darklight-legacy-widget-viewer]{filter:none!important;background:none!important}'}
         });
-        injectCSS('[darklight-legacy-widget-viewer]{filter:none!important;background:none!important}', body, 'text');
         $('iframe').each(function (idx, el) {
             if (el.hasAttribute('src') && el.getAttribute('src').match(/\/d2l\/lp\/homepage\/LegacyWidgetViewer\.d2l/gi)) {
                 el.setAttribute('darklight-legacy-widget-viewer', '');
+                var iframeDocument = this.contentDocument || this.contentWindow.document;
+                injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions_legacy_widget_viewer.js',
+                    $(iframeDocument.head), 'file');
+                injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/iframe_legacy_widget_viewer.css',
+                    $(iframeDocument.head), 'file');
             }
         });
     }

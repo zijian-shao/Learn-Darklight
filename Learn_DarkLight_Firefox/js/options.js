@@ -641,6 +641,9 @@ function initOptions() {
                     popup.find('.course-code').val(decodeURIComponent(params['course-name']));
                     popup.find('.thumb-image-url').focus();
                 }
+                popup.find('.btn-add').removeClass('btn-primary').addClass('btn-default');
+            } else {
+                popup.find('.btn-add-and-close').remove();
             }
             // type
             popup.find('.thumb-image-type').on('click', function (e) {
@@ -732,11 +735,12 @@ function initOptions() {
                 }
             });
             // add btn
-            popup.find('.btn-add').on('click', function (e) {
+            popup.find('.btn-add, .btn-add-and-close').on('click', function (e) {
                 e.preventDefault();
                 var errMsg = '';
                 var courseID = popup.find('.course-id').val(),
                     courseCode = popup.find('.course-code').val();
+                var needClose = !!$(this).hasClass('btn-add-and-close');
 
                 if (!courseID.match(/^\d+$/)) {
                     errMsg += '- [Course ID] should be an integer.\n';
@@ -759,7 +763,8 @@ function initOptions() {
                         course_id: courseID,
                         course_code: courseCode,
                         thumb_image: thumbBase64,
-                        popup_class: popupCls
+                        popup_class: popupCls,
+                        need_close: needClose
                     }
                 });
 
@@ -922,8 +927,14 @@ function initOptions() {
                 } else if (request.action == 'addCourseThumbsResponse') {
 
                     if (request.data.err_code === 0) {
-                        if (params['action'] === 'add-custom-cover') {
+                        if (request.data.data.need_close === true) {
+                            alert(request.data.data.msg + '.\nRefresh to apply the changes.');
+                            window.close();
+                            return;
+                        } else if (params['action'] === 'add-custom-cover') {
+                            alert(request.data.data.msg);
                             window.location.href = removeSearchParameters(['action', 'course-id', 'course-name'], true);
+                            return;
                         }
                         showToast(request.data.data.msg);
                         refreshThumbList();
@@ -1702,8 +1713,12 @@ var updateLog = [
     }, {
         targetElem: null,
         image: 'dlight.jpg',
-        title: 'More fixes',
-        desc: '- Custom cover pics now display without flashing<br>- Minor adjustments to themes<br>- Modified keep session alive code<br>- Performance improvements<br>- If you find any bugs, please click the icon on browser toolbar and report the issue',
+        title: 'More Improvements',
+        desc: '- Homepage course widget appears more smoothly<br>' +
+            '- Minor adjustments to themes<br>' +
+            '- Modified keep session alive code<br>' +
+            '- Performance improvements<br>' +
+            '- If you find any bugs, please click the Darklight icon on browser toolbar and report',
         offset: [5, 5, 5, 5]
     }
 ];

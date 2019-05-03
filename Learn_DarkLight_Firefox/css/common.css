@@ -623,7 +623,7 @@ li.d2l-contextmenu-item-title.empty > * {
 .darklight-homepage-courses-widget-complete .d2l-widget-content {
     height: auto;
     max-height: none;
-    overflow: auto;
+    overflow: visible;
 }
 
 .darklight-homepage-courses-loading {

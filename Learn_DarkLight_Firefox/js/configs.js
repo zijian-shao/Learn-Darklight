@@ -244,7 +244,7 @@ function getThemeConfigs(id) {
                         name: 'sci',
                         description: 'Science<span class="color-scheme-preview" style="background:#0073ce"></span>'
                     }],
-                    description: "Select a color scheme"
+                    description: "Choose a color scheme"
                 }, {
                     type: "separator"
                 }, {
@@ -257,6 +257,11 @@ function getThemeConfigs(id) {
                     type: "boolean",
                     value: false,
                     description: "Full-width layout"
+                }, {
+                    key: "tileModeForWidgets",
+                    type: "boolean",
+                    value: true,
+                    description: "Display widgets as tiles"
                 }
             ]
         },

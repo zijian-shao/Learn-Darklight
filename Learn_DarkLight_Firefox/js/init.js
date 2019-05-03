@@ -522,10 +522,6 @@ function initDarklight() {
             document.documentElement.appendChild(cover);
 
             var text = document.createElement("div");
-            if (!document.hidden) {
-                text.innerHTML = '<p><strong>Extension didn\'t work?</strong></p>' +
-                    '<p>Please click the extension icon in toolbar and report this issue. Thank you.</p>';
-            }
             text.style.color = invertColor(themeConfigs.overlayColor, true);
             cover.appendChild(text);
         }
@@ -539,11 +535,10 @@ function initDarklight() {
         // css
         browser.runtime.sendMessage({
             action: 'insertCSS',
-            data: [
-                // {code: 'html{font-size:' + options.GLB_BasicFontSize + 'px!important}'},
-                // {file: 'css/common.css'}
-                {code: 'html{font-size:' + options.GLB_BasicFontSize + 'px!important}'}
-            ]
+            data: {
+                code: 'html{font-size:' + options.GLB_BasicFontSize + 'px!important}',
+                allFrames: true
+            }
         });
 
         // course thumbs

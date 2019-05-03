@@ -1,0 +1,38 @@
+body {
+    background: none !important;
+    color: #ddd;
+}
+
+.d2l-typography {
+    color: #ddd !important;
+}
+
+div.dco div.dco_c, div.dco_f div.dco_c {
+    background: none !important;
+}
+
+.d2l-link, .d2l-link:active, .d2l-link:link, .d2l-link:visited {
+    color: #09b1b9 !important;
+}
+
+/*div.dco div.dco_c ul.dl {*/
+/*    padding-left: 0 !important;*/
+/*}*/
+
+/*div.dco div.dco_c ul.dl li span.dl_p img.darklight-list-icon {*/
+/*    float: left;*/
+/*    filter: brightness(2.5);*/
+/*}*/
+
+/*div.dco div.dco_c ul.dl li span.dl_p img.darklight-list-icon + a.d2l-link {*/
+/*    padding-left: 32px;*/
+/*    display: block;*/
+/*}*/
+
+.vui-list > li {
+    border: none;
+}
+
+.vui-list > .vui-active {
+    background: #424a56;
+}

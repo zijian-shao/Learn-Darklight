@@ -17,4 +17,21 @@ var dlightApp = {
     }
 };
 
-dlightApp.init();
+if (typeof dlightData !== typeof undefined) {
+    dlightApp.init();
+} else {
+    var initIntvCnt = 0;
+    var initIntv = setInterval(function () {
+        if (typeof dlightData !== typeof undefined) {
+            clearInterval(initIntv);
+            dlightApp.init();
+        } else {
+            initIntvCnt++;
+            if (initIntvCnt > 50) {
+                clearInterval(initIntv);
+                console.log('dlightData undefined');
+            }
+        }
+    }, 100);
+}
+

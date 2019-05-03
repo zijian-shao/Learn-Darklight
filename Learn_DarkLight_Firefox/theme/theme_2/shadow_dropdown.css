@@ -6,6 +6,28 @@
     background: var(--d2l-color-celestine);
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f242b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #323841;
+    border: 2px solid #1f242b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--d2l-color-gypsum);
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #323841 #1f242b;
+}
+
 :host .d2l-dropdown-content-width,
 :host .d2l-dropdown-content-pointer > div.d2l-dropdown-menu {
     background: #373e48 !important;
@@ -31,4 +53,3 @@
 d2l-menu-item:hover, d2l-menu-item:focus {
     background-color: var(--d2l-color-celestine-plus-2);
 }
-
