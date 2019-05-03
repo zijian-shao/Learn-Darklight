@@ -12,6 +12,7 @@
     /*--d2l-button-focus-plus-border_-_border-color: var(--dlight-btn-default-border-color);*/
     /*--d2l-button-focus-plus-border_-_box-shadow: none;*/
     --d2l-button-focus_-_box-shadow: var(--dlight-btn-primary-hover-box-shadow);
+    --d2l-alert-default-color: var(--dlight-btn-primary-background-color);
 }
 
 /* navbar */
@@ -123,13 +124,13 @@ d2l-navigation-band {
         margin-bottom: 30px;
     }
 
-    .d2l-tiles-container .d2l-course-banner-container {
+    .d2l-course-banner-container {
         margin-bottom: 30px;
     }
 }
 
 @media (min-width: 1230px) {
-    .d2l-tiles-container .d2l-course-banner-container {
+    .d2l-course-banner-container {
         border-radius: 8px;
         overflow: hidden;
     }
@@ -154,57 +155,173 @@ d2l-navigation-band {
 }
 
 @media screen and (min-width: 768px) {
-
     .homepage-container > div:not(.homepage-row):not(:last-child), .homepage-row > div:not(:last-child), .homepage-row > div > div:not(:last-child) {
-        margin-right: 2.15464%
+        margin-right: 2.15464%;
     }
 
     .homepage-col-1 {
-        width: 5.10825%
+        width: 5.10825%;
     }
 
     .homepage-col-2 {
-        width: 13.87113%
+        width: 13.87113%;
     }
 
     .homepage-col-3 {
-        width: 22.63402%
+        width: 22.63402%;
     }
 
     .homepage-col-4 {
-        width: 31.39691%
+        width: 31.39691%;
     }
 
     .homepage-col-5 {
-        width: 40.15979%
+        width: 40.15979%;
     }
 
     .homepage-col-6 {
-        width: 48.92268%
+        width: 48.92268%;
     }
 
     .homepage-col-7 {
-        width: 57.68557%
+        width: 57.68557%;
     }
 
     .homepage-col-8 {
-        width: 66.44845%
+        width: 66.44845%;
     }
 
     .homepage-col-9 {
-        width: 75.21134%
+        width: 75.21134%;
     }
 
     .homepage-col-10 {
-        width: 83.97423%
+        width: 83.97423%;
     }
 
     .homepage-col-11 {
-        width: 92.73711%
+        width: 92.73711%;
     }
 
     .homepage-col-12 {
-        width: 100%
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .darklight-tile-legacy .d2l-course-banner-container {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .darklight-tile-legacy .homepage-container > div:not(.homepage-row):not(:last-child),
+    .darklight-tile-legacy .homepage-row > div:not(:last-child),
+    .darklight-tile-legacy .homepage-row > div > div:not(:last-child) {
+        margin-right: 5.15464%;
+    }
+
+    .darklight-tile-legacy .homepage-col-1 {
+        width: 3.60825%;
+    }
+
+    .darklight-tile-legacy .homepage-col-2 {
+        width: 12.37113%;
+    }
+
+    .darklight-tile-legacy .homepage-col-3 {
+        width: 21.13402%;
+    }
+
+    .darklight-tile-legacy .homepage-col-4 {
+        width: 29.89691%;
+    }
+
+    .darklight-tile-legacy .homepage-col-5 {
+        width: 38.65979%;
+    }
+
+    .darklight-tile-legacy .homepage-col-6 {
+        width: 47.42268%;
+    }
+
+    .darklight-tile-legacy .homepage-col-7 {
+        width: 56.18557%;
+    }
+
+    .darklight-tile-legacy .homepage-col-8 {
+        width: 64.94845%;
+    }
+
+    .darklight-tile-legacy .homepage-col-9 {
+        width: 73.71134%;
+    }
+
+    .darklight-tile-legacy .homepage-col-10 {
+        width: 82.47423%;
+    }
+
+    .darklight-tile-legacy .homepage-col-11 {
+        width: 91.23711%;
+    }
+
+    .darklight-tile-legacy .homepage-col-12 {
+        width: 100%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-container > div:not(.homepage-row):not(:last-child),
+    .darklight-fullwidth.darklight-tile-legacy .homepage-row > div:not(:last-child),
+    .darklight-fullwidth.darklight-tile-legacy .homepage-row > div > div:not(:last-child) {
+        margin-right: 3.15464%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-1 {
+        width: 4.60825%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-2 {
+        width: 13.37113%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-3 {
+        width: 22.13402%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-4 {
+        width: 30.89691%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-5 {
+        width: 39.65979%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-6 {
+        width: 48.42268%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-7 {
+        width: 57.18557%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-8 {
+        width: 65.94845%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-9 {
+        width: 74.71134%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-10 {
+        width: 83.47423%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-11 {
+        width: 92.23711%;
+    }
+
+    .darklight-fullwidth.darklight-tile-legacy .homepage-col-12 {
+        width: 100%;
     }
 }
 
@@ -460,6 +577,45 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 
 .darklight-homepage-calendar-item:hover .darklight-homepage-calendar-date .day {
     border-top-color: #c3c3bf;
+}
+
+.darklight-tile-legacy .darklight-homepage-calendar {
+    margin: 10px 0 0;
+}
+
+.darklight-tile-legacy .darklight-homepage-calendar-item {
+    position: relative;
+    border: none !important;
+    overflow: hidden;
+    padding-left: 0;
+    transition: all 0.3s ease;
+}
+
+.darklight-tile-legacy .darklight-homepage-calendar-item:hover {
+    padding-left: 25px;
+    border-radius: 6px;
+}
+
+.darklight-tile-legacy .darklight-homepage-calendar-item:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--d2l-color-gypsum);
+    transition: background 0.3s ease;
+}
+
+.darklight-tile-legacy .darklight-homepage-calendar-item:first-child:after {
+    display: none;
+}
+
+.darklight-tile-legacy .darklight-homepage-calendar-item:hover:after,
+.darklight-tile-legacy .darklight-homepage-calendar-item:hover + .darklight-homepage-calendar-item:after {
+    background: transparent;
 }
 
 /* navbar back to top*/
