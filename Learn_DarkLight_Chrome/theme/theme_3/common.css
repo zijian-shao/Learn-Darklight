@@ -13,8 +13,6 @@ d2l-navigation-band {
 
 .blue-banner {
     background: #319be8;
-    background: -moz-linear-gradient(left, #319be8 0%, #0086f1 100%);
-    background: -webkit-linear-gradient(left, #319be8 0%, #0086f1 100%);
     background: linear-gradient(to right, #319be8 0%, #0086f1 100%);
     position: absolute;
     width: 100%;
@@ -27,8 +25,6 @@ d2l-navigation-band {
 
 .d2l-page-main:before {
     content: '';
-    background: -moz-linear-gradient(top, rgba(221, 234, 246, 0.4) 0%, rgba(221, 234, 246, 0) 100%);
-    background: -webkit-linear-gradient(top, rgba(221, 234, 246, 0.4) 0%, rgba(221, 234, 246, 0) 100%);
     background: linear-gradient(to bottom, rgba(221, 234, 246, 0.4) 0%, rgba(221, 234, 246, 0) 100%);
     position: absolute;
     top: 0;
@@ -40,8 +36,6 @@ d2l-navigation-band {
 }
 
 .d2l-tiles-container .d2l-page-main:before {
-    background: -moz-linear-gradient(top, rgba(221, 234, 246, 0.7) 0%, rgba(221, 234, 246, 0) 100%);
-    background: -webkit-linear-gradient(top, rgba(221, 234, 246, 0.7) 0%, rgba(221, 234, 246, 0) 100%);
     background: linear-gradient(to bottom, rgba(221, 234, 246, 0.7) 0%, rgba(221, 234, 246, 0) 100%);
 }
 
@@ -59,8 +53,6 @@ d2l-navigation-band {
 
 .d2l-navigation-s-mobile-menu-header {
     background: #319be8;
-    background: -moz-linear-gradient(left, #319be8 0%, #0086f1 100%);
-    background: -webkit-linear-gradient(left, #319be8 0%, #0086f1 100%);
     background: linear-gradient(to right, #319be8 0%, #0086f1 100%);
     position: relative;
 }
@@ -224,8 +216,6 @@ d2l-simple-overlay {
 
 .d2l-widget.d2l-tile .d2l-widget-header {
     background: #319be8;
-    background: -moz-linear-gradient(left, #319be8 0%, #0086f1 100%);
-    background: -webkit-linear-gradient(left, #319be8 0%, #0086f1 100%);
     background: linear-gradient(to right, #319be8 0%, #0086f1 100%);
     padding: 10px 25px;
     position: relative;

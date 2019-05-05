@@ -1,7 +1,5 @@
 /* common */
 * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -802,8 +800,6 @@ hr {
     padding-right: 5px;
     line-height: 2em;
     background: #ed5d31;
-    background: -moz-linear-gradient(left, #ed5d31 0%, #ec873b 100%);
-    background: -webkit-linear-gradient(left, #ed5d31 0%, #ec873b 100%);
     background: linear-gradient(to right, #ed5d31 0%, #ec873b 100%);
     color: #fff;
     text-align: center;
@@ -1133,6 +1129,17 @@ hr {
     border-color: #138496;
 }
 
+.btn.btn-d2l {
+    color: #fff !important;
+    background: #ed7911;
+    border-color: #ed7911;
+}
+
+.btn.btn-d2l:hover {
+    background: #f98111;
+    border-color: #f98111;
+}
+
 .btn:focus, .btn.btn-primary:focus {
     box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
 }
@@ -1143,6 +1150,14 @@ hr {
 
 .btn.btn-info:focus {
     box-shadow: 0 0 0 4px rgba(17, 187, 214, 0.4);
+}
+
+.btn.btn-d2l:focus {
+    box-shadow: 0 0 0 4px rgba(232, 117, 17, 0.4);
+}
+
+.btn.btn-lowercase {
+    text-transform: none;
 }
 
 .new-tag {
@@ -1198,8 +1213,6 @@ hr {
     color: #aaa;
     font-size: 12px;
     font-weight: bold;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     border: 1px solid #aaa;
     border-radius: 50%;
@@ -1354,14 +1367,11 @@ label.checkbox-label {
     height: 23px;
     cursor: pointer;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     z-index: 1;
     background: rgb(255, 255, 255);
-    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5e5e5', GradientType=0);
     border-radius: 50px;
     transition: left 0.2s ease;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -1392,11 +1402,7 @@ label.checkbox-label {
     margin: 0;
     border: 1px solid #ddd;
     background: rgb(255, 255, 255);
-    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     border-radius: 4px;
 }
@@ -1406,8 +1412,8 @@ label.checkbox-label {
     height: 25px;
     cursor: pointer;
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 0;
+    top: 0;
 }
 
 .checkbox-square label:after {
@@ -1477,13 +1483,9 @@ label.checkbox-label {
     width: 25px;
     height: 25px;
     border-radius: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     border: 1px solid #ddd;
     background: rgb(255, 255, 255);
-    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(220, 220, 220, 1) 100%);
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
@@ -1494,8 +1496,6 @@ label.checkbox-label {
     width: 17px;
     height: 17px;
     background: rgb(142, 219, 109);
-    background: -moz-linear-gradient(top, rgba(142, 219, 109, 1) 1%, rgba(91, 183, 91, 1) 100%);
-    background: -webkit-linear-gradient(top, rgba(142, 219, 109, 1) 1%, rgba(91, 183, 91, 1) 100%);
     background: linear-gradient(to bottom, rgba(142, 219, 109, 1) 1%, rgba(91, 183, 91, 1) 100%);
     position: absolute;
     top: 4px;
@@ -1521,8 +1521,6 @@ label.checkbox-label {
     padding: 10px 10px;
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -1556,8 +1554,6 @@ textarea.input-box {
     overflow: hidden;
     box-shadow: none !important;
     transition: border-color 0.2s ease, background 0.2s ease;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -2292,10 +2288,12 @@ textarea.input-box {
     margin: -30px -30px 30px;
     border-radius: 4px 4px 0 0;
     overflow: hidden;
+    border-bottom: 1px solid #eee;
 }
 
 .update-dialog .dialog-banner img {
     width: 100%;
+    display: block;
 }
 
 .update-dialog .dialog-title {

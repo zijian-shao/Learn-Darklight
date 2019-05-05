@@ -167,7 +167,6 @@ i.arrow.down {
 }
 
 body > header.darklight-navbar-sticky {
-    position: -webkit-sticky;
     position: sticky;
     z-index: 500;
 }
