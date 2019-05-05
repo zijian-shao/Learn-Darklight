@@ -1689,9 +1689,10 @@ var updateLog = [
         offset: 0
     }, {
         targetElem: '#theme-item-4',
-        image: 'theme.jpg',
+        image: 'theme.png',
         title: 'Modern Waterloo Theme',
-        desc: 'Get consistent experiences across sites. Click the 3-dot button to show more theme options.',
+        desc: 'Get consistent experiences across sites.<br>' +
+            '<span style="color: #f4ad24; font-weight: bold;">Click the 3-dot button to view theme options.</span>',
         offset: 0
     }, {
         targetElem: '#opt-general-1-5 < .option-group',
@@ -1705,10 +1706,10 @@ var updateLog = [
         desc: 'Make it convenient to browse course contents.',
         offset: [10, 10, 0, 10]
     }, {
-        targetElem: '#image-gallery',
+        targetElem: '#dlight-gallery',
         image: 'pd.jpg',
         title: 'New images added to gallery',
-        desc: 'I LOVE PD (づ￣ 3￣)づ',
+        desc: 'Image sets of multiple themes for course cover pics.<br>And special love for PD (づ￣ 3￣)づ',
         offset: [5, 5, 5, 5]
     }, {
         targetElem: null,

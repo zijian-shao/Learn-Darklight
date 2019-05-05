@@ -12,8 +12,6 @@ small {
     height: 100vh;
     overflow: hidden;
     background: #333 !important;
-    background: -moz-linear-gradient(bottom, #444 0%, #111 50%) !important;
-    background: -webkit-linear-gradient(bottom, #444 0%, #111 50%) !important;
     background: linear-gradient(to top, #444 0%, #111 50%) !important;
 }
 

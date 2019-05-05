@@ -368,7 +368,8 @@ function getLink(key) {
         gplusShare: 'https://plus.google.com/share?url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
         linkedInShare: 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
         mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension',
-        imageGallery: 'https://www.zijianshao.com/dlight/course-images/'
+        dlightGallery: 'https://www.zijianshao.com/dlight/gallery/?m=sets',
+        brightspaceGallery: 'https://www.zijianshao.com/dlight/gallery/?m=brightspace'
     };
     return list[key];
 }
