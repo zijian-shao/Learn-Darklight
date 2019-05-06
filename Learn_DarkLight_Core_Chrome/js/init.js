@@ -1,5 +1,7 @@
 var baseURL, currURL, options, configs;
 
+var initReady = false;
+
 function injectCSS(src, tag, type) {
 
     var style;
@@ -281,6 +283,8 @@ function initDarklight() {
         document.documentElement.appendChild(cover);
 
         extensionUpdate();
+
+        initReady = true;
     }
 
     baseURL = chrome.runtime.getURL('');

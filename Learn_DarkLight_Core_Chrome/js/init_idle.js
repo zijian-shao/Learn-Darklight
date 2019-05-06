@@ -228,7 +228,8 @@ function homepageFunc() {
         if (headText.match(/SYSTEM ALERT/) || headText.match(/News/)) {
             if (!isWLU()) {
                 // remove sys alert if empty
-                var _alertHtml = headSelf.closest('.d2l-widget').find('.d2l-widget-content .d2l-htmlblock').first().clone();
+                var alertHtmlDom = headSelf.closest('.d2l-widget').find('.d2l-widget-content .d2l-htmlblock').first();
+                var _alertHtml = alertHtmlDom.clone();
                 _alertHtml.find('a').remove();
                 _alertHtml.find('script').remove();
                 if (_alertHtml.text().trim() === '') {
@@ -259,25 +260,7 @@ function homepageFunc() {
 
 }
 
-function initDarklightIdle() {
-
-    if (currURL.includes('/content/enforced/'))
-        return;
-
-    // favicon
-    var head = $('head');
-    head.find('link[rel="icon"]').remove();
-    head.append($('<link rel="icon" type="image/png" href="' + baseURL + 'icon/icon32.png' + '">'));
-
-    // conflict detect
-    detectExtConflict();
-
-    // back to top button
-    addBackToTopButton();
-
-    // fix navigation
-    fixNavigation();
-
+function initDarklightFunc(){
     // display group members
     if (currURL.match(/\/d2l\/lms\/group\/user_available_group_list\.d2l/g)) {
         listMembersBtn();
@@ -307,16 +290,74 @@ function initDarklightIdle() {
     }, 3000);
 }
 
+function initDarklightIdle() {
 
-if (document.hasFocus()) {
+    if (currURL.includes('/content/enforced/'))
+        return;
+
+    // favicon
+    var head = $('head');
+    head.find('link[rel="icon"]').remove();
+    head.append($('<link rel="icon" type="image/png" href="' + baseURL + 'icon/icon32.png' + '">'));
+
+    // conflict detect
+    detectExtConflict();
+
+    // back to top button
+    addBackToTopButton();
+
+    // fix navigation
+    fixNavigation();
+
+    if (!document.hidden) {
+
+        initDarklightIdle.initialized = true;
+        setTimeout(function () {
+            initDarklightFunc();
+        }, 50);
+
+    } else {
+
+        document.addEventListener("visibilitychange", function () {
+            if (!document.hidden && initDarklightIdle.initialized !== true) {
+                initDarklightIdle.initialized = true;
+                setTimeout(function () {
+                    initDarklightFunc();
+                }, 50);
+            }
+        }, false);
+
+    }
+
+}
+
+// if (document.hasFocus()) {
+//     initDarklightIdle();
+// } else {
+//     var focusInterval = setInterval(function () {
+//         if (document.hasFocus()) {
+//             clearInterval(focusInterval);
+//             setTimeout(function () {
+//                 initDarklightIdle();
+//             }, 100);
+//         }
+//     }, 300);
+// }
+
+if (initReady) {
     initDarklightIdle();
 } else {
-    var focusInterval = setInterval(function () {
-        if (document.hasFocus()) {
-            clearInterval(focusInterval);
-            setTimeout(function () {
-                initDarklightIdle();
-            }, 100);
+    var initIntvCnt = 0;
+    var initIntv = setInterval(function () {
+        if (initReady) {
+            clearInterval(initIntv);
+            initDarklightIdle();
+        } else {
+            initIntvCnt++;
+            if (initIntvCnt > 50) {
+                clearInterval(initIntv);
+                removeOverlay(true);
+            }
         }
-    }, 300);
+    }, 100);
 }
