@@ -929,7 +929,10 @@ function initOptions() {
                     if (request.data.err_code === 0) {
                         if (request.data.data.need_close === true) {
                             alert(request.data.data.msg + '.\nRefresh to apply the changes.');
-                            window.close();
+                            chrome.tabs.getCurrent(function (tab) {
+                                chrome.tabs.remove(tab.id, function () {
+                                });
+                            });
                             return;
                         } else if (params['action'] === 'add-custom-cover') {
                             alert(request.data.data.msg);

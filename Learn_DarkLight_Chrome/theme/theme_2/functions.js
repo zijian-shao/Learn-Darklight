@@ -95,12 +95,22 @@ function initTheme() {
     }
 
     // input search box
-    if (document.querySelector('d2l-input-search') !== null && document.querySelector('d2l-input-search').shadowRoot !== null) {
-        injectCSS(':host{--d2l-input_-_background-color:#424a56;' +
-            '--d2l-input_-_border-color:#424a56;' +
-            '--d2l-input_-_box-shadow:none}',
-            $(document.querySelector('d2l-input-search').shadowRoot), 'text');
-
+    var inputSearch = document.querySelector('d2l-input-search');
+    if (inputSearch !== null) {
+        var waitSearchIntCnt = 0;
+        var waitSearchInt = setInterval(function () {
+            if (inputSearch.shadowRoot !== null) {
+                clearInterval(waitSearchInt);
+                injectCSS(':host{--d2l-input_-_background-color:#424a56;' +
+                    '--d2l-input_-_border-color:#424a56;' +
+                    '--d2l-input_-_box-shadow:none}',
+                    $(inputSearch.shadowRoot), 'text');
+            }
+            waitSearchIntCnt++;
+            if (waitSearchIntCnt > 20) {
+                clearInterval(waitSearchInt);
+            }
+        }, 300);
     }
 
     // floating buttons
