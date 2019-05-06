@@ -1431,6 +1431,7 @@ function customCourseThumbs(cards) {
                 var enrollCardImg = el.cardRoot.querySelector('div[slot="header"] > div.d2l-enrollment-card-image-container');
                 enrollCardImg.style.backgroundImage = 'url(' + thumbData['ID_' + el.id]['thumb_image'] + ')';
                 enrollCardImg.querySelector('d2l-course-image').style.opacity = '0';
+                thumbData['ID_' + el.id]['exists'] = true;
             }
 
             var moreBtn = el.cardRoot.querySelector('d2l-dropdown-more');
@@ -1455,6 +1456,19 @@ function customCourseThumbs(cards) {
                 }
             });
         });
+
+        // var hasUnused = false;
+        // for (var k in thumbData) {
+        //     if (!thumbData[k].hasOwnProperty('exists')) {
+        //         // console.log(thumbData[k]['course_id'] + ' does not exists');
+        //         hasUnused = true;
+        //     }
+        // }
+        // if (hasUnused) {
+        //     alert('[LEARN DARKLIGHT]\n' +
+        //         'You have unused custom course cover picture. ' +
+        //         'Please remember to remove them to improve extension performance.');
+        // }
     }
 
     // course home banner
@@ -1759,7 +1773,7 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
                 var orgSty = self.attr('style');
                 if (typeof orgSty !== typeof undefined) {
                     var hex = rgb2hex(self.css('color'));
-                    if (orgSty.match(/color\:/g) && !orgSty.match(/-color\:/g) && getContrastColor(hex) === '#ffffff') {
+                    if (orgSty.match(/color\:/g) && !orgSty.match(/-color\:/g) && invertColor(hex, true).toLowerCase() === '#ffffff') {
                         self.css('color', invertColor(hex));
                     }
                 }
