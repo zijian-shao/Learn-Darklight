@@ -1185,6 +1185,11 @@ function homepageFunc() {
                                     }
                                 });
 
+                                setTimeout(function () {
+                                    $('#darklight-homepage-courses-loading').hide();
+                                    courseWidget.addClass('darklight-homepage-courses-widget-complete');
+                                }, 100);
+
                                 // calendar
                                 homepageCalendar(myCards, myPanelID);
                                 // custom course thumb
@@ -1193,11 +1198,6 @@ function homepageFunc() {
                                 courseDirectToContent(myCards);
                                 // quick access
                                 courseTileContextMenu(myPanel, myCards);
-
-                                setTimeout(function () {
-                                    $('#darklight-homepage-courses-loading').hide();
-                                    courseWidget.addClass('darklight-homepage-courses-widget-complete');
-                                }, 100);
 
                             }, delayVal * times);
 
@@ -2071,6 +2071,10 @@ function initDarklightIdle() {
         d2lMyCoursesLoading.id = 'darklight-homepage-courses-loading';
         d2lMyCoursesLoading.innerHTML = '<div class="darklight-block-page-loader darklight-block-page-loader-d2l"></div>';
         d2lMyCourses[0].parentNode.append(d2lMyCoursesLoading);
+
+        if (d2lMyCourses.hasClass('darklight-homepage-courses-widget-complete')) {
+            $(d2lMyCoursesLoading).hide();
+        }
     }
 
     if (!document.hidden) {
