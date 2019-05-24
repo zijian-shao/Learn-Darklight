@@ -60,36 +60,36 @@ function getCustomThemeOption(name) {
     return options['THEME_ID_' + options.GLB_ThemeID + '_OPT_' + name];
 }
 
-function parseServerCommJson(json) {
-    if (typeof (Storage) === typeof undefined) return;
-    json.forEach(function (e, i) {
-        var md5Str = md5(btoa(JSON.stringify(e)));
-        var md5Store = window.localStorage.getItem('Darklight.Server.' + md5Str);
-        if (e.action === 'none') {
-            // none
-            var keys = Object.keys(localStorage);
-            keys.forEach(function (e, i) {
-                if (e.match(/^Darklight\.Server\./i)) {
-                    window.localStorage.removeItem(e);
-                }
-            });
-        } else if (e.action === 'notification') {
-            // notification
-            if (e.data.frequency === 'once' && md5Store !== null) return;
-            if (e.data.type === 'alert') {
-                if ((currURL2.match(/\/d2l\/home$/) && e.data.position === 'homepage')
-                    || e.data.position !== 'homepage') {
-                    window.localStorage.setItem('Darklight.Server.' + md5Str, Math.floor(Date.now() / 1000).toString());
-                    alert(e.data.message);
-                }
-            } else if (e.data.type === 'toast') {
-
-            }
-        } else if (e.action === 'upgrade') {
-
-        }
-    });
-}
+// function parseServerCommJson(json) {
+//     if (typeof (Storage) === typeof undefined) return;
+//     json.forEach(function (e, i) {
+//         var md5Str = md5(btoa(JSON.stringify(e)));
+//         var md5Store = window.localStorage.getItem('Darklight.Server.' + md5Str);
+//         if (e.action === 'none') {
+//             // none
+//             var keys = Object.keys(localStorage);
+//             keys.forEach(function (e, i) {
+//                 if (e.match(/^Darklight\.Server\./i)) {
+//                     window.localStorage.removeItem(e);
+//                 }
+//             });
+//         } else if (e.action === 'notification') {
+//             // notification
+//             if (e.data.frequency === 'once' && md5Store !== null) return;
+//             if (e.data.type === 'alert') {
+//                 if ((currURL2.match(/\/d2l\/home$/) && e.data.position === 'homepage')
+//                     || e.data.position !== 'homepage') {
+//                     window.localStorage.setItem('Darklight.Server.' + md5Str, Math.floor(Date.now() / 1000).toString());
+//                     alert(e.data.message);
+//                 }
+//             } else if (e.data.type === 'toast') {
+//
+//             }
+//         } else if (e.action === 'upgrade') {
+//
+//         }
+//     });
+// }
 
 function extensionUpdate() {
 
@@ -107,22 +107,22 @@ function extensionUpdate() {
         });
 
         // server communication
-        if (options.EXT_ReceiveNotification && typeof (Storage) !== typeof undefined && false) {
-            var lastRequest = window.localStorage.getItem('Darklight.Timestamp.ServerCommunication');
-            if (lastRequest === null || Math.floor(Date.now() / 1000) - lastRequest > 600) {
-                window.localStorage.setItem('Darklight.Timestamp.ServerCommunication', Math.floor(Date.now() / 1000).toString());
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var json = JSON.parse(this.responseText);
-                        parseServerCommJson(json);
-                        console.log(json);
-                    }
-                };
-                xhttp.open('GET', 'https://www.zijianshao.com/dlight/notification/?version=' + newVer + '&platform=' + getBrowser()['name'].toLowerCase(), true);
-                xhttp.send();
-            }
-        }
+        // if (options.EXT_ReceiveNotification && typeof (Storage) !== typeof undefined && false) {
+        //     var lastRequest = window.localStorage.getItem('Darklight.Timestamp.ServerCommunication');
+        //     if (lastRequest === null || Math.floor(Date.now() / 1000) - lastRequest > 600) {
+        //         window.localStorage.setItem('Darklight.Timestamp.ServerCommunication', Math.floor(Date.now() / 1000).toString());
+        //         var xhttp = new XMLHttpRequest();
+        //         xhttp.onreadystatechange = function () {
+        //             if (this.readyState == 4 && this.status == 200) {
+        //                 var json = JSON.parse(this.responseText);
+        //                 parseServerCommJson(json);
+        //                 console.log(json);
+        //             }
+        //         };
+        //         xhttp.open('GET', 'https://www.zijianshao.com/dlight/notification/?version=' + newVer + '&platform=' + getBrowser()['name'].toLowerCase(), true);
+        //         xhttp.send();
+        //     }
+        // }
 
         // return on install
         if (oldVer == '0.0.0')

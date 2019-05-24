@@ -1105,7 +1105,7 @@ function homepageFunc() {
                         var myPanel = _getPanelSelected();
                         var myPanelID = myPanel.id;
                         var myEnrollCards = myPanel.querySelector('d2l-my-courses-content').shadowRoot
-                            .querySelectorAll('.my-courses-content > .course-tile-grid > d2l-enrollment-card');
+                            .querySelectorAll('.my-courses-content > .course-card-grid > d2l-enrollment-card');
                         var myCards = [];
 
                         var courseTileLoaded = true;
