@@ -511,6 +511,11 @@ function initDarklight() {
 
         themeConfigs = getThemeConfigs(options.GLB_ThemeID);
 
+        browser.runtime.sendMessage({
+            action: 'executeScript',
+            data: {file: 'theme/theme_' + options.GLB_ThemeID + '/functions.js'}
+        });
+
         if (options['THEME_ID_' + options.GLB_ThemeID + '_OPT_overrideOverlayColor'] !== undefined)
             themeConfigs.overlayColor = options['THEME_ID_' + options.GLB_ThemeID + '_OPT_overrideOverlayColor'];
 

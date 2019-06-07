@@ -7,6 +7,7 @@ html {
     --d2l-button-focus_-_box-shadow: 0 0 0 4px rgba(9, 177, 185, 0.3) !important;
     --d2l-button-focus-plus-border_-_border-color: transparent !important;
     --d2l-alert-default-color: #09b1b9;
+    --darklight-background-color: #323841;
 }
 
 .d2l-page-main-padding {
@@ -126,7 +127,7 @@ body {
 }
 
 #d2l_body, .d2l-body {
-    background: #323841;
+    background: var(--darklight-background-color);
 }
 
 .d2l-page-bg {
@@ -603,6 +604,10 @@ d2l-dropdown-menu {
 }
 
 /* navbar */
+body > header {
+    background: var(--darklight-background-color);
+}
+
 d2l-navigation-band,
 .d2l-navigation-shadow-drop-border,
 .d2l-navigation-shadow-gradient {
@@ -614,7 +619,7 @@ d2l-navigation-band,
 }
 
 .d2l-navigation-s, .d2l-navigation-s-no-login {
-    background: #323841;
+    background: var(--darklight-background-color);
 }
 
 .d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header {
@@ -702,7 +707,7 @@ d2l-navigation-main-header d2l-icon.d2l-navigation-button-icon {
 
 .d2l-navigation-s-mobile-menu-content {
     border-top: none !important;
-    background: #323841;
+    background: var(--darklight-background-color);
 }
 
 .d2l-navigation-s-mobile-menu-header {
@@ -911,11 +916,11 @@ iframe {
 }
 
 .d2l-partial-render-shim1 {
-    background: #323841;
+    background: var(--darklight-background-color);
 }
 
 .d2l-shim {
-    background: #323841;
+    background: var(--darklight-background-color);
 }
 
 .d2l-imagelink d2l-icon {
@@ -1024,7 +1029,7 @@ iframe {
 
 /* tabs */
 .daylight .d_tabs_header .d_tabs_c, .daylight .d_tabs_header td.d_tabs_c_o {
-    border: 2px solid #323841;
+    border: 2px solid var(--darklight-background-color);
     border-bottom: none;
     background: #373e48;
 }
@@ -1179,7 +1184,7 @@ td.d2l-le-calendar-half {
 }
 
 td.d2l-le-calendar-weekend, th.d2l-le-calendar-weekend, .d2l-le-calendar-week-header.d2l-le-calendar-weekend, .d2l-le-calendar-week-all td.d2l-le-calendar-weekend, .d2l-le-calendar-week-events td.d2l-le-calendar-weekend {
-    background: #323841;
+    background: var(--darklight-background-color);
 }
 
 .d2l-le-calendar-week-days .d2l-le-calendar-week-header {
@@ -1270,7 +1275,7 @@ td.d2l-le-calendar-weekend, th.d2l-le-calendar-weekend, .d2l-le-calendar-week-he
 }
 
 .d2l-menuflyout-contents {
-    background: #323841;
+    background: var(--darklight-background-color);
     border: none !important;
 }
 
@@ -1640,7 +1645,7 @@ li.d2l-contextmenu-item-title {
     }
 
     .fix-side-panel .d2l-twopanelselector-side::-webkit-scrollbar-thumb:active {
-        background: #323841;
+        background: var(--darklight-background-color);
     }
 
     .fix-side-panel .d2l-twopanelselector-side {

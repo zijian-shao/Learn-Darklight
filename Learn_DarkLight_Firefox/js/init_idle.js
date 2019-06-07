@@ -408,20 +408,23 @@ function addBackToTopButtonNavbar() {
         scrollToUtil(0, 300);
     });
 
-    var intervalCnt = 0;
-    var interval = setInterval(function () {
-        if (typeof navWrapper === typeof undefined || !navWrapper.length) {
-            navWrapper = $('d2l-navigation d2l-navigation-main-footer .d2l-navigation-s-main-wrapper');
-        } else {
-            clearInterval(interval);
-            btn.appendTo(navWrapper);
-            _addBackToTopButton();
-        }
-        intervalCnt++;
-        if (intervalCnt > 10) {
-            clearInterval(interval);
-        }
-    }, 800);
+    navWrapper = $('d2l-navigation d2l-navigation-main-footer .d2l-navigation-s-main-wrapper');
+    btn.appendTo(navWrapper);
+
+    // var intervalCnt = 0;
+    // var interval = setInterval(function () {
+    //     if (typeof navWrapper === typeof undefined || !navWrapper.length) {
+    //         navWrapper = $('d2l-navigation d2l-navigation-main-footer .d2l-navigation-s-main-wrapper');
+    //     } else {
+    //         clearInterval(interval);
+    //         btn.appendTo(navWrapper);
+    //         _addBackToTopButton();
+    //     }
+    //     intervalCnt++;
+    //     if (intervalCnt > 10) {
+    //         clearInterval(interval);
+    //     }
+    // }, 800);
 
     $(window).on('scroll', function () {
         _addBackToTopButton();
@@ -801,11 +804,13 @@ function fixSidePanelSelector() {
         }
         // change height
         footerH = footer.outerHeight();
-        if (window.scrollY < themeConfigs.headerHeight) {
+        fixNavParam1 = (options.GLB_FixNavigation) ? footerH : 0;
+        fixNavParam2 = (options.GLB_FixNavigation) ? 0 : footerH;
+        if (window.scrollY < themeConfigs.headerHeight + fixNavParam2) {
             panelSide.css('top', (footerH + themeConfigs.headerHeight - window.scrollY) + 'px');
             panelSide.css('height', 'calc(100vh - ' + (footerH + themeConfigs.headerHeight + panelSidePadTop - window.scrollY) + 'px)');
         } else {
-            panelSide.css('top', footerH + 'px');
+            panelSide.css('top', fixNavParam1 + 'px');
             panelSide.css('height', 'calc(100vh - ' + (footerH + panelSidePadTop) + 'px)');
         }
     }
@@ -832,6 +837,8 @@ function fixSidePanelSelector() {
     var panelSidePadTop = Number(panelSide.css('padding-top').match(/\d+/g)[0]);
     var footerH = 0;
     var footer = $('d2l-navigation-main-footer');
+    var fixNavParam1 = (options.GLB_FixNavigation) ? footerH : 0;
+    var fixNavParam2 = (options.GLB_FixNavigation) ? 0 : footerH;
 
     // wait for footer
     if (footer.length) {
@@ -1823,6 +1830,75 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
 
 }
 
+function waitForNavbarReady() {
+
+    function onNavbarReady() {
+        if (options.GLB_FixNavigation && options.GLB_BackToTopButtonNavbar) {
+            addBackToTopButtonNavbar();
+        }
+
+        // fix navigation
+        if (options.GLB_FixNavigation) {
+            // fixNavigation();
+            fixNavigationSticky();
+        }
+
+        if (typeof themeOnNavbarReady === 'function') {
+            themeOnNavbarReady(d2lNavigation);
+        }
+
+        setTimeout(function () {
+            $('d2l-navigation').removeClass('darklight-navigation-hidden');
+        }, 1);
+    }
+
+    function testNavbarReady() {
+        if (d2lNavigation.shadowRoot === null) return false;
+        if (d2lNavigationMainHeader === null || d2lNavigationMainHeader.shadowRoot === null) return false;
+        if (d2lNavigationMainFooter === null || d2lNavigationMainFooter.shadowRoot === null) return false;
+
+        var d2lNavigationButtonNotificationIconReady = true;
+        d2lNavigationButtonNotificationIcon.forEach(function (el) {
+            if (el.shadowRoot === null) d2lNavigationButtonNotificationIconReady = false;
+        });
+        if (!d2lNavigationButtonNotificationIconReady) return false;
+
+        if (d2lNavigationButtonNotificationIcon === null || d2lNavigationButtonNotificationIcon.shadowRoot === null) return false;
+        if (d2lNavigationSeparator === null || d2lNavigationSeparator.shadowRoot === null) return false;
+        if (d2lNavigationLinkImage === null || d2lNavigationLinkImage.shadowRoot === null) return false;
+        if (d2lNavigationBandMobile === null || d2lNavigationBandMobile.shadowRoot === null) return false;
+        if (d2lNavigationLinkImageMobile === null || d2lNavigationLinkImageMobile.shadowRoot === null) return false;
+
+        return true;
+    }
+
+    var d2lNavigation = document.querySelector('header > nav > d2l-navigation');
+    if (d2lNavigation === null) return;
+    var d2lNavigationMainHeader = d2lNavigation.querySelector('d2l-navigation-main-header'),
+        d2lNavigationMainFooter = d2lNavigation.querySelector('d2l-navigation-main-footer'),
+        d2lNavigationSMobileMenu = d2lNavigation.querySelector('.d2l-navigation-s-mobile-menu'),
+        d2lNavigationButtonNotificationIcon = d2lNavigationMainHeader.querySelectorAll('d2l-navigation-button-notification-icon'),
+        d2lNavigationSeparator = d2lNavigationMainHeader.querySelector('d2l-navigation-separator'),
+        d2lNavigationLinkImage = d2lNavigationMainHeader.querySelector('d2l-navigation-link-image'),
+        d2lNavigationBandMobile = d2lNavigationSMobileMenu.querySelector('d2l-navigation-band'),
+        d2lNavigationLinkImageMobile = d2lNavigationSMobileMenu.querySelector('d2l-navigation-band');
+
+    var waitIntCnt = 0;
+    var waitInt = setInterval(function () {
+        if (testNavbarReady()) {
+            clearInterval(waitInt);
+            onNavbarReady();
+        } else {
+            waitIntCnt++;
+            if (waitIntCnt > 100) {
+                clearInterval(waitInt);
+                onNavbarReady();
+            }
+        }
+    }, 200);
+
+}
+
 function replaceLogo(logoPath, logoFile) {
     var logoImg = $('d2l-navigation-link-image');
     logoImg.each(function () {
@@ -1866,10 +1942,12 @@ function initDarklightFunc() {
     injectJS(baseURL + 'js/inject.js', 'head');
 
     // theme js
+    initTheme();
+
     var scriptArr = [];
-    scriptArr.push({
-        file: 'theme/theme_' + options.GLB_ThemeID + '/functions.js'
-    });
+    // scriptArr.push({
+    //     file: 'theme/theme_' + options.GLB_ThemeID + '/functions.js'
+    // });
     if (options.GLB_EnableCustomStyle) {
         scriptArr.push({
             code: options.GLB_CustomJS
@@ -1930,15 +2008,9 @@ function initDarklightFunc() {
         addBackToTopButton();
     }
 
-    if (options.GLB_FixNavigation && options.GLB_BackToTopButtonNavbar) {
-        addBackToTopButtonNavbar();
-    }
-
-    // fix navigation
-    if (options.GLB_FixNavigation) {
-        // fixNavigation();
-        fixNavigationSticky();
-    }
+    setTimeout(function () {
+        waitForNavbarReady();
+    }, 0);
 
     // display group members
     if (currURL.match(/\/d2l\/lms\/group\/user_available_group_list\.d2l/g) && options.GROUP_ListMembersBtn) {
@@ -2061,6 +2133,7 @@ function initDarklightIdle() {
         injectCSS(options.GLB_CustomCSS, 'head', 'text');
 
     // init homepage course widget even document hidden
+    $('d2l-navigation').addClass('darklight-navigation-hidden');
     if (currURL2.match(/\/d2l\/home$/) && !isWLU()) {
         var d2lMyCourses = $('d2l-my-courses');
         var courseWidget = d2lMyCourses.closest('div.d2l-widget');
@@ -2071,7 +2144,7 @@ function initDarklightIdle() {
         d2lMyCoursesLoading.id = 'darklight-homepage-courses-loading';
         d2lMyCoursesLoading.innerHTML = '<div class="darklight-block-page-loader darklight-block-page-loader-d2l"></div>';
         d2lMyCourses[0].parentNode.append(d2lMyCoursesLoading);
-        
+
         if (d2lMyCourses.hasClass('darklight-homepage-courses-widget-complete')) {
             $(d2lMyCoursesLoading).hide();
         }
@@ -2105,12 +2178,12 @@ function initDarklightIdle() {
 
 var html = $('html'), head = $('head'), body = $('body');
 
-if (initReady) {
+if (initReady && typeof initTheme === 'function') {
     initDarklightIdle();
 } else {
     var initIntvCnt = 0;
     var initIntv = setInterval(function () {
-        if (initReady) {
+        if (initReady && typeof initTheme === 'function') {
             clearInterval(initIntv);
             initDarklightIdle();
         } else {
