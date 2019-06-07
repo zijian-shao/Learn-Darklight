@@ -37,14 +37,31 @@ function initTheme() {
             action: 'insertCSS',
             data: {code: '[darklight-legacy-widget-viewer]{filter:none!important;background:none!important}'}
         });
+
         $('iframe').each(function (idx, el) {
+            var self = $(el);
             if (el.hasAttribute('src') && el.getAttribute('src').match(/\/d2l\/lp\/homepage\/LegacyWidgetViewer\.d2l/gi)) {
                 el.setAttribute('darklight-legacy-widget-viewer', '');
-                var iframeDocument = this.contentDocument || this.contentWindow.document;
-                injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions_legacy_widget_viewer.js',
-                    $(iframeDocument.head), 'file');
-                injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/iframe_legacy_widget_viewer.css',
-                    $(iframeDocument.head), 'file');
+                var loadingCont = self.prev('.d2l-iframe-loading-container');
+                if (loadingCont.css('display') !== 'none') {
+                    var targetNode = loadingCont[0];
+                    var observer = new MutationObserver(function () {
+                        if (targetNode.style.display === 'none') {
+                            var iframeDocument = el.contentDocument || el.contentWindow.document;
+                            injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions_legacy_widget_viewer.js',
+                                $(iframeDocument.head), 'file');
+                            injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/iframe_legacy_widget_viewer.css',
+                                $(iframeDocument.head), 'file');
+                        }
+                    });
+                    observer.observe(targetNode, {attributes: true});
+                } else {
+                    var iframeDocument = this.contentDocument || this.contentWindow.document;
+                    injectJS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/functions_legacy_widget_viewer.js',
+                        $(iframeDocument.head), 'file');
+                    injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/iframe_legacy_widget_viewer.css',
+                        $(iframeDocument.head), 'file');
+                }
             }
         });
     }
@@ -120,23 +137,23 @@ function initTheme() {
     }
 
     // wait for navbar
-    var d2lNavigation = document.querySelector('d2l-navigation');
-    if (d2lNavigation !== null) {
-        if (d2lNavigation.shadowRoot !== null) {
-            themeOnNavbarReady(d2lNavigation);
-        } else {
-            var navCounter = 0;
-            var navInterval = setInterval(function () {
-                if (d2lNavigation.shadowRoot !== null || navCounter > 20) {
-                    clearInterval(navInterval);
-                    setTimeout(function () {
-                        themeOnNavbarReady(d2lNavigation);
-                    }, 10);
-                }
-                navCounter++;
-            }, 200);
-        }
-    }
+    // var d2lNavigation = document.querySelector('d2l-navigation');
+    // if (d2lNavigation !== null) {
+    //     if (d2lNavigation.shadowRoot !== null) {
+    //         themeOnNavbarReady(d2lNavigation);
+    //     } else {
+    //         var navCounter = 0;
+    //         var navInterval = setInterval(function () {
+    //             if (d2lNavigation.shadowRoot !== null || navCounter > 20) {
+    //                 clearInterval(navInterval);
+    //                 setTimeout(function () {
+    //                     themeOnNavbarReady(d2lNavigation);
+    //                 }, 10);
+    //             }
+    //             navCounter++;
+    //         }, 200);
+    //     }
+    // }
 
     if (currURL.match(/\/d2l\/login/gi) && currURL.match(/noRedirect=1/gi)) {
         $('.d2l-page-main, .d2l-login-portal-heading').css({
@@ -203,4 +220,4 @@ function themeOnCourseTabAvailable(d2lTabs) {
     });
 }
 
-initTheme();
+// initTheme();

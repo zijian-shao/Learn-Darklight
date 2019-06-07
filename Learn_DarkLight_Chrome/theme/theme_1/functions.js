@@ -36,21 +36,21 @@ function initTheme() {
     }
 
     // wait for navbar
-    var d2lNavigation = document.querySelector('d2l-navigation');
-    if (d2lNavigation !== null) {
-        if (d2lNavigation.shadowRoot !== null) {
-            themeOnNavbarReady(d2lNavigation);
-        } else {
-            var navCounter = 0;
-            var navInterval = setInterval(function () {
-                if (d2lNavigation.shadowRoot !== null || navCounter > 20) {
-                    clearInterval(navInterval);
-                    themeOnNavbarReady(d2lNavigation);
-                }
-                navCounter++;
-            }, 200);
-        }
-    }
+    // var d2lNavigation = document.querySelector('d2l-navigation');
+    // if (d2lNavigation !== null) {
+    //     if (d2lNavigation.shadowRoot !== null) {
+    //         themeOnNavbarReady(d2lNavigation);
+    //     } else {
+    //         var navCounter = 0;
+    //         var navInterval = setInterval(function () {
+    //             if (d2lNavigation.shadowRoot !== null || navCounter > 20) {
+    //                 clearInterval(navInterval);
+    //                 themeOnNavbarReady(d2lNavigation);
+    //             }
+    //             navCounter++;
+    //         }, 200);
+    //     }
+    // }
 }
 
 function themeOnNavbarReady(d2lNavigation) {
@@ -67,4 +67,4 @@ function themeOnNavbarReady(d2lNavigation) {
     }
 }
 
-initTheme();
+// initTheme();
