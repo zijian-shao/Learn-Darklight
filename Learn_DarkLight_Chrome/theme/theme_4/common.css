@@ -16,6 +16,10 @@
 }
 
 /* navbar */
+.d2l-navigation-s {
+    background-color: transparent;
+}
+
 d2l-navigation-main-header {
     background: #000 !important;
 }

@@ -52,6 +52,10 @@
 }
 
 /* navbar */
+.d2l-navigation-s, .d2l-navigation-s-no-login {
+    background: #fff !important;
+}
+
 .d2l-navigation-s-header {
     border: none;
 }
