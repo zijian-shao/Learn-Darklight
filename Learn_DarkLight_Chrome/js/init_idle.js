@@ -1849,7 +1849,7 @@ function waitForNavbarReady() {
 
         setTimeout(function () {
             $('d2l-navigation').removeClass('darklight-navigation-hidden');
-        }, 1);
+        }, 0);
     }
 
     function testNavbarReady() {
@@ -2178,21 +2178,24 @@ function initDarklightIdle() {
 
 var html = $('html'), head = $('head'), body = $('body');
 
-if (initReady && typeof initTheme === 'function') {
-    initDarklightIdle();
-} else {
-    var initIntvCnt = 0;
-    var initIntv = setInterval(function () {
-        if (initReady && typeof initTheme === 'function') {
-            clearInterval(initIntv);
-            initDarklightIdle();
-        } else {
-            initIntvCnt++;
-            if (initIntvCnt > 50) {
+try {
+    if (initReady && typeof initTheme === 'function') {
+        initDarklightIdle();
+    } else {
+        var initIntvCnt = 0;
+        var initIntv = setInterval(function () {
+            if (initReady && typeof initTheme === 'function') {
                 clearInterval(initIntv);
-                removeOverlay(true);
+                initDarklightIdle();
+            } else {
+                initIntvCnt++;
+                if (initIntvCnt > 50) {
+                    clearInterval(initIntv);
+                    removeOverlay(true);
+                }
             }
-        }
-    }, 100);
+        }, 100);
+    }
+} catch (err) {
+    console.log('Learn Darklight Error Message: ' + err.message);
 }
-
