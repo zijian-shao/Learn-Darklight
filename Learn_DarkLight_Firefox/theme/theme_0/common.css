@@ -1,6 +1,6 @@
 /* body bg */
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
-    background: #fff;
+    background: #fff !important;
     min-height: 842px;
 }
 

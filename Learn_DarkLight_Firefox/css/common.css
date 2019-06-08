@@ -637,8 +637,3 @@ li.d2l-contextmenu-item-title.empty > * {
     z-index: 100;
     padding: 30px 0;
 }
-
-/* hide d2l navbar while loading*/
-.d2l-navigation-s {
-    background-color: transparent;
-}
