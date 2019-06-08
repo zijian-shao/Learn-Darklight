@@ -61,10 +61,14 @@ function themeOnNavbarReady(d2lNavigation) {
         $(d2lNavigation), 'file', true);
     // full width
     if (getCustomThemeOption('fullWidthLayout')) {
-        injectCSS('.d2l-navigation-centerer{max-width:none!important}',
-            $(d2lNavigation.querySelector('d2l-navigation-main-header').shadowRoot), 'text');
-        injectCSS('.d2l-navigation-centerer{max-width:none!important}',
-            $(d2lNavigation.querySelector('d2l-navigation-main-footer').shadowRoot), 'text');
+        if (d2lNavigation.querySelector('d2l-navigation-main-header') !== null
+            && d2lNavigation.querySelector('d2l-navigation-main-header').shadowRoot !== null)
+            injectCSS('.d2l-navigation-centerer{max-width:none!important}',
+                $(d2lNavigation.querySelector('d2l-navigation-main-header').shadowRoot), 'text');
+        if (d2lNavigation.querySelector('d2l-navigation-main-footer') !== null
+            && d2lNavigation.querySelector('d2l-navigation-main-footer').shadowRoot !== null)
+            injectCSS('.d2l-navigation-centerer{max-width:none!important}',
+                $(d2lNavigation.querySelector('d2l-navigation-main-footer').shadowRoot), 'text');
     }
     // logo - white
     var logoPath = '', logoFile = '';

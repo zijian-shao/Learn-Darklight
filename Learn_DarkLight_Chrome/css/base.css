@@ -51,5 +51,6 @@ d2l-navigation {
 }
 
 .darklight-navigation-hidden {
-    opacity: 0;
+    opacity: 0.01;
+    pointer-events: none;
 }

@@ -1504,6 +1504,7 @@ function courseDirectToContent(cards) {
 
         var d2lNavigation = document.querySelector('d2l-navigation');
         if (d2lNavigation === null) return;
+        if (document.querySelector('.d2l-navigation-s-course-menu') === null) return;
 
         var courseBtn = undefined;
         var intervalCnt = 0, intervalCnt2 = 0;
@@ -1687,6 +1688,7 @@ function courseTileContextMenu(panel, cards) {
 
         var d2lNavigation = document.querySelector('d2l-navigation');
         if (d2lNavigation === null) return;
+        if (document.querySelector('.d2l-navigation-s-course-menu') === null) return;
 
         var courseBtn = undefined;
         var intervalCnt = 0, intervalCnt2 = 0;
@@ -1855,7 +1857,7 @@ function waitForNavbarReady() {
     function testNavbarReady() {
         if (d2lNavigation.shadowRoot === null) return false;
         if (d2lNavigationMainHeader === null || d2lNavigationMainHeader.shadowRoot === null) return false;
-        if (d2lNavigationMainFooter === null || d2lNavigationMainFooter.shadowRoot === null) return false;
+        if (d2lNavigationMainFooter !== null && d2lNavigationMainFooter.shadowRoot === null) return false;
 
         var d2lNavigationButtonNotificationIconReady = true;
         d2lNavigationButtonNotificationIcon.forEach(function (el) {
@@ -1872,11 +1874,22 @@ function waitForNavbarReady() {
         return true;
     }
 
-    var d2lNavigation = document.querySelector('header > nav > d2l-navigation');
-    if (d2lNavigation === null) return;
+    var d2lNavigation = document.querySelector('d2l-navigation');
+    if (d2lNavigation === null) {
+        $('d2l-navigation').removeClass('darklight-navigation-hidden');
+        return;
+    }
+
     var d2lNavigationMainHeader = d2lNavigation.querySelector('d2l-navigation-main-header'),
-        d2lNavigationMainFooter = d2lNavigation.querySelector('d2l-navigation-main-footer'),
-        d2lNavigationSMobileMenu = d2lNavigation.querySelector('.d2l-navigation-s-mobile-menu'),
+        d2lNavigationMainFooter = d2lNavigation.querySelector('d2l-navigation-main-footer');
+    if (d2lNavigationMainHeader !== null && d2lNavigationMainFooter === null) {
+        if (typeof themeOnNavbarReady === 'function')
+            themeOnNavbarReady(d2lNavigation);
+        $('d2l-navigation').removeClass('darklight-navigation-hidden');
+        return;
+    }
+
+    var d2lNavigationSMobileMenu = d2lNavigation.querySelector('.d2l-navigation-s-mobile-menu'),
         d2lNavigationButtonNotificationIcon = d2lNavigationMainHeader.querySelectorAll('d2l-navigation-button-notification-icon'),
         d2lNavigationSeparator = d2lNavigationMainHeader.querySelector('d2l-navigation-separator'),
         d2lNavigationLinkImage = d2lNavigationMainHeader.querySelector('d2l-navigation-link-image'),

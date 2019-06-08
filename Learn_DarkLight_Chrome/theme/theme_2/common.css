@@ -1652,3 +1652,13 @@ li.d2l-contextmenu-item-title {
         scrollbar-color: var(--d2l-color-gypsum) #282d34;
     }
 }
+
+/* login - no redirect */
+.d2l-login-portal-bordered {
+    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.d2l-login-portal-heading {
+    color: inherit !important;
+}
