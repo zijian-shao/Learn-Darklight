@@ -50,11 +50,6 @@ d2l-navigation {
     transition: opacity ease-in .2s !important;
 }
 
-.d2l-navigation-s {
-    background-color: transparent !important;
-}
-
 .darklight-navigation-hidden {
     opacity: 0;
-    visibility: hidden;
 }

@@ -619,7 +619,7 @@ d2l-navigation-band,
 }
 
 .d2l-navigation-s, .d2l-navigation-s-no-login {
-    background: var(--darklight-background-color);
+    background: var(--darklight-background-color) !important;
 }
 
 .d2l-navigation-s-header, d2l-navigation-header, d2l-navigation-main-header {

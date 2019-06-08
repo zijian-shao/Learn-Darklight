@@ -97,7 +97,7 @@ d2l-navigation-band {
 }
 
 .d2l-navigation-s, .d2l-navigation-s-no-login {
-    background: #111;
+    background: #111 !important;
 }
 
 d2l-navigation-main-header {

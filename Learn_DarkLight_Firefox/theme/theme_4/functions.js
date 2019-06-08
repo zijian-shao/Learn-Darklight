@@ -59,9 +59,17 @@ function initTheme() {
         document.querySelectorAll('d2l-button-subtle, d2l-button-icon').forEach(function (el) {
             if (!el.hasAttribute('data-theme-button-init')) {
                 el.setAttribute('data-theme-button-init', '');
-                injectCSS('button:hover, button:focus, :host([active]) button, :host(.d2l-button-subtle-hover) button, :host(.d2l-button-subtle-focus) button{background-color:var(--dlight-menu-hover-background-color);color:var(--dlight-menu-hover-text-color)}' +
-                    'button:hover d2l-icon, button:focus d2l-icon, :host([active]) button d2l-icon, :host(.d2l-button-subtle-hover) button d2l-icon, :host(.d2l-button-subtle-focus) button d2l-icon{color:var(--dlight-menu-hover-text-color)}',
-                    $(el.shadowRoot), 'text');
+                if (el.shadowRoot !== null) {
+                    injectCSS('button:hover, button:focus, :host([active]) button, :host(.d2l-button-subtle-hover) button, :host(.d2l-button-subtle-focus) button{background-color:var(--dlight-menu-hover-background-color);color:var(--dlight-menu-hover-text-color)}' +
+                        'button:hover d2l-icon, button:focus d2l-icon, :host([active]) button d2l-icon, :host(.d2l-button-subtle-hover) button d2l-icon, :host(.d2l-button-subtle-focus) button d2l-icon{color:var(--dlight-menu-hover-text-color)}',
+                        $(el.shadowRoot), 'text');
+                } else {
+                    setTimeout(function () {
+                        injectCSS('button:hover, button:focus, :host([active]) button, :host(.d2l-button-subtle-hover) button, :host(.d2l-button-subtle-focus) button{background-color:var(--dlight-menu-hover-background-color);color:var(--dlight-menu-hover-text-color)}' +
+                            'button:hover d2l-icon, button:focus d2l-icon, :host([active]) button d2l-icon, :host(.d2l-button-subtle-hover) button d2l-icon, :host(.d2l-button-subtle-focus) button d2l-icon{color:var(--dlight-menu-hover-text-color)}',
+                            $(el.shadowRoot), 'text');
+                    }, 500);
+                }
             }
         });
     }
