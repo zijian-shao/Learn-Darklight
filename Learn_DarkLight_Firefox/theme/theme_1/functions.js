@@ -4,7 +4,7 @@ function initTheme() {
     if (!getCustomThemeOption('whiteNavbar')) {
         // black bar
         cssText += 'd2l-navigation-main-footer' +
-            '{border:none!important;background:rgba(0, 0, 0, 0.8)!important;box-shadow:0 2px 4px rgba(0, 0, 0, 0.2)!important;}';
+            '{border:none!important;background:#333!important;box-shadow:0 2px 4px rgba(0, 0, 0, 0.2)!important;}';
         cssText += 'd2l-navigation-main-footer a.d2l-navigation-s-link, d2l-navigation-main-footera.d2l-navigation-s-link:link, d2l-navigation-main-footera.d2l-navigation-s-link:visited' +
             '{color:#aaa!important;}';
         cssText += 'd2l-navigation-main-footer .d2l-navigation-s-item .d2l-navigation-s-group-text, d2l-navigation-main-footer .d2l-navigation-s-item d2l-icon' +

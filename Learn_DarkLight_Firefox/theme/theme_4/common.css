@@ -345,18 +345,21 @@ d2l-navigation-band {
 }
 
 /* button */
-.d2l-button, .d2l-button * {
-    vertical-align: bottom !important;
-    text-transform: uppercase;
+.daylight .d2l-button > .d2l-icon-custom {
+    width: 1rem;
+    height: 1rem;
+    background-size: 1rem 1rem;
+    vertical-align: bottom;
 }
 
-.dcm.bsi-button-menu {
-    vertical-align: bottom !important;
+d2l-button .d2l-buttonmenu-content > d2l-icon {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: bottom;
 }
 
-d2l-button:hover d2l-icon, d2l-button:focus d2l-icon {
-    /*color: #fff;*/
-    /*color: var(--d2l-color-ferrite);*/
+d2l-button[primary] .d2l-buttonmenu-content > d2l-icon {
+    color: #fff;
 }
 
 .d2l-button, .d2l-button[active][disabled], .d2l-button[disabled]:focus, .d2l-button[disabled]:hover {

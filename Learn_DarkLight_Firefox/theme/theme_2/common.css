@@ -145,8 +145,22 @@ body {
 }
 
 /* buttons */
-.d2l-button {
-    box-shadow: none;
+
+.daylight .d2l-button > .d2l-icon-custom {
+    width: 1rem;
+    height: 1rem;
+    background-size: 1rem 1rem;
+    vertical-align: bottom;
+}
+
+d2l-button .d2l-buttonmenu-content > d2l-icon {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: bottom;
+}
+
+d2l-button[primary] .d2l-buttonmenu-content > d2l-icon {
+    color: #fff;
 }
 
 .d2l-button, .d2l-button[disabled]:focus, .d2l-button[disabled]:hover {

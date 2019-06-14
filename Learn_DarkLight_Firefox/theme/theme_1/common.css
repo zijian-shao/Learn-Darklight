@@ -53,7 +53,11 @@
 
 /* navbar */
 .d2l-navigation-s, .d2l-navigation-s-no-login {
-    background: #fff !important;
+    background: transparent !important;
+}
+
+d2l-navigation-main-header {
+    background: #fff;
 }
 
 .d2l-navigation-s-header {
@@ -163,12 +167,21 @@ d2l-navigation-band {
 
 /* button */
 
-.d2l-button, .d2l-button * {
-    vertical-align: bottom !important;
+.daylight .d2l-button > .d2l-icon-custom {
+    width: 1rem;
+    height: 1rem;
+    background-size: 1rem 1rem;
+    vertical-align: bottom;
 }
 
-.dcm.bsi-button-menu {
-    vertical-align: bottom !important;
+d2l-button .d2l-buttonmenu-content > d2l-icon {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: bottom;
+}
+
+d2l-button[primary] .d2l-buttonmenu-content > d2l-icon {
+    color: #fff;
 }
 
 /* course home */
