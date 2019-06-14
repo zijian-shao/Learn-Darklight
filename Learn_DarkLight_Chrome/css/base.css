@@ -46,7 +46,7 @@
 }
 
 /* hide d2l navbar while loading*/
-d2l-navigation {
+.darklight-navigation-transition {
     transition: opacity ease-in .2s !important;
 }
 

@@ -1,6 +1,6 @@
 /* body bg */
 .d2l-page-bg > div, .d2l-page-main, .d2l-max-width, .d2l-min-width {
-    background: #fff !important;
+    background: #fff;
     min-height: 842px;
 }
 
@@ -208,12 +208,21 @@ a.d2l-navigation-s-link, a.d2l-navigation-s-link:link, a.d2l-navigation-s-link:v
 
 /* button */
 
-.d2l-button, .d2l-button * {
-    vertical-align: bottom !important;
+.daylight .d2l-button > .d2l-icon-custom {
+    width: 1rem;
+    height: 1rem;
+    background-size: 1rem 1rem;
+    vertical-align: bottom;
 }
 
-.dcm.bsi-button-menu {
-    vertical-align: bottom !important;
+d2l-button .d2l-buttonmenu-content > d2l-icon {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: bottom;
+}
+
+d2l-button[primary] .d2l-buttonmenu-content > d2l-icon {
+    color: #fff;
 }
 
 /* course banner */

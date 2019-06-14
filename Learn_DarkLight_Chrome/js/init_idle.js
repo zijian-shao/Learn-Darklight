@@ -410,6 +410,7 @@ function addBackToTopButtonNavbar() {
 
     navWrapper = $('d2l-navigation d2l-navigation-main-footer .d2l-navigation-s-main-wrapper');
     btn.appendTo(navWrapper);
+    _addBackToTopButton();
 
     // var intervalCnt = 0;
     // var interval = setInterval(function () {
@@ -2146,7 +2147,7 @@ function initDarklightIdle() {
         injectCSS(options.GLB_CustomCSS, 'head', 'text');
 
     // init homepage course widget even document hidden
-    $('d2l-navigation').addClass('darklight-navigation-hidden');
+    $('d2l-navigation').addClass('darklight-navigation-hidden darklight-navigation-transition');
     if (currURL2.match(/\/d2l\/home$/) && !isWLU()) {
         var d2lMyCourses = $('d2l-my-courses');
         var courseWidget = d2lMyCourses.closest('div.d2l-widget');
