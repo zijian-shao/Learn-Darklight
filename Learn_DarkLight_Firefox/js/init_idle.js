@@ -1069,7 +1069,7 @@ function homepageFunc() {
                     }
                 }
 
-                var d2lMyCourses = courseWidget[0].querySelector('.d2l-widget-content > .d2l-widget-content-padding > d2l-my-courses');
+                var d2lMyCourses = courseWidget[0].querySelector('.d2l-widget-content > .d2l-widget-content-padding > d2l-my-courses').shadowRoot.querySelector('d2l-my-courses-container');
 
                 // if (isTabSwitch !== true) {
                 //     var d2lMyCoursesLoading = document.createElement('div');
@@ -1287,7 +1287,9 @@ function homepageCalendar(cards, panelID) {
 
     if (!options.HOME_AddCalendar) return;
 
-    var tabsRoot = document.getElementsByTagName('d2l-my-courses')[0].shadowRoot.querySelector('d2l-tabs');
+    var tabsRoot = document.getElementsByTagName('d2l-my-courses')[0]
+        .shadowRoot.querySelector('d2l-my-courses-container')
+        .shadowRoot.querySelector('d2l-tabs');
 
     if (tabsRoot.querySelector('#' + panelID).hasAttribute('data-calendar-init')) {
         $('#darklight-homepage-calendar-widget').uwCalendar('switchTo', {
