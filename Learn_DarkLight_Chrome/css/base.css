@@ -20,7 +20,7 @@
     font: 16px Arial, sans-serif !important;
     text-align: center;
     opacity: 0;
-    animation: darklight-overlay-text 1s forwards 5s;
+    animation: darklight-overlay-text 1s forwards 6s;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

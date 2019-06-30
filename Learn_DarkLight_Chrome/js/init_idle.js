@@ -724,6 +724,24 @@ function contentPageFunc() {
                     fullScreenBtn.trigger('click');
                 }
 
+                if (options.COURSE_EscExitFullScreen) {
+                    function _exitFullScreen(e) {
+                        if (e.keyCode === 27) {
+                            if (iframe.hasClass('d2l-fileviewer-rendered-pdf-dialog')) {
+                                fullScreenBtn.trigger('click');
+                            }
+                        }
+                    }
+
+                    iframe.contents().on('keyup', function (e) {
+                        _exitFullScreen(e);
+                    });
+                    $(document).on('keyup', function (e) {
+                        _exitFullScreen(e);
+                    });
+
+                }
+
                 clearInterval(fullSrcInterval);
 
             }

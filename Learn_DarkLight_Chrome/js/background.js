@@ -4,9 +4,15 @@
  */
 function installWelcome(details) {
     if (details.reason === 'install') {
-        chrome.tabs.create({
-            'url': chrome.runtime.getURL('/html/welcome.html')
-        });
+        if (screen.width >= 1200) {
+            chrome.tabs.create({
+                'url': chrome.runtime.getURL('/html/welcome.html')
+            });
+        } else {
+            chrome.tabs.create({
+                'url': chrome.runtime.getURL('/html/options.html')
+            });
+        }
     }
 }
 
