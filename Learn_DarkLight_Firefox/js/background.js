@@ -4,9 +4,15 @@
  */
 function installWelcome(details) {
     if (details.reason === 'install') {
-        browser.tabs.create({
-            'url': browser.runtime.getURL('/html/welcome.html')
-        });
+        if (screen.width >= 1200) {
+            browser.tabs.create({
+                'url': browser.runtime.getURL('/html/welcome.html')
+            });
+        } else {
+            browser.tabs.create({
+                'url': browser.runtime.getURL('/html/options.html')
+            });
+        }
     }
 }
 

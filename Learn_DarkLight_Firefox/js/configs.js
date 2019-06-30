@@ -77,6 +77,7 @@ function getOptionListDefault() {
         COURSE_CustomThumb: true,
         COURSE_DirectToContent: false,
         COURSE_AutoEnterFullScreen: false,
+        COURSE_EscExitFullScreen: true,
         COURSE_HideCourseHomeBanner: false,
         COURSE_FixSidePanelSelector: false,
         COURSE_OpenContentInNewTab: false,
