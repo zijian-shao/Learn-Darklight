@@ -1161,8 +1161,18 @@ div[id^="postContents_"] > div,
 
 .vui-button, .vui-button.vui-disabled:focus, .vui-button.vui-disabled:hover, .vui-button:focus, .vui-button:hover, .vui-button:link, .vui-button:visited, .vui-button[disabled]:focus, .vui-button[disabled]:hover {
     background: none;
-    border-color: #999;
-    color: #999;
+    border-color: #ddd;
+    color: #ddd;
+}
+
+.d2l-button-filter > ul > li > a.vui-button {
+    color: #ddd;
+}
+
+.d2l-button-filter > ul > li > a.vui-button:hover {
+    background: #ddd !important;
+    border-color: #ddd !important;
+    color: #000 !important;
 }
 
 .daylight .d2l-button-filter > ul > li > a.d2l-button-filter-selected {
