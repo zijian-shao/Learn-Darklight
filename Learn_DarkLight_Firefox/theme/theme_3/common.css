@@ -1,3 +1,10 @@
+html {
+    --d2l-color-celestine: #118dee;
+    --d2l-color-celestine-minus-1: #117ad7;
+    --d2l-button-focus-plus-border_-_box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--d2l-color-celestine);
+    --d2l-button-focus_-_box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--d2l-color-celestine);
+}
+
 /* navbar */
 .d2l-navigation-s, .d2l-navigation-s-no-login {
     background: none;
@@ -305,6 +312,14 @@ d2l-simple-overlay {
 }
 
 /* button */
+d2l-button-icon {
+    --d2l-button-icon-focus-box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--d2l-color-celestine);
+}
+
+.d2l-button.d2l-button-focus, .d2l-button:focus {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--d2l-color-celestine);
+}
+
 .daylight .d2l-button > .d2l-icon-custom {
     width: 1rem;
     height: 1rem;

@@ -1,6 +1,6 @@
 /* course tiles */
 d2l-card {
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s, border 0.3s !important;
 }
 
 /* homepage course tile image ratio */

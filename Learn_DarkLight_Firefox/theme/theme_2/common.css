@@ -1,5 +1,6 @@
 html {
     --d2l-color-celestine: #09b1b9 !important;
+    --d2l-color-celestine-minus-1: #09b1b9 !important;
     --d2l-link-hover_-_color: #09b1b9 !important;
     --d2l-color-gypsum: #424a56 !important;
     --d2l-color-ferrite: #ddd !important;
@@ -8,6 +9,7 @@ html {
     --d2l-button-focus-plus-border_-_border-color: transparent !important;
     --d2l-alert-default-color: #09b1b9;
     --darklight-background-color: #323841;
+    --d2l-button-clear-focus_-_box-shadow: none;
 }
 
 .d2l-page-main-padding {
@@ -145,6 +147,13 @@ body {
 }
 
 /* buttons */
+.d2l-button {
+    box-shadow: none;
+}
+
+d2l-button-icon {
+    --d2l-button-icon-focus-box-shadow: 0 0 0 4px rgba(9, 177, 185, 0.4);
+}
 
 .daylight .d2l-button > .d2l-icon-custom {
     width: 1rem;
