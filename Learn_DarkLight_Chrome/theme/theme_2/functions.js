@@ -237,6 +237,8 @@ function themeOnCourseTileLoaded(elem) {
         ':host([active]), :host([subtle][active]){box-shadow:0 0 0 4px rgba(9, 177, 185, 0.4)!important;}' +
         extraCSS,
         $(elem.shadowRoot), 'text');
+    injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_course_tile.css',
+        $(elem), 'file');
 }
 
 function themeOnCourseTabAvailable(d2lTabs) {

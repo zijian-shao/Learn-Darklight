@@ -126,19 +126,19 @@ function themeOnNavbarReady(d2lNavigation) {
 function themeOnCourseTileLoaded(elem) {
     var colorScheme = getCustomThemeOption('colorScheme');
     // course tile box shadow on active
-    if (colorScheme === 'default') {
-        injectCSS(':host([active]), :host([subtle][active]){' +
-            'box-shadow:0 0 0 4px var(--dlight-btn-default-hover-box-shadow-color)!important;' +
-            'border-color:var(--dlight-btn-default-hover-box-shadow-color)!important;' +
-            '}',
-            $(elem.shadowRoot), 'text');
-    } else {
-        injectCSS(':host([active]), :host([subtle][active]){' +
-            'box-shadow:0 0 0 4px var(--dlight-band-color-1)!important;' +
-            'border-color:var(--dlight-band-color-2)!important;' +
-            '}',
-            $(elem.shadowRoot), 'text');
-    }
+    // if (colorScheme === 'default') {
+    //     injectCSS(':host([active]), :host([subtle][active]){' +
+    //         'box-shadow:0 0 0 4px var(--dlight-btn-default-hover-box-shadow-color)!important;' +
+    //         'border-color:var(--dlight-btn-default-hover-box-shadow-color)!important;' +
+    //         '}',
+    //         $(elem.shadowRoot), 'text');
+    // } else {
+    //     injectCSS(':host([active]), :host([subtle][active]){' +
+    //         'box-shadow:0 0 0 4px var(--dlight-band-color-1)!important;' +
+    //         'border-color:var(--dlight-band-color-2)!important;' +
+    //         '}',
+    //         $(elem.shadowRoot), 'text');
+    // }
 }
 
 function themeOnCourseTabAvailable(d2lTabs) {

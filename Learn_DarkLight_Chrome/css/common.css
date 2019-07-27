@@ -555,6 +555,22 @@ li.d2l-contextmenu-item-title.empty > * {
     z-index: 100 !important;
 }
 
+.d2l-twopanelselector-main .d2l-datalist-item.d2l-datalist-simpleitem .d2l-topic-view {
+    overflow: visible !important;
+}
+
+.d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
+    background: linear-gradient(to right, rgba(249, 250, 251, 0) 0, #f9fafb 320px);
+}
+
+.daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:link::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:visited::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:hover::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:focus::before {
+    background: linear-gradient(to right, rgba(227, 233, 241, 0) 0, #e6eaf0 400px);;
+}
+
+.daylight .d2l-collapsepane .d2l-collapsepane-header {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #f9fafb);
+}
+
 @media (min-width: 1001px) {
     .fix-side-panel .d2l-twopanelselector-side {
         position: fixed;
@@ -636,4 +652,9 @@ li.d2l-contextmenu-item-title.empty > * {
     background: #fff;
     z-index: 100;
     padding: 30px 0;
+}
+
+/* button */
+.d2l-button {
+    background: #f9fafb;
 }

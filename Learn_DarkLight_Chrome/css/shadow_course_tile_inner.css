@@ -6,3 +6,12 @@
 .d2l-card-footer {
     display: none !important;
 }
+
+/*:host([href]) .d2l-card-link-container {*/
+/*    transition: color 0.3s !important;*/
+/*}*/
+
+:host([href]) .d2l-card-link-container-hover, :host([href][active]) .d2l-card-content {
+    text-decoration: none;
+    color: inherit;
+}

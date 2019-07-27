@@ -5,14 +5,14 @@
     --d2l-color-celestine-plus-2: var(--dlight-menu-hover-background-color);
     --d2l-color-celestine-minus-1: var(--dlight-link-hover-color);
 
-    /*--d2l-color-gypsum: var(--dlight-menu-hover-background-color);*/
-    --d2l-button-focus-plus-border_-_border-color: var(--dlight-menu-hover-border-color);
-    --d2l-button-focus-plus-border_-_box-shadow: 0 0 0 4px var(--dlight-btn-default-hover-box-shadow-color);
+    --d2l-button-focus-plus-border_-_border-color: var(--dlight-btn-primary-background-color);
+    --d2l-button-focus-plus-border_-_box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--dlight-btn-primary-background-color);
+    /*--d2l-button-focus-plus-border_-_box-shadow: 0 0 0 4px var(--dlight-btn-default-hover-box-shadow-color);*/
 
-    /*--d2l-button-focus-plus-border_-_border-color: var(--dlight-btn-default-border-color);*/
-    /*--d2l-button-focus-plus-border_-_box-shadow: none;*/
-    --d2l-button-focus_-_box-shadow: var(--dlight-btn-primary-hover-box-shadow);
+    /*--d2l-button-focus_-_box-shadow: var(--dlight-btn-primary-hover-box-shadow);*/
+    --d2l-button-focus_-_box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--dlight-btn-primary-background-color);
     --d2l-alert-default-color: var(--dlight-btn-primary-background-color);
+
 }
 
 /* navbar */
@@ -380,7 +380,8 @@ d2l-button[primary] .d2l-buttonmenu-content > d2l-icon {
 
 .d2l-button.d2l-button-focus, .d2l-button:focus {
     border-color: var(--dlight-btn-default-hover-border-color);
-    box-shadow: 0 0 0 4px var(--dlight-btn-default-hover-box-shadow-color);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--dlight-btn-default-hover-border-color);
+    /*box-shadow: 0 0 0 4px var(--dlight-btn-default-hover-box-shadow-color);*/
 }
 
 d2l-button[primary] d2l-icon,
@@ -406,7 +407,12 @@ d2l-button[primary]:hover d2l-icon, d2l-button[primary]:focus d2l-icon {
 }
 
 .d2l-button[primary].d2l-button-focus, .d2l-button[primary]:focus {
-    box-shadow: 0 0 0 4px var(--dlight-btn-primary-hover-box-shadow-color);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--dlight-btn-primary-hover-box-shadow-color);
+    /*box-shadow: 0 0 0 4px var(--dlight-btn-primary-hover-box-shadow-color);*/
+}
+
+d2l-button-icon {
+    --d2l-button-icon-focus-box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--dlight-btn-default-hover-border-color);
 }
 
 .daylight .d2l-imagelink {
@@ -695,4 +701,22 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 .uw-default d2l-navigation-main-footer .d2l-navigation-s-item button.d2l-navigation-s-group:focus d2l-icon,
 .uw-default #courseSelectorId a {
     color: var(--dlight-menu-hover-text-color);
+}
+
+.uw-default d2l-menu-item, .uw-default d2l-menu-item-link, .uw-default d2l-my-courses {
+    --d2l-color-celestine-minus-1: #000;
+}
+
+.uw-default {
+    --d2l-branding-primary-color: #000;
+}
+
+.uw-default d2l-button-subtle {
+    --d2l-button-focus_-_box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #333;
+    --d2l-color-celestine-minus-1: #fff;
+    --dlight-menu-hover-background-color: #000;
+}
+
+.uw-default d2l-button-icon {
+    --d2l-button-icon-focus-box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #000;
 }
