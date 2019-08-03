@@ -13,6 +13,7 @@ function getOptionListDefault() {
         OPT_Version: 0,
         GLB_Enabled: true,
         GLB_ThemeID: 0,
+        GLB_DecreaseBlueLight: true,
         GLB_CustomFont: true,
         GLB_CustomFontInfo: 'Lato',
         GLB_DarklightFavicon: true,

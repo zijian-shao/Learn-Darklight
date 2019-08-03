@@ -2452,4 +2452,8 @@ textarea.input-box {
         text-indent: -999em;
         overflow: hidden;
     }
+
+    .gallery-links {
+        width: 100%;
+    }
 }

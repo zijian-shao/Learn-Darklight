@@ -905,7 +905,7 @@ iframe {
 
 /* course content sidebar */
 .d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
-    background: #373e48;
+    background: #373e48 !important;
     border-color: #373e48;
 }
 

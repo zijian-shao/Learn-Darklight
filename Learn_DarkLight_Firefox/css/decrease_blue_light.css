@@ -1,0 +1,45 @@
+html {
+    --d2l-color-regolith: #f9fafb;
+    --d2l-color-gypsum: #e3e9f1;
+}
+
+.d2l-button,
+.daylight .d_ggl1,
+.daylight .d2l-msg-container,
+.daylight .d2l-editable-changed,
+.daylight .d2l-editable.d2l-editable-changed:hover,
+.daylight .d2l-editable-focus.d2l-editable-changed,
+.daylight .d2l-editable-focus,
+.daylight .d2l-editable-placeholder,
+.bsi-button-menu,.bsi-button-menu.vui-disabled:focus,.bsi-button-menu.vui-disabled:hover,.bsi-button-menu:focus,.bsi-button-menu:hover,.bsi-button-menu:link,.bsi-button-menu:visited,
+.vui-input[type=checkbox],.vui-input[type=checkbox]:hover:disabled,
+.vui-input[type=radio],.vui-input[type=radio]:hover:disabled,
+.d2l-button,.d2l-button[active][disabled],.d2l-button[disabled]:focus,.d2l-button[disabled]:hover,
+.d2l-navigation-s-mobile-menu-title-bp,
+#d2l_body.d2l-page-dashboard,.d2l-page-dashboard,
+.d2l-page-header-dark{
+    background: #f9fafb;
+}
+
+/* side panel bg */
+.d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
+    background: linear-gradient(to right, rgba(249, 250, 251, 0) 0, #f9fafb 320px);
+}
+
+.daylight.darklight-fullwidth .d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .daylight.darklight-fullwidth .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
+    background: #f9fafb;
+}
+
+/* side panel item */
+.daylight #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor::before, .daylight #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:link::before, .daylight #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:visited::before, .daylight #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:hover::before, .daylight #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:focus::before {
+    background: linear-gradient(to right, rgba(227, 233, 241, 0) 0, #e6eaf0 400px);
+}
+
+.daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:link::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:visited::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:hover::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:focus::before {
+    background: #e6eaf0;
+}
+
+/* content container header */
+.daylight .d2l-collapsepane .d2l-collapsepane-header {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #f9fafb);
+}
