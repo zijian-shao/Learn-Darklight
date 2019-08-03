@@ -727,16 +727,35 @@ function contentPageFunc() {
                 if (options.COURSE_EscExitFullScreen) {
                     function _exitFullScreen(e) {
                         if (e.keyCode === 27) {
-                            if (iframe.hasClass('d2l-fileviewer-rendered-pdf-dialog')) {
+                            setTimeout(function () {
+                                if (!allowEsc) return;
+                                // if (iframe.hasClass('d2l-fileviewer-rendered-pdf-dialog')) {
                                 fullScreenBtn.trigger('click');
-                            }
+                                // }
+                            }, 10);
                         }
                     }
 
-                    iframe.contents().on('keyup', function (e) {
+                    var findBtn = iframe.contents().find('#viewFind');
+                    var findPrevState = false, allowEsc = true;
+
+                    var observer = new MutationObserver(function () {
+                        if (findPrevState === true && !findBtn.hasClass('toggled')) {
+                            allowEsc = false;
+                            setTimeout(function () {
+                                allowEsc = true;
+                            }, 100);
+                        }
+                        findPrevState = findBtn.hasClass('toggled');
+                    });
+
+                    observer.observe(findBtn[0], {attributes: true, childList: false, subtree: false});
+
+                    iframe.contents().on('keydown', function (e) {
                         _exitFullScreen(e);
                     });
-                    $(document).on('keyup', function (e) {
+
+                    $(document).on('keydown', function (e) {
                         _exitFullScreen(e);
                     });
 
@@ -2162,6 +2181,10 @@ function initDarklightIdle() {
     // css
     // injectCSS('html{font-size:' + options.GLB_BasicFontSize + 'px}', 'head', 'text');
     injectCSS(baseURL + 'css/common.css', 'head');
+    if (options.GLB_DecreaseBlueLight) {
+        injectCSS(baseURL + 'css/decrease_blue_light.css', 'head');
+        body.addClass('darklight-decrease-blue-light');
+    }
     injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/common.css', 'head');
     if (options.GLB_EnableCustomStyle)
         injectCSS(options.GLB_CustomCSS, 'head', 'text');

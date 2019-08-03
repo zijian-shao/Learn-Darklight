@@ -302,13 +302,31 @@
 
             <!-- Select Theme -->
             <div class="group">
-
-                <!-- Theme list -->
                 <div class="group-title full-width">Select Theme
                     <div class="group-subtitle">Click the 3-dot button to custom each theme</div>
                 </div>
                 <div class="group-content full-width">
+
+                    <!-- Theme list -->
                     <div class="theme-list" id="theme-list"></div>
+
+                    <!-- Decrease blue light -->
+                    <div class="option-group checkbox-group">
+                        <div class="checkbox-slide">
+                            <input type="checkbox" id="opt-themes-3-1" data-option-name="GLB_DecreaseBlueLight"
+                                   data-option-type="switch">
+                            <label for="opt-themes-3-1"></label>
+                        </div>
+                        <div class="checkbox-content">
+                            <label for="opt-themes-3-1" class="checkbox-label">Decrease blue light</label>
+                            <a class="option-tip-toggle">?</a>
+                        </div>
+                        <div class="option-tip hidden">
+                            <p>Decrease the blue light for some default Learn elements, such as button and table
+                                header. If you cannot distinguish the colors on your screen, try to disable this.</p>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -587,12 +605,12 @@
                             <label for="opt-courses-1-7"></label>
                         </div>
                         <div class="checkbox-content">
-                            <label for="opt-courses-1-7" class="checkbox-label">Press "Esc" to exit full screen
+                            <label for="opt-courses-1-7" class="checkbox-label">Press 'Esc' to enter / exit full screen
                                 mode</label>
                             <a class="option-tip-toggle">?</a>
                         </div>
                         <div class="option-tip hidden">
-                            <p>Allow using "Esc" key to exit full screen mode if the content file is using pdf
+                            <p>Allow using 'Esc' key to enter or exit full screen mode if the content file is using pdf
                                 viewer.</p>
                         </div>
                     </div>
@@ -718,7 +736,7 @@
                             <a href="#" class="btn btn-default btn-cancel">Cancel</a>
                         </div>
                     </div>
-                    <div class="inline-block">
+                    <div class="inline-block gallery-links">
                         <a data-href="dlightGallery" class="btn btn-success btn-lowercase" target="_blank"
                            id="dlight-gallery">
                             From Darklight</a>

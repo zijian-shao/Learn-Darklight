@@ -363,7 +363,7 @@ d2l-button[primary] .d2l-buttonmenu-content > d2l-icon {
 }
 
 .d2l-button, .d2l-button[active][disabled], .d2l-button[disabled]:focus, .d2l-button[disabled]:hover {
-    background-color: var(--dlight-btn-default-background-color);
+    /*background-color: var(--dlight-btn-default-background-color);*/
     border-color: var(--dlight-btn-default-border-color);
     color: var(--dlight-btn-default-text-color);
 }
@@ -439,6 +439,8 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 }
 
 /* list */
+.vui-list > .vui-active,
+.vui-list > .vui-active + li,
 .vui-list > .vui-selected + li {
     border-top-color: var(--dlight-menu-hover-border-color);
 }
@@ -464,10 +466,6 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 }
 
 /* collapse pane */
-.darklight-fullwidth .d2l-twopanelselector-side-bg.d2l-twopanelselector-side-sep, .darklight-fullwidth .d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
-    background: #f9fafb;
-}
-
 .d2l-collapsepane-header {
     padding-bottom: 0.6rem !important;
 }
@@ -487,10 +485,6 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 
 .daylight .d2l-page-collapsepane-shadow {
     top: 90px;
-}
-
-.daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:link::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:visited::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:hover::before, .daylight.darklight-fullwidth #ContentModuleTree .d2l-le-TreeAccordionItem.d2l-le-TreeAccordionItem-Selected > a.d2l-le-TreeAccordionItem-anchor:focus::before {
-    background: #e6eaf0;
 }
 
 /* progress bar */
@@ -719,4 +713,8 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 
 .uw-default d2l-button-icon {
     --d2l-button-icon-focus-box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #000;
+}
+
+.uw-default .d2l-navigation-s-notification .d2l-minibar-activity-message-content a, .uw-default .d2l-navigation-s-notification .d2l-minibar-activity-message-content a:visited, .uw-default .d2l-navigation-s-notification .d2l-minibar-activity-message-content a:hover {
+    color: #000;
 }
