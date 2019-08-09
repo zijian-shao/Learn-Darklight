@@ -649,3 +649,15 @@ li.d2l-contextmenu-item-title.empty > * {
     z-index: 100;
     padding: 30px 0;
 }
+
+/* checkboxes */
+.vui-input[type=checkbox]:checked {
+    background-size: 1.2rem;
+    background-position: center;
+}
+
+.vui-input[type=radio]:checked {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.65rem;
+}
