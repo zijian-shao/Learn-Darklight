@@ -340,8 +340,14 @@ d2l-navigation-band {
 .vui-breadcrumbs > div > a.d2l-link-focus, .vui-breadcrumbs > div > a:focus, .vui-breadcrumbs > div > a:hover, .vui-breadcrumbs > li > a.d2l-link-focus, .vui-breadcrumbs > li > a:focus, .vui-breadcrumbs > li > a:hover, .vui-breadcrumbs > span > a.d2l-link-focus, .vui-breadcrumbs > span > a:focus, .vui-breadcrumbs > span > a:hover,
 .daylight .d_tabs_header td.d_tabs_c_o a,
 .daylight .d_tabs_header td.d_tabs_c_s_o a,
-.daylight #ContentModuleTree a.d2l-le-TreeAccordionItem-anchor:hover .d2l-inline .d2l-textblock:first-child, .daylight #ContentModuleTree a.d2l-le-TreeAccordionItem-anchor:focus .d2l-inline .d2l-textblock:first-child, .daylight #ContentModuleTree a.d2l-le-TreeAccordionItem-anchor:hover .d2l-tree-browser-icon, .daylight #ContentModuleTree a.d2l-le-TreeAccordionItem-anchor:focus .d2l-tree-browser-icon {
+.daylight #ContentModuleTree a.d2l-le-TreeAccordionItem-anchor:hover .d2l-inline .d2l-textblock:first-child, .daylight #ContentModuleTree a.d2l-le-TreeAccordionItem-anchor:focus .d2l-inline .d2l-textblock:first-child, .daylight #ContentModuleTree a.d2l-le-TreeAccordionItem-anchor:hover .d2l-tree-browser-icon, .daylight #ContentModuleTree a.d2l-le-TreeAccordionItem-anchor:focus .d2l-tree-browser-icon,
+.d_tabs_link:hover, .d_tabs_link:focus {
     color: var(--dlight-link-hover-color);
+}
+
+.d_tabs_c_s .d_tabs_highlight, .d_tabs_c_s .d_tabs_link:focus .d_tabs_highlight,
+.d_tabs_c_s .d_tabs_link:focus .d_tabs_highlight_outer, .d_tabs_c_s .d_tabs_link:focus .d_tabs_highlight {
+    background-color: var(--dlight-link-hover-color);
 }
 
 /* button */
