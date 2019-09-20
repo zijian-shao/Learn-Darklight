@@ -807,6 +807,74 @@ function initOptions() {
             $('input[id="opt-themes-3-0"]').val(parseInt($(this).attr('data-size'), 10)).trigger('change');
         });
 
+        // import & export
+        var importContainer = $('#opt-import-0-0');
+        var importTextarea = importContainer.children('textarea');
+        importContainer.find('a.btn').on('click', function (e) {
+            e.preventDefault();
+            try {
+                importContainer.addClass('wait');
+                var value = importTextarea.val();
+                if (value.length === 0) {
+                    importContainer.removeClass('wait');
+                    return;
+                }
+                if (!value.startsWith('----------- LEARN DARKLIGHT OPTIONS BEGIN -----------')
+                    || !value.endsWith('----------- LEARN DARKLIGHT OPTIONS END -----------')) {
+                    throw 'Format error';
+                } else {
+                    value = value.replace(/-----------.*-----------/g, '').trim();
+                    value = JSON.parse(window.atob(value));
+                    browser.storage.sync.set(value, function () {
+                        alert(importContainer.find('.lang .success').text());
+                        window.location.hash = '';
+                        window.location.reload();
+                    });
+                }
+            } catch (error) {
+                importContainer.removeClass('wait');
+                importContainer.find('.import-info-container .import-info')
+                    .removeClass('success')
+                    .addClass('failed')
+                    .text(
+                        importContainer.find('.lang .failed').text()
+                    );
+            }
+        });
+
+        var exportContainer = $('#opt-import-1-0');
+        var exportTextarea = exportContainer.children('textarea');
+        exportContainer.find('a.btn').on('click', function (e) {
+            e.preventDefault();
+            try {
+                exportContainer.addClass('wait');
+                browser.storage.sync.get(getOptionListDefault(), function (items) {
+                    exportTextarea.val(
+                        '----------- LEARN DARKLIGHT OPTIONS BEGIN -----------\n' +
+                        window.btoa(JSON.stringify(items)) +
+                        '\n----------- LEARN DARKLIGHT OPTIONS END -----------'
+                    );
+                    exportContainer.removeClass('wait');
+                    exportContainer.find('.import-info-container .import-info')
+                        .removeClass('failed')
+                        .addClass('success')
+                        .text(
+                            exportContainer.find('.lang .success').text()
+                        );
+                    exportTextarea.select();
+                    document.execCommand('Copy');
+                });
+            } catch (error) {
+                exportContainer.removeClass('wait');
+                exportContainer.find('.import-info-container .import-info')
+                    .removeClass('success')
+                    .addClass('failed')
+                    .text(
+                        exportContainer.find('.lang .failed').text()
+                    );
+            }
+        });
+
         // scroll
         $(window).on('scroll', function () {
             // if (welcomeMode) return;

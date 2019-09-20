@@ -216,7 +216,7 @@ div {
     }
 
     .checkbox-slide:before {
-        background: #5bb75b;
+        background: #519354;
     }
 
     .content {
@@ -225,13 +225,25 @@ div {
     }
 
     .btn {
-        color: #fff;
+        color: #ddd;
         border-color: #2d2d2d;
         background: #2d2d2d;
     }
 
     .btn-icon img {
-        filter: invert(1);
+        filter: invert(0.8);
+    }
+
+    .btn-yellow:hover {
+        box-shadow: 0 0 0 2px #ae812e;
+    }
+
+    .btn-purple:hover {
+        box-shadow: 0 0 0 2px #7e4ea1;
+    }
+
+    .btn-green:hover {
+        box-shadow: 0 0 0 2px #3d7d3d;
     }
 
     .btn:hover {

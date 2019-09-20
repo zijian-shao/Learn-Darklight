@@ -1,7 +1,10 @@
 {
-  "manifest_version": 2,
-  "name": "Learn Darklight",
-  "version": "3.0.13",
+  "applications": {
+    "gecko": {
+      "id": "learndarklight@zijianshao.com",
+      "strict_min_version": "57.0"
+    }
+  },
   "author": "Zijian Shao",
   "background": {
     "scripts": [
@@ -47,10 +50,12 @@
   ],
   "description": "Learn Darklight offers multiple themes for the new Waterloo Learn.",
   "icons": {
-    "128": "icon/icon128.png",
     "16": "icon/icon16.png",
-    "48": "icon/icon48.png"
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
   },
+  "manifest_version": 2,
+  "name": "Learn Darklight",
   "options_ui": {
     "page": "html/options.html"
   },
@@ -62,17 +67,12 @@
     "*://mylearningspace.wlu.ca/*"
   ],
   "short_name": "Learn Darklight",
+  "version": "3.0.14",
   "web_accessible_resources": [
     "js/*",
     "css/*",
     "icon/*",
     "img/*",
     "theme/*"
-  ],
-  "applications": {
-    "gecko": {
-      "id": "learndarklight@zijianshao.com",
-      "strict_min_version": "57.0"
-    }
-  }
+  ]
 }

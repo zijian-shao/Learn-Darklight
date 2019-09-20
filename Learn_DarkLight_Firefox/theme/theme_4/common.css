@@ -448,7 +448,7 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 .vui-list > .vui-active,
 .vui-list > .vui-active + li,
 .vui-list > .vui-selected + li {
-    border-top-color: var(--dlight-menu-hover-border-color);
+    border-top-color: var(--d2l-color-celestine);
 }
 
 .vui-changed, .vui-dropdown-menu > ul > li.d2l-last-visible-item.vui-dropdown-menu-item-focus, .vui-dropdown-menu > ul > li.vui-dropdown-menu-item-focus, .vui-list > .vui-active, .vui-list > .vui-selected {
@@ -704,23 +704,24 @@ textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input
 }
 
 .uw-default d2l-menu-item, .uw-default d2l-menu-item-link, .uw-default d2l-my-courses {
-    --d2l-color-celestine-minus-1: #000;
+    --d2l-color-celestine-minus-1: #333;
 }
 
 .uw-default {
-    --d2l-branding-primary-color: #000;
+    --d2l-branding-primary-color: #333;
 }
 
 .uw-default d2l-button-subtle {
     --d2l-button-focus_-_box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #333;
     --d2l-color-celestine-minus-1: #fff;
-    --dlight-menu-hover-background-color: #000;
+    --dlight-menu-hover-background-color: #333;
+    --d2l-color-gypsum: #333;
 }
 
 .uw-default d2l-button-icon {
-    --d2l-button-icon-focus-box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #000;
+    --d2l-button-icon-focus-box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #333;
 }
 
 .uw-default .d2l-navigation-s-notification .d2l-minibar-activity-message-content a, .uw-default .d2l-navigation-s-notification .d2l-minibar-activity-message-content a:visited, .uw-default .d2l-navigation-s-notification .d2l-minibar-activity-message-content a:hover {
-    color: #000;
+    color: #333;
 }
