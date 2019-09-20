@@ -714,3 +714,133 @@ ul.nav li.active:before {
 .finish .btn {
     padding: 20px 40px;
 }
+
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: #1d1d1d;
+    }
+
+    .container:nth-child(even) {
+        background: #2d2d2d;
+    }
+
+    .container .index {
+        color: #fff;
+    }
+
+    .container.theme-container-0 .index,
+    .container.theme-container-0 .title {
+        color: #ddd;
+    }
+
+    .container.theme-container-0 .theme-item-wrapper {
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .container.theme-container-1 {
+        background: #ccc;
+    }
+
+    .container.theme-container-1 .theme-item-wrapper {
+        border-color: #ddd;
+    }
+
+    .container.theme-container-2 .theme-item-wrapper {
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .container.theme-container-3 {
+        background: #0f73bb;
+    }
+
+    .container.theme-container-3 .index,
+    .container.theme-container-3 .title {
+        color: #ddd;
+    }
+
+    .container.theme-container-3 .theme-item-wrapper {
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .container.theme-container-4 .index,
+    .container.theme-container-4 .title {
+        color: #ddd;
+    }
+
+    .container.theme-container-4 .theme-item-wrapper {
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .container.theme-container-99 {
+        background: #ccc;
+    }
+
+    .container.theme-container-99 .index,
+    .container.theme-container-99 .title {
+        color: #000;
+    }
+
+    .theme-item .theme-content {
+        border-top-color: #2d2d2d;
+        background: #2d2d2d;
+    }
+
+    .theme-item .theme-options {
+        background: #2d2d2d;
+    }
+
+    .font-item, .font-item:before {
+        background: transparent;
+    }
+
+    .font-item img {
+        filter: invert(1) hue-rotate(180deg);
+    }
+
+    .font-preview {
+        background: #3d3d3d;
+    }
+
+    .input-range {
+        background: transparent;
+    }
+
+    .input-range::-webkit-slider-runnable-track {
+        background: #555;
+    }
+
+    .input-range::-webkit-slider-thumb {
+        box-shadow: 0 0 0 3px #555;
+    }
+
+    .input-range:focus::-webkit-slider-runnable-track {
+        background: #555;
+    }
+
+    .input-range::-moz-range-track {
+        background: #555;
+    }
+
+    .input-range::-moz-range-thumb {
+        box-shadow: 0 0 0 3px #555;
+    }
+
+    .homepage-preview, .course-preview {
+        background: #222;
+        border-color: #555;
+    }
+
+    .course-preview .card,
+    .course-preview .tabs {
+        border-color: #555;
+    }
+
+    .sec-title {
+        background: #444;
+        color: #ddd;
+    }
+
+    .darklight-toast {
+        background: rgba(81, 147, 84, 0.9);
+    }
+}

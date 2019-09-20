@@ -21,10 +21,13 @@
             <li data-option-tab-index="0" data-option-tab-name="general" id="nav-tab-0" class="nav-tab active">General
             </li>
             <li data-option-tab-index="1" data-option-tab-name="themes" id="nav-tab-1" class="nav-tab">Themes
-                <div class="new-tag margin-left-5">NEW</div>
+<!--                <div class="new-tag margin-left-5">NEW</div>-->
             </li>
             <li data-option-tab-index="2" data-option-tab-name="courses" id="nav-tab-2" class="nav-tab">Courses</li>
             <li data-option-tab-index="3" data-option-tab-name="pages" id="nav-tab-3" class="nav-tab">Pages</li>
+            <li data-option-tab-index="5" data-option-tab-name="import-export" id="nav-tab-5" class="nav-tab">Import /
+                Export
+            </li>
             <li data-option-tab-index="4" data-option-tab-name="about" id="nav-tab-4" class="nav-tab">About</li>
             <li class="nav-tab link link-donate"><a target="_blank" data-href="donate"></a></li>
         </ul>
@@ -214,7 +217,7 @@
                             <label for="opt-general-1-5"></label>
                         </div>
                         <div class="checkbox-content">
-                            <div class="new-tag-o margin-right-5">NEW</div>
+<!--                            <div class="new-tag-o margin-right-5">NEW</div>-->
                             <label for="opt-general-1-5" class="checkbox-label">Use white Darklight icon</label>
                             <a class="option-tip-toggle">?</a>
                         </div>
@@ -474,7 +477,7 @@
                             <label for="opt-courses-1-4"></label>
                         </div>
                         <div class="checkbox-content">
-                            <div class="new-tag-o margin-right-5">NEW</div>
+<!--                            <div class="new-tag-o margin-right-5">NEW</div>-->
                             <label for="opt-courses-1-4" class="checkbox-label">Hide course home banner image</label>
                             <a class="option-tip-toggle">?</a>
                         </div>
@@ -510,7 +513,7 @@
                             <label for="opt-courses-1-5"></label>
                         </div>
                         <div class="checkbox-content">
-                            <div class="new-tag-o margin-right-5">NEW</div>
+<!--                            <div class="new-tag-o margin-right-5">NEW</div>-->
                             <label for="opt-courses-1-5" class="checkbox-label">Fix side panel position on table of
                                 contents page</label>
                             <a class="option-tip-toggle">?</a>
@@ -529,7 +532,7 @@
                             <label for="opt-courses-1-6"></label>
                         </div>
                         <div class="checkbox-content">
-                            <div class="new-tag-o margin-right-5">NEW</div>
+<!--                            <div class="new-tag-o margin-right-5">NEW</div>-->
                             <label for="opt-courses-1-6" class="checkbox-label">Open course content in new tab</label>
                             <a class="option-tip-toggle">?</a>
                         </div>
@@ -1037,6 +1040,48 @@
             </div>
         </div>
         <!-- Pages End-->
+
+        <!-- Import / Export Start -->
+        <div data-option-index="5" class="section" id="opt-tab-5">
+            <div class="title">Import / Export</div>
+
+            <!-- Import -->
+            <div class="group">
+
+                <div class="group-title full-width">Import Options</div>
+                <div class="group-content full-width margin-bottom-20">
+                    <div class="import-container" id="opt-import-0-0">
+                        <textarea rows="6" placeholder="Paste options text here and click 'Import'"></textarea>
+                        <div class="import-info-container">
+                            <a class="btn btn-primary pull-right">Import</a>
+                            <div class="import-info"></div>
+                        </div>
+                        <div class="lang hidden">
+                            <div class="success">Extension options imported successfully!</div>
+                            <div class="failed">Import failed. Incorrect option text format. Please check your input.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-title full-width">Export Options</div>
+                <div class="group-content full-width margin-bottom-20">
+                    <div class="import-container" id="opt-import-1-0">
+                        <textarea rows="6" placeholder="Click 'Export' to generate options text"></textarea>
+                        <div class="import-info-container">
+                            <a class="btn btn-primary pull-right">Export</a>
+                            <div class="import-info"></div>
+                        </div>
+                        <div class="lang hidden">
+                            <div class="success">Options text generated successfully. Content copied to clipboard.</div>
+                            <div class="failed">Export failed, please report this issue to the developer.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Import / Export End-->
 
         <!-- About Start -->
         <div data-option-index="4" class="section" id="opt-tab-4">
