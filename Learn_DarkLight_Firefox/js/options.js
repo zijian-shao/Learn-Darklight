@@ -848,7 +848,7 @@ function initOptions() {
             e.preventDefault();
             try {
                 exportContainer.addClass('wait');
-                browser.storage.sync.get(getOptionListDefault(), function (items) {
+                browser.storage.sync.get(null, function (items) {
                     exportTextarea.val(
                         '----------- LEARN DARKLIGHT OPTIONS BEGIN -----------\n' +
                         window.btoa(JSON.stringify(items)) +
