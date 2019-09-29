@@ -1,7 +1,7 @@
 /* course tiles */
-d2l-card {
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s, border 0.3s !important;
-}
+/*d2l-card {*/
+/*    transition: transform 0.3s, box-shadow 0.3s, background 0.3s, border 0.3s !important;*/
+/*}*/
 
 /* homepage course tile image ratio */
 d2l-card .d2l-enrollment-card-image-container {
@@ -10,7 +10,8 @@ d2l-card .d2l-enrollment-card-image-container {
     padding-top: 45%;
 }
 
-d2l-card .d2l-enrollment-card-image-container d2l-course-image {
+/*d2l-card .d2l-enrollment-card-image-container d2l-course-image {*/
+d2l-card .d2l-enrollment-card-image-container d2l-organization-image {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;

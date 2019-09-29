@@ -242,8 +242,9 @@ function themeOnCourseTileLoaded(elem) {
 }
 
 function themeOnCourseTabAvailable(d2lTabs) {
+    injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_course_tab.css', $(d2lTabs.shadowRoot), 'file');
     d2lTabs.querySelectorAll('d2l-tab-panel').forEach(function (elem) {
-        injectCSS('d2l-alert{color:#ddd;background:#424a56;border:#424a56;}', $(elem.querySelector('d2l-my-courses-content').shadowRoot), 'text');
+        injectCSS('d2l-alert{color:#ddd;background:var(--d2l-color-gypsum);border:var(--d2l-color-gypsum);}', $(elem.querySelector('d2l-my-courses-content').shadowRoot), 'text');
     });
 }
 

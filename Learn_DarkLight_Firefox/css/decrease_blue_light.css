@@ -48,3 +48,9 @@ html {
 .daylight .d2l-grid[type=data] > :only-child > tr.d_ggl2 > td, .daylight .d2l-grid[type=data] > :only-child > tr.d_ggl2 > th, .daylight .d2l-grid[type=list] > :only-child > tr.d_ggl2 > td, .daylight .d2l-grid[type=list] > :only-child > tr.d_ggl2 > th {
     background-color: #f9fafb;
 }
+
+/* button group */
+.vui-button, .vui-button.vui-disabled:focus, .vui-button.vui-disabled:hover, .vui-button:focus, .vui-button:hover, .vui-button:link, .vui-button:visited, .vui-button[disabled]:focus, .vui-button[disabled]:hover,
+.d2l-iterator-button, .d2l-iterator-button.d2l-iterator-button-disabled:hover, .d2l-iterator-button.d2l-iterator-button-disabled:focus {
+    background: #f9fafb;
+}
