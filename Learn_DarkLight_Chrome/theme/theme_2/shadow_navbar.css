@@ -21,7 +21,7 @@ d2l-navigation-band,
     color: #666 !important;
 }
 
-:host([icon*="d2l-tier3:"]) {
+d2l-icon.d2l-navigation-button-icon {
     color: #999 !important;
     width: 1.5rem !important;
 }
@@ -42,9 +42,3 @@ a:hover .d2l-navigation-link-top-border, a:focus .d2l-navigation-link-top-border
 :host button:hover .d2l-navigation-button-top-border, :host button:focus .d2l-navigation-button-top-border {
     background: #09b1b9;
 }
-
-.d2l-navigation-button-notification-indicator-icon {
-    width: 8px !important;
-    height: 8px !important;
-}
-

@@ -23,7 +23,7 @@ div.d2l-navigation-centerer > div.d2l-navigation-gutters > div.d2l-navigation-he
     color: rgba(255, 255, 255, 0.6) !important;
 }
 
-:host([icon*="d2l-tier3:"]) {
+d2l-icon.d2l-navigation-button-icon {
     color: rgba(255, 255, 255, 0.6) !important;
     width: 1.5rem !important;
 }
@@ -43,9 +43,4 @@ a:hover .d2l-navigation-link-top-border, a:focus .d2l-navigation-link-top-border
 
 :host button:hover .d2l-navigation-button-top-border, :host button:focus .d2l-navigation-button-top-border {
     background: #fff;
-}
-
-.d2l-navigation-button-notification-indicator-icon {
-    width: 8px !important;
-    height: 8px !important;
 }

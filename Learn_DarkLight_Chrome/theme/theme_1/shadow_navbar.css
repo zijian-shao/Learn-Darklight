@@ -8,11 +8,6 @@ d2l-navigation-band,
     max-height: 40px;
 }
 
-:host([icon*="d2l-tier3:"]) {
+d2l-icon.d2l-navigation-button-icon {
     width: 1.5rem !important;
-}
-
-.d2l-navigation-button-notification-indicator-icon {
-    width: 8px !important;
-    height: 8px !important;
 }

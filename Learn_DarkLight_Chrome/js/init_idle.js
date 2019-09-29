@@ -1156,7 +1156,7 @@ function homepageFunc() {
                         var courseTileLoaded = true;
 
                         myEnrollCards.forEach(function (el) {
-                            if (!el.shadowRoot.querySelector('d2l-card > div[slot="header"] > div.d2l-enrollment-card-image-container > d2l-course-image').shadowRoot.querySelector('img').hasAttribute('src')
+                            if (!el.shadowRoot.querySelector('d2l-card > div[slot="header"] > div.d2l-enrollment-card-image-container > d2l-organization-image').shadowRoot.querySelector('d2l-course-image').shadowRoot.querySelector('img').hasAttribute('src')
                                 || el.shadowRoot.querySelector('d2l-card > div.d2l-enrollment-card-content-flex > d2l-organization-name').shadowRoot.textContent.trim() === '')
                                 courseTileLoaded = false;
                         });
@@ -1477,7 +1477,7 @@ function customCourseThumbs(cards) {
             if (thumbData.hasOwnProperty('ID_' + el.id)) {
                 var enrollCardImg = el.cardRoot.querySelector('div[slot="header"] > div.d2l-enrollment-card-image-container');
                 enrollCardImg.style.backgroundImage = 'url(' + thumbData['ID_' + el.id]['thumb_image'] + ')';
-                enrollCardImg.querySelector('d2l-course-image').style.opacity = '0';
+                enrollCardImg.querySelector('d2l-organization-image').style.opacity = '0';
                 thumbData['ID_' + el.id]['exists'] = true;
             }
 

@@ -22,7 +22,7 @@ button:focus, :host(.d2l-button-icon-focus) button {
 }
 
 button:hover, button:focus, :host([active]) button, :host(.d2l-button-icon-hover) button, :host(.d2l-button-icon-focus) button {
-    background: none;
+    background: none !important;
     border: 1px solid #fff;
     box-shadow: none !important;
     opacity: 1;
