@@ -4,6 +4,8 @@ Learn Darklight is a browser extension that offers multiple themes for Waterloo 
 ## Install
 Chrome: [View in Chrome Web Store](https://chrome.google.com/webstore/detail/learn-darklight/lhodieepeghcemhpbloffmljoklaklho "Learn Darklight (Chrome Version)")
 
+Edge: [View in Edge Addons](https://microsoftedge.microsoft.com/addons/detail/gniehfhhoajdjieojgojjgbcochajole "Learn Darklight (Edge Version)")
+
 Firefox: [View in Firefox Addons](https://addons.mozilla.org/addon/learn-darklight/ "Learn Darklight (Firefox Version)")
 
 ## Features
