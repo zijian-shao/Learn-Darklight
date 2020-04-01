@@ -1,0 +1,10 @@
+.d2l-input {
+    background-color: var(--d2l-color-gypsum) !important;
+    color: #ddd !important;
+    border-color: var(--d2l-color-gypsum) !important;
+    box-shadow: none !important;
+}
+
+.d2l-input:hover, .d2l-input:focus, .d2l-input-focus {
+    border-color: var(--d2l-color-celestine) !important;
+}

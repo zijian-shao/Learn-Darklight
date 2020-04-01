@@ -371,7 +371,8 @@ function getLink(key) {
         linkedInShare: 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dfirefox',
         mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension',
         dlightGallery: 'https://www.zijianshao.com/dlight/gallery/?m=sets',
-        brightspaceGallery: 'https://www.zijianshao.com/dlight/gallery/?m=brightspace'
+        brightspaceGallery: 'https://www.zijianshao.com/dlight/gallery/?m=brightspace',
+        privacy: 'https://www.zijianshao.com/dlight/privacy/'
     };
     return list[key];
 }
