@@ -7,7 +7,7 @@ function initTheme() {
         if (getCustomThemeOption('darkIframe'))
             filterText += 'brightness(0.8) ';
         if (getCustomThemeOption('invertIframe'))
-            filterText += 'invert(1) ';
+            filterText += 'invert(1) hue-rotate(180deg) ';
         if (filterText != '')
             cssText += 'iframe{filter:' + filterText + '!important;}';
     }
@@ -139,10 +139,8 @@ function initTheme() {
         var waitSearchInt = setInterval(function () {
             if (inputSearch.shadowRoot !== null) {
                 clearInterval(waitSearchInt);
-                injectCSS(':host{--d2l-input_-_background-color:#424a56;' +
-                    '--d2l-input_-_border-color:#424a56;' +
-                    '--d2l-input_-_box-shadow:none}',
-                    $(inputSearch.shadowRoot), 'text');
+                injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_input.css',
+                    $(inputSearch.shadowRoot), 'file');
             }
             waitSearchIntCnt++;
             if (waitSearchIntCnt > 20) {
@@ -152,9 +150,20 @@ function initTheme() {
     }
 
     // floating buttons
-    if (document.querySelector('d2l-floating-buttons') !== null && document.querySelector('d2l-floating-buttons').shadowRoot !== null) {
-        injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_float_button.css',
-            $(document.querySelector('d2l-floating-buttons').shadowRoot), 'file');
+    var floatingButtons = document.querySelector('d2l-floating-buttons');
+    if (floatingButtons !== null) {
+        var waitFltBtnIntCnt = 0;
+        var waitFltBtnInt = setInterval(function () {
+            if (floatingButtons.shadowRoot !== null) {
+                clearInterval(waitFltBtnInt);
+                injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_float_button.css',
+                    $(floatingButtons.shadowRoot), 'file');
+            }
+            waitFltBtnIntCnt++;
+            if (waitFltBtnIntCnt > 20) {
+                clearInterval(waitFltBtnInt);
+            }
+        }, 300);
     }
 
     // wait for navbar

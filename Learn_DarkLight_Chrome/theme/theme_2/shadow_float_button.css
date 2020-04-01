@@ -1,5 +1,5 @@
-.d2l-floating-buttons-container.d2l-floating-buttons-floating {
-    border: none !important;
-    background: #424a56 !important;
+.d2l-floating-buttons-container {
+    border-color: var(--darklight-background-color) !important;
+    background-color: var(--darklight-background-color) !important;
     box-shadow: none !important;
 }

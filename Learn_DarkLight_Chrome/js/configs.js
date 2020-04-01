@@ -353,11 +353,12 @@ function getFontConfigs() {
 }
 
 function getLink(key) {
+    var ua = navigator.userAgent;
     var list = {
-        darklightStore: 'https://chrome.google.com/webstore/detail/learn-darklight/lhodieepeghcemhpbloffmljoklaklho',
-        azureStore: 'https://chrome.google.com/webstore/detail/waterlooworks-azure/peeaakkcmdoeljddgdkcailflcballmm',
-        autologStore: 'https://chrome.google.com/webstore/detail/waterloo-autolog/ncpmlgiinkikhgijoplpnjggobinhkpl',
-        raspberryStore: 'https://chrome.google.com/webstore/detail/quest-raspberry/ifhnmgllkaeebiklhakndljclagikoak',
+        darklightStore: '',
+        azureStore: '',
+        autologStore: '',
+        raspberryStore: '',
         feedback: 'https://docs.google.com/forms/d/e/1FAIpQLSdrOnFC70L2juZuUzAy0r2xmPPCiWQ5sR7-U_c8ZQIuJYsqsg/viewform?usp=pp_url&entry.131896974=@@extVersion@@&entry.763960959=@@browser@@&entry.1389556052=@@os@@',
         officialWebsite: 'https://www.zijianshao.com/dlight/',
         officialWebsiteVersion: 'https://www.zijianshao.com/dlight/releases/',
@@ -371,7 +372,22 @@ function getLink(key) {
         linkedInShare: 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.zijianshao.com%2Fdlight%2Fsharelink%2F%3Fplatform%3Dchrome',
         mailTo: 'mailto:sam.zj.shao@gmail.com?Subject=Learn Darklight Extension',
         dlightGallery: 'https://www.zijianshao.com/dlight/gallery/?m=sets',
-        brightspaceGallery: 'https://www.zijianshao.com/dlight/gallery/?m=brightspace'
+        brightspaceGallery: 'https://www.zijianshao.com/dlight/gallery/?m=brightspace',
+        privacy: 'https://www.zijianshao.com/dlight/privacy/'
     };
+
+    if (ua.indexOf('Edge') !== -1 || ua.indexOf('Edg') !== -1) {
+        // edge
+        list['darklightStore'] = 'https://microsoftedge.microsoft.com/addons/detail/gniehfhhoajdjieojgojjgbcochajole';
+        list['azureStore'] = 'https://microsoftedge.microsoft.com/addons/detail/bjkcklpgffonojilhdfbjbifgpacajmm';
+        list['autologStore'] = 'https://microsoftedge.microsoft.com/addons/detail/eifpbkdegnmkokbngeifkmmkjmimaogb';
+        list['raspberryStore'] = 'https://microsoftedge.microsoft.com/addons/detail/bbhlapokfenllaokgocokaemclmncafk';
+    } else {
+        // chrome
+        list['darklightStore'] = 'https://chrome.google.com/webstore/detail/learn-darklight/lhodieepeghcemhpbloffmljoklaklho';
+        list['azureStore'] = 'https://chrome.google.com/webstore/detail/waterlooworks-azure/peeaakkcmdoeljddgdkcailflcballmm';
+        list['autologStore'] = 'https://chrome.google.com/webstore/detail/waterloo-autolog/ncpmlgiinkikhgijoplpnjggobinhkpl';
+        list['raspberryStore'] = 'https://chrome.google.com/webstore/detail/quest-raspberry/ifhnmgllkaeebiklhakndljclagikoak';
+    }
     return list[key];
 }

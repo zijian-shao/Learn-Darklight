@@ -43,7 +43,7 @@
       "run_at": "document_idle"
     }
   ],
-  "description": "Learn Darklight offers multiple themes for the new Waterloo Learn.",
+  "description": "Learn Darklight offers multiple themes and advanced features for Waterloo Learn.",
   "icons": {
     "16": "icon/icon16.png",
     "48": "icon/icon48.png",
@@ -61,7 +61,7 @@
     "*://mylearningspace.wlu.ca/*"
   ],
   "short_name": "Learn Darklight",
-  "version": "3.0.16",
+  "version": "3.0.17",
   "web_accessible_resources": [
     "js/*",
     "css/*",

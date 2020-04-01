@@ -176,6 +176,8 @@ d2l-button[primary] .d2l-buttonmenu-content > d2l-icon {
 
 .d2l-button, .d2l-button[disabled]:focus, .d2l-button[disabled]:hover {
     background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
     border-color: #999;
     color: #999;
 }
@@ -337,112 +339,81 @@ bsi-button-menu:visited {
     color: #fff;
 }
 
-/* selects */
-select.vui-input, select.vui-input:hover:disabled {
-    background-color: var(--d2l-color-gypsum);
-    border-color: rgba(0, 0, 0, 0.01);
-    box-shadow: none;
-    color: #ddd;
-}
-
-select.vui-input.vui-input-focus, select.vui-input:focus, select.vui-input:hover {
-    border-color: var(--d2l-color-celestine);
-}
-
 /* inputs */
-.vui-input-search-container input[type=text], .vui-input-search-container input[type=text]:hover:disabled, .vui-input-search-container input[type=search], .vui-input-search-container input[type=search]:hover:disabled {
-    background: var(--d2l-color-gypsum);
+.vui-changed {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/*short input*/
+.d2l-edit, .vui-input[type=email], .vui-input[type=password], .vui-input[type=text], .vui-input[type=url] {
+    background-color: var(--d2l-color-gypsum);
     color: #ddd;
     border-color: var(--d2l-color-gypsum);
     box-shadow: none;
 }
 
-.vui-input-search-container input[type=text].vui-input-focus, .vui-input-search-container input[type=text]:focus, .vui-input-search-container input[type=text]:hover, .vui-input-search-container input[type=search].vui-input-focus, .vui-input-search-container input[type=search]:focus, .vui-input-search-container input[type=search]:hover {
+.d2l-edit:focus, .d2l-edit:hover, .vui-input[type=email]:focus, .vui-input[type=email]:hover, .vui-input[type=password]:focus, .vui-input[type=password]:hover, .vui-input[type=text]:focus, .vui-input[type=text]:hover, .vui-input[type=url]:focus, .vui-input[type=url]:hover {
     border-color: var(--d2l-color-celestine);
 }
 
-.vui-input[type=email], .vui-input[type=email]:hover:disabled, .vui-input[type=password], .vui-input[type=password]:hover:disabled, .vui-input[type=text], .vui-input[type=text]:hover:disabled, .vui-input[type=url], .vui-input[type=url]:hover:disabled {
-    background: var(--d2l-color-gypsum);
+/*long input*/
+.d2l-longedit, textarea.vui-input {
+    background-color: var(--d2l-color-gypsum);
     color: #ddd;
     border-color: var(--d2l-color-gypsum);
     box-shadow: none;
 }
 
-.vui-input[type=email].vui-input-focus, .vui-input[type=email]:focus, .vui-input[type=email]:hover, .vui-input[type=password].vui-input-focus, .vui-input[type=password]:focus, .vui-input[type=password]:hover, .vui-input[type=text].vui-input-focus, .vui-input[type=text]:focus, .vui-input[type=text]:hover, .vui-input[type=url].vui-input-focus, .vui-input[type=url]:focus, .vui-input[type=url]:hover {
+.d2l-longedit:focus, .d2l-longedit:hover, textarea.vui-input:focus, textarea.vui-input:hover {
     border-color: var(--d2l-color-celestine);
 }
 
-.d2l-search-widget-1 input.d2l-search-widget {
-    background: var(--d2l-color-gypsum);
+/*select*/
+.d2l-select, .d2l-select:hover:disabled, select.vui-input, select.vui-input:hover:disabled {
+    background-color: var(--d2l-color-gypsum);
     color: #ddd;
     border-color: var(--d2l-color-gypsum);
     box-shadow: none;
 }
 
-.d2l-search-widget-1 input.d2l-search-widget:focus, .d2l-search-widget-1 input.d2l-search-widget:hover {
+.d2l-select:focus, .d2l-select:hover, select.vui-input:focus, select.vui-input:hover {
     border-color: var(--d2l-color-celestine);
 }
 
-.d2l-search-widget-custom-0 input.d2l-search-widget-custom {
-    background: var(--d2l-color-gypsum);
+.d2l-select, .d2l-select:disabled, .d2l-select:focus:disabled, .d2l-select:hover:disabled, select.vui-input, select.vui-input:disabled, select.vui-input:focus:disabled, select.vui-input:hover:disabled {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iNyIgdmlld0JveD0iMCAwIDExIDciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogIDxwYXRoIGQ9Ik0xIDJsNC41IDRNMTAgMkw1LjUgNiIgc3Ryb2tlPSIjRUVFRUVFIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+DQo8L3N2Zz4=);
+}
+
+/*checkbox*/
+.d2l-checkbox, .d2l-checkbox:hover:disabled, .vui-input[type=checkbox], .vui-input[type=checkbox]:hover:disabled {
+    background-color: var(--d2l-color-gypsum);
     color: #ddd;
     border-color: var(--d2l-color-gypsum);
     box-shadow: none;
 }
 
-.d2l-search-widget-custom-0 input.d2l-search-widget-custom:focus, .d2l-search-widget-custom-0 input.d2l-search-widget-custom:hover {
+.d2l-checkbox:focus, .d2l-checkbox:hover, .vui-input[type=checkbox]:focus, .vui-input[type=checkbox]:hover {
     border-color: var(--d2l-color-celestine);
 }
 
-.daylight .d2l-editable-placeholder {
-    background: var(--d2l-color-gypsum);
-    border-color: var(--d2l-color-gypsum);
-    color: #ddd;
+.d2l-checkbox:checked, .vui-input[type=checkbox]:checked {
+    background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23EEEEEE%22%20d%3D%22M8.4%2016.6c.6.6%201.5.6%202.1%200l8-8c.6-.6.6-1.5%200-2.1-.6-.6-1.5-.6-2.1%200l-6.9%207-1.9-1.9c-.6-.6-1.5-.6-2.1%200-.6.6-.6%201.5%200%202.1l2.9%202.9z%22/%3E%3C/svg%3E%0A);
 }
 
-.daylight .d2l-editable-focus {
-    border-color: var(--d2l-color-celestine);
-    box-shadow: none;
-}
-
-.daylight .d2l-editable:hover {
-    background: var(--d2l-color-gypsum);
-    border-color: var(--d2l-color-celestine);
-    color: #ddd;
-}
-
-textarea.vui-input, textarea.vui-input:hover:disabled {
-    background: var(--d2l-color-gypsum);
+/*radio*/
+.d2l-radio, .d2l-radio:hover:disabled, .vui-input[type=radio], .vui-input[type=radio]:hover:disabled {
+    background-color: var(--d2l-color-gypsum);
     color: #ddd;
     border-color: var(--d2l-color-gypsum);
     box-shadow: none;
 }
 
-textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input:hover {
+.d2l-radio:focus, .d2l-radio:hover, .vui-input[type=radio]:focus, .vui-input[type=radio]:hover {
     border-color: var(--d2l-color-celestine);
 }
 
-.vui-changed, .vui-dropdown-menu > ul > li.d2l-last-visible-item.vui-dropdown-menu-item-focus, .vui-dropdown-menu > ul > li.vui-dropdown-menu-item-focus {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-input[type="text"].d2l-input.d2l-input-search,
-input[type="search"].d2l-input.d2l-input-search,
-input[type="tel"].d2l-input.d2l-input-search,
-input[type="url"].d2l-input.d2l-input-search,
-input[type="email"].d2l-input.d2l-input-search,
-input[type="password"].d2l-input.d2l-input-search,
-input[type="number"].d2l-input.d2l-input-search {
-    background: var(--d2l-color-gypsum) !important;
-    color: #ddd !important;
-    border-color: var(--d2l-color-gypsum) !important;
-    box-shadow: none !important;
-    transition: border-color 0.3s ease !important;
-}
-
-.d2l-input-search-hover.d2l-input-search input[type="text"].d2l-input.d2l-input-search,
-.d2l-input-search-focus.d2l-input-search input[type="text"].d2l-input.d2l-input-search {
-    border-color: var(--d2l-color-celestine) !important;
+.d2l-radio:checked, .vui-input[type=radio]:checked {
+    background-image: url(data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%2010%2010%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%0A%09%3Ccircle%20cx%3D%225%22%20cy%3D%225%22%20r%3D%225%22%20fill%3D%22%23EEEEEE%22%3E%3C/circle%3E%0A%3C/svg%3E);
 }
 
 /* table */
@@ -553,7 +524,7 @@ d2l-dropdown button.d2l-button-icon:focus {
 }
 
 .vui-heading-collapsible > .vui-heading-collapsible-changed[aria-expanded=false], .vui-heading-collapsible > .vui-heading-collapsible-changed[aria-expanded=false]:focus, .vui-heading-collapsible > .vui-heading-collapsible-changed[aria-expanded=false]:hover, .vui-list > .vui-active, .vui-list > .vui-selected {
-    background: none;
+    background: #3a424c;
     border: none;
 }
 
@@ -1601,6 +1572,12 @@ d2l-dropdown-more d2l-button-icon[active] > button {
     background: var(--darklight-tile-background-color) !important;
     border-color: var(--darklight-tile-background-color) !important;
 }
+
+#ContentView.d2l-placeholder > div {
+    background: var(--darklight-tile-background-color) !important;
+    border-color: var(--darklight-tile-background-color) !important;
+}
+
 
 /* homepage calendar */
 .darklight-homepage-calendar-item {

@@ -128,6 +128,10 @@ d2l-navigation-band {
         margin-bottom: 30px;
     }
 
+    .homepage-container div:last-of-type .d2l-widget:last-child {
+        margin-bottom: 30px;
+    }
+
     .d2l-course-banner-container {
         margin-bottom: 30px;
     }
@@ -156,6 +160,10 @@ d2l-navigation-band {
 .d2l-homepage-header-wrapper .d2l-heading {
     font-weight: normal;
     text-transform: uppercase;
+}
+
+.daylight-widget-demarcation .d2l-custom-widget .d2l-widget-content .d2l-htmlblock > p:first-child {
+    margin-top: 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -436,11 +444,11 @@ d2l-button-icon {
 }
 
 /* input */
-select.vui-input.vui-input-focus, select.vui-input:focus, select.vui-input:hover,
-.vui-input[type=email].vui-input-focus, .vui-input[type=email]:focus, .vui-input[type=email]:hover, .vui-input[type=password].vui-input-focus, .vui-input[type=password]:focus, .vui-input[type=password]:hover, .vui-input[type=text].vui-input-focus, .vui-input[type=text]:focus, .vui-input[type=text]:hover, .vui-input[type=url].vui-input-focus, .vui-input[type=url]:focus, .vui-input[type=url]:hover,
-.vui-input[type=checkbox].vui-input-focus, .vui-input[type=checkbox]:focus, .vui-input[type=checkbox]:hover,
-.vui-input[type=radio].vui-input-focus, .vui-input[type=radio]:focus, .vui-input[type=radio]:hover,
-textarea.vui-input.vui-input-focus, textarea.vui-input:focus, textarea.vui-input:hover {
+.d2l-edit:focus, .d2l-edit:hover, .vui-input[type=email]:focus, .vui-input[type=email]:hover, .vui-input[type=password]:focus, .vui-input[type=password]:hover, .vui-input[type=text]:focus, .vui-input[type=text]:hover, .vui-input[type=url]:focus, .vui-input[type=url]:hover,
+.d2l-longedit:focus, .d2l-longedit:hover, textarea.vui-input:focus, textarea.vui-input:hover,
+.d2l-select:focus, .d2l-select:hover, select.vui-input:focus, select.vui-input:hover,
+.d2l-radio:focus, .d2l-radio:hover, .vui-input[type=radio]:focus, .vui-input[type=radio]:hover,
+.d2l-checkbox:focus, .d2l-checkbox:hover, .vui-input[type=checkbox]:focus, .vui-input[type=checkbox]:hover {
     border-color: var(--dlight-link-hover-color);
 }
 
