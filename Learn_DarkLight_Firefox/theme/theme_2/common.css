@@ -430,17 +430,17 @@ bsi-button-menu:visited {
 }
 
 .d2l-table:not([style-scope]):not(.style-scope) > tbody:not([style-scope]):not(.style-scope), d2l-tbody:not([style-scope]):not(.style-scope) {
-    background: none;
+    background: none !important;
     border-color: rgba(255, 255, 255, 0.1);
 }
 
 .d2l-table:not([style-scope]):not(.style-scope) > *:not([style-scope]):not(.style-scope) > tr:not([style-scope]):not(.style-scope), d2l-tr:not([style-scope]):not(.style-scope) {
-    background: none;
+    background: none !important;
     border-color: rgba(255, 255, 255, 0.1);
 }
 
 .d2l-table:not([style-scope]):not(.style-scope) > *:not([style-scope]):not(.style-scope) > tr[header]:not([style-scope]):not(.style-scope) > th:not([style-scope]):not(.style-scope), .d2l-table:not([style-scope]):not(.style-scope) > thead:not([style-scope]):not(.style-scope) > tr:not([style-scope]):not(.style-scope) > th:not([style-scope]):not(.style-scope), d2l-thead:not([style-scope]):not(.style-scope) > d2l-tr:not([style-scope]):not(.style-scope) > d2l-th:not([style-scope]):not(.style-scope), d2l-tr[header]:not([style-scope]):not(.style-scope) > d2l-th:not([style-scope]):not(.style-scope) {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05) !important;
     border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -600,6 +600,15 @@ d2l-dropdown-menu {
 
 .d2l-tile {
     box-shadow: none;
+}
+
+d2l-dropdown d2l-dropdown-menu d2l-menu d2l-menu-item {
+    background: none;
+}
+
+d2l-dropdown d2l-dropdown-menu d2l-menu d2l-menu-item:hover,
+d2l-dropdown d2l-dropdown-menu d2l-menu d2l-menu-item:focus {
+    background: var(--d2l-color-celestine-plus-2);
 }
 
 /* navbar */
