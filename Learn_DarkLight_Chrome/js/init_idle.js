@@ -1481,27 +1481,28 @@ function customCourseThumbs(cards) {
                 thumbData['ID_' + el.id]['exists'] = true;
             }
 
-            var moreBtn = el.cardRoot.querySelector('d2l-dropdown-more');
-            $(moreBtn).on('click', function (e) {
-                var dropDownMenu = moreBtn.querySelector('d2l-dropdown-menu');
-                if (dropDownMenu.querySelector('d2l-menu > d2l-menu-item[darklight-custom-course-pic]') === null) {
-                    var menuLink = document.createElement('d2l-menu-item');
-                    menuLink.setAttribute('darklight-custom-course-pic', '');
-                    // var menuLink = $('<d2l-menu-item darklight-custom-course-pic><span class="style-scope d2l-menu-item darklight-custom-course-pic-text">Customize</span></d2l-menu-item>');
-                    menuLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        chrome.runtime.sendMessage({
-                            action: 'createTab',
-                            data: {
-                                url: baseURL + 'html/options.html?action=add-custom-cover&course-id=' + el.id + '&course-name=' + encodeURIComponent(el.title)
-                            }
-                        });
-                    });
-
-                    dropDownMenu.querySelector('d2l-menu').appendChild(menuLink);
-                    menuLink.shadowRoot.querySelector('span').textContent = 'Customize';
-                }
-            });
+            // customize button
+            // var moreBtn = el.cardRoot.querySelector('d2l-dropdown-more');
+            // $(moreBtn).on('click', function (e) {
+            //     var dropDownMenu = moreBtn.querySelector('d2l-dropdown-menu');
+            //     if (dropDownMenu.querySelector('d2l-menu > d2l-menu-item[darklight-custom-course-pic]') === null) {
+            //         var menuLink = document.createElement('d2l-menu-item');
+            //         menuLink.setAttribute('darklight-custom-course-pic', '');
+            //         // var menuLink = $('<d2l-menu-item darklight-custom-course-pic><span class="style-scope d2l-menu-item darklight-custom-course-pic-text">Customize</span></d2l-menu-item>');
+            //         menuLink.addEventListener('click', function (e) {
+            //             e.preventDefault();
+            //             chrome.runtime.sendMessage({
+            //                 action: 'createTab',
+            //                 data: {
+            //                     url: baseURL + 'html/options.html?action=add-custom-cover&course-id=' + el.id + '&course-name=' + encodeURIComponent(el.title)
+            //                 }
+            //             });
+            //         });
+            //
+            //         dropDownMenu.querySelector('d2l-menu').appendChild(menuLink);
+            //         menuLink.shadowRoot.querySelector('span').textContent = 'Customize';
+            //     }
+            // });
         });
 
         // var hasUnused = false;
@@ -2021,9 +2022,9 @@ function initDarklightFunc() {
                 setTimeout(function () {
                     if (self.data('dropdown-init') !== 'true') {
                         self.data('dropdown-init', 'true');
-                        injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self, 'file', true);
+                        // injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self, 'file', true);
                     } else if (typeof self.children('d2l-dropdown-menu').attr('render-content') === typeof undefined) {
-                        injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self.children('d2l-dropdown-menu'), 'file', true);
+                        // injectCSSShadow(baseURL + 'css/shadow_dropdown.css', self.children('d2l-dropdown-menu'), 'file', true);
                     }
                     if (typeof themeOnDropdownClick === 'function') {
                         themeOnDropdownClick(self);
