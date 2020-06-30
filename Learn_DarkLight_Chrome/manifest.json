@@ -61,7 +61,7 @@
     "*://mylearningspace.wlu.ca/*"
   ],
   "short_name": "Learn Darklight",
-  "version": "3.0.18",
+  "version": "3.0.19",
   "web_accessible_resources": [
     "js/*",
     "css/*",
