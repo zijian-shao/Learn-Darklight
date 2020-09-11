@@ -1106,7 +1106,16 @@ function homepageFunc() {
                     }
                 }
 
-                var d2lMyCourses = courseWidget[0].querySelector('.d2l-widget-content > .d2l-widget-content-padding > d2l-my-courses').shadowRoot.querySelector('d2l-my-courses-container');
+                var d2lMyCourses = courseWidget[0].querySelector('.d2l-widget-content > .d2l-widget-content-padding > d2l-my-courses').shadowRoot;
+                if (d2lMyCourses === null) {
+                    shadowRootIntervalCount++;
+                    if (shadowRootIntervalCount > 10) {
+                        clearInterval(shadowRootIntervalId);
+                    }
+                    return;
+                }
+                clearInterval(shadowRootIntervalId);
+                d2lMyCourses = d2lMyCourses.querySelector('d2l-my-courses-container');
 
                 // if (isTabSwitch !== true) {
                 //     var d2lMyCoursesLoading = document.createElement('div');
@@ -1299,9 +1308,14 @@ function homepageFunc() {
 
             }
 
-            setTimeout(function () {
+            var shadowRootIntervalCount = 0;
+            var shadowRootIntervalId = setInterval(function () {
                 _waitForCourseLoad();
             }, 800);
+
+            // setTimeout(function () {
+            //     _waitForCourseLoad();
+            // }, 800);
 
         } else if (headText.match(/Calendar/) && isWLU()) {
             // for WLU homepage calendar
@@ -1754,9 +1768,17 @@ function courseTileContextMenu(panel, cards) {
         var interval = setInterval(function () {
 
             if (typeof courseBtn === typeof undefined || !courseBtn.length) {
-                courseBtn = $(document.querySelector('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon')
-                    .shadowRoot.querySelector(':host > d2l-navigation-button')
-                    .shadowRoot.querySelector(':host > button'));
+                try {
+                    courseBtn = $(document.querySelector('.d2l-navigation-s-course-menu d2l-dropdown d2l-navigation-button-notification-icon')
+                        .shadowRoot.querySelector(':host > d2l-navigation-button')
+                        .shadowRoot.querySelector(':host > button'));
+                } catch (e) {
+                    courseBtn = undefined;
+                    intervalCnt++;
+                    if (intervalCnt > 20) {
+                        clearInterval(interval);
+                    }
+                }
             } else {
                 clearInterval(interval);
 
