@@ -56,18 +56,20 @@ function initTheme() {
 
     // drop down button observer
     function _customizeButtons() {
-        document.querySelectorAll('d2l-button-subtle, d2l-button-icon').forEach(function (el) {
+        var btnCSS = ':host([active]) button,button:focus,button:hover{background-color:var(--dlight-menu-hover-background-color)!important;color:var(--dlight-menu-hover-text-color)!important}button:focus{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--d2l-color-celestine)!important}';
+        var btnIconCSS = ':host{color: inherit!important}';
+        document.querySelectorAll('d2l-dropdown-context-menu').forEach(function (el) {
             if (!el.hasAttribute('data-theme-button-init')) {
                 el.setAttribute('data-theme-button-init', '');
                 if (el.shadowRoot !== null) {
-                    injectCSS('button:hover, button:focus, :host([active]) button, :host(.d2l-button-subtle-hover) button, :host(.d2l-button-subtle-focus) button{background-color:var(--dlight-menu-hover-background-color);color:var(--dlight-menu-hover-text-color)}' +
-                        'button:hover d2l-icon, button:focus d2l-icon, :host([active]) button d2l-icon, :host(.d2l-button-subtle-hover) button d2l-icon, :host(.d2l-button-subtle-focus) button d2l-icon{color:var(--dlight-menu-hover-text-color)}',
-                        $(el.shadowRoot), 'text');
+                    var tar = el.shadowRoot.querySelector('d2l-button-icon').shadowRoot;
+                    injectCSS(btnCSS, $(tar), 'text');
+                    injectCSS(btnIconCSS, $(tar.querySelector('d2l-icon').shadowRoot), 'text');
                 } else {
                     setTimeout(function () {
-                        injectCSS('button:hover, button:focus, :host([active]) button, :host(.d2l-button-subtle-hover) button, :host(.d2l-button-subtle-focus) button{background-color:var(--dlight-menu-hover-background-color);color:var(--dlight-menu-hover-text-color)}' +
-                            'button:hover d2l-icon, button:focus d2l-icon, :host([active]) button d2l-icon, :host(.d2l-button-subtle-hover) button d2l-icon, :host(.d2l-button-subtle-focus) button d2l-icon{color:var(--dlight-menu-hover-text-color)}',
-                            $(el.shadowRoot), 'text');
+                        var tar = el.shadowRoot.querySelector('d2l-button-icon').shadowRoot;
+                        injectCSS(btnCSS, $(tar), 'text');
+                        injectCSS(btnIconCSS, $(tar.querySelector('d2l-icon').shadowRoot), 'text');
                     }, 500);
                 }
             }

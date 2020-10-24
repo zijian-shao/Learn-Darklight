@@ -379,8 +379,8 @@ body > header.darklight-navbar-sticky {
 
 /* dropdown */
 d2l-dropdown-menu d2l-menu {
-    display: block !important;
-    height: auto !important;
+    /*display: block !important;*/
+    /*height: auto !important;*/
 }
 
 /* course selector */
@@ -547,6 +547,38 @@ li.d2l-contextmenu-item-title > * {
 
 li.d2l-contextmenu-item-title.empty > * {
     display: none;
+}
+
+#darklight-context-menu .d2l-contextmenu-daylightoff {
+    padding-bottom: 6px;
+    min-width: 180px;
+}
+
+#darklight-context-menu .d2l-contextmenu-daylightoff .vui-dropdown-menu-item-link {
+    border: 1px solid transparent;
+    border-top-color: var(--d2l-color-gypsum);
+    border-image: initial;
+    box-sizing: border-box;
+    color: var(--d2l-color-ferrite);
+    cursor: pointer;
+    display: block;
+    font-size: 0.8rem;
+    margin-top: -1px;
+    outline: 0;
+    width: 100%;
+    padding: 0.75rem 1rem;
+}
+
+#darklight-context-menu .d2l-contextmenu-daylightoff .vui-dropdown-menu-item-link:hover {
+    background-color: var(--d2l-color-celestine-plus-2);
+    border-bottom: 1px solid var(--d2l-color-celestine);
+    border-top: 1px solid var(--d2l-color-celestine);
+    color: var(--d2l-color-celestine-minus-1);
+}
+
+#darklight-context-menu .d2l-contextmenu-item-hover + .d2l-contextmenu-item a,
+#darklight-context-menu .vui-dropdown-menu-item-focus + .d2l-contextmenu-item a {
+    border-top: 1px solid var(--d2l-color-celestine) !important;
 }
 
 /* course content list */

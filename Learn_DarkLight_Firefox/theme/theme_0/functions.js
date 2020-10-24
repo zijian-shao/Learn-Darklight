@@ -10,17 +10,17 @@ function initTheme() {
 
     // widget header dropdown
     var dropdownCSS = baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css';
-    var dropdowns = document.querySelectorAll('.d2l-homepage-header-menu-wrapper d2l-dropdown d2l-button-icon');
+    var dropdowns = document.querySelectorAll('.d2l-homepage-header-menu-wrapper d2l-dropdown-context-menu');
 
     function _injectDropdownCSS(el, counter) {
         if (counter === undefined) counter = 0;
         if (counter > 20) return;
 
         if (el.shadowRoot !== null) {
-            var icon = el.shadowRoot.querySelector('button d2l-icon');
+            var icon = el.shadowRoot.querySelector('d2l-button-icon');
             if (icon.shadowRoot !== null) {
-                injectCSS(dropdownCSS, $(el.shadowRoot), 'file');
                 injectCSS(dropdownCSS, $(icon.shadowRoot), 'file');
+                injectCSS(dropdownCSS, $(icon.shadowRoot.querySelector('d2l-icon').shadowRoot), 'file');
             } else {
                 setTimeout(function () {
                     _injectDropdownCSS(el, ++counter);

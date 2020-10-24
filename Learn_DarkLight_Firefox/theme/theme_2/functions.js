@@ -25,17 +25,17 @@ function initTheme() {
 
     // widget header dropdown
     var dropdownCSS = baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_widget_header_dropdown.css';
-    var dropdowns = document.querySelectorAll('.d2l-homepage-header-menu-wrapper d2l-dropdown d2l-button-icon');
+    var dropdowns = document.querySelectorAll('.d2l-homepage-header-menu-wrapper d2l-dropdown-context-menu');
 
     function _injectDropdownCSS(el, counter) {
         if (counter === undefined) counter = 0;
         if (counter > 20) return;
 
         if (el.shadowRoot !== null) {
-            var icon = el.shadowRoot.querySelector('button d2l-icon');
+            var icon = el.shadowRoot.querySelector('d2l-button-icon');
             if (icon.shadowRoot !== null) {
-                injectCSS(dropdownCSS, $(el.shadowRoot), 'file');
                 injectCSS(dropdownCSS, $(icon.shadowRoot), 'file');
+                injectCSS(dropdownCSS, $(icon.shadowRoot.querySelector('d2l-icon').shadowRoot), 'file');
             } else {
                 setTimeout(function () {
                     _injectDropdownCSS(el, ++counter);
@@ -139,8 +139,10 @@ function initTheme() {
         var waitSearchInt = setInterval(function () {
             if (inputSearch.shadowRoot !== null) {
                 clearInterval(waitSearchInt);
-                injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_input.css',
-                    $(inputSearch.shadowRoot), 'file');
+                setTimeout(function () {
+                    injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_input.css',
+                        $(inputSearch.shadowRoot), 'file');
+                }, 200);
             }
             waitSearchIntCnt++;
             if (waitSearchIntCnt > 20) {
@@ -185,6 +187,7 @@ function initTheme() {
     //     }
     // }
 
+    // no-redirect login
     if (currURL.match(/\/d2l\/login/gi) && currURL.match(/noRedirect=1/gi)) {
         $('.d2l-page-main, .d2l-login-portal-heading').css({
             'background': 'none',
@@ -194,6 +197,74 @@ function initTheme() {
             'background': 'none',
             'border-color': 'rgba(255,255,255,0.1)'
         });
+    }
+
+    // drop down button observer
+    function _customizeButtons(isWidgetHeadBtn) {
+
+        function _waitForDropdown(elem) {
+            var self = $(elem);
+            var counter = 0;
+            var interval = setInterval(function () {
+                if (self.children('d2l-dropdown-menu').length) {
+                    clearInterval(interval);
+                    setTimeout(function () {
+                        injectCSS(baseURL + 'theme/theme_' + options.GLB_ThemeID + '/shadow_dropdown.css',
+                            $(self.children('d2l-dropdown-menu')[0].shadowRoot), 'file');
+                    }, 10);
+                    return;
+                }
+                counter++;
+                if (counter > 100) {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+
+        var btnCSS = 'button:focus{box-shadow:0 0 0 2px var(--darklight-background-color),0 0 0 4px var(--d2l-color-celestine)!important}';
+
+        document.querySelectorAll('d2l-dropdown-context-menu').forEach(function (el) {
+
+            var isWidgetHeadBtn = $(el).closest('div.d2l-homepage-header-menu-wrapper').length !== 0;
+
+            if (!el.hasAttribute('data-theme-button-init')) {
+
+                el.setAttribute('data-theme-button-init', '');
+
+                if (el.shadowRoot !== null) {
+                    var tar = el.shadowRoot.querySelector('d2l-button-icon').shadowRoot;
+                    if (!isWidgetHeadBtn) injectCSS(btnCSS, $(tar), 'text');
+                    $(el).on('mouseup', function () {
+                        _waitForDropdown(this);
+                    });
+                } else {
+                    setTimeout(function () {
+                        var tar = el.shadowRoot.querySelector('d2l-button-icon').shadowRoot;
+                        if (!isWidgetHeadBtn) injectCSS(btnCSS, $(tar), 'text');
+                        $(el).on('mouseup', function () {
+                            _waitForDropdown(this);
+                        });
+                    }, 500);
+                }
+            }
+
+        });
+
+
+    }
+
+    _customizeButtons();
+
+    var tabPanel = document.getElementById('d2l_two_panel_selector_main');
+    if (tabPanel !== null) {
+        var observer = new MutationObserver(function (mutationsList, observer) {
+            for (var mutation of mutationsList) {
+                if (mutation.attributeName === 'aria-live') {
+                    _customizeButtons();
+                }
+            }
+        });
+        observer.observe(tabPanel, {attributes: true});
     }
 }
 
@@ -242,7 +313,7 @@ function themeOnCourseTileLoaded(elem) {
     if (getCustomThemeOption('darkCoursePic')) {
         extraCSS += '.d2l-card-link-container>.d2l-card-header{opacity:0.7!important;}';
     }
-    injectCSS(':host{background:#424a56;border:none!important}' +
+    injectCSS(':host{background:#424a56!important;border:none!important}' +
         ':host([active]), :host([subtle][active]){box-shadow:0 0 0 4px rgba(9, 177, 185, 0.4)!important;}' +
         extraCSS,
         $(elem.shadowRoot), 'text');
