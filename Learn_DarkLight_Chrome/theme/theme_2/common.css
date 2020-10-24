@@ -449,6 +449,9 @@ bsi-button-menu:visited {
 }
 
 /* widget */
+.d2l-tile {
+    box-shadow: none;
+}
 
 .daylight .d2l-widget {
     background: var(--darklight-tile-background-color);
@@ -598,10 +601,6 @@ d2l-dropdown-menu {
     border-top-right-radius: .4rem;
 }
 
-.d2l-tile {
-    box-shadow: none;
-}
-
 d2l-dropdown d2l-dropdown-menu d2l-menu d2l-menu-item {
     background: none;
 }
@@ -609,6 +608,21 @@ d2l-dropdown d2l-dropdown-menu d2l-menu d2l-menu-item {
 d2l-dropdown d2l-dropdown-menu d2l-menu d2l-menu-item:hover,
 d2l-dropdown d2l-dropdown-menu d2l-menu d2l-menu-item:focus {
     background: var(--d2l-color-celestine-plus-2);
+}
+
+d2l-menu-item-link, d2l-menu-item {
+    background: none;
+    border: none;
+}
+
+d2l-menu-item-link:hover, d2l-menu-item-link:focus,
+d2l-menu-item:hover, d2l-menu-item:focus {
+    background: var(--d2l-color-celestine-plus-2);
+    border: none;
+}
+
+d2l-menu-item-separator {
+    display: none;
 }
 
 /* navbar */
@@ -1657,6 +1671,24 @@ li.d2l-contextmenu-item-title {
     background: var(--d2l-color-gypsum);
 }
 
+#darklight-context-menu.d2l-floating-container {
+    border: none;
+}
+
+#darklight-context-menu .d2l-contextmenu-daylightoff .vui-dropdown-menu-item-link {
+    border: none;
+    margin-top: 0;
+}
+
+#darklight-context-menu .d2l-contextmenu-daylightoff .vui-dropdown-menu-item-link:hover {
+    border: none;
+}
+
+#darklight-context-menu .d2l-contextmenu-item-hover + .d2l-contextmenu-item a,
+#darklight-context-menu .vui-dropdown-menu-item-focus + .d2l-contextmenu-item a {
+    border: none !important;
+}
+
 /* homepage courses */
 .darklight-homepage-courses-loading {
     background: var(--darklight-tile-background-color);
@@ -1699,4 +1731,10 @@ li.d2l-contextmenu-item-title {
 
 .d2l-login-portal-heading {
     color: inherit !important;
+}
+
+/* tooltip */
+d2l-tooltip {
+    color: #000;
+    filter: invert(1);
 }

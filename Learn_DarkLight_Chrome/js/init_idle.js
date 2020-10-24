@@ -1216,11 +1216,11 @@ function homepageFunc() {
 
                                         // find elements
                                         var theCard = el.shadowRoot.querySelector('d2l-card'),
-                                            id = theCard.shadowRoot.querySelector('div.d2l-card-container a.d2l-focusable').getAttribute('href').match(/\/\d+/)[0].substring(1),
-                                            title = theCard.querySelector('div.d2l-enrollment-card-content-flex d2l-organization-name').shadowRoot.textContent,
-                                            linkElem = theCard.shadowRoot.querySelector('div.d2l-card-container > a.d2l-focusable'),
-                                            link = linkElem.getAttribute('href');
-                                        title = title.trim().split(' - ')[0];
+                                            linkElem = theCard.shadowRoot.querySelector('div.d2l-card-container > a'),
+                                            link = linkElem.getAttribute('href'),
+                                            id = link.match(/\/\d+/)[0].substring(1),
+                                            title = theCard.querySelector('div.d2l-enrollment-card-content-flex d2l-organization-name')
+                                                .shadowRoot.textContent.trim().split(' - ')[0];
 
                                         // css
                                         injectCSS(hideStyle, $(el.shadowRoot), 'text');
@@ -1233,7 +1233,7 @@ function homepageFunc() {
                                         theCard.querySelector('d2l-dropdown-more').addEventListener('click', function () {
                                             if (!this.hasAttribute('data-dropdown-init')) {
                                                 this.setAttribute('data-dropdown-init', '');
-                                                injectCSS(baseURL + 'css/shadow_dropdown.css', $(this.querySelector('d2l-dropdown-menu').shadowRoot), 'file');
+                                                // injectCSS(baseURL + 'css/shadow_dropdown.css', $(this.querySelector('d2l-dropdown-menu').shadowRoot), 'file');
                                             }
                                             if (typeof themeOnCourseDropdownClick === 'function') {
                                                 themeOnCourseDropdownClick(this);
@@ -1344,7 +1344,7 @@ function homepageFunc() {
 
     // remove announcement inline styles
     if (announcementWidget != null) {
-        removeAnnouncePageFormat(true, announcementWidget);
+        removeAnnouncePageFormat('home', announcementWidget);
     }
 }
 
@@ -1843,7 +1843,7 @@ function dropboxMarkFunc() {
     hideBtn.insertAfter(header);
 }
 
-function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
+function removeAnnouncePageFormat(pageType, announcementWidget, counter) {
     function _removeCSS(elem) {
         elem.css({
             'font-size': '',
@@ -1866,7 +1866,6 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
                 }
             });
         }
-
     }
 
     if (!options.HOME_RemoveAnnounceFormat) return;
@@ -1877,25 +1876,26 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
         return;
     }
 
-    if (isHomepage === true) {
-
+    if (pageType === 'home') {
         if (announcementWidget.find('ul.d2l-datalist li.d2l-datalist-item div.d2l-htmlblock template').length) {
             setTimeout(function () {
-                removeAnnouncePageFormat(true, announcementWidget, ++counter);
+                removeAnnouncePageFormat('home', announcementWidget, ++counter);
             }, 500);
             return;
         }
 
-        announcementWidget.find('div.d2l-widget-content ul.d2l-datalist').children('li').each(function (i, e) {
-            _removeCSS($(e).find('div.d2l-htmlblock').find('p, span, ul, ol, li, table, tr, th, td'));
-        });
+        setTimeout(function () {
+            announcementWidget.find('.d2l-widget-content ul.d2l-datalist').children('li').each(function (i, e) {
+                _removeCSS($(e).find('div.d2l-htmlblock').find('p, span, ul, ol, li, table, tr, th, td'));
+            });
+        }, 500);
 
-    } else {
+    } else if (pageType === 'list') {
         var announceTable = $('d2l-table-wrapper');
 
-        if (!announceTable.length || announceTable.find('ul.d2l-datalist li.d2l-datalist-item div.d2l-htmlblock template').length) {
+        if (!announceTable.length || announceTable.find('ul.d2l-datalist li.d2l-datalist-item div.d2l-htmlblock').length) {
             setTimeout(function () {
-                removeAnnouncePageFormat(false, null, ++counter);
+                removeAnnouncePageFormat('list', null, ++counter);
             }, 500);
             return;
         }
@@ -1906,8 +1906,18 @@ function removeAnnouncePageFormat(isHomepage, announcementWidget, counter) {
             });
         }, 500);
 
-    }
+    } else if (pageType === 'single') {
+        if ($('.d2l-page-main .d2l-htmlblock template').length) {
+            setTimeout(function () {
+                removeAnnouncePageFormat('single', null, ++counter);
+            }, 500);
+            return;
+        }
 
+        setTimeout(function () {
+            _removeCSS($('.d2l-page-main .d2l-htmlblock').find('p, span, ul, ol, li, table, tr, th, td'));
+        }, 500);
+    }
 }
 
 function waitForNavbarReady() {
@@ -2138,7 +2148,7 @@ function initDarklightFunc() {
             if (headText.match(/Calendar/i)) {
                 $(e).closest('div.d2l-widget').addClass('darklight-course-home-calendar');
             } else if (headText.match(/Announcements/i)) {
-                removeAnnouncePageFormat(true, $(e).closest('div.d2l-widget'));
+                removeAnnouncePageFormat('home', $(e).closest('div.d2l-widget'));
             }
         });
 
@@ -2157,7 +2167,9 @@ function initDarklightFunc() {
 
     // announcement page
     if (currURL.match(/\/d2l\/lms\/news\/main\.d2l/i)) {
-        removeAnnouncePageFormat();
+        removeAnnouncePageFormat('list');
+    } else if (currURL.match(/\/d2l\/le\/news\/\d+\/\d+\/view/i)) {
+        removeAnnouncePageFormat('single');
     }
 
     // popup page
